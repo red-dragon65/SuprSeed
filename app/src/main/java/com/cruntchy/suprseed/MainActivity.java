@@ -3,10 +3,16 @@ package com.cruntchy.suprseed;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+
+import com.cruntchy.suprseed.ClientGame.ClientBuilder;
+import com.cruntchy.suprseed.MainView.GameViewBuilder.BaseBuilder;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         initWindowSettings(false, false);
 
         // Load the game view
-        loadGameView();
+        loadGameView(this.getApplicationContext(), this.getResources(), this.getSharedPreferences("GAME_DATA", MODE_PRIVATE));
 
     }
 
@@ -74,12 +80,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void loadGameView(){
+    private void loadGameView(Context context, Resources res, SharedPreferences saveData){
 
         // Get layout
         ConstraintLayout cLayout = findViewById(R.id.game_layout);
 
+        // Create a builder
+        BaseBuilder builder = new ClientBuilder(context, res, saveData);
+
         // Add custom view to the layout
-        //cLayout.addView(new GameView());
+        cLayout.addView(builder.getView());
     }
 }
