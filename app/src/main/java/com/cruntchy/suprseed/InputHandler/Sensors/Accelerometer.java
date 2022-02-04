@@ -14,7 +14,6 @@ import java.util.Map;
 
 public class Accelerometer implements SensorEventListener, DeviceSensor<Float[]> {
 
-
     private Float[] tiltValues = new Float[2];
 
     // Variables for tilting
@@ -22,6 +21,7 @@ public class Accelerometer implements SensorEventListener, DeviceSensor<Float[]>
     private Sensor mAccelerometer;
 
 
+    // Constructor
     public Accelerometer(Context context){
 
         // Initialize variables for tilt
@@ -48,6 +48,8 @@ public class Accelerometer implements SensorEventListener, DeviceSensor<Float[]>
 
     }
 
+
+    // Gets the most recent sensor data
     @Override
     public Float[] getSensorData() {
 

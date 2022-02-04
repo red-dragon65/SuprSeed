@@ -1,4 +1,4 @@
-package com.cruntchy.suprseed.MainView.GameProcessor;
+package com.cruntchy.suprseed.MainView.GameProcessor.Loop;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -11,23 +11,15 @@ import android.view.SurfaceView;
 import androidx.annotation.NonNull;
 
 import com.cruntchy.suprseed.InputHandler.TouchInput.TouchMethod;
+import com.cruntchy.suprseed.MainView.GameProcessor.Render.RenderHandler;
 
 public abstract class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
 
     // Dependencies
     protected TouchMethod touchHandler;
-
-    /*
-    ProcessHandler
-
-    GameRenderer
-        GameScaler
-        GameCameraView
-
-    GamePhysicsHandler
-
-     */
+    protected RunnableConfig<GameView> loopRunner;
+    protected RenderHandler renderer;
 
     protected Context context;
     protected Resources resources;
@@ -39,7 +31,7 @@ public abstract class GameView extends SurfaceView implements SurfaceHolder.Call
      * Constructor
      * @param context
      */
-    public GameView(Context context, Resources resources, SharedPreferences gameData, TouchMethod touchHandler) {
+    public GameView(Context context, Resources resources, SharedPreferences gameData, TouchMethod touchHandler, LoopConfig loopRunner, RenderHandler renderer) {
         super(context);
 
         this.context = context;
@@ -48,6 +40,8 @@ public abstract class GameView extends SurfaceView implements SurfaceHolder.Call
 
         // Dependency inject
         this.touchHandler = touchHandler;
+        this.loopRunner = loopRunner;
+        this.renderer = renderer;
     }
 
 
@@ -75,6 +69,9 @@ public abstract class GameView extends SurfaceView implements SurfaceHolder.Call
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
 
+        // Set canvas size
+        renderer.setCanvasSize(w, h);
+
         // Initialize the assets
         // Initialize static game objects
         // Initialize a new game loop
@@ -85,9 +82,15 @@ public abstract class GameView extends SurfaceView implements SurfaceHolder.Call
 
 
 
+
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+
+        // TODO: Verify that this will actually work
+        // Set the renderers canvas
+        renderer.setCanvas(canvas);
 
         /*
         Game Renderer
@@ -116,30 +119,32 @@ public abstract class GameView extends SurfaceView implements SurfaceHolder.Call
 
          */
 
+
+        loopRunner.run(this);
     }
 
 
     @Override
     public void surfaceDestroyed(@NonNull SurfaceHolder surfaceHolder) {
 
-        // Stop the game loop
-        // Stop the game drawing (in game pause)
-
+        // Stop logic and drawing
+        loopRunner.setHardPause(true);
     }
 
     @Override
     public void surfaceCreated(@NonNull SurfaceHolder surfaceHolder) {
 
-        // Initialize the sensors?
+        //TODO: Initialize the sensors?
 
-        // Resume the game loop
+        // Continue drawing
+        loopRunner.setHardPause(false);
     }
-
 
     @Override
     public void surfaceChanged(@NonNull SurfaceHolder surfaceHolder, int i, int i1, int i2) {
 
-        // Resume the game loop
+        // Continue drawing
+        loopRunner.setHardPause(false);
     }
 
     @Override
@@ -147,26 +152,22 @@ public abstract class GameView extends SurfaceView implements SurfaceHolder.Call
         super.onWindowFocusChanged(hasWindowFocus);
 
         // Pause game drawing (in game pause)
+        if(!hasWindowFocus){
+
+            loopRunner.setSoftPause(true);
+        }
+
     }
-
-
-
-
-
-
-
-
 
 
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
+        // Process touch input
+        // Note: this runs regardless if the game loop is allowed to run
         touchHandler.processInput(event);
 
         return true;
     }
-
-
-
 }

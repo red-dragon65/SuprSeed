@@ -6,7 +6,7 @@ import android.content.res.Resources;
 
 import com.cruntchy.suprseed.InputHandler.Sensors.DeviceSensor;
 import com.cruntchy.suprseed.InputHandler.TouchInput.TouchHandler;
-import com.cruntchy.suprseed.MainView.GameProcessor.GameView;
+import com.cruntchy.suprseed.MainView.GameProcessor.Loop.GameView;
 
 public class DefaultBuilder extends BaseBuilder implements InfoBuilder<Float[]>{
 
@@ -31,6 +31,12 @@ public class DefaultBuilder extends BaseBuilder implements InfoBuilder<Float[]>{
 
         return null;
     }
+
+
+
+    /*
+    Returns the default objects used to build the default engine
+     */
 
 
     @Override

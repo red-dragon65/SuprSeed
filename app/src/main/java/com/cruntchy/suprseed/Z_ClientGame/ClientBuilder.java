@@ -1,10 +1,10 @@
-package com.cruntchy.suprseed.ClientGame;
+package com.cruntchy.suprseed.Z_ClientGame;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 
-import com.cruntchy.suprseed.MainView.GameProcessor.GameView;
+import com.cruntchy.suprseed.MainView.GameProcessor.Loop.GameView;
 import com.cruntchy.suprseed.MainView.GameViewBuilder.BaseBuilder;
 import com.cruntchy.suprseed.MainView.GameViewBuilder.DefaultBuilder;
 

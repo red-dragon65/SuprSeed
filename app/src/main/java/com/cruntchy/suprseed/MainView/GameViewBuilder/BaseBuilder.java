@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 
-import com.cruntchy.suprseed.MainView.GameProcessor.GameView;
+import com.cruntchy.suprseed.MainView.GameProcessor.Loop.GameView;
 
 public abstract class BaseBuilder {
 
