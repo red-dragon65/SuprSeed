@@ -1,4 +1,4 @@
-package com.cruntchy.suprseed.MainView.GameProcessor.Render;
+package com.cruntchy.suprseed.MainView.GameProcessor.Render.Coordinates;
 
 public class Camera {
 

@@ -1,19 +1,19 @@
-package com.cruntchy.suprseed.MainView.GameProcessor.Render;
+package com.cruntchy.suprseed.MainView.GameProcessor.Render.Graphics;
 
 import android.graphics.Canvas;
 
 import com.cruntchy.suprseed.ErrorLogger.ErrorType;
 import com.cruntchy.suprseed.ErrorLogger.Logable;
+import com.cruntchy.suprseed.MainView.GameProcessor.Render.Coordinates.CoordinateProcessor;
 
-public class RenderHandler implements Renderable {
+public class RenderProcessor implements RenderHandler {
 
     // The hardware accelerated canvas provided by a view
     private Canvas canvas;
 
     // Dependencies
     private Logable logger;
-    private Camera camera;
-    private CoordinateHandler coordinateHandler;
+    private CoordinateProcessor coordinateHandler;
 
 
 
@@ -32,11 +32,10 @@ public class RenderHandler implements Renderable {
 
 
     // Constructor
-    public RenderHandler(Logable logger, Camera camera, CoordinateHandler coordinateHandler){
+    public RenderProcessor(Logable logger, CoordinateProcessor coordinateHandler){
 
         // Dependency injection
         this.logger = logger;
-        this.camera = camera;
         this.coordinateHandler = coordinateHandler;
     }
 
@@ -83,42 +82,27 @@ public class RenderHandler implements Renderable {
             return;
         }
 
-        // TODO: Draw a sprite here
 
+        // TODO: Draw a sprite here
         /*
 
-        // Get the sprites location
-        float x = sprite.getX();
-        float y = sprite.getY();
+        float[] spriteLoc = {sprite.getX(), sprite.getY()};
 
-        // Format the location to the canvas
-        x = coordinateHandler.formatCoordinateToCanvas(x, canvasWidth);
-        y = coordinateHandler.formatCoordinateToCanvas(y, canvasHeight);
-
-        // Apply any camera offset
-        x += camera.getX();
-        y += camera.getY();
-
+        // Get drawing location of sprite
+        float[] finalLoc = coordinateHandler.parseFinalLocation(spriteLoc);
 
         // Draw the sprite at the final location
         canvas.drawBitmap(
             sprite.getImage(),
-            x,
-            y,
+            finalLoc[0],
+            finalLoc[1],
             paint
-        );
-         */
+        );*/
     }
 
 
-
     @Override
-    public Camera getCamera(){
-        return camera;
-    }
-
-    @Override
-    public CoordinateHandler getCoordinateHandler(){
+    public CoordinateProcessor getCoordinateHandler(){
         return coordinateHandler;
     }
 
