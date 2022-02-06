@@ -4,9 +4,11 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Canvas;
+import android.os.Build;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 
@@ -135,6 +137,9 @@ public abstract class GameView extends SurfaceView implements SurfaceHolder.Call
     public void surfaceCreated(@NonNull SurfaceHolder surfaceHolder) {
 
         //TODO: Initialize the sensors?
+
+        // Update the loop config
+        loopRunner.initLoop(this);
 
         // Continue drawing
         loopRunner.setHardPause(false);
