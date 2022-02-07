@@ -1,4 +1,4 @@
-package com.cruntchy.suprseed.Z_ClientGame;
+package com.cruntchy.suprseed.Z_ClientGame.GameCode;
 
 import com.cruntchy.suprseed.AssetLoader.AssetLoader;
 import com.cruntchy.suprseed.AssetLoader.FolderParser;

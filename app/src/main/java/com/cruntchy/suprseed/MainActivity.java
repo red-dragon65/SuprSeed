@@ -11,7 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 
-import com.cruntchy.suprseed.Z_ClientGame.ClientBuilder;
+import com.cruntchy.suprseed.Z_ClientGame.EngineSetup.ClientBuilder;
 import com.cruntchy.suprseed.MainView.GameViewBuilder.BaseBuilder;
 
 public class MainActivity extends AppCompatActivity {

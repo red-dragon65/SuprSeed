@@ -8,6 +8,7 @@ import android.view.Surface;
 import com.cruntchy.suprseed.ErrorLogger.CentralLogger;
 import com.cruntchy.suprseed.ErrorLogger.ErrorType;
 import com.cruntchy.suprseed.MainView.GameProcessor.Render.Coordinates.CanvasLocationScaler;
+import com.cruntchy.suprseed.MainView.GameProcessor.Render.Coordinates.LocationScaler;
 
 import java.util.Arrays;
 
@@ -24,12 +25,12 @@ public class LoopConfig implements RunnableConfig<GameView> {
     private boolean hardPause;
 
     // Dependencies
-    private CanvasLocationScaler locationScaler;
+    private LocationScaler locationScaler;
 
 
 
     // Constructor
-    public LoopConfig(RefreshTypes refreshSpeed, LogicRates logicRate, CanvasLocationScaler locationScaler){
+    public LoopConfig(RefreshTypes refreshSpeed, LogicRates logicRate, LocationScaler locationScaler){
 
         this.refreshSpeed = refreshSpeed;
         this.logicRate = logicRate;

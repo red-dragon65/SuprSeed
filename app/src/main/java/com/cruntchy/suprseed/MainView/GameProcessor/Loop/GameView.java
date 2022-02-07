@@ -13,6 +13,7 @@ import android.view.WindowManager;
 import androidx.annotation.NonNull;
 
 import com.cruntchy.suprseed.InputHandler.TouchInput.TouchMethod;
+import com.cruntchy.suprseed.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import com.cruntchy.suprseed.MainView.GameProcessor.Render.Graphics.RenderProcessor;
 
 public abstract class GameView extends SurfaceView implements SurfaceHolder.Callback {
@@ -21,7 +22,7 @@ public abstract class GameView extends SurfaceView implements SurfaceHolder.Call
     // Dependencies
     protected TouchMethod touchHandler;
     protected RunnableConfig<GameView> loopRunner;
-    protected RenderProcessor renderer;
+    protected RenderHandler renderer;
 
     protected Context context;
     protected Resources resources;
@@ -33,7 +34,7 @@ public abstract class GameView extends SurfaceView implements SurfaceHolder.Call
      * Constructor
      * @param context
      */
-    public GameView(Context context, Resources resources, SharedPreferences gameData, TouchMethod touchHandler, LoopConfig loopRunner, RenderProcessor renderer) {
+    public GameView(Context context, Resources resources, SharedPreferences gameData, TouchMethod touchHandler, RunnableConfig<GameView> loopRunner, RenderHandler renderer) {
         super(context);
 
         this.context = context;
@@ -50,11 +51,11 @@ public abstract class GameView extends SurfaceView implements SurfaceHolder.Call
 
 
     // Instantiates game objects to their initial state
-    abstract void initStartingState();
+    abstract public void initStartingState();
 
     // Actually run the game
-    abstract void logicLoop();
-    abstract void drawingLoop();
+    abstract public void logicLoop();
+    abstract public void drawingLoop();
 
     /*
     // Reset game objects to their original state

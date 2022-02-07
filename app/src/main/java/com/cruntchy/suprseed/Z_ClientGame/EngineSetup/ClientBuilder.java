@@ -1,4 +1,4 @@
-package com.cruntchy.suprseed.Z_ClientGame;
+package com.cruntchy.suprseed.Z_ClientGame.EngineSetup;
 
 import android.content.Context;
 import android.content.SharedPreferences;

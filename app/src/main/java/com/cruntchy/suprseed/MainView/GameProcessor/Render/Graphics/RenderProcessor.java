@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 
 import com.cruntchy.suprseed.ErrorLogger.CentralLogger;
 import com.cruntchy.suprseed.ErrorLogger.ErrorType;
+import com.cruntchy.suprseed.MainView.GameProcessor.Render.Coordinates.CoordinateHandler;
 import com.cruntchy.suprseed.MainView.GameProcessor.Render.Coordinates.CoordinateProcessor;
 
 public class RenderProcessor implements RenderHandler {
@@ -12,7 +13,7 @@ public class RenderProcessor implements RenderHandler {
     private Canvas canvas;
 
     // Dependencies
-    private CoordinateProcessor coordinateHandler;
+    private CoordinateHandler coordinateHandler;
 
 
     // The original size of the screen
@@ -22,7 +23,7 @@ public class RenderProcessor implements RenderHandler {
 
 
     // Constructor
-    public RenderProcessor(CoordinateProcessor coordinateHandler){
+    public RenderProcessor(CoordinateHandler coordinateHandler){
 
         // Dependency injection
         this.coordinateHandler = coordinateHandler;
@@ -91,7 +92,7 @@ public class RenderProcessor implements RenderHandler {
 
 
     @Override
-    public CoordinateProcessor getCoordinateHandler(){
+    public CoordinateHandler getCoordinateHandler(){
         return coordinateHandler;
     }
 
