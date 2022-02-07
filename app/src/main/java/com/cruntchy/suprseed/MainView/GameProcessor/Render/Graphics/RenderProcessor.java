@@ -2,8 +2,8 @@ package com.cruntchy.suprseed.MainView.GameProcessor.Render.Graphics;
 
 import android.graphics.Canvas;
 
+import com.cruntchy.suprseed.ErrorLogger.CentralLogger;
 import com.cruntchy.suprseed.ErrorLogger.ErrorType;
-import com.cruntchy.suprseed.ErrorLogger.Logable;
 import com.cruntchy.suprseed.MainView.GameProcessor.Render.Coordinates.CoordinateProcessor;
 
 public class RenderProcessor implements RenderHandler {
@@ -12,17 +12,7 @@ public class RenderProcessor implements RenderHandler {
     private Canvas canvas;
 
     // Dependencies
-    private Logable logger;
     private CoordinateProcessor coordinateHandler;
-
-
-
-    // TODO: This should belong to the 'ImagePreprocessor'
-    // The ratio to scale sprites when they are loaded
-    private float spriteImageScaleRatio;
-    // The scaled size of the canvas
-    private float scaledCanvasWidth;
-    private float scaledCanvasHeight;
 
 
     // The original size of the screen
@@ -32,10 +22,9 @@ public class RenderProcessor implements RenderHandler {
 
 
     // Constructor
-    public RenderProcessor(Logable logger, CoordinateProcessor coordinateHandler){
+    public RenderProcessor(CoordinateProcessor coordinateHandler){
 
         // Dependency injection
-        this.logger = logger;
         this.coordinateHandler = coordinateHandler;
     }
 
@@ -47,7 +36,7 @@ public class RenderProcessor implements RenderHandler {
         originalCanvasWidth = w;
         originalCanvasHeight = h;
 
-        logger.logMessage(ErrorType.INFO, "The canvas dimensions have been set...");
+        CentralLogger.logMessage(ErrorType.INFO, "The canvas dimensions have been set...");
     }
 
 
@@ -59,7 +48,7 @@ public class RenderProcessor implements RenderHandler {
 
             this.canvas = canvas;
 
-            logger.logMessage(ErrorType.INFO, "The canvas has been set...");
+            CentralLogger.logMessage(ErrorType.INFO, "The canvas has been set...");
         }
     }
 
@@ -70,14 +59,14 @@ public class RenderProcessor implements RenderHandler {
         // Show warning if canvas is not set
         if(this.canvas == null){
 
-            logger.logMessage(ErrorType.WARNING, "The canvas has not been initialized!");
+            CentralLogger.logMessage(ErrorType.WARNING, "The canvas has not been initialized!");
 
             return;
         }
 
         if(this.originalCanvasWidth == 0 || this.originalCanvasHeight == 0){
 
-            logger.logMessage(ErrorType.WARNING, "The canvas dimensions have not been initialized!!");
+            CentralLogger.logMessage(ErrorType.WARNING, "The canvas dimensions have not been initialized!!");
 
             return;
         }

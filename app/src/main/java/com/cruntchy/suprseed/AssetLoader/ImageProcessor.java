@@ -1,7 +1,24 @@
 package com.cruntchy.suprseed.AssetLoader;
 
-public class ImageProcessor {
+import android.graphics.Bitmap;
 
+public class ImageProcessor implements ImageTransformer {
+
+
+    private float spriteImageScaleRatio;
+    private int scaledCanvasWidth;
+    private int scaledCanvasHeight;
+
+
+    public void init(int width, int height, String fileName, Streamable assetStreamer){
+
+        this.scaledCanvasWidth = width;
+        this.scaledCanvasWidth = height;
+
+        Bitmap bg = assetStreamer.loadImage_Unscaled(fileName);
+
+        this.spriteImageScaleRatio = (float) width / bg.getWidth();
+    }
 
 
     public void rotateSprite(/*Sprite sprite,*/ float degrees){
@@ -25,6 +42,12 @@ public class ImageProcessor {
 
     public void invertColors(/*Sprite sprite*/){
 
+    }
+
+
+
+    public float getSpriteImageScaleRatio(){
+        return spriteImageScaleRatio;
     }
 
 }

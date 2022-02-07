@@ -1,13 +1,10 @@
 package com.cruntchy.suprseed.MainView.GameProcessor.Render.Coordinates;
 
-import com.cruntchy.suprseed.ErrorLogger.Logable;
 
 public class CoordinateProcessor implements CoordinateHandler {
 
 
     // Dependencies
-    private Logable logger;
-
     private LocationHandler locationHandler;
     private LocationScaler locationScaler;
     private Camera camera;
@@ -15,10 +12,8 @@ public class CoordinateProcessor implements CoordinateHandler {
 
 
     // Constructor
-    public CoordinateProcessor(Logable logger){
+    public CoordinateProcessor(){
 
-        // Injection
-        this.logger = logger;
     }
 
 
