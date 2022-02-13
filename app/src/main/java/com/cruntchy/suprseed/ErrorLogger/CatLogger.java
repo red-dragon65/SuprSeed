@@ -9,7 +9,11 @@ public class CatLogger implements Logable {
     private String tag = "";
     private String postMessage = "";
 
+    // Show one level up on stack trace
+    private int logDepth = 1;
 
+
+    @Override
     public void logMessage(ErrorType errorType, String message){
 
         // TODO: Verify that this is working as intended
@@ -20,9 +24,9 @@ public class CatLogger implements Logable {
 
         // Get the stack trace of the caller of this method
         StackTraceElement[] stackTrace = new Exception().getStackTrace();
-        topStackTrace = stackTrace[1].getClassName();
+        topStackTrace = stackTrace[logDepth].getClassName();
         topStackTrace += "::";
-        topStackTrace += stackTrace[1].getMethodName();
+        topStackTrace += stackTrace[logDepth].getMethodName();
 
         tag = applicationName + "::" + errorType.toString();
 
@@ -47,5 +51,10 @@ public class CatLogger implements Logable {
                 Log.wtf(tag, message);
                 break;
         }
+    }
+
+    @Override
+    public void setLogDepth(int logDepth) {
+        this.logDepth = logDepth;
     }
 }

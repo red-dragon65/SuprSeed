@@ -4,9 +4,11 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.cruntchy.suprseed.MainView.GameProcessor.Loop.GameView;
 
-public abstract class BaseBuilder {
+public abstract class BaseEngineBuilder {
 
     protected Context context;
     protected Resources res;
@@ -14,7 +16,7 @@ public abstract class BaseBuilder {
 
 
     // Constructor
-    public BaseBuilder(Context context, Resources res, SharedPreferences gameData){
+    public BaseEngineBuilder(Context context, Resources res, SharedPreferences gameData){
 
         this.context = context;
         this.res = res;
@@ -23,4 +25,6 @@ public abstract class BaseBuilder {
     }
 
     public abstract GameView getView();
+
+    public abstract void setWindowConfig(AppCompatActivity mainActivity);
 }

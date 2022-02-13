@@ -10,6 +10,9 @@ public class CentralLogger {
     public CentralLogger(Logable logMethod){
 
         CentralLogger.logMethod = logMethod;
+
+        // Set the log depth
+        logMethod.setLogDepth(2);
     }
 
     public static void logMessage(ErrorType errorType, String message) {

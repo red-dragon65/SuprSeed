@@ -3,7 +3,8 @@ package com.cruntchy.suprseed.MainView.GameViewBuilder;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
-import android.text.method.Touch;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.cruntchy.suprseed.InputHandler.Sensors.DeviceSensor;
 import com.cruntchy.suprseed.InputHandler.TouchInput.TouchHandler;
@@ -21,11 +22,11 @@ import com.cruntchy.suprseed.MainView.GameProcessor.Render.Graphics.RenderHandle
 import com.cruntchy.suprseed.MainView.GameProcessor.Render.Graphics.RenderProcessor;
 import com.cruntchy.suprseed.Z_ClientGame.EngineSetup.SceneManager;
 
-public class DefaultBuilder extends BaseBuilder implements InfoBuilder<Float[]>{
+public class DefaultEngineBuilder extends BaseEngineBuilder implements InfoBuilder<Float[]>{
 
 
     // Constructor
-    public DefaultBuilder(Context context, Resources res, SharedPreferences gameData){
+    public DefaultEngineBuilder(Context context, Resources res, SharedPreferences gameData){
         super(context, res, gameData);
     }
 
@@ -41,11 +42,24 @@ public class DefaultBuilder extends BaseBuilder implements InfoBuilder<Float[]>{
     }
 
 
+    @Override
+    public void setWindowConfig(AppCompatActivity mainActivity) {
+
+        WindowConfigurator defaultWindowConfig = new DefaultWindowConfig(false, false);
+
+        defaultWindowConfig.applyWindowSettings(mainActivity);
+    }
+
+
+
+
+
+
+
 
     /*
     Returns the default objects used to build the default engine
      */
-
 
     @Override
     public DeviceSensor<Float[]> getDefaultSensor() {

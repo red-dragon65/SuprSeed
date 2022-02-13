@@ -4,16 +4,19 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.cruntchy.suprseed.MainView.GameProcessor.Loop.GameView;
-import com.cruntchy.suprseed.MainView.GameViewBuilder.BaseBuilder;
-import com.cruntchy.suprseed.MainView.GameViewBuilder.DefaultBuilder;
+import com.cruntchy.suprseed.MainView.GameViewBuilder.BaseEngineBuilder;
+import com.cruntchy.suprseed.MainView.GameViewBuilder.DefaultEngineBuilder;
+import com.cruntchy.suprseed.MainView.GameViewBuilder.DefaultWindowConfig;
+import com.cruntchy.suprseed.MainView.GameViewBuilder.WindowConfigurator;
 
 
-
-public class ClientBuilder extends BaseBuilder {
+public class ClientEngineBuilder extends BaseEngineBuilder {
 
     // Constructor
-    public ClientBuilder(Context context, Resources res, SharedPreferences gameData){
+    public ClientEngineBuilder(Context context, Resources res, SharedPreferences gameData){
         super(context, res, gameData);
 
     }
@@ -25,9 +28,17 @@ public class ClientBuilder extends BaseBuilder {
         // TODO: Client adds their custom code here for how they want their view to built out
         //  If the client does not want to manually pick modules, they can use the 'DefaultBuilder'
 
-        DefaultBuilder builder = new DefaultBuilder(super.context, super.res, super.gameData);
+        DefaultEngineBuilder builder = new DefaultEngineBuilder(super.context, super.res, super.gameData);
 
         return builder.getView();
+    }
+
+    @Override
+    public void setWindowConfig(AppCompatActivity mainActivity) {
+
+        WindowConfigurator defaultWindowConfig = new DefaultWindowConfig(false, false);
+
+        defaultWindowConfig.applyWindowSettings(mainActivity);
     }
 
 
