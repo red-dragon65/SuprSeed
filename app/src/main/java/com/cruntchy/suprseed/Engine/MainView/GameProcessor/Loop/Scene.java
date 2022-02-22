@@ -1,6 +1,9 @@
 package com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop;
 
-public abstract class Scene implements SceneRunner {
+import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteExtensions.Logic;
+import com.cruntchy.suprseed.Engine.SpriteObjects.System.SpriteSystem;
+
+public abstract class Scene implements Logic {
 
     private String id;
     private boolean hidden;
@@ -15,6 +18,9 @@ public abstract class Scene implements SceneRunner {
 
         hidden = true;
         active = false;
+
+        // Register logic
+        SpriteSystem.getInstance().registerLogicSprite(this);
     }
 
 

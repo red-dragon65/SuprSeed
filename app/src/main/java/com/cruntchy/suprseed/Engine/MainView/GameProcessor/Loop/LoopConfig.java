@@ -8,6 +8,7 @@ import android.view.Surface;
 import com.cruntchy.suprseed.Engine.ErrorLogger.CentralLogger;
 import com.cruntchy.suprseed.Engine.ErrorLogger.ErrorType;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Coordinates.LocationScaler;
+import com.cruntchy.suprseed.Engine.SpriteObjects.System.SpriteSystem;
 
 import java.util.Arrays;
 
@@ -25,7 +26,6 @@ public class LoopConfig implements RunnableConfig<GameView> {
 
     // Dependencies
     private LocationScaler locationScaler;
-
 
 
     // Constructor
@@ -157,11 +157,12 @@ public class LoopConfig implements RunnableConfig<GameView> {
             }else{
 
                 // Run the game logic
-                runLogic(gameView);
+                runLogic();
             }
 
             // Run clients drawing code
-            gameView.drawingLoop();
+            //gameView.drawingLoop();
+            SpriteSystem.getInstance().draw(gameView.renderer);
 
 
             // Clear out old contents of screen
@@ -185,7 +186,7 @@ public class LoopConfig implements RunnableConfig<GameView> {
 
 
     // Handle logic run rate (scaled relative to refresh rate)
-    private void runLogic(GameView gameView){
+    private void runLogic(){
 
         // Number of times to run logic based on logic tick rate
         // (logic rate is greater than refresh rate)
@@ -194,7 +195,8 @@ public class LoopConfig implements RunnableConfig<GameView> {
             for(int i = 0; i < logicMultiple; i++){
 
                 // Run client logic code
-                gameView.logicLoop();
+                //gameView.logicLoop();
+                SpriteSystem.getInstance().runLogic();
             }
         }
 
@@ -206,7 +208,8 @@ public class LoopConfig implements RunnableConfig<GameView> {
             if(frameCounter == refreshMultiple){
 
                 // Run client logic code
-                gameView.logicLoop();
+                //gameView.logicLoop();
+                SpriteSystem.getInstance().runLogic();
             }
 
             frameCounter++;

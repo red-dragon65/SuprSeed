@@ -4,7 +4,7 @@ import com.cruntchy.suprseed.Engine.AssetLoader.AssetLoader;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.Scene;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.SceneController;
 
-public class CharacterSelectionOverlayScene  extends Scene {
+public class CharacterSelectionOverlayScene extends Scene {
 
     private AssetLoader assets;
 
@@ -16,17 +16,7 @@ public class CharacterSelectionOverlayScene  extends Scene {
     }
 
     @Override
-    public void initStartingState() {
-
-    }
-
-    @Override
-    public void logicLoop() {
-
-    }
-
-    @Override
-    public void drawingLoop() {
+    public void runLogic() {
 
     }
 }

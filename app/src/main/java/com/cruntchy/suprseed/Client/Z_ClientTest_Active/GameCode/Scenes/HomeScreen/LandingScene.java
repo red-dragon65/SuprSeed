@@ -17,11 +17,8 @@ public class LandingScene extends Scene {
         super(sceneManager, id);
 
         this.assets = assets;
-    }
 
 
-    @Override
-    public void initStartingState() {
 
         // Load any third party game function
 
@@ -42,40 +39,9 @@ public class LandingScene extends Scene {
          */
     }
 
-    @Override
-    public void logicLoop() {
-
-        // Call run???
-
-        charScene.logicLoop();
-
-        /*
-
-        background.logic();
-        characters.logic();
-
-
-        if(tap occurs){
-
-            this.active = false;
-            charScene.active = false;
-
-            sceneManager.changeScene("FallingScene");
-        }
-         */
-
-    }
 
     @Override
-    public void drawingLoop() {
+    public void runLogic() {
 
-        // Call draw???
-
-        charScene.drawingLoop();
-
-        /*
-        background.drawing();
-        characters.drawing();
-         */
     }
 }

@@ -7,7 +7,7 @@ import android.content.res.Resources;
 import com.cruntchy.suprseed.Engine.InputHandler.TouchInput.TouchMethod;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.GameView;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.RunnableConfig;
-import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.SceneRunner;
+import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.Scene;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Graphics.RenderHandler;
 
 public class SceneManager extends GameView {
@@ -16,13 +16,9 @@ public class SceneManager extends GameView {
     // TODO: This needs to handle loading, de-allocating, and running other scenes
 
 
-    private SceneRunner someScene;
-
-
     /**
      * Constructor
-     *
-     * @param context
+     *  @param context
      * @param resources
      * @param gameData
      * @param touchHandler
@@ -32,9 +28,6 @@ public class SceneManager extends GameView {
     public SceneManager(Context context, Resources resources, SharedPreferences gameData, TouchMethod touchHandler, RunnableConfig<GameView> loopRunner, RenderHandler renderer) {
         super(context, resources, gameData, touchHandler, loopRunner, renderer);
     }
-
-
-
 
 
     @Override
@@ -50,23 +43,10 @@ public class SceneManager extends GameView {
 
         // OR, initialize a scene
 
-        someScene = new SomeScene();
-
     }
 
     @Override
-    public void logicLoop() {
+    public void changeScene(Scene oldScene, String sceneId) {
 
-        // Call run???
-
-        someScene.logicLoop();
-    }
-
-    @Override
-    public void drawingLoop() {
-
-        // Call draw???
-
-        someScene.drawingLoop();
     }
 }

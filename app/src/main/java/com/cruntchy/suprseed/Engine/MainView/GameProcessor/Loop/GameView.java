@@ -12,8 +12,9 @@ import androidx.annotation.NonNull;
 
 import com.cruntchy.suprseed.Engine.InputHandler.TouchInput.TouchMethod;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Graphics.RenderHandler;
+import com.cruntchy.suprseed.Engine.SpriteObjects.System.SpriteSystem;
 
-public abstract class GameView extends SurfaceView implements SurfaceHolder.Callback, SceneRunner {
+public abstract class GameView extends SurfaceView implements SurfaceHolder.Callback, SceneController {
 
 
     // Dependencies
@@ -25,13 +26,14 @@ public abstract class GameView extends SurfaceView implements SurfaceHolder.Call
     protected Resources resources;
     protected SharedPreferences gameData;
 
-
+    protected SpriteSystem spriteSystem;
 
     /**
      * Constructor
      * @param context
      */
-    public GameView(Context context, Resources resources, SharedPreferences gameData, TouchMethod touchHandler, RunnableConfig<GameView> loopRunner, RenderHandler renderer) {
+    public GameView(Context context, Resources resources, SharedPreferences gameData,
+                    TouchMethod touchHandler, RunnableConfig<GameView> loopRunner, RenderHandler renderer) {
         super(context);
 
         this.context = context;
@@ -42,6 +44,8 @@ public abstract class GameView extends SurfaceView implements SurfaceHolder.Call
         this.touchHandler = touchHandler;
         this.loopRunner = loopRunner;
         this.renderer = renderer;
+
+        spriteSystem = new SpriteSystem();
     }
 
 
@@ -63,6 +67,7 @@ public abstract class GameView extends SurfaceView implements SurfaceHolder.Call
      */
 
 
+    protected abstract void initStartingState();
 
 
 

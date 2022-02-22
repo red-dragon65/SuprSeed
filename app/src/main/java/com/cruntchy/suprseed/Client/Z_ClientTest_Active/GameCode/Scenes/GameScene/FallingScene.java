@@ -10,17 +10,7 @@ public class FallingScene extends Scene {
     }
 
     @Override
-    public void initStartingState() {
-
-    }
-
-    @Override
-    public void logicLoop() {
-
-    }
-
-    @Override
-    public void drawingLoop() {
+    public void runLogic() {
 
     }
 }

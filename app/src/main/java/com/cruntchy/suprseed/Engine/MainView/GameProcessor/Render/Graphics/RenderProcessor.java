@@ -1,15 +1,20 @@
 package com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Graphics;
 
 import android.graphics.Canvas;
+import android.graphics.Paint;
 
 import com.cruntchy.suprseed.Engine.ErrorLogger.CentralLogger;
 import com.cruntchy.suprseed.Engine.ErrorLogger.ErrorType;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Coordinates.CoordinateHandler;
+import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase.Sprite;
 
 public class RenderProcessor implements RenderHandler {
 
     // The hardware accelerated canvas provided by a view
     private Canvas canvas;
+
+    // TODO: Get the paint object
+    private Paint paint;
 
     // Dependencies
     private CoordinateHandler coordinateHandler;
@@ -54,7 +59,7 @@ public class RenderProcessor implements RenderHandler {
 
 
     @Override
-    public void drawSprite(/*ImageSprite sprite*/){
+    public void drawSprite(Sprite sprite){
 
         // Show warning if canvas is not set
         if(this.canvas == null){
@@ -71,22 +76,22 @@ public class RenderProcessor implements RenderHandler {
             return;
         }
 
+        if(sprite.isEnabled() && sprite.isShow()){
 
-        // TODO: Draw a sprite here
-        /*
+            float[] spriteLoc = {sprite.getX(), sprite.getY()};
 
-        float[] spriteLoc = {sprite.getX(), sprite.getY()};
+            // Get drawing location of sprite
+            float[] finalLoc = coordinateHandler.parseLocation(spriteLoc);
 
-        // Get drawing location of sprite
-        float[] finalLoc = coordinateHandler.parseFinalLocation(spriteLoc);
+            // Draw the sprite at the final location
+            canvas.drawBitmap(
+                    sprite.getImageHandler().getSelectedImage().getImage(),
+                    finalLoc[0],
+                    finalLoc[1],
+                    paint
+            );
+        }
 
-        // Draw the sprite at the final location
-        canvas.drawBitmap(
-            sprite.getImage(),
-            finalLoc[0],
-            finalLoc[1],
-            paint
-        );*/
     }
 
 
