@@ -10,6 +10,7 @@ import com.cruntchy.suprseed.Client.Z_ClientTest_Active.GameCode.Scenes.HomeScre
 import com.cruntchy.suprseed.Engine.AssetLoader.AssetLoader;
 import com.cruntchy.suprseed.Engine.AssetLoader.FolderParser;
 import com.cruntchy.suprseed.Engine.AssetLoader.ImageProcessor;
+import com.cruntchy.suprseed.Engine.AssetLoader.ImageTransformer;
 import com.cruntchy.suprseed.Engine.AssetLoader.LocalFolderParser;
 import com.cruntchy.suprseed.Engine.AssetLoader.LocalImageFileStreamer;
 import com.cruntchy.suprseed.Engine.AssetLoader.Streamable;
@@ -26,38 +27,20 @@ import java.util.List;
 
 public class SceneManagerTest extends GameView implements Logic {
 
-
-    // TODO: This needs to handle loading, de-allocating, and running other scenes
-
-
-
-    // Initialize assets
-    private FolderParser localFolderParser = new LocalFolderParser(resources);
-    private Streamable localStreamer = new LocalImageFileStreamer(resources, new ImageProcessor());
-    private AssetLoader myAssets = new AssetScriptTest(localStreamer, localFolderParser);
-
+    // VERIFY: Observer pattern
 
 
     private List<Scene> myScenes = new ArrayList<>();
 
-    /**
-     * Constructor
-     *
-     * @param context
-     * @param resources
-     * @param gameData
-     * @param touchHandler
-     * @param loopRunner
-     * @param renderer
-     */
+
+    // Constructor
     public SceneManagerTest(Context context, Resources resources, SharedPreferences gameData,
-                            TouchMethod touchHandler, RunnableConfig<GameView> loopRunner, RenderHandler renderer) {
-        super(context, resources, gameData, touchHandler, loopRunner, renderer);
+                            TouchMethod touchHandler, RunnableConfig<GameView> loopRunner, RenderHandler renderer,
+                            ImageTransformer imageProcessor) {
+        super(context, resources, gameData, touchHandler, loopRunner, renderer, imageProcessor);
 
 
     }
-
-
 
 
 
@@ -74,16 +57,20 @@ public class SceneManagerTest extends GameView implements Logic {
 
         // OR, initialize a scene
 
+        FolderParser localFolderParser = new LocalFolderParser(resources);
+        Streamable localStreamer = new LocalImageFileStreamer(resources, imageProcessor);
+        AssetLoader myAssets = new AssetScriptTest(localStreamer, localFolderParser);
 
 
-        myScenes.add(new LandingScene(this, "landingScene", myAssets));
-        myScenes.add(new FallingScene(this, "fallingScene"));
+        myScenes.add(new TestScene(this, "testScene", myAssets));
 
 
+        // Activate start scene
+        myScenes.get(0).setActive(true);
 
 
-        // Register this
-        SpriteSystem.getInstance().registerLogicSprite(this);
+        // Register this scenes logic
+        //spriteSystem.registerLogicSprite(this);
     }
 
 
@@ -92,6 +79,7 @@ public class SceneManagerTest extends GameView implements Logic {
     @Override
     public void runLogic() {
 
+        // We don't need this for now...
     }
 
 

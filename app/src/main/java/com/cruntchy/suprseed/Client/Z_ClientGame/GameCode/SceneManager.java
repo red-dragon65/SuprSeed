@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 
+import com.cruntchy.suprseed.Engine.AssetLoader.ImageTransformer;
 import com.cruntchy.suprseed.Engine.InputHandler.TouchInput.TouchMethod;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.GameView;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.RunnableConfig;
@@ -25,8 +26,8 @@ public class SceneManager extends GameView {
      * @param loopRunner
      * @param renderer
      */
-    public SceneManager(Context context, Resources resources, SharedPreferences gameData, TouchMethod touchHandler, RunnableConfig<GameView> loopRunner, RenderHandler renderer) {
-        super(context, resources, gameData, touchHandler, loopRunner, renderer);
+    public SceneManager(Context context, Resources resources, SharedPreferences gameData, TouchMethod touchHandler, RunnableConfig<GameView> loopRunner, RenderHandler renderer, ImageTransformer imageProcessor) {
+        super(context, resources, gameData, touchHandler, loopRunner, renderer, imageProcessor);
     }
 
 

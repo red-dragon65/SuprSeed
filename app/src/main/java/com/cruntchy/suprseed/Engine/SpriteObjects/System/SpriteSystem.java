@@ -18,6 +18,8 @@ public class SpriteSystem implements Renderable, Logic, ResetState, Systemizable
 
     // TODO: Make this a proper singleton!
 
+    // OPTIMIZE: Should sprites be allowed to de-register themselves?
+
 
     private List<Collidable> collisionSprites;
     private List<Logic> logicSprites;
@@ -35,10 +37,12 @@ public class SpriteSystem implements Renderable, Logic, ResetState, Systemizable
 
 
 
+    // VERIFY: is this correct?
     private static class SystemSingleton {
         private static final SpriteSystem INSTANCE = new SpriteSystem();
     }
 
+    // VERIFY: is this correct?
     public static SpriteSystem getInstance() {
         return SystemSingleton.INSTANCE;
     }
@@ -105,7 +109,8 @@ public class SpriteSystem implements Renderable, Logic, ResetState, Systemizable
 
         // Draw the sprites
         for(Sprite s : renderSprites){
-            renderer.drawSprite(s);
+            //renderer.drawSprite(s);
+            s.draw(renderer);
         }
     }
 

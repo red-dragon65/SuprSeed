@@ -6,6 +6,9 @@ import android.content.res.Resources;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.cruntchy.suprseed.Client.Z_ClientTest_Active.GameCode.Scenes.SceneManagerTest;
+import com.cruntchy.suprseed.Engine.AssetLoader.ImageProcessor;
+import com.cruntchy.suprseed.Engine.AssetLoader.ImageTransformer;
 import com.cruntchy.suprseed.Engine.InputHandler.Sensors.DeviceSensor;
 import com.cruntchy.suprseed.Engine.InputHandler.TouchInput.TouchHandler;
 import com.cruntchy.suprseed.Engine.InputHandler.TouchInput.TouchMethod;
@@ -36,7 +39,7 @@ public class DefaultEngineBuilder extends BaseEngineBuilder implements InfoBuild
 
         // TODO: Initialize the game view
 
-        GameView defaultView = new SceneManager(context, res, gameData, getDefaultTouchMethod(), getDefaultRunnableConfig(), getDefaultRenderProcessor());
+        GameView defaultView = new SceneManagerTest(context, res, gameData, getDefaultTouchMethod(), getDefaultRunnableConfig(), getDefaultRenderProcessor(), getDefaultTransformer());
 
         return defaultView;
     }
@@ -106,6 +109,12 @@ public class DefaultEngineBuilder extends BaseEngineBuilder implements InfoBuild
         return new CoordinateProcessor();
     }
 
+
+    @Override
+    public ImageTransformer getDefaultTransformer(){
+
+        return new ImageProcessor();
+    }
 
 
 

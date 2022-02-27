@@ -5,6 +5,7 @@ import com.cruntchy.suprseed.Engine.ErrorLogger.ErrorType;
 import com.cruntchy.suprseed.Engine.Images.Animator;
 import com.cruntchy.suprseed.Engine.Images.ImageType;
 
+import java.util.HashMap;
 import java.util.Map;
 
 abstract public class AssetLoader {
@@ -14,8 +15,8 @@ abstract public class AssetLoader {
     protected FolderParser folderParser;
 
     // Hold image data
-    protected Map<String, ImageType> images;
-    protected Map<String, Animator> animations;
+    protected Map<String, ImageType> images = new HashMap<>();
+    protected Map<String, Animator> animations = new HashMap<>();
 
 
     // Constructor
@@ -23,6 +24,8 @@ abstract public class AssetLoader {
 
         this.assetStreamer = assetStreamer;
         this.folderParser = folderParser;
+
+        loadAssets();
     }
 
 

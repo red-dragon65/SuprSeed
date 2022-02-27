@@ -21,8 +21,8 @@ public class LoopConfig implements RunnableConfig<GameView> {
     private int refreshMultiple = 0;
     private int logicMultiple = 0;
 
-    private boolean softPause;
-    private boolean hardPause;
+    private boolean softPause = false;
+    private boolean hardPause = false;
 
     // Dependencies
     private LocationScaler locationScaler;

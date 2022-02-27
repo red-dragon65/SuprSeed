@@ -1,5 +1,6 @@
 package com.cruntchy.suprseed.Engine.MainView.GameViewBuilder;
 
+import com.cruntchy.suprseed.Engine.AssetLoader.ImageTransformer;
 import com.cruntchy.suprseed.Engine.InputHandler.Sensors.DeviceSensor;
 import com.cruntchy.suprseed.Engine.InputHandler.TouchInput.TouchMethod;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.GameView;
@@ -24,5 +25,6 @@ public interface InfoBuilder <T>{
     public RenderHandler getDefaultRenderProcessor();
     public CoordinateHandler getDefaultCoordinateHandler();
 
+    public ImageTransformer getDefaultTransformer();
 
 }

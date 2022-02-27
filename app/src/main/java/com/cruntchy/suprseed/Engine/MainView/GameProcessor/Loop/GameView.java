@@ -10,6 +10,7 @@ import android.view.SurfaceView;
 
 import androidx.annotation.NonNull;
 
+import com.cruntchy.suprseed.Engine.AssetLoader.ImageTransformer;
 import com.cruntchy.suprseed.Engine.InputHandler.TouchInput.TouchMethod;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import com.cruntchy.suprseed.Engine.SpriteObjects.System.SpriteSystem;
@@ -28,12 +29,13 @@ public abstract class GameView extends SurfaceView implements SurfaceHolder.Call
 
     protected SpriteSystem spriteSystem;
 
-    /**
-     * Constructor
-     * @param context
-     */
+    protected ImageTransformer imageProcessor;
+
+
+    // Constructor
     public GameView(Context context, Resources resources, SharedPreferences gameData,
-                    TouchMethod touchHandler, RunnableConfig<GameView> loopRunner, RenderHandler renderer) {
+                    TouchMethod touchHandler, RunnableConfig<GameView> loopRunner, RenderHandler renderer,
+                    ImageTransformer imageProcessor) {
         super(context);
 
         this.context = context;
@@ -46,6 +48,8 @@ public abstract class GameView extends SurfaceView implements SurfaceHolder.Call
         this.renderer = renderer;
 
         spriteSystem = new SpriteSystem();
+
+        this.imageProcessor = imageProcessor;
     }
 
 
@@ -76,6 +80,7 @@ public abstract class GameView extends SurfaceView implements SurfaceHolder.Call
 
         // Set canvas size
         renderer.setCanvasSize(w, h);
+        imageProcessor.init(w, h, 1080);
 
         // Initialize the assets
         // Initialize static game objects

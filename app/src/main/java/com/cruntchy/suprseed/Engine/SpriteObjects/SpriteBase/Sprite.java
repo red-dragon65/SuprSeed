@@ -2,6 +2,8 @@ package com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase;
 
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteExtensions.Renderable;
+import com.cruntchy.suprseed.Engine.SpriteObjects.System.SpriteSystem;
+import com.cruntchy.suprseed.Engine.SpriteObjects.System.Systemizable;
 
 public abstract class Sprite implements Renderable {
 
@@ -11,11 +13,12 @@ public abstract class Sprite implements Renderable {
     private float xVel;
     private float yVel;
 
-    private boolean enabled;
-    private boolean show;
+    private boolean enabled = true;
+    private boolean show = true;
 
     // Dependency
     private ImageHandler imageHandler;
+    protected Systemizable spriteSystem;
 
 
     // Constructor that takes one sprite image set
@@ -23,6 +26,11 @@ public abstract class Sprite implements Renderable {
 
         // Dependency injection
         this.imageHandler = imageHandler;
+
+        spriteSystem = SpriteSystem.getInstance();
+
+        // Register this renderable
+        spriteSystem.registerRenderSprite(this);
     }
 
 
