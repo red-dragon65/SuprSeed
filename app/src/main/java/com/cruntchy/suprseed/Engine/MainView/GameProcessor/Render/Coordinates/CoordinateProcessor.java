@@ -1,6 +1,8 @@
 package com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Coordinates;
 
 
+import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase.Sprite;
+
 public class CoordinateProcessor implements CoordinateHandler {
 
 
@@ -12,21 +14,26 @@ public class CoordinateProcessor implements CoordinateHandler {
 
 
     // Constructor
-    public CoordinateProcessor(){
+    public CoordinateProcessor(LocationHandler locationHandler, LocationScaler locationScaler){
 
+        this.locationHandler = locationHandler;
+        this.locationScaler = locationScaler;
     }
 
 
     // Calculate the location a sprite should be put
     @Override
-    public float[] parseLocation(float[] loc){
+    public float[] parseLocation(Sprite sprite, float canvasWidth, float canvasHeight){
 
-        /*
 
-        // Apply camera offset (this has to happen before transforming location data)
-        loc[0] += camera.getX();
-        loc[1] += camera.getY();
+        float[] loc = {sprite.getX(), sprite.getY()};
 
+        if(sprite.isCameraEnabled()){
+
+            // Apply camera offset (this has to happen before transforming location data)
+            loc[0] += Camera.getInstance().getxOffset();
+            loc[1] += Camera.getInstance().getyOffset();
+        }
 
 
         // Flip location based on canvas orientation
@@ -38,9 +45,9 @@ public class CoordinateProcessor implements CoordinateHandler {
 
         // Format the location to the canvas
         loc[0] = locationScaler.formatCoordinateToCanvas(loc[0], canvasWidth);
-        loc[1] = locationScaler.formatCoordinateToCanvas(loc[1], canvasHeight);
+        loc[1] = locationScaler.formatCoordinateToCanvas(loc[1], canvasWidth);
 
-         */
+
 
 
         return loc;

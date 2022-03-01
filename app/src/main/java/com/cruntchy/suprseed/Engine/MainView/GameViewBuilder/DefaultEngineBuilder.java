@@ -17,15 +17,21 @@ import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.LogicRates;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.LoopConfig;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.RefreshTypes;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.RunnableConfig;
+import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Coordinates.CanvasLocationHandler;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Coordinates.CanvasLocationScaler;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Coordinates.CoordinateHandler;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Coordinates.CoordinateProcessor;
+import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Coordinates.LocationHandler;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Coordinates.LocationScaler;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Graphics.RenderProcessor;
 import com.cruntchy.suprseed.Client.Z_ClientGame.GameCode.SceneManager;
 
 public class DefaultEngineBuilder extends BaseEngineBuilder implements InfoBuilder<Float[]>{
+
+
+    private final LocationScaler locationScaler = new CanvasLocationScaler();
+
 
 
     // Constructor
@@ -52,9 +58,6 @@ public class DefaultEngineBuilder extends BaseEngineBuilder implements InfoBuild
 
         defaultWindowConfig.applyWindowSettings(mainActivity);
     }
-
-
-
 
 
 
@@ -92,7 +95,7 @@ public class DefaultEngineBuilder extends BaseEngineBuilder implements InfoBuild
     @Override
     public LocationScaler getDefaultLocationScaler(){
 
-        return new CanvasLocationScaler();
+        return locationScaler;
     }
 
 
@@ -106,7 +109,13 @@ public class DefaultEngineBuilder extends BaseEngineBuilder implements InfoBuild
     @Override
     public CoordinateHandler getDefaultCoordinateHandler(){
 
-        return new CoordinateProcessor();
+        return new CoordinateProcessor(getDefaultLocationHandler(), getDefaultLocationScaler());
+    }
+
+    @Override
+    public LocationHandler getDefaultLocationHandler(){
+
+        return new CanvasLocationHandler(true, true);
     }
 
 

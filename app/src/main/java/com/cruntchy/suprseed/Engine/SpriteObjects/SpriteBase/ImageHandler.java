@@ -20,7 +20,7 @@ public class ImageHandler {
             spriteImage = new HashMap<>();
             spriteImage.put(name, spriteImageSet);
 
-            selectedImage = getFirstImageId();
+            selectedImage = getFirstImageSetId();
         }
 
     }
@@ -32,14 +32,14 @@ public class ImageHandler {
 
             this.spriteImage = sprites;
 
-            selectedImage = getFirstImageId();
+            selectedImage = getFirstImageSetId();
         }
 
     }
 
 
 
-    public ImageType getSpriteImage(String imageName) {
+    public ImageType getSpriteImageSet(String imageName) {
 
         verifySpriteList();
 
@@ -51,14 +51,14 @@ public class ImageHandler {
         throw new NullPointerException("Image with key: '" + imageName + "' does not exist!");
     }
 
-    public ImageType getSelectedImage() {
+    public ImageType getSelectedImageSet() {
 
         verifySpriteList();
 
         return spriteImage.get(selectedImage);
     }
 
-    public void setSelectedImage(String selected) {
+    public void setSelectedImageSet(String selected) {
 
         // Verify id exists
         if (spriteImage.containsKey(selected)) {
@@ -70,7 +70,7 @@ public class ImageHandler {
         throw new NullPointerException("Image with key: '" + selected + "' does not exist!");
     }
 
-    private String getFirstImageId() {
+    private String getFirstImageSetId() {
 
         verifySpriteList();
 

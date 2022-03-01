@@ -87,6 +87,12 @@ public abstract class GameView extends SurfaceView implements SurfaceHolder.Call
         // Initialize a new game loop
         initStartingState();
 
+        // Force onDraw call
+        setWillNotDraw(false);
+
+        // Tell SurfaceView SurfaceHolder is being used
+        getHolder().addCallback(this);
+
         super.onSizeChanged(w, h, oldw, oldh);
     }
 

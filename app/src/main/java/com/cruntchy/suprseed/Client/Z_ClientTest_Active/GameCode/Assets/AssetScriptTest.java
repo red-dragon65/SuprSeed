@@ -22,7 +22,7 @@ public class AssetScriptTest extends AssetLoader {
 
         // CLIENT CODE GOES HERE!!!
 
-        ImageSingle hero = new ImageSingle("hero_left_jumpman.png", 1, assetStreamer);
+        ImageSingle hero = new ImageSingle("frog_jump_fullframe.png", 10, assetStreamer);
         images.put("hero", hero);
 
 

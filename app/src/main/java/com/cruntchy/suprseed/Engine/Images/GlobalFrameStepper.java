@@ -4,9 +4,7 @@ import android.util.Log;
 
 public class GlobalFrameStepper {
 
-    // TODO: Make this a singleton
-    // TODO: Make this a part of a system
-    // TODO: Call this within a loop (loop config)
+    // TODO: Make this a proper singleton
 
     // Global frame stepper
     // Tracks which frame in an animation should be in

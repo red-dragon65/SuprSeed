@@ -4,8 +4,6 @@ public class ImageProcessor implements ImageTransformer {
 
 
     private float spriteImageScaleRatio;
-    private int scaledCanvasWidth;
-    private int scaledCanvasHeight;
 
 
     /*
@@ -22,9 +20,6 @@ public class ImageProcessor implements ImageTransformer {
     public void init(int width, int height, float targetResolutionWidth){
 
         this.spriteImageScaleRatio = width / targetResolutionWidth;
-
-        this.scaledCanvasWidth = (int) (width * targetResolutionWidth);
-        this.scaledCanvasHeight = (int) (height * targetResolutionWidth);
     }
 
 

@@ -16,6 +16,8 @@ public abstract class Sprite implements Renderable {
     private boolean enabled = true;
     private boolean show = true;
 
+    private boolean cameraRegistered = true;
+
     // Dependency
     private ImageHandler imageHandler;
     protected Systemizable spriteSystem;
@@ -31,6 +33,14 @@ public abstract class Sprite implements Renderable {
 
         // Register this renderable
         spriteSystem.registerRenderSprite(this);
+    }
+
+
+
+    @Override
+    public void draw(RenderHandler renderer){
+
+        renderer.drawSprite(this);
     }
 
 
@@ -92,10 +102,16 @@ public abstract class Sprite implements Renderable {
         this.imageHandler = imageHandler;
     }
 
-    @Override
-    public void draw(RenderHandler renderer){
+    public void enableCamera(){
+        cameraRegistered = true;
+    }
 
-        renderer.drawSprite(this);
+    public void disableCamera(){
+        cameraRegistered = false;
+    }
+
+    public boolean isCameraEnabled(){
+        return cameraRegistered;
     }
 
 }

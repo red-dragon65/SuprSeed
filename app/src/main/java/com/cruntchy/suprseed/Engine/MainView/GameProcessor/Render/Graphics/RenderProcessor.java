@@ -13,8 +13,7 @@ public class RenderProcessor implements RenderHandler {
     // The hardware accelerated canvas provided by a view
     private Canvas canvas;
 
-    // TODO: Get the paint object
-    private Paint paint;
+    private Paint paint = new Paint();
 
     // Dependencies
     private CoordinateHandler coordinateHandler;
@@ -48,13 +47,8 @@ public class RenderProcessor implements RenderHandler {
     @Override
     public void setCanvas(Canvas canvas){
 
-        // Set the canvas if it is null
-        if(this.canvas == null){
-
-            this.canvas = canvas;
-
-            CentralLogger.logMessage(ErrorType.INFO, "The canvas has been set...");
-        }
+        // Get the latest canvas from onDraw
+        this.canvas = canvas;
     }
 
 
@@ -76,16 +70,16 @@ public class RenderProcessor implements RenderHandler {
             return;
         }
 
+
+        // Actually draw sprite
         if(sprite.isEnabled() && sprite.isShow()){
 
-            float[] spriteLoc = {sprite.getX(), sprite.getY()};
-
             // Get drawing location of sprite
-            float[] finalLoc = coordinateHandler.parseLocation(spriteLoc);
+            float[] finalLoc = coordinateHandler.parseLocation(sprite, originalCanvasWidth, originalCanvasHeight);
 
             // Draw the sprite at the final location
             canvas.drawBitmap(
-                    sprite.getImageHandler().getSelectedImage().getImage(),
+                    sprite.getImageHandler().getSelectedImageSet().getImage(),
                     finalLoc[0],
                     finalLoc[1],
                     paint

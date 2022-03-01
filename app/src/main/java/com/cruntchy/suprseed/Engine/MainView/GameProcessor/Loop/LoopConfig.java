@@ -198,7 +198,7 @@ public class LoopConfig implements RunnableConfig<GameView> {
                 //gameView.logicLoop();
                 SpriteSystem.getInstance().runLogic();
             }
-        }
+        }else
 
         // Number of frames to skip
         // (logic rate is less than refresh rate)
@@ -210,9 +210,19 @@ public class LoopConfig implements RunnableConfig<GameView> {
                 // Run client logic code
                 //gameView.logicLoop();
                 SpriteSystem.getInstance().runLogic();
+
+                frameCounter = 0;
             }
 
             frameCounter++;
+        }
+
+
+        // Ignore frame pacing
+        else{
+
+            // Run client logic code
+            SpriteSystem.getInstance().runLogic();
         }
     }
 

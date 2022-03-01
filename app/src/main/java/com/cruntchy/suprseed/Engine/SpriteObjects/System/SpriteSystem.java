@@ -2,6 +2,7 @@ package com.cruntchy.suprseed.Engine.SpriteObjects.System;
 
 import com.cruntchy.suprseed.Engine.ErrorLogger.CentralLogger;
 import com.cruntchy.suprseed.Engine.ErrorLogger.ErrorType;
+import com.cruntchy.suprseed.Engine.Images.GlobalFrameStepper;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase.Sprite;
 import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteExtensions.Collidable;
@@ -98,6 +99,9 @@ public class SpriteSystem implements Renderable, Logic, ResetState, Systemizable
     // Draw registered sprites
     @Override
     public void draw(RenderHandler renderer) {
+
+        // Update animation frames
+        GlobalFrameStepper.moveToNextFrame();
 
         // Verify renderHandler
         if(renderer == null){

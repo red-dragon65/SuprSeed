@@ -6,6 +6,7 @@ import com.cruntchy.suprseed.Engine.InputHandler.TouchInput.TouchMethod;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.GameView;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.RunnableConfig;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Coordinates.CoordinateHandler;
+import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Coordinates.LocationHandler;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Coordinates.LocationScaler;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Graphics.RenderHandler;
 
@@ -21,10 +22,13 @@ public interface InfoBuilder <T>{
 
     public RunnableConfig<GameView> getDefaultRunnableConfig();
     public LocationScaler getDefaultLocationScaler();
+    public LocationHandler getDefaultLocationHandler();
 
     public RenderHandler getDefaultRenderProcessor();
     public CoordinateHandler getDefaultCoordinateHandler();
 
+
     public ImageTransformer getDefaultTransformer();
+
 
 }
