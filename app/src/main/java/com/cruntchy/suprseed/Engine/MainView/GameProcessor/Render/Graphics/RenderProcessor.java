@@ -5,6 +5,7 @@ import android.graphics.Paint;
 
 import com.cruntchy.suprseed.Engine.ErrorLogger.CentralLogger;
 import com.cruntchy.suprseed.Engine.ErrorLogger.ErrorType;
+import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.CanvasData;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Coordinates.CoordinateHandler;
 import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase.Sprite;
 
@@ -13,15 +14,12 @@ public class RenderProcessor implements RenderHandler {
     // The hardware accelerated canvas provided by a view
     private Canvas canvas;
 
-    private Paint paint = new Paint();
+    private final Paint paint = new Paint();
 
     // Dependencies
-    private CoordinateHandler coordinateHandler;
+    private final CoordinateHandler coordinateHandler;
 
 
-    // The original size of the screen
-    private float originalCanvasWidth = 0;
-    private float originalCanvasHeight = 0;
 
 
 
@@ -33,15 +31,6 @@ public class RenderProcessor implements RenderHandler {
     }
 
 
-
-    @Override
-    public void setCanvasSize(int w, int h){
-
-        originalCanvasWidth = w;
-        originalCanvasHeight = h;
-
-        CentralLogger.logMessage(ErrorType.INFO, "The canvas dimensions have been set...");
-    }
 
 
     @Override
@@ -63,7 +52,7 @@ public class RenderProcessor implements RenderHandler {
             return;
         }
 
-        if(this.originalCanvasWidth == 0 || this.originalCanvasHeight == 0){
+        if (CanvasData.getInstance().getOriginalWidth() == 0 || CanvasData.getInstance().getOriginalHeight() == 0) {
 
             CentralLogger.logMessage(ErrorType.WARNING, "The canvas dimensions have not been initialized!!");
 
@@ -75,7 +64,7 @@ public class RenderProcessor implements RenderHandler {
         if(sprite.isEnabled() && sprite.isShow()){
 
             // Get drawing location of sprite
-            float[] finalLoc = coordinateHandler.parseLocation(sprite, originalCanvasWidth, originalCanvasHeight);
+            float[] finalLoc = coordinateHandler.parseLocation(sprite);
 
             // Draw the sprite at the final location
             canvas.drawBitmap(

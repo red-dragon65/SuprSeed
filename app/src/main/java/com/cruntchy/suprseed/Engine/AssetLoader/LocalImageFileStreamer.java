@@ -5,23 +5,21 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
 
+import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.CanvasData;
+
 import java.io.IOException;
 import java.io.InputStream;
 
 public class LocalImageFileStreamer implements Streamable {
 
-    private Resources res;
+    private final Resources res;
     private InputStream reader = null;
-
-    private ImageTransformer imageProcessor;
 
 
     // Constructor
-    public LocalImageFileStreamer(Resources res, ImageTransformer imageProcessor){
+    public LocalImageFileStreamer(Resources res) {
 
         this.res = res;
-
-        this.imageProcessor = imageProcessor;
     }
 
 
@@ -58,7 +56,7 @@ public class LocalImageFileStreamer implements Streamable {
                 Log.d("ImageLoader", "Image failed to load: " + fileName);
             }
 
-            return Bitmap.createScaledBitmap(temp, ((int) ((float) temp.getWidth() * imageProcessor.getSpriteImageScaleRatio() * scaleFactor)), ((int) ((float) temp.getHeight() * imageProcessor.getSpriteImageScaleRatio() * scaleFactor)), false);
+            return Bitmap.createScaledBitmap(temp, ((int) ((float) temp.getWidth() * CanvasData.getInstance().getSpriteScaleRatio() * scaleFactor)), ((int) ((float) temp.getHeight() * CanvasData.getInstance().getSpriteScaleRatio() * scaleFactor)), false);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -72,7 +70,7 @@ public class LocalImageFileStreamer implements Streamable {
     @Override
     public Bitmap loadImage_Unscaled(String fileName){
 
-        InputStream reader = null;
+        InputStream reader;
 
         try {
             reader = res.getAssets().open(fileName);

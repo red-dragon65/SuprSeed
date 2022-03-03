@@ -17,20 +17,20 @@ import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.LogicRates;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.LoopConfig;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.RefreshTypes;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.RunnableConfig;
-import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Coordinates.CanvasLocationHandler;
-import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Coordinates.CanvasLocationScaler;
+import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.SceneController;
+import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Coordinates.CartesianHandler;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Coordinates.CoordinateHandler;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Coordinates.CoordinateProcessor;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Coordinates.LocationHandler;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Coordinates.LocationScaler;
+import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Coordinates.LocationTemporalScaler;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Graphics.RenderProcessor;
-import com.cruntchy.suprseed.Client.Z_ClientGame.GameCode.SceneManager;
 
 public class DefaultEngineBuilder extends BaseEngineBuilder implements InfoBuilder<Float[]>{
 
 
-    private final LocationScaler locationScaler = new CanvasLocationScaler();
+    private final LocationScaler locationScaler = new LocationTemporalScaler();
 
 
 
@@ -45,7 +45,9 @@ public class DefaultEngineBuilder extends BaseEngineBuilder implements InfoBuild
 
         // TODO: Initialize the game view
 
-        GameView defaultView = new SceneManagerTest(context, res, gameData, getDefaultTouchMethod(), getDefaultRunnableConfig(), getDefaultRenderProcessor(), getDefaultTransformer());
+        SceneController testScene = new SceneManagerTest();
+
+        GameView defaultView = new GameView(context, res, gameData, getDefaultTouchMethod(), getDefaultRunnableConfig(), getDefaultRenderProcessor(), testScene);
 
         return defaultView;
     }
@@ -115,7 +117,7 @@ public class DefaultEngineBuilder extends BaseEngineBuilder implements InfoBuild
     @Override
     public LocationHandler getDefaultLocationHandler(){
 
-        return new CanvasLocationHandler(true, true);
+        return new CartesianHandler(true, true);
     }
 
 

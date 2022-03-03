@@ -7,9 +7,9 @@ import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase.Sprite;
 
 public interface RenderHandler {
 
-    public void setCanvasSize(int width, int height);
-    public void setCanvas(Canvas canvas);
-    public void drawSprite(Sprite sprite);
+    void setCanvas(Canvas canvas);
 
-    public CoordinateHandler getCoordinateHandler();
+    void drawSprite(Sprite sprite);
+
+    CoordinateHandler getCoordinateHandler();
 }

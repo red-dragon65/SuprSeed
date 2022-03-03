@@ -3,7 +3,7 @@ package com.cruntchy.suprseed.Engine.AssetLoader;
 import com.cruntchy.suprseed.Engine.ErrorLogger.CentralLogger;
 import com.cruntchy.suprseed.Engine.ErrorLogger.ErrorType;
 import com.cruntchy.suprseed.Engine.Images.Animator;
-import com.cruntchy.suprseed.Engine.Images.ImageType;
+import com.cruntchy.suprseed.Engine.Images.SpriteImage;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,7 +15,7 @@ abstract public class AssetLoader {
     protected FolderParser folderParser;
 
     // Hold image data
-    protected Map<String, ImageType> images = new HashMap<>();
+    protected Map<String, SpriteImage> images = new HashMap<>();
     protected Map<String, Animator> animations = new HashMap<>();
 
 
@@ -32,13 +32,13 @@ abstract public class AssetLoader {
     abstract public void loadAssets();
 
 
-    public ImageType getImage(String imageId){
+    public SpriteImage getImage(String imageId) {
 
-        try{
+        try {
 
             return images.get(imageId);
 
-        }catch(Exception e){
+        } catch (Exception e) {
 
             e.printStackTrace();
 

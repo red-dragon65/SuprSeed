@@ -3,8 +3,6 @@ package com.cruntchy.suprseed.Engine.AssetLoader;
 public class ImageProcessor implements ImageTransformer {
 
 
-    private float spriteImageScaleRatio;
-
 
     /*
     public void init(int width, int height, String fileName, Streamable assetStreamer){
@@ -16,11 +14,6 @@ public class ImageProcessor implements ImageTransformer {
 
         this.spriteImageScaleRatio = (float) width / bg.getWidth();
     }*/
-
-    public void init(int width, int height, float targetResolutionWidth){
-
-        this.spriteImageScaleRatio = width / targetResolutionWidth;
-    }
 
 
     public void rotateSprite(/*Sprite sprite,*/ float degrees){
@@ -44,12 +37,6 @@ public class ImageProcessor implements ImageTransformer {
 
     public void invertColors(/*Sprite sprite*/){
 
-    }
-
-
-
-    public float getSpriteImageScaleRatio(){
-        return spriteImageScaleRatio;
     }
 
 }

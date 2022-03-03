@@ -10,12 +10,12 @@ import android.view.SurfaceView;
 
 import androidx.annotation.NonNull;
 
-import com.cruntchy.suprseed.Engine.AssetLoader.ImageTransformer;
 import com.cruntchy.suprseed.Engine.InputHandler.TouchInput.TouchMethod;
+import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.CanvasData;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import com.cruntchy.suprseed.Engine.SpriteObjects.System.SpriteSystem;
 
-public abstract class GameView extends SurfaceView implements SurfaceHolder.Callback, SceneController {
+public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
 
     // Dependencies
@@ -29,13 +29,12 @@ public abstract class GameView extends SurfaceView implements SurfaceHolder.Call
 
     protected SpriteSystem spriteSystem;
 
-    protected ImageTransformer imageProcessor;
-
+    protected SceneController sceneManager;
 
     // Constructor
     public GameView(Context context, Resources resources, SharedPreferences gameData,
                     TouchMethod touchHandler, RunnableConfig<GameView> loopRunner, RenderHandler renderer,
-                    ImageTransformer imageProcessor) {
+                    SceneController sceneManager) {
         super(context);
 
         this.context = context;
@@ -49,7 +48,7 @@ public abstract class GameView extends SurfaceView implements SurfaceHolder.Call
 
         spriteSystem = new SpriteSystem();
 
-        this.imageProcessor = imageProcessor;
+        this.sceneManager = sceneManager;
     }
 
 
@@ -71,21 +70,18 @@ public abstract class GameView extends SurfaceView implements SurfaceHolder.Call
      */
 
 
-    protected abstract void initStartingState();
 
 
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
 
-        // Set canvas size
-        renderer.setCanvasSize(w, h);
-        imageProcessor.init(w, h, 1080);
+        CanvasData.getInstance().setDimensions(h, w);
 
         // Initialize the assets
         // Initialize static game objects
         // Initialize a new game loop
-        initStartingState();
+        sceneManager.initStartingState(context, resources, gameData);
 
         // Force onDraw call
         setWillNotDraw(false);

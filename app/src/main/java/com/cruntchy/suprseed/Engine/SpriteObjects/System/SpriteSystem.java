@@ -2,6 +2,7 @@ package com.cruntchy.suprseed.Engine.SpriteObjects.System;
 
 import com.cruntchy.suprseed.Engine.ErrorLogger.CentralLogger;
 import com.cruntchy.suprseed.Engine.ErrorLogger.ErrorType;
+import com.cruntchy.suprseed.Engine.Images.Animator;
 import com.cruntchy.suprseed.Engine.Images.GlobalFrameStepper;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase.Sprite;
@@ -14,7 +15,7 @@ import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteExtensions.ResetState;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SpriteSystem implements Renderable, Logic, ResetState, Systemizable{
+public class SpriteSystem implements Renderable, Logic, ResetState, Systemizable {
 
 
     // TODO: Make this a proper singleton!
@@ -22,18 +23,20 @@ public class SpriteSystem implements Renderable, Logic, ResetState, Systemizable
     // OPTIMIZE: Should sprites be allowed to de-register themselves?
 
 
-    private List<Collidable> collisionSprites;
-    private List<Logic> logicSprites;
-    private List<Movable> movingSprites;
-    private List<Sprite> renderSprites;
+    private final List<Collidable> collisionSprites;
+    private final List<Logic> logicSprites;
+    private final List<Movable> movingSprites;
+    private final List<Sprite> renderSprites;
+    private final List<Animator> animationImages;
 
 
-    public SpriteSystem(){
+    public SpriteSystem() {
 
         collisionSprites = new ArrayList<>();
         logicSprites = new ArrayList<>();
         movingSprites = new ArrayList<>();
         renderSprites = new ArrayList<>();
+        animationImages = new ArrayList<>();
     }
 
 
@@ -63,26 +66,27 @@ public class SpriteSystem implements Renderable, Logic, ResetState, Systemizable
     }
 
     @Override
-    public void registerMovingSprite(Movable sprite){
+    public void registerMovingSprite(Movable sprite) {
 
         movingSprites.add(sprite);
     }
 
     @Override
-    public void registerRenderSprite(Sprite sprite){
+    public void registerRenderSprite(Sprite sprite) {
 
         renderSprites.add(sprite);
     }
 
-
-
+    public void registerAnimationImage(Animator animation) {
+        animationImages.add(animation);
+    }
 
 
     // Run logic for all registered sprites
     @Override
     public void runLogic() {
 
-        for(Logic s : logicSprites){
+        for (Logic s : logicSprites) {
             s.runLogic();
         }
 
@@ -103,16 +107,21 @@ public class SpriteSystem implements Renderable, Logic, ResetState, Systemizable
         // Update animation frames
         GlobalFrameStepper.moveToNextFrame();
 
-        // Verify renderHandler
-        if(renderer == null){
+        // Make sure renderHandler is set
+        if (renderer == null) {
 
             CentralLogger.logMessage(ErrorType.FATAL_ERROR, "The render is null! The engine is borked!");
             return;
         }
 
 
+        // Update all animations to the next frame
+        for (Animator ani : animationImages) {
+            ani.generateNextFrame();
+        }
+
         // Draw the sprites
-        for(Sprite s : renderSprites){
+        for (Sprite s : renderSprites) {
             //renderer.drawSprite(s);
             s.draw(renderer);
         }

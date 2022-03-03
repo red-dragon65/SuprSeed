@@ -1,14 +1,14 @@
 package com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Coordinates;
 
-public class CanvasLocationHandler implements LocationHandler {
+public class CartesianHandler implements LocationHandler {
 
 
-    private boolean isPortrait;
-    private boolean isTopLeftOrigin;
+    private final boolean isPortrait;
+    private final boolean isTopLeftOrigin;
 
 
     // Constructor
-    public CanvasLocationHandler(boolean isPortrait, boolean isTopLeftOrigin){
+    public CartesianHandler(boolean isPortrait, boolean isTopLeftOrigin) {
 
         this.isPortrait = isPortrait;
         this.isTopLeftOrigin = isTopLeftOrigin;

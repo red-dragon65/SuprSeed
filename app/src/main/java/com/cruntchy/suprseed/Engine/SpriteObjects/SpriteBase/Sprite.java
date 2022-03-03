@@ -1,5 +1,6 @@
 package com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase;
 
+import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.CanvasData;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteExtensions.Renderable;
 import com.cruntchy.suprseed.Engine.SpriteObjects.System.SpriteSystem;
@@ -106,12 +107,19 @@ public abstract class Sprite implements Renderable {
         cameraRegistered = true;
     }
 
-    public void disableCamera(){
+    public void disableCamera() {
         cameraRegistered = false;
     }
 
-    public boolean isCameraEnabled(){
+    public boolean isCameraEnabled() {
         return cameraRegistered;
     }
 
+    public float getCanvasScaledWidth() {
+        return CanvasData.getInstance().getScaledWidth();
+    }
+
+    public float getCanvasScaledHeight() {
+        return CanvasData.getInstance().getScaledHeight();
+    }
 }

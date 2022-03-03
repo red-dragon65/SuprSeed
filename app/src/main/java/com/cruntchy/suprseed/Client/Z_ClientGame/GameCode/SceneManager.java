@@ -4,35 +4,22 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 
-import com.cruntchy.suprseed.Engine.AssetLoader.ImageTransformer;
-import com.cruntchy.suprseed.Engine.InputHandler.TouchInput.TouchMethod;
-import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.GameView;
-import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.RunnableConfig;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.Scene;
-import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Graphics.RenderHandler;
+import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.SceneController;
 
-public class SceneManager extends GameView {
+public class SceneManager implements SceneController {
 
 
     // TODO: This needs to handle loading, de-allocating, and running other scenes
 
 
-    /**
-     * Constructor
-     *  @param context
-     * @param resources
-     * @param gameData
-     * @param touchHandler
-     * @param loopRunner
-     * @param renderer
-     */
-    public SceneManager(Context context, Resources resources, SharedPreferences gameData, TouchMethod touchHandler, RunnableConfig<GameView> loopRunner, RenderHandler renderer, ImageTransformer imageProcessor) {
-        super(context, resources, gameData, touchHandler, loopRunner, renderer, imageProcessor);
+    public SceneManager() {
+
     }
 
 
     @Override
-    public void initStartingState() {
+    public void initStartingState(Context context, Resources res, SharedPreferences gameData) {
 
         // Load any third party game function
 

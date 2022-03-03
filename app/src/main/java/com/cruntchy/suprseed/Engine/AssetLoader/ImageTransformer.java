@@ -2,14 +2,9 @@ package com.cruntchy.suprseed.Engine.AssetLoader;
 
 public interface ImageTransformer {
 
+    void rotateSprite(float degrees);
 
-    public void init(int width, int height, float targetResolutionWidth);
+    void flipSprite(boolean vertical);
 
-    public void rotateSprite(float degrees);
-
-    public void flipSprite(boolean vertical);
-
-    public void invertColors();
-
-    public float getSpriteImageScaleRatio();
+    void invertColors();
 }

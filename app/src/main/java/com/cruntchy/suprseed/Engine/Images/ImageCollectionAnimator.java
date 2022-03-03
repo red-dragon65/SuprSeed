@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.cruntchy.suprseed.Engine.AssetLoader.FolderParser;
 import com.cruntchy.suprseed.Engine.AssetLoader.Streamable;
+import com.cruntchy.suprseed.Engine.SpriteObjects.System.SpriteSystem;
 
 
 public class ImageCollectionAnimator extends ImageCollection implements Animator{
@@ -21,13 +22,15 @@ public class ImageCollectionAnimator extends ImageCollection implements Animator
 
 
     // Constructor for animating images
-    public ImageCollectionAnimator(String folderPath, float imageScale, Streamable imageStreamer, FolderParser folderParser, int fps, boolean loop){
+    public ImageCollectionAnimator(String folderPath, float imageScale, Streamable imageStreamer, FolderParser folderParser, int fps, boolean loop) {
         super(folderPath, imageScale, imageStreamer, folderParser);
 
-        // Initialize data
+        // Register with system
+        SpriteSystem.getInstance().registerAnimationImage(this);
 
-        //Verify fps fits within frame time
-        if(GlobalFrameStepper.getFrameTime() % fps != 0){
+
+        //Make sure fps fits within frame time
+        if (GlobalFrameStepper.getFrameTime() % fps != 0) {
 
             try {
                 throw new Exception();
@@ -35,7 +38,7 @@ public class ImageCollectionAnimator extends ImageCollection implements Animator
                 e.printStackTrace();
             }
 
-        }else{
+        } else {
 
             frameDelay = 60 / fps;
         }
@@ -57,7 +60,6 @@ public class ImageCollectionAnimator extends ImageCollection implements Animator
     }
 
 
-    // TODO: Add this to an animation system
     @Override
     public void generateNextFrame(){
 

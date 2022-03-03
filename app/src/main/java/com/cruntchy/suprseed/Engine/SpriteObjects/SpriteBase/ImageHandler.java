@@ -1,6 +1,6 @@
 package com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase;
 
-import com.cruntchy.suprseed.Engine.Images.ImageType;
+import com.cruntchy.suprseed.Engine.Images.SpriteImage;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,12 +8,12 @@ import java.util.Optional;
 
 public class ImageHandler {
 
-    private Map<String, ImageType> spriteImage;
+    private Map<String, SpriteImage> spriteImage;
     private String selectedImage;
 
 
     // Constructor that takes one sprite image set
-    public ImageHandler(String name, ImageType spriteImageSet) {
+    public ImageHandler(String name, SpriteImage spriteImageSet) {
 
         if (name != null && spriteImageSet != null) {
 
@@ -26,7 +26,7 @@ public class ImageHandler {
     }
 
     // Constructor that takes multiple sprite image sets
-    public ImageHandler(Map<String, ImageType> sprites) {
+    public ImageHandler(Map<String, SpriteImage> sprites) {
 
         if (sprites != null) {
 
@@ -38,8 +38,7 @@ public class ImageHandler {
     }
 
 
-
-    public ImageType getSpriteImageSet(String imageName) {
+    public SpriteImage getSpriteImageSetById(String imageName) {
 
         verifySpriteList();
 
@@ -51,7 +50,8 @@ public class ImageHandler {
         throw new NullPointerException("Image with key: '" + imageName + "' does not exist!");
     }
 
-    public ImageType getSelectedImageSet() {
+
+    public SpriteImage getSelectedImageSet() {
 
         verifySpriteList();
 
@@ -70,6 +70,7 @@ public class ImageHandler {
         throw new NullPointerException("Image with key: '" + selected + "' does not exist!");
     }
 
+
     private String getFirstImageSetId() {
 
         verifySpriteList();
@@ -86,14 +87,13 @@ public class ImageHandler {
         throw new NullPointerException("Could not get image id! Verify sprite list is initialized!");
     }
 
-    public void addImageSet(String name, ImageType spriteSet) {
+
+    public void addImageSet(String name, SpriteImage spriteSet) {
 
         verifySpriteList();
 
         spriteImage.put(name, spriteSet);
     }
-
-
 
     public void verifySpriteList() {
 

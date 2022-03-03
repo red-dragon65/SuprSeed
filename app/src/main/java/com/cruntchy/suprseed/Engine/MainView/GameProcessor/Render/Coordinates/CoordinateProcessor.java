@@ -1,20 +1,19 @@
 package com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Coordinates;
 
 
+import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.CanvasData;
 import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase.Sprite;
 
 public class CoordinateProcessor implements CoordinateHandler {
 
 
     // Dependencies
-    private LocationHandler locationHandler;
-    private LocationScaler locationScaler;
-    private Camera camera;
-
+    private final LocationHandler locationHandler;
+    private final LocationScaler locationScaler;
 
 
     // Constructor
-    public CoordinateProcessor(LocationHandler locationHandler, LocationScaler locationScaler){
+    public CoordinateProcessor(LocationHandler locationHandler, LocationScaler locationScaler) {
 
         this.locationHandler = locationHandler;
         this.locationScaler = locationScaler;
@@ -23,12 +22,12 @@ public class CoordinateProcessor implements CoordinateHandler {
 
     // Calculate the location a sprite should be put
     @Override
-    public float[] parseLocation(Sprite sprite, float canvasWidth, float canvasHeight){
+    public float[] parseLocation(Sprite sprite) {
 
 
         float[] loc = {sprite.getX(), sprite.getY()};
 
-        if(sprite.isCameraEnabled()){
+        if (sprite.isCameraEnabled()) {
 
             // Apply camera offset (this has to happen before transforming location data)
             loc[0] += Camera.getInstance().getxOffset();
@@ -44,10 +43,8 @@ public class CoordinateProcessor implements CoordinateHandler {
         loc = locationScaler.applyLocationScale(loc);
 
         // Format the location to the canvas
-        loc[0] = locationScaler.formatCoordinateToCanvas(loc[0], canvasWidth);
-        loc[1] = locationScaler.formatCoordinateToCanvas(loc[1], canvasWidth);
-
-
+        loc[0] = CanvasData.getInstance().formatCoordinateToCanvas(loc[0]);
+        loc[1] = CanvasData.getInstance().formatCoordinateToCanvas(loc[1]);
 
 
         return loc;

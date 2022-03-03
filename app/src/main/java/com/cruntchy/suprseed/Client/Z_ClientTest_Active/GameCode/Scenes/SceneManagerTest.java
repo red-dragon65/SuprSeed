@@ -5,47 +5,35 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 
 import com.cruntchy.suprseed.Client.Z_ClientTest_Active.GameCode.Assets.AssetScriptTest;
-import com.cruntchy.suprseed.Client.Z_ClientTest_Active.GameCode.Scenes.GameScene.FallingScene;
-import com.cruntchy.suprseed.Client.Z_ClientTest_Active.GameCode.Scenes.HomeScreen.LandingScene;
 import com.cruntchy.suprseed.Engine.AssetLoader.AssetLoader;
 import com.cruntchy.suprseed.Engine.AssetLoader.FolderParser;
-import com.cruntchy.suprseed.Engine.AssetLoader.ImageProcessor;
-import com.cruntchy.suprseed.Engine.AssetLoader.ImageTransformer;
 import com.cruntchy.suprseed.Engine.AssetLoader.LocalFolderParser;
 import com.cruntchy.suprseed.Engine.AssetLoader.LocalImageFileStreamer;
 import com.cruntchy.suprseed.Engine.AssetLoader.Streamable;
-import com.cruntchy.suprseed.Engine.InputHandler.TouchInput.TouchMethod;
-import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.GameView;
-import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.RunnableConfig;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.Scene;
-import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Graphics.RenderHandler;
+import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.SceneController;
 import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteExtensions.Logic;
 import com.cruntchy.suprseed.Engine.SpriteObjects.System.SpriteSystem;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SceneManagerTest extends GameView implements Logic {
+public class SceneManagerTest implements Logic, SceneController {
 
     // VERIFY: Observer pattern
 
 
-    private List<Scene> myScenes = new ArrayList<>();
+    private final List<Scene> myScenes = new ArrayList<>();
 
 
     // Constructor
-    public SceneManagerTest(Context context, Resources resources, SharedPreferences gameData,
-                            TouchMethod touchHandler, RunnableConfig<GameView> loopRunner, RenderHandler renderer,
-                            ImageTransformer imageProcessor) {
-        super(context, resources, gameData, touchHandler, loopRunner, renderer, imageProcessor);
-
+    public SceneManagerTest() {
 
     }
 
 
-
     @Override
-    public void initStartingState() {
+    public void initStartingState(Context context, Resources res, SharedPreferences gameData) {
 
         // Load any third party game function
 
@@ -57,8 +45,8 @@ public class SceneManagerTest extends GameView implements Logic {
 
         // OR, initialize a scene
 
-        FolderParser localFolderParser = new LocalFolderParser(resources);
-        Streamable localStreamer = new LocalImageFileStreamer(resources, imageProcessor);
+        FolderParser localFolderParser = new LocalFolderParser(res);
+        Streamable localStreamer = new LocalImageFileStreamer(res);
         AssetLoader myAssets = new AssetScriptTest(localStreamer, localFolderParser);
 
 

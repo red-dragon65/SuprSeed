@@ -4,10 +4,8 @@ import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.LogicRates;
 
 public interface LocationScaler {
 
-    public float formatCoordinateToCanvas(float input, float canvasSize);
+    float[] applyLocationScale(float[] loc);
 
-    public float[] applyLocationScale(float[] loc);
-
-    public void setLocationScaleRatio(LogicRates logicRate);
+    void setLocationScaleRatio(LogicRates logicRate);
 
 }

@@ -21,34 +21,30 @@ public class Hero extends Sprite implements Logic, Movable {
         this.setY(0); // This should be half the width of the screen from the top
 
         this.setxVel(0.4f); // This should move from the left side of the screen to the right in about 4 seconds
-        this.setyVel(0.1f);
+        this.setyVel(0.8f);
     }
 
     @Override
     public void runLogic() {
 
+        float width = getImageHandler().getSelectedImageSet().getScaledWidth();
+        float height = getImageHandler().getSelectedImageSet().getScaledHeight();
 
-        // The image width should be scaled within 100
-        float width = getImageHandler().getSelectedImageSet().getImage().getWidth();
-        width *= 0.10f;
-
-
-        if(this.getX() > 100-width){ // This should see if the sprite moves off the right side of the screen
+        if (this.getX() > getCanvasScaledWidth() - width) { // This should see if the sprite moves off the right side of the screen
 
             setxVel(-getxVel());
 
-        }else if (getX() < 0){
+        } else if (getX() < 0) {
 
             setxVel(-getxVel());
         }
 
 
-
-        if(this.getY() > 100){
+        if (this.getY() > getCanvasScaledHeight() - height) {
 
             setyVel(-getyVel());
 
-        }else if (getY() < 0){
+        } else if (getY() < 0) {
 
             setyVel(-getyVel());
         }
