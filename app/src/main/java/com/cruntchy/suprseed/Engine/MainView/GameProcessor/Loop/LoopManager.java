@@ -4,15 +4,15 @@ import android.os.Build;
 import android.view.Display;
 import android.view.Surface;
 
-
 import com.cruntchy.suprseed.Engine.ErrorLogger.CentralLogger;
 import com.cruntchy.suprseed.Engine.ErrorLogger.ErrorType;
+import com.cruntchy.suprseed.Engine.MainView.EngineSettings.BaseConfig;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Coordinates.LocationScaler;
 import com.cruntchy.suprseed.Engine.SpriteObjects.System.SpriteSystem;
 
 import java.util.Arrays;
 
-public class LoopConfig implements RunnableConfig<GameView> {
+public class LoopManager implements RunnableConfig<GameView> {
 
     private RefreshTypes refreshSpeed;
     private LogicRates logicRate;
@@ -25,14 +25,13 @@ public class LoopConfig implements RunnableConfig<GameView> {
     private boolean hardPause = false;
 
     // Dependencies
-    private LocationScaler locationScaler;
+    private final LocationScaler locationScaler;
 
 
     // Constructor
-    public LoopConfig(RefreshTypes refreshSpeed, LogicRates logicRate, LocationScaler locationScaler){
+    public LoopManager(BaseConfig<RunnableConfig<GameView>> config, LocationScaler locationScaler) {
 
-        this.refreshSpeed = refreshSpeed;
-        this.logicRate = logicRate;
+        config.applySettings(this);
 
         this.locationScaler = locationScaler;
     }
@@ -243,13 +242,23 @@ public class LoopConfig implements RunnableConfig<GameView> {
     }
 
     @Override
-    public void setSoftPause(boolean pause){
+    public void setSoftPause(boolean pause) {
         softPause = pause;
     }
 
     @Override
-    public void toggleSoftPause(){
+    public void toggleSoftPause() {
         softPause = !softPause;
+    }
+
+    @Override
+    public void setRefreshSpeed(RefreshTypes refreshSpeed) {
+        this.refreshSpeed = refreshSpeed;
+    }
+
+    @Override
+    public void setLogicRate(LogicRates logicRate) {
+        this.logicRate = logicRate;
     }
 
 }

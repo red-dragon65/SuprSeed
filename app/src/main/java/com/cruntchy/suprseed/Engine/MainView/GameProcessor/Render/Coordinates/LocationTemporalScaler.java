@@ -10,15 +10,14 @@ public class LocationTemporalScaler implements LocationScaler {
     // sprite movement
 
     // 1 assumes that refresh rate and logic rate are both at 60
-    private float locationScaleRatio = 1;
-    private final float targetLogicRate = 60;
 
-
-
+    private static final float targetLogicRate = 60;
+    // Enforce only one setting across instance usages
+    private static float locationScaleRatio = 1;
 
 
     @Override
-    public float[] applyLocationScale(float[] loc){
+    public float[] applyLocationScale(float[] loc) {
 
         // Add multiplier to scale location to varying refresh/tick rates
         loc[0] *= locationScaleRatio;
@@ -27,12 +26,10 @@ public class LocationTemporalScaler implements LocationScaler {
         return loc;
     }
 
-
-
     // Setters
     @Override
     public void setLocationScaleRatio(LogicRates logicRate) {
 
-        this.locationScaleRatio = targetLogicRate / logicRate.getTickRate();
+        locationScaleRatio = targetLogicRate / logicRate.getTickRate();
     }
 }

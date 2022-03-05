@@ -3,18 +3,26 @@ package com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop;
 
 import android.view.SurfaceView;
 
-public interface RunnableConfig <T extends SurfaceView>{
+public interface RunnableConfig<T extends SurfaceView> {
 
     // TODO: Verify this covers the correct responsibilities
 
-    public void initLoop(T gameView);
+    void initLoop(T gameView);
 
-    public void run(T gameView);
+    void run(T gameView);
 
-    public boolean isHardPause();
-    public boolean isSoftPause();
-    public void setHardPause(boolean pause);
-    public void setSoftPause(boolean pause);
-    public void toggleSoftPause();
+    boolean isHardPause();
+
+    void setHardPause(boolean pause);
+
+    boolean isSoftPause();
+
+    void setSoftPause(boolean pause);
+
+    void toggleSoftPause();
+
+    void setRefreshSpeed(RefreshTypes refreshSpeed);
+
+    void setLogicRate(LogicRates logicRate);
 
 }

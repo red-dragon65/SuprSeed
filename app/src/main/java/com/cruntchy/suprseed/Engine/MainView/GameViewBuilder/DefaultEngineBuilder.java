@@ -12,9 +12,12 @@ import com.cruntchy.suprseed.Engine.AssetLoader.ImageTransformer;
 import com.cruntchy.suprseed.Engine.InputHandler.Sensors.DeviceSensor;
 import com.cruntchy.suprseed.Engine.InputHandler.TouchInput.TouchHandler;
 import com.cruntchy.suprseed.Engine.InputHandler.TouchInput.TouchMethod;
+import com.cruntchy.suprseed.Engine.MainView.EngineSettings.CanvasConfig;
+import com.cruntchy.suprseed.Engine.MainView.EngineSettings.LoopConfig;
+import com.cruntchy.suprseed.Engine.MainView.EngineSettings.ViewConfig;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.GameView;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.LogicRates;
-import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.LoopConfig;
+import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.LoopManager;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.RefreshTypes;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.RunnableConfig;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.SceneController;
@@ -30,9 +33,6 @@ import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Graphics.Rende
 public class DefaultEngineBuilder extends BaseEngineBuilder implements InfoBuilder<Float[]>{
 
 
-    private final LocationScaler locationScaler = new LocationTemporalScaler();
-
-
 
     // Constructor
     public DefaultEngineBuilder(Context context, Resources res, SharedPreferences gameData){
@@ -43,11 +43,9 @@ public class DefaultEngineBuilder extends BaseEngineBuilder implements InfoBuild
     @Override
     public GameView getView() {
 
-        // TODO: Initialize the game view
-
         SceneController testScene = new SceneManagerTest();
 
-        GameView defaultView = new GameView(context, res, gameData, getDefaultTouchMethod(), getDefaultRunnableConfig(), getDefaultRenderProcessor(), testScene);
+        GameView defaultView = new GameView(context, res, gameData, getDefaultTouchMethod(), getDefaultRunnableConfig(), getDefaultRenderProcessor(), getDefaultViewConfig(), testScene);
 
         return defaultView;
     }
@@ -89,15 +87,13 @@ public class DefaultEngineBuilder extends BaseEngineBuilder implements InfoBuild
     @Override
     public RunnableConfig<GameView> getDefaultRunnableConfig(){
 
-        RunnableConfig<GameView> loopConfig = new LoopConfig(RefreshTypes.SIXTY_FPS, LogicRates.SIXTY_TICKS, getDefaultLocationScaler());
-
-        return loopConfig;
+        return new LoopManager(getDefaultLoopConfig(), getDefaultLocationScaler());
     }
 
     @Override
     public LocationScaler getDefaultLocationScaler(){
 
-        return locationScaler;
+        return new LocationTemporalScaler();
     }
 
 
@@ -117,20 +113,33 @@ public class DefaultEngineBuilder extends BaseEngineBuilder implements InfoBuild
     @Override
     public LocationHandler getDefaultLocationHandler(){
 
-        return new CartesianHandler(true, true);
+        return new CartesianHandler(getDefaultCanvasConfig());
     }
 
 
     @Override
-    public ImageTransformer getDefaultTransformer(){
+    public ImageTransformer getDefaultTransformer() {
 
         return new ImageProcessor();
     }
 
+    @Override
+    public LoopConfig getDefaultLoopConfig() {
 
+        return new LoopConfig(RefreshTypes.SIXTY_FPS, LogicRates.SIXTY_TICKS);
+    }
 
+    @Override
+    public ViewConfig getDefaultViewConfig() {
 
+        return new ViewConfig(true, true, true, true);
+    }
 
+    @Override
+    public CanvasConfig getDefaultCanvasConfig() {
+
+        return new CanvasConfig(true);
+    }
 
 
 }

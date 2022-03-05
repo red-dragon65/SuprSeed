@@ -3,14 +3,12 @@ package com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Coordinates;
 public interface LocationHandler {
 
 
-    public float[] parseLocation(float[] loc);
+    float[] parseLocation(float[] loc);
 
-    public boolean isPortrait();
-    public boolean isTopLeftOrigin();
+    boolean isTopLeftOrigin();
 
-    public float[] canvasCenter(float[] loc);
+    void setTopLeftOrigin(boolean value);
 
-    public float getCanvasWidth();
-    public float getCanvasHeight();
+    float[] canvasCenter(float[] loc);
 
 }

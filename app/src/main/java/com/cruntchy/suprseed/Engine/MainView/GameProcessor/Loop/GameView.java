@@ -9,8 +9,10 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.cruntchy.suprseed.Engine.InputHandler.TouchInput.TouchMethod;
+import com.cruntchy.suprseed.Engine.MainView.EngineSettings.BaseConfig;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.CanvasData;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import com.cruntchy.suprseed.Engine.SpriteObjects.System.SpriteSystem;
@@ -31,10 +33,12 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
     protected SceneController sceneManager;
 
+    protected BaseConfig<AppCompatActivity> viewConfig;
+
     // Constructor
     public GameView(Context context, Resources resources, SharedPreferences gameData,
                     TouchMethod touchHandler, RunnableConfig<GameView> loopRunner, RenderHandler renderer,
-                    SceneController sceneManager) {
+                    BaseConfig<AppCompatActivity> viewConfig, SceneController sceneManager) {
         super(context);
 
         this.context = context;
@@ -49,25 +53,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         spriteSystem = new SpriteSystem();
 
         this.sceneManager = sceneManager;
+
+        this.viewConfig = viewConfig;
     }
-
-
-
-
-    // Instantiates game objects to their initial state
-    //abstract public void initStartingState();
-
-    // Actually run the game
-    //abstract public void logicLoop();
-    //abstract public void drawingLoop();
-
-    /*
-    // Reset game objects to their original state
-    reset()?
-
-    // Used for loading in new sprites for things like level changes
-    loadNewState()?
-     */
 
 
 
@@ -76,7 +64,15 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
 
-        CanvasData.getInstance().setDimensions(h, w);
+        // Set the width and height based on screen orientation
+        if (viewConfig.getSetting("orientation").active()) {
+
+            CanvasData.getInstance().setDimensions(h, w);
+        } else {
+
+            CanvasData.getInstance().setDimensions(w, h);
+        }
+
 
         // Initialize the assets
         // Initialize static game objects
