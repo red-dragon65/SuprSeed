@@ -1,9 +1,10 @@
 package com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Coordinates;
 
-import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteExtensions.Movable;
+import com.cruntchy.suprseed.Engine.SpriteObjects.DefaultComponents.Movable;
+import com.cruntchy.suprseed.Engine.SpriteObjects.System.Logic;
 import com.cruntchy.suprseed.Engine.SpriteObjects.System.SpriteSystem;
 
-public class Camera implements Movable {
+public class Camera implements Logic {
 
     // TODO: make this a singleton!
 
@@ -18,10 +19,18 @@ public class Camera implements Movable {
 
 
     // Constructor
-    public Camera(){
+    public Camera() {
 
         // Register with the sprite system
-        SpriteSystem.getInstance().registerMovingSprite(this);
+        SpriteSystem.getInstance().registerLogicSprite(this);
+
+        // Default movement behavior
+        cameraMovement = () -> {
+
+            // Update the cameras location based on velocity
+            setxOffset(getxOffset() + getxVelocity());
+            setyOffset(getyOffset() + getyVelocity());
+        };
     }
 
 
@@ -36,25 +45,11 @@ public class Camera implements Movable {
     }
 
 
-
-
     @Override
-    public void move() {
+    public void runLogic() {
 
-        // Use default behavior or switch to user specified behavior
-        if(cameraMovement == null){
-
-            // Update the cameras location based on velocity
-            setxOffset(getxOffset() + getxVelocity());
-            setyOffset(getyOffset() + getyVelocity());
-
-        }else{
-
-            cameraMovement.move();
-        }
+        cameraMovement.move();
     }
-
-
 
 
     // Getters/setters

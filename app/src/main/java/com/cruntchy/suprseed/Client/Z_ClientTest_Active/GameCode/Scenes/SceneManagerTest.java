@@ -12,7 +12,7 @@ import com.cruntchy.suprseed.Engine.AssetLoader.LocalImageFileStreamer;
 import com.cruntchy.suprseed.Engine.AssetLoader.Streamable;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.Scene;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.SceneController;
-import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteExtensions.Logic;
+import com.cruntchy.suprseed.Engine.SpriteObjects.System.Logic;
 import com.cruntchy.suprseed.Engine.SpriteObjects.System.SpriteSystem;
 
 import java.util.ArrayList;

@@ -6,16 +6,12 @@ import com.cruntchy.suprseed.Engine.Images.Animator;
 import com.cruntchy.suprseed.Engine.Images.GlobalFrameStepper;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase.Sprite;
-import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteExtensions.Collidable;
-import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteExtensions.Logic;
-import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteExtensions.Movable;
-import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteExtensions.Renderable;
-import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteExtensions.ResetState;
+import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteExtensions.Resetable;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SpriteSystem implements Renderable, Logic, ResetState, Systemizable {
+public class SpriteSystem implements Renderable, Logic, Resetable, Systemizable {
 
 
     // TODO: Make this a proper singleton!
@@ -23,18 +19,14 @@ public class SpriteSystem implements Renderable, Logic, ResetState, Systemizable
     // OPTIMIZE: Should sprites be allowed to de-register themselves?
 
 
-    private final List<Collidable> collisionSprites;
     private final List<Logic> logicSprites;
-    private final List<Movable> movingSprites;
     private final List<Sprite> renderSprites;
     private final List<Animator> animationImages;
 
 
     public SpriteSystem() {
 
-        collisionSprites = new ArrayList<>();
         logicSprites = new ArrayList<>();
-        movingSprites = new ArrayList<>();
         renderSprites = new ArrayList<>();
         animationImages = new ArrayList<>();
     }
@@ -54,21 +46,9 @@ public class SpriteSystem implements Renderable, Logic, ResetState, Systemizable
 
 
     @Override
-    public void registerCollisionSprite(Collidable sprite){
-
-        collisionSprites.add(sprite);
-    }
-
-    @Override
     public void registerLogicSprite(Logic sprite){
 
         logicSprites.add(sprite);
-    }
-
-    @Override
-    public void registerMovingSprite(Movable sprite) {
-
-        movingSprites.add(sprite);
     }
 
     @Override
@@ -88,14 +68,6 @@ public class SpriteSystem implements Renderable, Logic, ResetState, Systemizable
 
         for (Logic s : logicSprites) {
             s.runLogic();
-        }
-
-        for(Movable s : movingSprites){
-            s.move();
-        }
-
-        for(Collidable s : collisionSprites){
-            s.collide();
         }
     }
 
@@ -132,9 +104,7 @@ public class SpriteSystem implements Renderable, Logic, ResetState, Systemizable
     @Override
     public void resetState() {
 
-        collisionSprites.clear();
         logicSprites.clear();
-        movingSprites.clear();
         renderSprites.clear();
     }
 }

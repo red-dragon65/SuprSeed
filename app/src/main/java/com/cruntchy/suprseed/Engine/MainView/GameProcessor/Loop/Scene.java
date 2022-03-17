@@ -1,11 +1,11 @@
 package com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop;
 
-import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteExtensions.Logic;
+import com.cruntchy.suprseed.Engine.SpriteObjects.System.Logic;
 import com.cruntchy.suprseed.Engine.SpriteObjects.System.SpriteSystem;
 
 public abstract class Scene implements Logic {
 
-    private String id;
+    private final String id;
     private boolean hidden;
     private boolean active;
     protected static SceneController sceneManager;

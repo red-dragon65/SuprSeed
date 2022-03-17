@@ -5,7 +5,6 @@ import com.cruntchy.suprseed.Engine.AssetLoader.AssetLoader;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.Scene;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.SceneController;
 import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase.ImageHandler;
-import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase.Sprite;
 
 public class TestScene extends Scene {
 
@@ -13,7 +12,7 @@ public class TestScene extends Scene {
     public TestScene(SceneController sceneManager, String id, AssetLoader assets) {
         super(sceneManager, id);
 
-        Sprite hero = new Hero(new ImageHandler("hero", assets.getImage("hero")));
+        new Hero(new ImageHandler("hero", assets.getImage("hero")));
     }
 
     @Override

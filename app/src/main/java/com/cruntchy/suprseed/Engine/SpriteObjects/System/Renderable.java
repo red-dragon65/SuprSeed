@@ -1,8 +1,8 @@
-package com.cruntchy.suprseed.Engine.SpriteObjects.SpriteExtensions;
+package com.cruntchy.suprseed.Engine.SpriteObjects.System;
 
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Graphics.RenderHandler;
 
 public interface Renderable {
 
-    public void draw(RenderHandler renderer);
+    void draw(RenderHandler renderer);
 }

@@ -1,12 +1,19 @@
 package com.cruntchy.suprseed.Client.Z_ClientTest_Active.GameCode.HeroSprite;
 
+import com.cruntchy.suprseed.Engine.SpriteObjects.DefaultComponents.Collidable;
+import com.cruntchy.suprseed.Engine.SpriteObjects.DefaultComponents.Movable;
+import com.cruntchy.suprseed.Engine.SpriteObjects.DefaultComponents.StartingState;
 import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase.ImageHandler;
 import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase.Sprite;
-import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteExtensions.Logic;
-import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteExtensions.Movable;
+import com.cruntchy.suprseed.Engine.SpriteObjects.System.Logic;
 
-public class Hero extends Sprite implements Logic, Movable {
+public class Hero extends Sprite implements Logic {
 
+
+    // Behavior components
+    private final StartingState startingState;
+    private final Collidable wallCollision;
+    private final Movable applyVelocity;
 
 
     public Hero(ImageHandler imageHandler) {
@@ -14,49 +21,28 @@ public class Hero extends Sprite implements Logic, Movable {
 
         // Register this to the system
         spriteSystem.registerLogicSprite(this);
-        spriteSystem.registerMovingSprite(this);
 
-        // Initialize starting state
-        this.setX(0); // This should be half the width of the screen
-        this.setY(0); // This should be half the width of the screen from the top
 
-        this.setxVel(0.4f); // This should move from the left side of the screen to the right in about 4 seconds
-        this.setyVel(0.8f);
+        // Instantiate behavior here if you want
+        // but it is probably better to dependency inject these
+        startingState = new HeroStartingState(this);
+        wallCollision = new WallCollisionComponent(this);
+        applyVelocity = new VelocityMovementComponent(this);
+
+
+        // Run starting state behavior
+        startingState.setStartingState();
     }
+
 
     @Override
     public void runLogic() {
 
-        float width = getImageHandler().getSelectedImageSet().getScaledWidth();
-        float height = getImageHandler().getSelectedImageSet().getScaledHeight();
+        // Update velocity based on wall collisions
+        wallCollision.collide();
 
-        if (this.getX() > getCanvasScaledWidth() - width) { // This should see if the sprite moves off the right side of the screen
+        // Apply final sprite movement
+        applyVelocity.move();
 
-            setxVel(-getxVel());
-
-        } else if (getX() < 0) {
-
-            setxVel(-getxVel());
-        }
-
-
-        if (this.getY() > getCanvasScaledHeight() - height) {
-
-            setyVel(-getyVel());
-
-        } else if (getY() < 0) {
-
-            setyVel(-getyVel());
-        }
-
-
-    }
-
-    @Override
-    public void move() {
-
-        // Update location based on velocity
-        setX(getX() + getxVel());
-        setY(getY() + getyVel());
     }
 }

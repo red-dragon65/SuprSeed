@@ -2,7 +2,7 @@ package com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase;
 
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.CanvasData;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Graphics.RenderHandler;
-import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteExtensions.Renderable;
+import com.cruntchy.suprseed.Engine.SpriteObjects.System.Renderable;
 import com.cruntchy.suprseed.Engine.SpriteObjects.System.SpriteSystem;
 import com.cruntchy.suprseed.Engine.SpriteObjects.System.Systemizable;
 

@@ -1,6 +1,6 @@
 package com.cruntchy.suprseed.Engine.SpriteObjects.SpriteExtensions;
 
-public interface ResetState {
+public interface Resetable {
 
-    public void resetState();
+    void resetState();
 }
