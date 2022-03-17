@@ -45,7 +45,7 @@ public class DefaultEngineBuilder extends BaseEngineBuilder implements InfoBuild
 
         SceneController testScene = new SceneManagerTest();
 
-        GameView defaultView = new GameView(context, res, gameData, getDefaultTouchMethod(), getDefaultRunnableConfig(), getDefaultRenderProcessor(), getDefaultViewConfig(), testScene);
+        GameView defaultView = new GameView(context, res, gameData, getDefaultTouchMethod(), getDefaultRunnableConfig(), getDefaultRenderProcessor(), testScene);
 
         return defaultView;
     }
@@ -54,9 +54,8 @@ public class DefaultEngineBuilder extends BaseEngineBuilder implements InfoBuild
     @Override
     public void setWindowConfig(AppCompatActivity mainActivity) {
 
-        WindowConfigurator defaultWindowConfig = new DefaultWindowConfig(false, false);
-
-        defaultWindowConfig.applyWindowSettings(mainActivity);
+        // Apply user settings to main activity
+        getDefaultViewConfig().applySettings(mainActivity);
     }
 
 

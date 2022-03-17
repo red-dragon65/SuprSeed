@@ -32,4 +32,9 @@ public class LocationTemporalScaler implements LocationScaler {
 
         locationScaleRatio = targetLogicRate / logicRate.getTickRate();
     }
+
+    @Override
+    public float getLocationScaleRatio() {
+        return locationScaleRatio;
+    }
 }

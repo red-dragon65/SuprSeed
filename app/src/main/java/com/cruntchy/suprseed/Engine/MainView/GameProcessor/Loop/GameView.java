@@ -9,10 +9,8 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.cruntchy.suprseed.Engine.InputHandler.TouchInput.TouchMethod;
-import com.cruntchy.suprseed.Engine.MainView.EngineSettings.BaseConfig;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.CanvasData;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import com.cruntchy.suprseed.Engine.SpriteObjects.System.SpriteSystem;
@@ -33,12 +31,15 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
     protected SceneController sceneManager;
 
-    protected BaseConfig<AppCompatActivity> viewConfig;
+
+    // TODO: REMOVE THIS! Instead, override 'instance state configuration changes'!!!
+    protected static boolean initialized = false;
+
 
     // Constructor
     public GameView(Context context, Resources resources, SharedPreferences gameData,
                     TouchMethod touchHandler, RunnableConfig<GameView> loopRunner, RenderHandler renderer,
-                    BaseConfig<AppCompatActivity> viewConfig, SceneController sceneManager) {
+                    SceneController sceneManager) {
         super(context);
 
         this.context = context;
@@ -53,8 +54,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         spriteSystem = new SpriteSystem();
 
         this.sceneManager = sceneManager;
-
-        this.viewConfig = viewConfig;
     }
 
 
@@ -64,20 +63,16 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
 
-        // Set the width and height based on screen orientation
-        if (viewConfig.getSetting("orientation").active()) {
-
-            CanvasData.getInstance().setDimensions(h, w);
-        } else {
-
-            CanvasData.getInstance().setDimensions(w, h);
-        }
-
+        CanvasData.getInstance().setDimensions(h, w);
 
         // Initialize the assets
         // Initialize static game objects
         // Initialize a new game loop
-        sceneManager.initStartingState(context, resources, gameData);
+        if (!initialized) {
+            sceneManager.initStartingState(context, resources, gameData);
+            initialized = true;
+        }
+
 
         // Force onDraw call
         setWillNotDraw(false);

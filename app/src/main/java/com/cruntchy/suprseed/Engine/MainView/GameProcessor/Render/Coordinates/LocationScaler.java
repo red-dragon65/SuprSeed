@@ -8,4 +8,6 @@ public interface LocationScaler {
 
     void setLocationScaleRatio(LogicRates logicRate);
 
+    float getLocationScaleRatio();
+
 }

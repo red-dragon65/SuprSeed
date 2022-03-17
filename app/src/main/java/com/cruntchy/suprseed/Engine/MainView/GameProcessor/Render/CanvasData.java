@@ -2,6 +2,7 @@ package com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render;
 
 import com.cruntchy.suprseed.Engine.ErrorLogger.CentralLogger;
 import com.cruntchy.suprseed.Engine.ErrorLogger.ErrorType;
+import com.cruntchy.suprseed.Engine.MainView.EngineSettings.ViewConfig;
 
 public class CanvasData {
 
@@ -42,7 +43,17 @@ public class CanvasData {
 
     private void setSpriteScale() {
 
-        spriteScaleRatio = originalWidth / targetResolution;
+        ViewConfig viewy = new ViewConfig();
+
+        if (viewy.getSetting("orientation").active()) {
+
+            // For landscape
+            spriteScaleRatio = originalHeight / targetResolution;
+        } else {
+
+            // For portrait
+            spriteScaleRatio = originalWidth / targetResolution;
+        }
     }
 
     private void scaleDimensions() {

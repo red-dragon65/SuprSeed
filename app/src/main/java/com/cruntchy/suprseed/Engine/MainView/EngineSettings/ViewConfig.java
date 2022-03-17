@@ -1,5 +1,7 @@
 package com.cruntchy.suprseed.Engine.MainView.EngineSettings;
 
+import android.annotation.SuppressLint;
+import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.view.View;
 import android.view.WindowManager;
@@ -13,16 +15,31 @@ public class ViewConfig extends BaseConfig<AppCompatActivity> {
     private static boolean showNotch;
     private static boolean noSleep;
     private static boolean noUI;
-    private static boolean portrait;
+    private static boolean landscape;
 
 
     // Constructor
-    public ViewConfig(boolean showNotch, boolean noSleep, boolean noUI, boolean portrait) {
+    // Allows getting the settings with whatever their default value is
+    public ViewConfig() {
+
+        initSettings();
+    }
+
+
+    // Constructor
+    // Updates all instances settings data to whatever is passed in
+    public ViewConfig(boolean showNotch, boolean noSleep, boolean noUI, boolean landscape) {
 
         ViewConfig.showNotch = showNotch;
         ViewConfig.noSleep = noSleep;
         ViewConfig.noUI = noUI;
-        ViewConfig.portrait = portrait;
+        ViewConfig.landscape = landscape;
+
+        initSettings();
+    }
+
+
+    private void initSettings() {
 
         //Notch
         settings.add(new Configurable<AppCompatActivity>() {
@@ -98,16 +115,19 @@ public class ViewConfig extends BaseConfig<AppCompatActivity> {
 
         // Orientation
         settings.add(new Configurable<AppCompatActivity>() {
+
+            @SuppressLint("SourceLockedOrientationActivity")
             @Override
             public void applySettings(AppCompatActivity inputObject) {
 
-                // TODO: Handle orientation settings!!!
-                // TODO: Lock orientation once set!!!
+                if (ViewConfig.landscape) {
+                    inputObject.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                }
             }
 
             @Override
             public boolean active() {
-                return ViewConfig.portrait;
+                return ViewConfig.landscape;
             }
 
             @Override
