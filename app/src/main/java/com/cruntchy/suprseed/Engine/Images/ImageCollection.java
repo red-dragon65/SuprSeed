@@ -7,6 +7,7 @@ import com.cruntchy.suprseed.Engine.AssetLoader.Streamable;
 import com.cruntchy.suprseed.Engine.ErrorLogger.CentralLogger;
 import com.cruntchy.suprseed.Engine.ErrorLogger.ErrorType;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.CanvasData;
+import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Coordinates.LocationTemporalScaler;
 
 import java.util.ArrayList;
 
@@ -15,6 +16,8 @@ public class ImageCollection implements SpriteImage {
 
 
     protected ArrayList<Bitmap> imageSet;
+
+    private final LocationTemporalScaler scaler = new LocationTemporalScaler();
 
 
     // Constructor for collection of images
@@ -69,23 +72,23 @@ public class ImageCollection implements SpriteImage {
     @Override
     public float getScaledWidth() {
 
-        return CanvasData.getInstance().formatCanvasToCoordinate(getImage().getWidth());
+        return CanvasData.getInstance().formatCanvasToCoordinate(getImage().getWidth()) / scaler.getLocationScaleRatio();
     }
 
     @Override
     public float getScaledHeight() {
 
-        return CanvasData.getInstance().formatCanvasToCoordinate(getImage().getHeight());
+        return CanvasData.getInstance().formatCanvasToCoordinate(getImage().getHeight()) / scaler.getLocationScaleRatio();
     }
 
     @Override
     public float getScaledWidth(int index) {
-        return CanvasData.getInstance().formatCanvasToCoordinate(getIndexedImage(index).getWidth());
+        return CanvasData.getInstance().formatCanvasToCoordinate(getIndexedImage(index).getWidth()) / scaler.getLocationScaleRatio();
     }
 
     @Override
     public float getScaledHeight(int index) {
 
-        return CanvasData.getInstance().formatCanvasToCoordinate(getIndexedImage(index).getHeight());
+        return CanvasData.getInstance().formatCanvasToCoordinate(getIndexedImage(index).getHeight()) / scaler.getLocationScaleRatio();
     }
 }

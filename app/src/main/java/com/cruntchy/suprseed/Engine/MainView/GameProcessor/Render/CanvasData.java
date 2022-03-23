@@ -3,6 +3,7 @@ package com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render;
 import com.cruntchy.suprseed.Engine.ErrorLogger.CentralLogger;
 import com.cruntchy.suprseed.Engine.ErrorLogger.ErrorType;
 import com.cruntchy.suprseed.Engine.MainView.EngineSettings.ViewConfig;
+import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Coordinates.LocationTemporalScaler;
 
 public class CanvasData {
 
@@ -17,6 +18,9 @@ public class CanvasData {
 
     // Default target resolution
     private float targetResolution = 1080;
+
+    private final LocationTemporalScaler scaler = new LocationTemporalScaler();
+
 
     // VERIFY: is this correct?
     public static CanvasData getInstance() {
@@ -87,11 +91,11 @@ public class CanvasData {
     }
 
     public float getScaledHeight() {
-        return scaledHeight;
+        return scaledHeight / scaler.getLocationScaleRatio();
     }
 
     public float getScaledWidth() {
-        return scaledWidth;
+        return scaledWidth / scaler.getLocationScaleRatio();
     }
 
     public float getSpriteScaleRatio() {

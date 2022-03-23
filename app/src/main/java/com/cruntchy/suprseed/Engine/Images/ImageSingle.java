@@ -4,10 +4,13 @@ import android.graphics.Bitmap;
 
 import com.cruntchy.suprseed.Engine.AssetLoader.Streamable;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.CanvasData;
+import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Coordinates.LocationTemporalScaler;
 
 public class ImageSingle implements SpriteImage {
 
     private Bitmap image;
+
+    private final LocationTemporalScaler scaler = new LocationTemporalScaler();
 
     // Constructor
     public ImageSingle(String filePath, float imageScale, Streamable imageStreamer) {
@@ -40,13 +43,13 @@ public class ImageSingle implements SpriteImage {
     @Override
     public float getScaledWidth() {
 
-        return CanvasData.getInstance().formatCanvasToCoordinate(getImage().getWidth());
+        return CanvasData.getInstance().formatCanvasToCoordinate(getImage().getWidth()) / scaler.getLocationScaleRatio();
     }
 
     @Override
     public float getScaledHeight() {
 
-        return CanvasData.getInstance().formatCanvasToCoordinate(getImage().getHeight());
+        return CanvasData.getInstance().formatCanvasToCoordinate(getImage().getHeight()) / scaler.getLocationScaleRatio();
     }
 
     @Override

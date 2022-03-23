@@ -1,7 +1,5 @@
 package com.cruntchy.suprseed.Engine.Images;
 
-import android.util.Log;
-
 public class GlobalFrameStepper {
 
     // TODO: Make this a proper singleton
@@ -17,7 +15,7 @@ public class GlobalFrameStepper {
     public static void moveToNextFrame(){
 
 
-        Log.d("ImageAnimator", "NEXT FRAME QUEUED!");
+        //Log.d("ImageAnimator", "NEXT FRAME QUEUED!");
 
         if(frameStep <= frameTime){
 
