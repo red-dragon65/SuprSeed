@@ -47,6 +47,8 @@ public class LoopManager implements RunnableConfig<GameView> {
         //  Currently, only 60 and 120 fps are supported. Find a way to allow more options
         //  such as 90, 144, and 240 hz without causing a logic-refresh mis-match.
 
+
+        // TODO: Refactor these methods out into separate classes
         initRefreshSpeed(gameView);
         initLogicSpeed();
     }
@@ -61,9 +63,10 @@ public class LoopManager implements RunnableConfig<GameView> {
 
 
         // Set the refresh rate of the display if possible
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
 
-            // TODO: Verify that this is dependable!!!!
+            // OPTIMIZE: This is not dependable!
+            //  Replace this with an instance of 'DisplayRefreshHandler'!
             gameView.getHolder().getSurface().setFrameRate(refreshSpeed.getHertz(), Surface.FRAME_RATE_COMPATIBILITY_DEFAULT);
 
             /*

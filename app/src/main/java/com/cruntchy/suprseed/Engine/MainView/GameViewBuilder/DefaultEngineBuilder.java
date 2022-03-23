@@ -131,7 +131,7 @@ public class DefaultEngineBuilder extends BaseEngineBuilder implements InfoBuild
     @Override
     public ViewConfig getDefaultViewConfig() {
 
-        return new ViewConfig(true, true, true, true);
+        return new ViewConfig(true, true, true, false);
     }
 
     @Override
