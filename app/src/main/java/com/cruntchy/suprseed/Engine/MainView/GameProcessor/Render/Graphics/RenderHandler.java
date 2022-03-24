@@ -1,6 +1,7 @@
 package com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Graphics;
 
 import android.graphics.Canvas;
+import android.graphics.Paint;
 
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Coordinates.CoordinateHandler;
 import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase.Sprite;
@@ -12,4 +13,8 @@ public interface RenderHandler {
     void drawSprite(Sprite sprite);
 
     CoordinateHandler getCoordinateHandler();
+
+    Paint getPaint();
+
+    Canvas getCanvas();
 }

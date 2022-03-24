@@ -6,7 +6,7 @@ import android.util.Log;
 
 import com.cruntchy.suprseed.Engine.AssetLoader.FolderParser;
 import com.cruntchy.suprseed.Engine.AssetLoader.Streamable;
-import com.cruntchy.suprseed.Engine.SpriteObjects.System.SpriteSystem;
+import com.cruntchy.suprseed.Engine.SpriteObjects.System.RenderSystem;
 
 
 public class ImageCollectionAnimator extends ImageCollection implements Animator{
@@ -26,7 +26,7 @@ public class ImageCollectionAnimator extends ImageCollection implements Animator
         super(folderPath, imageScale, imageStreamer, folderParser);
 
         // Register with system
-        SpriteSystem.getInstance().registerAnimationImage(this);
+        RenderSystem.getInstance().registerAnimationImage(this);
 
 
         //Make sure fps fits within frame time

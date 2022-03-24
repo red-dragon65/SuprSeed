@@ -14,7 +14,7 @@ import com.cruntchy.suprseed.Engine.AssetLoader.Streamable;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.Scene;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.SceneController;
 import com.cruntchy.suprseed.Engine.SpriteObjects.System.Logic;
-import com.cruntchy.suprseed.Engine.SpriteObjects.System.SpriteSystem;
+import com.cruntchy.suprseed.Engine.SpriteObjects.System.LogicSystem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,7 +89,7 @@ public class SceneManagerTest implements Logic, SceneController {
                 oldScene.setHidden(true);
 
                 // Clear the system register
-                SpriteSystem.getInstance().resetState();
+                LogicSystem.getInstance().resetState();
 
                 // Enable the new scene
                 scene.setActive(true);

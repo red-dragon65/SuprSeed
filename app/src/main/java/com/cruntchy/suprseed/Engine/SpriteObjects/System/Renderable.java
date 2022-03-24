@@ -5,4 +5,6 @@ import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Graphics.Rende
 public interface Renderable {
 
     void draw(RenderHandler renderer);
+
+    int getLayerDepth();
 }

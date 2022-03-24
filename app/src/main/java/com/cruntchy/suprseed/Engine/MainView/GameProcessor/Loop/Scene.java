@@ -1,7 +1,7 @@
 package com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop;
 
 import com.cruntchy.suprseed.Engine.SpriteObjects.System.Logic;
-import com.cruntchy.suprseed.Engine.SpriteObjects.System.SpriteSystem;
+import com.cruntchy.suprseed.Engine.SpriteObjects.System.LogicSystem;
 
 public abstract class Scene implements Logic {
 
@@ -20,7 +20,7 @@ public abstract class Scene implements Logic {
         active = false;
 
         // Register logic
-        SpriteSystem.getInstance().registerLogicSprite(this);
+        LogicSystem.getInstance().registerLogicSprite(this);
     }
 
 

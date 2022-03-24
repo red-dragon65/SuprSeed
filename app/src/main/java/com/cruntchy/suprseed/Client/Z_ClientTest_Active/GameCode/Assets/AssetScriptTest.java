@@ -5,7 +5,6 @@ import com.cruntchy.suprseed.Engine.AssetLoader.FolderParser;
 import com.cruntchy.suprseed.Engine.AssetLoader.Streamable;
 import com.cruntchy.suprseed.Engine.Images.ImageCollectionAnimator;
 import com.cruntchy.suprseed.Engine.Images.ImageSingle;
-import com.cruntchy.suprseed.Engine.SpriteObjects.System.SpriteSystem;
 
 public class AssetScriptTest extends AssetLoader {
 
@@ -25,7 +24,6 @@ public class AssetScriptTest extends AssetLoader {
 
         ImageCollectionAnimator hero = new ImageCollectionAnimator("Images/Hero", 10, assetStreamer, folderParser, 2, true);
         animations.put("hero", hero);
-        SpriteSystem.getInstance().registerAnimationImage(hero);
 
 
         ImageSingle background = new ImageSingle("Images/Grassy_Mountains_preview_fullcolor.png", 11f, assetStreamer);

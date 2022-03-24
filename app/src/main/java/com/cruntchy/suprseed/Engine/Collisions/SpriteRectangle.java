@@ -9,7 +9,6 @@ public class SpriteRectangle implements RectangleCreator {
     @Override
     public void getRectF(RectF result, Sprite obj) {
 
-
         // TODO: VERIFY THAT THIS IS WORKING AS EXPECTED!
 
         result.left = obj.getX();
@@ -17,5 +16,7 @@ public class SpriteRectangle implements RectangleCreator {
 
         result.top = obj.getY();
         result.bottom = result.top + obj.getImageHandler().getSelectedImageSet().getScaledHeight();
+
+        CollisionDiagnosticsOverlay.getInstance().addRect(result);
     }
 }

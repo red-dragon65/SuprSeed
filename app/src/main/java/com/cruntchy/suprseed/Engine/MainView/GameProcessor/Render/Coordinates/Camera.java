@@ -2,7 +2,7 @@ package com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Coordinates;
 
 import com.cruntchy.suprseed.Engine.SpriteObjects.DefaultComponents.Movable;
 import com.cruntchy.suprseed.Engine.SpriteObjects.System.Logic;
-import com.cruntchy.suprseed.Engine.SpriteObjects.System.SpriteSystem;
+import com.cruntchy.suprseed.Engine.SpriteObjects.System.LogicSystem;
 
 public class Camera implements Logic {
 
@@ -22,7 +22,7 @@ public class Camera implements Logic {
     public Camera() {
 
         // Register with the sprite system
-        SpriteSystem.getInstance().registerLogicSprite(this);
+        LogicSystem.getInstance().registerLogicSprite(this);
 
         // Default movement behavior
         cameraMovement = () -> {

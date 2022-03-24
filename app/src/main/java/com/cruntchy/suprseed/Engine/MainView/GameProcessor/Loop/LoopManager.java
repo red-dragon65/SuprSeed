@@ -8,7 +8,8 @@ import com.cruntchy.suprseed.Engine.ErrorLogger.CentralLogger;
 import com.cruntchy.suprseed.Engine.ErrorLogger.ErrorType;
 import com.cruntchy.suprseed.Engine.MainView.EngineSettings.BaseConfig;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Coordinates.LocationScaler;
-import com.cruntchy.suprseed.Engine.SpriteObjects.System.SpriteSystem;
+import com.cruntchy.suprseed.Engine.SpriteObjects.System.LogicSystem;
+import com.cruntchy.suprseed.Engine.SpriteObjects.System.RenderSystem;
 
 import java.util.Arrays;
 
@@ -163,8 +164,7 @@ public class LoopManager implements RunnableConfig<GameView> {
             }
 
             // Run clients drawing code
-            //gameView.drawingLoop();
-            SpriteSystem.getInstance().draw(gameView.renderer);
+            RenderSystem.getInstance().draw(gameView.renderer);
 
 
             // Clear out old contents of screen
@@ -198,7 +198,7 @@ public class LoopManager implements RunnableConfig<GameView> {
 
                 // Run client logic code
                 //gameView.logicLoop();
-                SpriteSystem.getInstance().runLogic();
+                LogicSystem.getInstance().runLogic();
             }
         }else
 
@@ -211,7 +211,7 @@ public class LoopManager implements RunnableConfig<GameView> {
 
                 // Run client logic code
                 //gameView.logicLoop();
-                SpriteSystem.getInstance().runLogic();
+                LogicSystem.getInstance().runLogic();
 
                 frameCounter = 0;
             }
@@ -224,7 +224,7 @@ public class LoopManager implements RunnableConfig<GameView> {
         else{
 
             // Run client logic code
-            SpriteSystem.getInstance().runLogic();
+            LogicSystem.getInstance().runLogic();
         }
     }
 

@@ -2,9 +2,8 @@ package com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase;
 
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.CanvasData;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Graphics.RenderHandler;
+import com.cruntchy.suprseed.Engine.SpriteObjects.System.RenderSystem;
 import com.cruntchy.suprseed.Engine.SpriteObjects.System.Renderable;
-import com.cruntchy.suprseed.Engine.SpriteObjects.System.SpriteSystem;
-import com.cruntchy.suprseed.Engine.SpriteObjects.System.Systemizable;
 
 public abstract class Sprite implements Renderable {
 
@@ -19,9 +18,10 @@ public abstract class Sprite implements Renderable {
 
     private boolean cameraRegistered = true;
 
+    private int layerDepth = 0;
+
     // Dependency
     private ImageHandler imageHandler;
-    protected Systemizable spriteSystem;
 
 
     // Constructor that takes one sprite image set
@@ -30,10 +30,8 @@ public abstract class Sprite implements Renderable {
         // Dependency injection
         this.imageHandler = imageHandler;
 
-        spriteSystem = SpriteSystem.getInstance();
-
         // Register this renderable
-        spriteSystem.registerRenderSprite(this);
+        RenderSystem.getInstance().registerRenderSprite(this);
     }
 
 
@@ -113,6 +111,15 @@ public abstract class Sprite implements Renderable {
 
     public boolean isCameraEnabled() {
         return cameraRegistered;
+    }
+
+    @Override
+    public int getLayerDepth() {
+        return layerDepth;
+    }
+
+    public void setLayerDepth(int layerDepth) {
+        this.layerDepth = layerDepth;
     }
 
     public float getCanvasScaledWidth() {

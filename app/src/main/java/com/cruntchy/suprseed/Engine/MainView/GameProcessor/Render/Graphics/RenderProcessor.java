@@ -79,10 +79,19 @@ public class RenderProcessor implements RenderHandler {
 
 
     @Override
-    public CoordinateHandler getCoordinateHandler(){
+    public CoordinateHandler getCoordinateHandler() {
         return coordinateHandler;
     }
 
+    @Override
+    public Paint getPaint() {
+        return paint;
+    }
+
+    @Override
+    public Canvas getCanvas() {
+        return canvas;
+    }
 
 
 }
