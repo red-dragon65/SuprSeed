@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 
 import com.cruntchy.suprseed.Client.Z_ClientTest_Active.GameCode.Assets.AssetScriptTest;
+import com.cruntchy.suprseed.Client.Z_ClientTest_Active.GameCode.Scenes.GameScene.MainScene;
 import com.cruntchy.suprseed.Engine.AssetLoader.AssetLoader;
 import com.cruntchy.suprseed.Engine.AssetLoader.FolderParser;
 import com.cruntchy.suprseed.Engine.AssetLoader.LocalFolderParser;
@@ -50,7 +51,8 @@ public class SceneManagerTest implements Logic, SceneController {
         AssetLoader myAssets = new AssetScriptTest(localStreamer, localFolderParser);
 
 
-        myScenes.add(new TestScene(this, "testScene", myAssets));
+        // Add scenes here
+        myScenes.add(new MainScene(this, "MainScene", myAssets));
 
 
         // Activate start scene

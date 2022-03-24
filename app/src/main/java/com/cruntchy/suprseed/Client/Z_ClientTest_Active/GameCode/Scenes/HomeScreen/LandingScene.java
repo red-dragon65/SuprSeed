@@ -1,13 +1,12 @@
 package com.cruntchy.suprseed.Client.Z_ClientTest_Active.GameCode.Scenes.HomeScreen;
 
-import com.cruntchy.suprseed.Client.Z_ClientTest_Active.GameCode.Scenes.UIOverlayScene.CharacterSelectionOverlayScene;
 import com.cruntchy.suprseed.Engine.AssetLoader.AssetLoader;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.Scene;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.SceneController;
 
 public class LandingScene extends Scene {
 
-    private AssetLoader assets;
+    private final AssetLoader assets;
 
     private Scene charScene;
 
@@ -30,7 +29,6 @@ public class LandingScene extends Scene {
 
         // OR, initialize a scene
 
-        charScene = new CharacterSelectionOverlayScene(sceneManager, "characterSelection", assets);
 
 
         /*

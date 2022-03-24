@@ -1,4 +1,4 @@
-package com.cruntchy.suprseed.Client.Z_ClientTest_Active.GameCode.HeroSprite;
+package com.cruntchy.suprseed.Client.Z_ClientTest_Active.GameCode.Sprites.HeroSprite;
 
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Coordinates.LocationScaler;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Coordinates.LocationTemporalScaler;

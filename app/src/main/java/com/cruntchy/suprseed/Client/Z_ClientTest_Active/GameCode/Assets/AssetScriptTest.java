@@ -3,11 +3,9 @@ package com.cruntchy.suprseed.Client.Z_ClientTest_Active.GameCode.Assets;
 import com.cruntchy.suprseed.Engine.AssetLoader.AssetLoader;
 import com.cruntchy.suprseed.Engine.AssetLoader.FolderParser;
 import com.cruntchy.suprseed.Engine.AssetLoader.Streamable;
-import com.cruntchy.suprseed.Engine.Images.ImageCollection;
 import com.cruntchy.suprseed.Engine.Images.ImageCollectionAnimator;
 import com.cruntchy.suprseed.Engine.Images.ImageSingle;
-
-import java.util.HashMap;
+import com.cruntchy.suprseed.Engine.SpriteObjects.System.SpriteSystem;
 
 public class AssetScriptTest extends AssetLoader {
 
@@ -22,8 +20,16 @@ public class AssetScriptTest extends AssetLoader {
 
         // CLIENT CODE GOES HERE!!!
 
-        ImageSingle hero = new ImageSingle("frog_jump_fullframe.png", 10, assetStreamer);
-        images.put("hero", hero);
+        //ImageSingle hero = new ImageSingle("Images/Hero/frog_jump_fullframe.png", 10, assetStreamer);
+        //images.put("hero", hero);
+
+        ImageCollectionAnimator hero = new ImageCollectionAnimator("Images/Hero", 10, assetStreamer, folderParser, 2, true);
+        animations.put("hero", hero);
+        SpriteSystem.getInstance().registerAnimationImage(hero);
+
+
+        ImageSingle background = new ImageSingle("Images/Grassy_Mountains_preview_fullcolor.png", 11f, assetStreamer);
+        images.put("background", background);
 
 
         //ImageSingle hero = new ImageSingle("path/to/image.png", 1, assetStreamer);
