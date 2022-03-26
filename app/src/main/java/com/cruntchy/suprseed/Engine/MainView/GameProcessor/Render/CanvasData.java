@@ -66,6 +66,7 @@ public class CanvasData {
     }
 
     // This upscales a value from 0 to 100 to the canvas' size
+    // This is used for upscaling sprite coordinates to the canvas
     public float formatCoordinateToCanvas(float input) {
 
         // Converts a given value to scale to the same point on a given canvas
@@ -77,6 +78,7 @@ public class CanvasData {
     }
 
     // This downscales a value from the canvas to 0 to 100
+    // This is used to downscale an images dimensions into usable sprite coordinates
     public float formatCanvasToCoordinate(float input) {
 
         return (input / getOriginalWidth()) * 100;

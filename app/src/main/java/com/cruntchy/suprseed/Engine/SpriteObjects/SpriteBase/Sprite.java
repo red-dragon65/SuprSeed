@@ -1,11 +1,17 @@
 package com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase;
 
+import android.graphics.RectF;
+
+import com.cruntchy.suprseed.Engine.Collisions.Boundable;
+import com.cruntchy.suprseed.Engine.Collisions.CollisionDiagnosticsOverlay;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.CanvasData;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import com.cruntchy.suprseed.Engine.SpriteObjects.System.RenderSystem;
 import com.cruntchy.suprseed.Engine.SpriteObjects.System.Renderable;
 
-public abstract class Sprite implements Renderable {
+public abstract class Sprite implements Renderable, Boundable {
+
+    // TODO: Apply SOLID to this
 
     private float x;
     private float y;
@@ -128,5 +134,19 @@ public abstract class Sprite implements Renderable {
 
     public float getCanvasScaledHeight() {
         return CanvasData.getInstance().getScaledHeight();
+    }
+
+    @Override
+    public void getRectF(RectF result) {
+
+        // TODO: VERIFY THAT THIS IS WORKING AS EXPECTED!
+
+        result.left = CanvasData.getInstance().formatCoordinateToCanvas(this.getX());
+        result.right = result.left + this.getImageHandler().getSelectedImageSet().getImage().getWidth();
+
+        result.top = CanvasData.getInstance().formatCoordinateToCanvas(this.getY());
+        result.bottom = result.top + this.getImageHandler().getSelectedImageSet().getImage().getHeight();
+
+        CollisionDiagnosticsOverlay.getInstance().addRect(result);
     }
 }

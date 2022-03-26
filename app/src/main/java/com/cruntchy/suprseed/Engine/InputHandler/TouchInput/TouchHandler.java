@@ -11,8 +11,9 @@ import java.util.List;
 
 public class TouchHandler implements InputProcessor {
 
-    private int lastDownX;
-    private int lastDownY;
+    private final RectF bounds = new RectF();
+    private float lastDownX;
+    private float lastDownY;
 
     private String actionPerformed;
 
@@ -66,27 +67,28 @@ public class TouchHandler implements InputProcessor {
         return null;
     }
 
-
     private boolean isTouching(InputListener listener, MotionEvent event) {
 
-        // TODO: Set this up properly
-        //RectF rect = listener.getRectangle();
-        RectF rect = new RectF();
+        // Get the bounds
+        listener.getRectF(bounds);
 
         // See if event occurred on the listener
-        if (!rect.contains(event.getX(), event.getY())) {
+        if (!bounds.contains(event.getX(), event.getY())) {
             return false;
         }
-
 
         // Calculate the touch type
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 actionPerformed = "hold";
+
+                // Hold the last location
+                lastDownX = event.getX();
+                lastDownY = event.getY();
                 return true;
             case MotionEvent.ACTION_UP:
 
-                if (lastDownX == event.getX() && lastDownY == event.getY()) {
+                if (bounds.contains(lastDownX, lastDownY)) {
 
                     // Hold and lift are at the same point
                     actionPerformed = "tap";

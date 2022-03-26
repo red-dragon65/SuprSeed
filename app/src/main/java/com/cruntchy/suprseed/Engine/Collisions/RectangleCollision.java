@@ -10,22 +10,18 @@ public class RectangleCollision implements CollisionHandler {
     private static final RectF first = new RectF();
     private static final RectF second = new RectF();
 
-    // Dependency injection
-    private final RectangleCreator rector;
 
 
     // Constructor
-    public RectangleCollision(RectangleCreator rector) {
-
-        this.rector = rector;
+    public RectangleCollision() {
     }
 
 
     @Override
     public boolean checkCollision(Sprite one, Sprite two) {
 
-        rector.getRectF(first, one);
-        rector.getRectF(second, two);
+        one.getRectF(first);
+        two.getRectF(second);
 
         return first.intersects(second.left, second.top, second.right, second.bottom);
     }

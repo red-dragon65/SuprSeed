@@ -11,14 +11,12 @@ public class PixelPerfectCollision implements CollisionHandler {
     private static final RectF second = new RectF();
     private static final RectF temp = new RectF();
     // Dependency injection
-    private final RectangleCreator rector;
     private final CollisionHandler basicCollision;
     private int pixelMaskResolution = 1;
 
 
-    public PixelPerfectCollision(RectangleCreator rector, CollisionHandler basicCollision, int pixelMaskResolution) {
+    public PixelPerfectCollision(CollisionHandler basicCollision, int pixelMaskResolution) {
 
-        this.rector = rector;
         this.pixelMaskResolution = pixelMaskResolution;
         this.basicCollision = basicCollision;
 
@@ -38,8 +36,8 @@ public class PixelPerfectCollision implements CollisionHandler {
         }
 
         // Get the rect for both sprites
-        rector.getRectF(first, one);
-        rector.getRectF(second, two);
+        one.getRectF(first);
+        two.getRectF(second);
 
         // Calculate the overlap area for both sprites
         temp.set(first);

@@ -4,39 +4,28 @@ import android.view.MotionEvent;
 
 import com.cruntchy.suprseed.Engine.ErrorLogger.CentralLogger;
 import com.cruntchy.suprseed.Engine.ErrorLogger.ErrorType;
+import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteExtensions.Resetable;
 import com.cruntchy.suprseed.Engine.SpriteObjects.System.Layerable;
 import com.cruntchy.suprseed.Engine.SpriteObjects.System.LayerableQueueComparator;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class InputManager implements InputHandler {
+public class InputManager implements InputHandler, Resetable {
 
     // TODO: Make this a singleton
 
     // Dependency injection
     private final Comparator<Layerable> layerComparer;
-    private List<InputProcessor> inputs;
-    private List<InputListener> listeners;
+    private final List<InputProcessor> inputs;
+    private final List<InputListener> listeners;
 
-
-    /*
-    // Constructor
-    public InputManager(List<InputProcessor> inputs, Comparator<Layerable> layerComparer){
-
-        this.inputs = inputs;
-        this.layerComparer = layerComparer;
-    }
-
-    // Constructor
-    public InputManager(Comparator<Layerable> layerComparer){
-
-        inputs = new ArrayList<>();
-        this.layerComparer = layerComparer;
-    }*/
 
     // Constructor
     public InputManager() {
+        inputs = new ArrayList<>();
+        listeners = new ArrayList<>();
         this.layerComparer = new LayerableQueueComparator();
     }
 
@@ -77,6 +66,12 @@ public class InputManager implements InputHandler {
 
         // Resort the listener based on layer depth
         listeners.sort(layerComparer);
+    }
+
+    @Override
+    public void resetState() {
+
+        listeners.clear();
     }
 
     // VERIFY: is this correct?

@@ -11,6 +11,8 @@ import com.cruntchy.suprseed.Engine.AssetLoader.FolderParser;
 import com.cruntchy.suprseed.Engine.AssetLoader.LocalFolderParser;
 import com.cruntchy.suprseed.Engine.AssetLoader.LocalImageFileStreamer;
 import com.cruntchy.suprseed.Engine.AssetLoader.Streamable;
+import com.cruntchy.suprseed.Engine.InputHandler.TouchInput.InputManager;
+import com.cruntchy.suprseed.Engine.InputHandler.TouchInput.TouchHandler;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.Scene;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.SceneController;
 import com.cruntchy.suprseed.Engine.SpriteObjects.System.Logic;
@@ -49,6 +51,10 @@ public class SceneManagerTest implements Logic, SceneController {
         FolderParser localFolderParser = new LocalFolderParser(res);
         Streamable localStreamer = new LocalImageFileStreamer(res);
         AssetLoader myAssets = new AssetScriptTest(localStreamer, localFolderParser);
+
+
+        // Add the input listener here
+        InputManager.getInstance().addInputHandler(new TouchHandler());
 
 
         // Add scenes here

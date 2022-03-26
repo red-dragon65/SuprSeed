@@ -164,7 +164,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     @Override
-    public boolean onGenericMotionEvent(MotionEvent event) {
+    public boolean onTouchEvent(MotionEvent event) {
 
         // Process touch input
         // Note: this runs regardless if the game loop is allowed to run
@@ -172,7 +172,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
 
         // Returns whether the event was handled or not
-        //return super.onGenericMotionEvent(event);
         return true;
     }
 }

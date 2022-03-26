@@ -3,7 +3,6 @@ package com.cruntchy.suprseed.Client.Z_ClientTest_Active.GameCode.Sprites.HeroSp
 import com.cruntchy.suprseed.Engine.Collisions.CollisionDiagnosticsOverlay;
 import com.cruntchy.suprseed.Engine.Collisions.CollisionHandler;
 import com.cruntchy.suprseed.Engine.Collisions.RectangleCollision;
-import com.cruntchy.suprseed.Engine.Collisions.SpriteRectangle;
 import com.cruntchy.suprseed.Engine.SpriteObjects.DefaultComponents.Collidable;
 import com.cruntchy.suprseed.Engine.SpriteObjects.DefaultComponents.Movable;
 import com.cruntchy.suprseed.Engine.SpriteObjects.DefaultComponents.StartingState;
@@ -41,7 +40,7 @@ public class Hero extends Sprite implements Logic {
 
         CollisionDiagnosticsOverlay.getInstance().enable();
 
-        collider = new RectangleCollision(new SpriteRectangle());
+        collider = new RectangleCollision();
     }
 
 

@@ -13,14 +13,9 @@ public class RectangleOffsetCollision implements CollisionHandler {
     private final int xOffset = 0;
     private final int yOffset = 0;
 
-    // Dependency injection
-    private final RectangleCreator rector;
-
 
     // Constructor
-    public RectangleOffsetCollision(RectangleCreator rector, int xOffset, int yOffset) {
-
-        this.rector = rector;
+    public RectangleOffsetCollision(int xOffset, int yOffset) {
 
         xOffset = xOffset;
         yOffset = yOffset;
@@ -30,8 +25,8 @@ public class RectangleOffsetCollision implements CollisionHandler {
     @Override
     public boolean checkCollision(Sprite one, Sprite two) {
 
-        rector.getRectF(first, one);
-        rector.getRectF(second, two);
+        one.getRectF(first);
+        two.getRectF(second);
 
         first.offset(xOffset, yOffset);
         second.offset(xOffset, yOffset);
