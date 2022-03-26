@@ -10,8 +10,6 @@ import com.cruntchy.suprseed.Client.Z_ClientTest_Active.GameCode.Scenes.SceneMan
 import com.cruntchy.suprseed.Engine.AssetLoader.ImageProcessor;
 import com.cruntchy.suprseed.Engine.AssetLoader.ImageTransformer;
 import com.cruntchy.suprseed.Engine.InputHandler.Sensors.DeviceSensor;
-import com.cruntchy.suprseed.Engine.InputHandler.TouchInput.TouchHandler;
-import com.cruntchy.suprseed.Engine.InputHandler.TouchInput.TouchMethod;
 import com.cruntchy.suprseed.Engine.MainView.EngineSettings.CanvasConfig;
 import com.cruntchy.suprseed.Engine.MainView.EngineSettings.LoopConfig;
 import com.cruntchy.suprseed.Engine.MainView.EngineSettings.ViewConfig;
@@ -45,7 +43,7 @@ public class DefaultEngineBuilder extends BaseEngineBuilder implements InfoBuild
 
         SceneController testScene = new SceneManagerTest();
 
-        GameView defaultView = new GameView(context, res, gameData, getDefaultTouchMethod(), getDefaultRunnableConfig(), getDefaultRenderProcessor(), testScene);
+        GameView defaultView = new GameView(context, res, gameData, getDefaultRunnableConfig(), getDefaultRenderProcessor(), testScene);
 
         return defaultView;
     }
@@ -72,14 +70,6 @@ public class DefaultEngineBuilder extends BaseEngineBuilder implements InfoBuild
         // TODO: Initialize the default modules state
 
         return null;
-    }
-
-    @Override
-    public TouchMethod getDefaultTouchMethod() {
-
-        // TODO: Initialize the default modules state
-
-        return new TouchHandler();
     }
 
 

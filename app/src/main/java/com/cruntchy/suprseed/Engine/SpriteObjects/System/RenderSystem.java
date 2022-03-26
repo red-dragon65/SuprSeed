@@ -20,7 +20,7 @@ public class RenderSystem implements Resetable, RenderRegister {
 
     private final List<Renderable> renderQueue;
     private final List<Animator> animationImages;
-    private final Comparator<Renderable> rqic;
+    private final Comparator<Layerable> layerComparer;
     private boolean isQueueSynced = false;
 
 
@@ -28,7 +28,7 @@ public class RenderSystem implements Resetable, RenderRegister {
     public RenderSystem() {
         renderQueue = new ArrayList<>();
         animationImages = new ArrayList<>();
-        rqic = new RenderQueueComparator();
+        layerComparer = new LayerableQueueComparator();
     }
 
     // VERIFY: is this correct?
@@ -71,7 +71,7 @@ public class RenderSystem implements Resetable, RenderRegister {
         // Re-sort the sprite list if necessary
         if (!isQueueSynced) {
 
-            renderQueue.sort(rqic);
+            renderQueue.sort(layerComparer);
 
             isQueueSynced = true;
         }

@@ -10,7 +10,7 @@ import android.view.SurfaceView;
 
 import androidx.annotation.NonNull;
 
-import com.cruntchy.suprseed.Engine.InputHandler.TouchInput.TouchMethod;
+import com.cruntchy.suprseed.Engine.InputHandler.TouchInput.InputManager;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.CanvasData;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import com.cruntchy.suprseed.Engine.SpriteObjects.System.LogicSystem;
@@ -19,7 +19,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
 
     // Dependencies
-    protected TouchMethod touchHandler;
     protected RunnableConfig<GameView> loopRunner;
     protected RenderHandler renderer;
 
@@ -38,7 +37,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
     // Constructor
     public GameView(Context context, Resources resources, SharedPreferences gameData,
-                    TouchMethod touchHandler, RunnableConfig<GameView> loopRunner, RenderHandler renderer,
+                    RunnableConfig<GameView> loopRunner, RenderHandler renderer,
                     SceneController sceneManager) {
         super(context);
 
@@ -47,7 +46,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         this.gameData = gameData;
 
         // Dependency inject
-        this.touchHandler = touchHandler;
         this.loopRunner = loopRunner;
         this.renderer = renderer;
 
@@ -165,15 +163,16 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
     }
 
-
-
     @Override
-    public boolean onTouchEvent(MotionEvent event) {
+    public boolean onGenericMotionEvent(MotionEvent event) {
 
         // Process touch input
         // Note: this runs regardless if the game loop is allowed to run
-        touchHandler.processInput(event);
+        InputManager.getInstance().processInput(event);
 
+
+        // Returns whether the event was handled or not
+        //return super.onGenericMotionEvent(event);
         return true;
     }
 }

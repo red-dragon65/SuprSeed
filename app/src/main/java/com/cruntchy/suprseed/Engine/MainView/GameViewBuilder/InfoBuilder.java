@@ -2,7 +2,6 @@ package com.cruntchy.suprseed.Engine.MainView.GameViewBuilder;
 
 import com.cruntchy.suprseed.Engine.AssetLoader.ImageTransformer;
 import com.cruntchy.suprseed.Engine.InputHandler.Sensors.DeviceSensor;
-import com.cruntchy.suprseed.Engine.InputHandler.TouchInput.TouchMethod;
 import com.cruntchy.suprseed.Engine.MainView.EngineSettings.CanvasConfig;
 import com.cruntchy.suprseed.Engine.MainView.EngineSettings.LoopConfig;
 import com.cruntchy.suprseed.Engine.MainView.EngineSettings.ViewConfig;
@@ -20,8 +19,6 @@ public interface InfoBuilder<T> {
     // TODO: Finish me!
 
     DeviceSensor<T> getDefaultSensor();
-
-    TouchMethod getDefaultTouchMethod();
 
     RunnableConfig<GameView> getDefaultRunnableConfig();
 

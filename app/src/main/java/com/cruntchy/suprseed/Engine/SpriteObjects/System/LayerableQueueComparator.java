@@ -2,10 +2,10 @@ package com.cruntchy.suprseed.Engine.SpriteObjects.System;
 
 import java.util.Comparator;
 
-public class RenderQueueComparator implements Comparator<Renderable> {
+public class LayerableQueueComparator implements Comparator<Layerable> {
 
     @Override
-    public int compare(Renderable o1, Renderable o2) {
+    public int compare(Layerable o1, Layerable o2) {
         return o1.getLayerDepth() - o2.getLayerDepth();
     }
 }
