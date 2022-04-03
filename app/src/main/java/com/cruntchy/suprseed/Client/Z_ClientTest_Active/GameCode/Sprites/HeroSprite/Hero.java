@@ -1,6 +1,5 @@
 package com.cruntchy.suprseed.Client.Z_ClientTest_Active.GameCode.Sprites.HeroSprite;
 
-import com.cruntchy.suprseed.Engine.Collisions.CollisionDiagnosticsOverlay;
 import com.cruntchy.suprseed.Engine.Collisions.CollisionHandler;
 import com.cruntchy.suprseed.Engine.Collisions.RectangleCollision;
 import com.cruntchy.suprseed.Engine.SpriteObjects.DefaultComponents.Collidable;
@@ -38,7 +37,7 @@ public class Hero extends Sprite implements Logic {
         // Run starting state behavior
         startingState.setStartingState();
 
-        CollisionDiagnosticsOverlay.getInstance().enable();
+        //CollisionDiagnosticsOverlay.getInstance().enable();
 
         collider = new RectangleCollision();
     }

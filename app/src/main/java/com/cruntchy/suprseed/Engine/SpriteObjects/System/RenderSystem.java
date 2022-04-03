@@ -51,9 +51,6 @@ public class RenderSystem implements Resetable, RenderRegister {
     // Draw registered sprites
     public void draw(RenderHandler renderer) {
 
-        // Update animation frames
-        GlobalFrameStepper.moveToNextFrame();
-
         // Make sure renderHandler is set
         if (renderer == null) {
 
@@ -85,6 +82,14 @@ public class RenderSystem implements Resetable, RenderRegister {
 
             sprite.draw(renderer);
         }
+
+        // Update animation frames
+        /*
+        Logic loop -> render -> generate next frames -> logic loop -> render
+
+        This has to go after rendering / before logic to make sure logic matches with given frame
+         */
+        GlobalFrameStepper.moveToNextFrame();
     }
 
     // Clear currently registered sprites
