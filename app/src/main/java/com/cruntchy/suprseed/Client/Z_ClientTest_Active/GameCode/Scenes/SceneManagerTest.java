@@ -58,7 +58,7 @@ public class SceneManagerTest implements Logic, SceneController {
 
 
         // Add scenes here
-        myScenes.add(new MainScene(this, "MainScene", myAssets));
+        myScenes.add(new MainScene(this, "MainScene", myAssets, context));
 
 
         // Activate start scene
