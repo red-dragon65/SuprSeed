@@ -1,6 +1,6 @@
 package com.cruntchy.suprseed.Engine.Images;
 
-public class GlobalFrameStepper {
+public class GlobalFrameStepper implements FrameStepper {
 
     // Eager loading singleton
     private static final GlobalFrameStepper INSTANCE = new GlobalFrameStepper();
@@ -22,6 +22,7 @@ public class GlobalFrameStepper {
     }
 
     // Cycles through 60 frames of animation
+    @Override
     public void moveToNextFrame() {
 
 
@@ -37,11 +38,12 @@ public class GlobalFrameStepper {
 
     }
 
-
+    @Override
     public int getFrameStep() {
         return frameStep;
     }
 
+    @Override
     public int getFrameTime() {
         return frameTime;
     }
