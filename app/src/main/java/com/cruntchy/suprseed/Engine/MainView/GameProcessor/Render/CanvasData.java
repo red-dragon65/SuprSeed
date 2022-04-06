@@ -7,7 +7,6 @@ import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Coordinates.Lo
 
 public class CanvasData {
 
-    // TODO: Make this a proper singleton!
     // TODO: Make this an observer pattern
 
     private final float scaledWidth = 100;
@@ -21,10 +20,18 @@ public class CanvasData {
 
     private final LocationTemporalScaler scaler = new LocationTemporalScaler();
 
+    // Eager loading singleton
+    private static final CanvasData INSTANCE = new CanvasData();
 
-    // VERIFY: is this correct?
+
+    // Constructor
+    // Private to prevent client use of 'new' keyword
+    private CanvasData() {
+
+    }
+
     public static CanvasData getInstance() {
-        return CanvasData.CanvasDataSingleton.INSTANCE;
+        return INSTANCE;
     }
 
     // For client
@@ -103,11 +110,5 @@ public class CanvasData {
     public float getSpriteScaleRatio() {
         return spriteScaleRatio;
     }
-
-    // VERIFY: is this correct?
-    private static class CanvasDataSingleton {
-        private static final CanvasData INSTANCE = new CanvasData();
-    }
-
 
 }

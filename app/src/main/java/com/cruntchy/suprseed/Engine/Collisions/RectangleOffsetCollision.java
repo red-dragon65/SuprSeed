@@ -10,15 +10,15 @@ public class RectangleOffsetCollision implements CollisionHandler {
     private static final RectF first = new RectF();
     private static final RectF second = new RectF();
 
-    private final int xOffset = 0;
-    private final int yOffset = 0;
+    private final int xOffset;
+    private final int yOffset;
 
 
     // Constructor
     public RectangleOffsetCollision(int xOffset, int yOffset) {
 
-        xOffset = xOffset;
-        yOffset = yOffset;
+        this.xOffset = xOffset;
+        this.yOffset = yOffset;
     }
 
 

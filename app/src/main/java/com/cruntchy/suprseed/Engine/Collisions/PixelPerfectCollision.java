@@ -15,6 +15,7 @@ public class PixelPerfectCollision implements CollisionHandler {
     private int pixelMaskResolution = 1;
 
 
+    // Constructor
     public PixelPerfectCollision(CollisionHandler basicCollision, int pixelMaskResolution) {
 
         this.pixelMaskResolution = pixelMaskResolution;

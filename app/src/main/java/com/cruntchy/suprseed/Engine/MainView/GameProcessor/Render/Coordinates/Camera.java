@@ -6,8 +6,6 @@ import com.cruntchy.suprseed.Engine.SpriteObjects.System.LogicSystem;
 
 public class Camera implements Logic {
 
-    // TODO: make this a singleton!
-
     private float xOffset;
     private float yOffset;
 
@@ -17,9 +15,13 @@ public class Camera implements Logic {
     // Modifiable behavior
     private Movable cameraMovement;
 
+    // Eager loading singleton
+    private static final Camera INSTANCE = new Camera();
+
 
     // Constructor
-    public Camera() {
+    // Private to prevent client use of 'new' keyword
+    private Camera() {
 
         // Register with the sprite system
         LogicSystem.getInstance().registerLogicSprite(this);
@@ -33,15 +35,8 @@ public class Camera implements Logic {
         };
     }
 
-
-    // VERIFY: is this correct?
-    private static class CameraSingleton {
-        private static final Camera INSTANCE = new Camera();
-    }
-
-    // VERIFY: is this correct?
     public static Camera getInstance() {
-        return Camera.CameraSingleton.INSTANCE;
+        return INSTANCE;
     }
 
 

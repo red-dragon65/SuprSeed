@@ -11,7 +11,6 @@ import com.cruntchy.suprseed.Engine.SpriteObjects.System.RenderSystem;
 
 public class ImageCollectionAnimator extends ImageCollection implements Animator{
 
-
     // This number must fit equally within the frame time
     // FPS options: 1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30, 60
     private int frameDelay = 0;

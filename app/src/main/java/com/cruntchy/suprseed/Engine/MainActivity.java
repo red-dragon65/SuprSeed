@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
+    // Load the game view based on builder results
     private void loadGameView(Context context, Resources res, SharedPreferences saveData){
 
         // Get layout

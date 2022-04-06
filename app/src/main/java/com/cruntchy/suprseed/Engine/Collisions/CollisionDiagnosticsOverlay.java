@@ -12,23 +12,23 @@ import java.util.List;
 
 public class CollisionDiagnosticsOverlay implements Renderable, RectCollector {
 
-    // TODO: Make this a singleton
-
-
     private final List<RectF> collisionBounds;
     private boolean isEnabled = false;
 
+    // Eager loading singleton
+    private static final CollisionDiagnosticsOverlay INSTANCE = new CollisionDiagnosticsOverlay();
+
 
     // Constructor
-    public CollisionDiagnosticsOverlay() {
+    // Private to prevent client use of 'new' keyword
+    private CollisionDiagnosticsOverlay() {
         collisionBounds = new ArrayList<>();
 
         RenderSystem.getInstance().registerRenderSprite(this);
     }
 
-    // VERIFY: is this correct?
     public static CollisionDiagnosticsOverlay getInstance() {
-        return CollisionDiagnosticSingleton.INSTANCE;
+        return INSTANCE;
     }
 
     @Override
@@ -80,10 +80,5 @@ public class CollisionDiagnosticsOverlay implements Renderable, RectCollector {
     @Override
     public int getLayerDepth() {
         return 10;
-    }
-
-    // VERIFY: is this correct?
-    private static class CollisionDiagnosticSingleton {
-        private static final CollisionDiagnosticsOverlay INSTANCE = new CollisionDiagnosticsOverlay();
     }
 }

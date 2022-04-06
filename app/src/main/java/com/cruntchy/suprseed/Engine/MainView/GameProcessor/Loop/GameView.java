@@ -13,7 +13,6 @@ import androidx.annotation.NonNull;
 import com.cruntchy.suprseed.Engine.InputHandler.TouchInput.InputManager;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.CanvasData;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Graphics.RenderHandler;
-import com.cruntchy.suprseed.Engine.SpriteObjects.System.LogicSystem;
 
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
@@ -21,14 +20,13 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     // Dependencies
     protected RunnableConfig<GameView> loopRunner;
     protected RenderHandler renderer;
+    protected SceneController sceneManager;
 
     protected Context context;
     protected Resources resources;
     protected SharedPreferences gameData;
 
-    protected LogicSystem spriteSystem;
 
-    protected SceneController sceneManager;
 
 
     // TODO: REMOVE THIS! Instead, override 'instance state configuration changes'!!!
@@ -48,8 +46,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         // Dependency inject
         this.loopRunner = loopRunner;
         this.renderer = renderer;
-
-        spriteSystem = new LogicSystem();
 
         this.sceneManager = sceneManager;
     }

@@ -4,10 +4,9 @@ import android.util.Log;
 
 public class CatLogger implements Logable {
 
-    private String applicationName = "Cruntchy";
+    private final String applicationName = "Cruntchy";
     private String topStackTrace = "";
     private String tag = "";
-    private String postMessage = "";
 
     // Show one level up on stack trace
     private int logDepth = 1;
@@ -15,8 +14,6 @@ public class CatLogger implements Logable {
 
     @Override
     public void logMessage(ErrorType errorType, String message){
-
-        // TODO: Verify that this is working as intended
 
         // Build the log data
 
@@ -29,7 +26,6 @@ public class CatLogger implements Logable {
         topStackTrace += stackTrace[logDepth].getMethodName();
 
         tag = applicationName + "::" + errorType.toString();
-
 
 
         // Log message using correct logging level

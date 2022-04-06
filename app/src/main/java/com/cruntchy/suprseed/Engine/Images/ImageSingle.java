@@ -4,25 +4,16 @@ import android.graphics.Bitmap;
 
 import com.cruntchy.suprseed.Engine.AssetLoader.Streamable;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.CanvasData;
-import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Coordinates.LocationTemporalScaler;
 
 public class ImageSingle implements SpriteImage {
 
-    private Bitmap image;
-
-    private final LocationTemporalScaler scaler = new LocationTemporalScaler();
+    private final Bitmap image;
 
     // Constructor
     public ImageSingle(String filePath, float imageScale, Streamable imageStreamer) {
 
         this.image = imageStreamer.loadImage(filePath, imageScale);
     }
-
-    public void setImage(Bitmap newImage) {
-
-        image = newImage;
-    }
-
 
     @Override
     public Bitmap getImage() {

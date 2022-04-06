@@ -14,25 +14,26 @@ import java.util.List;
 
 public class InputManager implements InputHandler, Resetable {
 
-    // TODO: Make this a singleton
 
     // Dependency injection
     private final Comparator<Layerable> layerComparer;
     private final List<InputProcessor> inputs;
     private final List<InputListener> listeners;
 
+    // Eager loading singleton
+    private static final InputManager INSTANCE = new InputManager();
 
     // Constructor
-    public InputManager() {
+    // Private to prevent client use of 'new' keyword
+    private InputManager() {
         inputs = new ArrayList<>();
         listeners = new ArrayList<>();
         this.layerComparer = new LayerableQueueComparator();
     }
 
 
-    // VERIFY: is this correct?
     public static InputManager getInstance() {
-        return InputSingleton.INSTANCE;
+        return INSTANCE;
     }
 
     @Override
@@ -72,10 +73,5 @@ public class InputManager implements InputHandler, Resetable {
     public void resetState() {
 
         listeners.clear();
-    }
-
-    // VERIFY: is this correct?
-    private static class InputSingleton {
-        private static final InputManager INSTANCE = new InputManager();
     }
 }

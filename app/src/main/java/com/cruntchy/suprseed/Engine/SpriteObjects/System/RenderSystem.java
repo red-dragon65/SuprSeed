@@ -13,7 +13,6 @@ import java.util.List;
 
 public class RenderSystem implements Resetable, RenderRegister {
 
-    // TODO: Make this a proper singleton!
 
     // OPTIMIZE: Should sprites be allowed to de-register themselves?
 
@@ -23,17 +22,20 @@ public class RenderSystem implements Resetable, RenderRegister {
     private final Comparator<Layerable> layerComparer;
     private boolean isQueueSynced = false;
 
+    // Eager loading singleton
+    private static final RenderSystem INSTANCE = new RenderSystem();
 
     // Constructor
-    public RenderSystem() {
+    // Private to prevent client use of 'new' keyword
+    private RenderSystem() {
         renderQueue = new ArrayList<>();
         animationImages = new ArrayList<>();
         layerComparer = new LayerableQueueComparator();
     }
 
-    // VERIFY: is this correct?
+
     public static RenderSystem getInstance() {
-        return RenderSingleton.INSTANCE;
+        return INSTANCE;
     }
 
     @Override
@@ -96,10 +98,5 @@ public class RenderSystem implements Resetable, RenderRegister {
     @Override
     public void resetState() {
         renderQueue.clear();
-    }
-
-    // VERIFY: is this correct?
-    private static class RenderSingleton {
-        private static final RenderSystem INSTANCE = new RenderSystem();
     }
 }

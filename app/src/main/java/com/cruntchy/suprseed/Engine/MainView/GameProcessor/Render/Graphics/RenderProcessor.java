@@ -20,17 +20,12 @@ public class RenderProcessor implements RenderHandler {
     private final CoordinateHandler coordinateHandler;
 
 
-
-
-
     // Constructor
     public RenderProcessor(CoordinateHandler coordinateHandler){
 
         // Dependency injection
         this.coordinateHandler = coordinateHandler;
     }
-
-
 
 
     @Override
@@ -92,6 +87,5 @@ public class RenderProcessor implements RenderHandler {
     public Canvas getCanvas() {
         return canvas;
     }
-
 
 }

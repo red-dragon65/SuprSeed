@@ -23,7 +23,6 @@ public class LocalImageFileStreamer implements Streamable {
     }
 
 
-
     @Override
     public Bitmap loadImage(String fileName, float scale){
 
@@ -92,9 +91,5 @@ public class LocalImageFileStreamer implements Streamable {
 
         return null;
     }
-
-
-
-
 
 }

@@ -11,11 +11,6 @@ public class RectangleCollision implements CollisionHandler {
     private static final RectF second = new RectF();
 
 
-    // Constructor
-    public RectangleCollision() {
-    }
-
-
     @Override
     public boolean checkCollision(Sprite one, Sprite two) {
 

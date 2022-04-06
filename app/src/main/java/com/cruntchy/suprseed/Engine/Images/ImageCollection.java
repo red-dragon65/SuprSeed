@@ -7,18 +7,13 @@ import com.cruntchy.suprseed.Engine.AssetLoader.Streamable;
 import com.cruntchy.suprseed.Engine.ErrorLogger.CentralLogger;
 import com.cruntchy.suprseed.Engine.ErrorLogger.ErrorType;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.CanvasData;
-import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Coordinates.LocationTemporalScaler;
 
 import java.util.ArrayList;
 
 
 public class ImageCollection implements SpriteImage {
 
-
     protected ArrayList<Bitmap> imageSet;
-
-    private final LocationTemporalScaler scaler = new LocationTemporalScaler();
-
 
     // Constructor for collection of images
     public ImageCollection(String folderPath, float imageScale, Streamable imageStreamer, FolderParser folderParser) {

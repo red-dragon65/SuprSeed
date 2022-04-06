@@ -6,7 +6,6 @@ import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase.Sprite;
 
 public class CoordinateProcessor implements CoordinateHandler {
 
-
     // Dependencies
     private final LocationHandler locationHandler;
     private final LocationScaler locationScaler;
@@ -49,6 +48,5 @@ public class CoordinateProcessor implements CoordinateHandler {
 
         return loc;
     }
-
 
 }

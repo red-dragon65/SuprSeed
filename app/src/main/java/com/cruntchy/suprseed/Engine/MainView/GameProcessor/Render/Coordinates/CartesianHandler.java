@@ -5,7 +5,6 @@ import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.CanvasData;
 
 public class CartesianHandler implements LocationHandler {
 
-
     private boolean isTopLeftOrigin;
 
 
@@ -14,7 +13,6 @@ public class CartesianHandler implements LocationHandler {
 
         config.applySettings(this);
     }
-
 
 
     @Override

@@ -7,22 +7,22 @@ import java.util.List;
 
 public class LogicSystem implements Logic, Resetable, LogicRegister {
 
-    // TODO: Make this a proper singleton!
-
     // OPTIMIZE: Should sprites be allowed to de-register themselves?
-
 
     private final List<Logic> logicSprites;
 
+    // Eager loading singleton
+    private static final LogicSystem INSTANCE = new LogicSystem();
+
 
     // Constructor
-    public LogicSystem() {
+    // Private to prevent client use of 'new' keyword
+    private LogicSystem() {
         logicSprites = new ArrayList<>();
     }
 
-    // VERIFY: is this correct?
     public static LogicSystem getInstance() {
-        return LogicSingleton.INSTANCE;
+        return INSTANCE;
     }
 
     @Override
@@ -44,10 +44,5 @@ public class LogicSystem implements Logic, Resetable, LogicRegister {
     @Override
     public void resetState() {
         logicSprites.clear();
-    }
-
-    // VERIFY: is this correct?
-    private static class LogicSingleton {
-        private static final LogicSystem INSTANCE = new LogicSystem();
     }
 }
