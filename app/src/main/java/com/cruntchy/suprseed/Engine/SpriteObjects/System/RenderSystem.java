@@ -91,7 +91,7 @@ public class RenderSystem implements Resetable, RenderRegister {
 
         This has to go after rendering / before logic to make sure logic matches with given frame
          */
-        GlobalFrameStepper.moveToNextFrame();
+        GlobalFrameStepper.getInstance().moveToNextFrame();
     }
 
     // Clear currently registered sprites

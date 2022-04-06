@@ -2,25 +2,35 @@ package com.cruntchy.suprseed.Engine.Images;
 
 public class GlobalFrameStepper {
 
-    // TODO: Make this a proper singleton
-
+    // Eager loading singleton
+    private static final GlobalFrameStepper INSTANCE = new GlobalFrameStepper();
     // Global frame stepper
     // Tracks which frame in an animation should be in
-    private static final int startingFrame = 1;
-    private static int frameStep = startingFrame;
-    private static final int frameTime = 60;
+    private final int startingFrame = 1;
+    private final int frameTime = 60;
+    private int frameStep = startingFrame;
 
+
+    // Constructor
+    // Private to prevent client use of 'new' keyword
+    private GlobalFrameStepper() {
+
+    }
+
+    public static GlobalFrameStepper getInstance() {
+        return INSTANCE;
+    }
 
     // Cycles through 60 frames of animation
-    public static void moveToNextFrame(){
+    public void moveToNextFrame() {
 
 
         //Log.d("ImageAnimator", "NEXT FRAME QUEUED!");
 
-        if(frameStep <= frameTime){
+        if (frameStep <= frameTime) {
 
             frameStep++;
-        }else{
+        } else {
 
             frameStep = startingFrame;
         }
@@ -28,11 +38,11 @@ public class GlobalFrameStepper {
     }
 
 
-    public static int getFrameStep() {
+    public int getFrameStep() {
         return frameStep;
     }
 
-    public static int getFrameTime() {
+    public int getFrameTime() {
         return frameTime;
     }
 }

@@ -29,7 +29,7 @@ public class ImageCollectionAnimator extends ImageCollection implements Animator
 
 
         //Make sure fps fits within frame time
-        if (GlobalFrameStepper.getFrameTime() % fps != 0) {
+        if (GlobalFrameStepper.getInstance().getFrameTime() % fps != 0) {
 
             try {
                 throw new Exception();
@@ -63,15 +63,15 @@ public class ImageCollectionAnimator extends ImageCollection implements Animator
     public void generateNextFrame(){
 
         // Cycle to the next frame index
-        if(cycledImage == false && GlobalFrameStepper.getFrameStep() % frameDelay == 0 && lockLoop == false){
+        if (cycledImage == false && GlobalFrameStepper.getInstance().getFrameStep() % frameDelay == 0 && lockLoop == false) {
 
-            Log.d("ImageAnimator", "FrameStep: " + GlobalFrameStepper.getFrameStep());
+            Log.d("ImageAnimator", "FrameStep: " + GlobalFrameStepper.getInstance().getFrameStep());
             Log.d("ImageAnimator", "FrameDelay: " + frameDelay);
 
             currentFrameIndex++;
 
             // Rollover animation frame to first frame when necessary
-            if(currentFrameIndex >= imageSet.size()){
+            if (currentFrameIndex >= imageSet.size()) {
 
                 // Lock the animation to the last frame
                 if(enableLooping == false){
