@@ -31,7 +31,7 @@ public class ImageCollection implements SpriteImage {
         }
 
         if(imageSet.size() == 0){
-            CentralLogger.logMessage(ErrorType.FATAL_ERROR, "No images found in folder! Folder: " + folderPath);
+            CentralLogger.getInstance().logMessage(ErrorType.FATAL_ERROR, "No images found in folder! Folder: " + folderPath);
         }
     }
 

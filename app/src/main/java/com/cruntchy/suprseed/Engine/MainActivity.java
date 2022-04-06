@@ -9,17 +9,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.cruntchy.suprseed.Client.Z_ClientTest_Active.EngineSetup.ClientEngineBuilderTest;
-import com.cruntchy.suprseed.Engine.ErrorLogger.CatLogger;
-import com.cruntchy.suprseed.Engine.ErrorLogger.CentralLogger;
-import com.cruntchy.suprseed.Engine.ErrorLogger.Logable;
 import com.cruntchy.suprseed.Engine.MainView.GameViewBuilder.BaseEngineBuilder;
 import com.cruntchy.suprseed.R;
 
 public class MainActivity extends AppCompatActivity {
-
-    // Initialize the logger singleton
-    private final Logable catLogger = new CatLogger();
-    private final CentralLogger centralLogger = new CentralLogger(catLogger);
 
     private BaseEngineBuilder engineBuilder;
 

@@ -23,7 +23,7 @@ public class TouchHandler implements InputProcessor {
         // Check input type
         if (!event.isFromSource(InputDevice.SOURCE_TOUCHSCREEN)) {
 
-            CentralLogger.logMessage(ErrorType.INFO, "Ignored irrelevant event.");
+            CentralLogger.getInstance().logMessage(ErrorType.INFO, "Ignored irrelevant event.");
 
             return;
         }
@@ -31,7 +31,7 @@ public class TouchHandler implements InputProcessor {
         // Check if any listeners exist
         if (listeners.size() == 0) {
 
-            CentralLogger.logMessage(ErrorType.WARNING, "There are no listeners taking input!");
+            CentralLogger.getInstance().logMessage(ErrorType.WARNING, "There are no listeners taking input!");
 
             return;
         }
@@ -43,7 +43,7 @@ public class TouchHandler implements InputProcessor {
         if (il != null) {
             il.processInput(actionPerformed, event);
 
-            CentralLogger.logMessage(ErrorType.INFO, "An event was passed to the client!");
+            CentralLogger.getInstance().logMessage(ErrorType.INFO, "An event was passed to the client!");
         }
 
 

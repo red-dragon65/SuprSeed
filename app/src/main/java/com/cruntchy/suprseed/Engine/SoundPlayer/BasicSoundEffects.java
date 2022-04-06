@@ -71,7 +71,7 @@ public class BasicSoundEffects<T> implements SoundMixer<T> {
 
             } else {
 
-                CentralLogger.logMessage(ErrorType.WARNING, "The requested sound '" + soundId + "' does not exist in the loaded sound list!");
+                CentralLogger.getInstance().logMessage(ErrorType.WARNING, "The requested sound '" + soundId + "' does not exist in the loaded sound list!");
             }
 
         }

@@ -42,7 +42,7 @@ public class InputManager implements InputHandler, Resetable {
         // Check if any processors exist
         if (inputs.size() == 0) {
 
-            CentralLogger.logMessage(ErrorType.WARNING, "There are no input processors to handle the given input!");
+            CentralLogger.getInstance().logMessage(ErrorType.WARNING, "There are no input processors to handle the given input!");
 
             return;
         }

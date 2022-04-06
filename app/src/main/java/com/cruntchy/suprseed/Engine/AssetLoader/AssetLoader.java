@@ -42,7 +42,7 @@ abstract public class AssetLoader {
 
             e.printStackTrace();
 
-            CentralLogger.logMessage(ErrorType.FATAL_ERROR, "Could not find the image specified!");
+            CentralLogger.getInstance().logMessage(ErrorType.FATAL_ERROR, "Could not find the image specified!");
 
             throw new NullPointerException();
         }
@@ -59,7 +59,7 @@ abstract public class AssetLoader {
 
             e.printStackTrace();
 
-            CentralLogger.logMessage(ErrorType.FATAL_ERROR, "Could not find the animation specified!");
+            CentralLogger.getInstance().logMessage(ErrorType.FATAL_ERROR, "Could not find the animation specified!");
 
             throw new NullPointerException();
         }

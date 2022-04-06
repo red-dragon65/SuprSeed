@@ -45,7 +45,7 @@ public class CanvasData {
         this.originalHeight = height;
         this.originalWidth = width;
 
-        CentralLogger.logMessage(ErrorType.INFO, "The canvas dimensions have been set...");
+        CentralLogger.getInstance().logMessage(ErrorType.INFO, "The canvas dimensions have been set...");
 
         setSpriteScale();
 

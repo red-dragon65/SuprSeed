@@ -1,23 +1,42 @@
 package com.cruntchy.suprseed.Engine.ErrorLogger;
 
-public class CentralLogger {
+public class CentralLogger implements Logable {
 
-    // TODO: Make this a singleton!!!
+    // Eager loading singleton
+    private static final CentralLogger INSTANCE = new CentralLogger();
+    // Hold the log strategy
+    private Logable logMethod;
 
-    private static Logable logMethod;
 
     // Constructor
-    public CentralLogger(Logable logMethod){
+    // Private to prevent client use of 'new' keyword
+    private CentralLogger() {
 
-        CentralLogger.logMethod = logMethod;
+        // Use cat logging as the default
+        logMethod = new CatLogger();
 
         // Set the log depth
         logMethod.setLogDepth(2);
     }
 
-    public static void logMessage(ErrorType errorType, String message) {
+    public static CentralLogger getInstance() {
+        return INSTANCE;
+    }
+
+    public void changeLogMethod(Logable logMethod) {
+        this.logMethod = logMethod;
+    }
+
+    @Override
+    public void logMessage(ErrorType errorType, String message) {
 
         logMethod.logMessage(errorType, message);
+    }
+
+    @Override
+    public void setLogDepth(int logDepth) {
+
+        logMethod.setLogDepth(logDepth);
     }
 
 }

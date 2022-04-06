@@ -42,14 +42,14 @@ public class RenderProcessor implements RenderHandler {
         // Show warning if canvas is not set
         if(this.canvas == null){
 
-            CentralLogger.logMessage(ErrorType.WARNING, "The canvas has not been initialized!");
+            CentralLogger.getInstance().logMessage(ErrorType.WARNING, "The canvas has not been initialized!");
 
             return;
         }
 
         if (CanvasData.getInstance().getOriginalWidth() == 0 || CanvasData.getInstance().getOriginalHeight() == 0) {
 
-            CentralLogger.logMessage(ErrorType.WARNING, "The canvas dimensions have not been initialized!!");
+            CentralLogger.getInstance().logMessage(ErrorType.WARNING, "The canvas dimensions have not been initialized!!");
 
             return;
         }

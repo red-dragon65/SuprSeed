@@ -56,7 +56,7 @@ public class RenderSystem implements Resetable, RenderRegister {
         // Make sure renderHandler is set
         if (renderer == null) {
 
-            CentralLogger.logMessage(ErrorType.FATAL_ERROR, "The render is null! The engine is borked!");
+            CentralLogger.getInstance().logMessage(ErrorType.FATAL_ERROR, "The render is null! The engine is borked!");
             return;
         }
 
