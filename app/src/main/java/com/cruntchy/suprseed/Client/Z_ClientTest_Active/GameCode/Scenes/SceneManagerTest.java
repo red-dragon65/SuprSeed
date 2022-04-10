@@ -54,7 +54,7 @@ public class SceneManagerTest implements Logic, SceneController {
 
 
         // Add the input listener here
-        InputManager.getInstance().addInputHandler(new TouchHandler());
+        InputManager.getInstance().processorRegister.registerObject(new TouchHandler());
 
 
         // Add scenes here
@@ -95,7 +95,7 @@ public class SceneManagerTest implements Logic, SceneController {
                 oldScene.setHidden(true);
 
                 // Clear the system register
-                LogicSystem.getInstance().resetState();
+                LogicSystem.getInstance().removeAllObjects();
 
                 // Enable the new scene
                 scene.setActive(true);

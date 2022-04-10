@@ -5,12 +5,12 @@ import android.graphics.RectF;
 
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import com.cruntchy.suprseed.Engine.SpriteObjects.System.RenderSystem;
-import com.cruntchy.suprseed.Engine.SpriteObjects.System.Renderable;
+import com.cruntchy.suprseed.Engine.SpriteObjects.System.RenderableAndLayerable;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CollisionDiagnosticsOverlay implements Renderable, RectCollector {
+public class CollisionDiagnosticsOverlay implements RenderableAndLayerable, RectCollector {
 
     private final List<RectF> collisionBounds;
     private boolean isEnabled = false;
@@ -24,7 +24,7 @@ public class CollisionDiagnosticsOverlay implements Renderable, RectCollector {
     private CollisionDiagnosticsOverlay() {
         collisionBounds = new ArrayList<>();
 
-        RenderSystem.getInstance().registerRenderSprite(this);
+        RenderSystem.getInstance().imageRegister.registerObject(this);
     }
 
     public static CollisionDiagnosticsOverlay getInstance() {

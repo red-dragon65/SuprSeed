@@ -20,7 +20,7 @@ public abstract class Scene implements Logic {
         active = false;
 
         // Register logic
-        LogicSystem.getInstance().registerLogicSprite(this);
+        LogicSystem.getInstance().registerObject(this);
     }
 
 

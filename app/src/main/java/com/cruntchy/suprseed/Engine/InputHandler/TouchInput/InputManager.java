@@ -4,21 +4,16 @@ import android.view.MotionEvent;
 
 import com.cruntchy.suprseed.Engine.ErrorLogger.CentralLogger;
 import com.cruntchy.suprseed.Engine.ErrorLogger.ErrorType;
-import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteExtensions.Resetable;
-import com.cruntchy.suprseed.Engine.SpriteObjects.System.Layerable;
 import com.cruntchy.suprseed.Engine.SpriteObjects.System.LayerableQueueComparator;
 
 import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
 
-public class InputManager implements InputHandler, Resetable {
+public class InputManager implements InputHandler {
 
 
     // Dependency injection
-    private final Comparator<Layerable> layerComparer;
-    private final List<InputProcessor> inputs;
-    private final List<InputListener> listeners;
+    public final InputRegister<InputProcessor> processorRegister;
+    public final InputRegister<InputListener> listenerRegister;
 
     // Eager loading singleton
     private static final InputManager INSTANCE = new InputManager();
@@ -26,11 +21,10 @@ public class InputManager implements InputHandler, Resetable {
     // Constructor
     // Private to prevent client use of 'new' keyword
     private InputManager() {
-        inputs = new ArrayList<>();
-        listeners = new ArrayList<>();
-        this.layerComparer = new LayerableQueueComparator();
-    }
 
+        processorRegister = new InputProcessorRegister(new ArrayList<>());
+        listenerRegister = new InputListenerHolder(new ArrayList<>(), new LayerableQueueComparator());
+    }
 
     public static InputManager getInstance() {
         return INSTANCE;
@@ -40,7 +34,7 @@ public class InputManager implements InputHandler, Resetable {
     public void processInput(MotionEvent event) {
 
         // Check if any processors exist
-        if (inputs.size() == 0) {
+        if (processorRegister.getRegisterList().size() == 0) {
 
             CentralLogger.getInstance().logMessage(ErrorType.WARNING, "There are no input processors to handle the given input!");
 
@@ -48,30 +42,9 @@ public class InputManager implements InputHandler, Resetable {
         }
 
         // Get action performed
-        for (InputProcessor ih : inputs) {
+        for (InputProcessor ih : processorRegister.getRegisterList()) {
 
-            ih.processEvent(listeners, event);
+            ih.processEvent(listenerRegister.getRegisterList(), event);
         }
-    }
-
-    @Override
-    public void addInputHandler(InputProcessor inputMethod) {
-        inputs.add(inputMethod);
-    }
-
-    @Override
-    public void registerListener(InputListener listener) {
-
-        // Add the listener
-        listeners.add(listener);
-
-        // Resort the listener based on layer depth
-        listeners.sort(layerComparer);
-    }
-
-    @Override
-    public void resetState() {
-
-        listeners.clear();
     }
 }

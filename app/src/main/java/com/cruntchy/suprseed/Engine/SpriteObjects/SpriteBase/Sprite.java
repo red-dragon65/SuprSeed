@@ -7,9 +7,9 @@ import com.cruntchy.suprseed.Engine.Collisions.CollisionDiagnosticsOverlay;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.CanvasData;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import com.cruntchy.suprseed.Engine.SpriteObjects.System.RenderSystem;
-import com.cruntchy.suprseed.Engine.SpriteObjects.System.Renderable;
+import com.cruntchy.suprseed.Engine.SpriteObjects.System.RenderableAndLayerable;
 
-public abstract class Sprite implements Renderable, Boundable {
+public abstract class Sprite implements RenderableAndLayerable, Boundable {
 
     // TODO: Apply SOLID to this
 
@@ -37,7 +37,7 @@ public abstract class Sprite implements Renderable, Boundable {
         this.imageHandler = imageHandler;
 
         // Register this renderable
-        RenderSystem.getInstance().registerRenderSprite(this);
+        RenderSystem.getInstance().imageRegister.registerObject(this);
     }
 
 

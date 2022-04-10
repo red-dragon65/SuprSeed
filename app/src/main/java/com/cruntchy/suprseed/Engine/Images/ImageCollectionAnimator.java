@@ -25,7 +25,7 @@ public class ImageCollectionAnimator extends ImageCollection implements Animator
         super(folderPath, imageScale, imageStreamer, folderParser);
 
         // Register with system
-        RenderSystem.getInstance().registerAnimationImage(this);
+        RenderSystem.getInstance().animationRegister.registerObject(this);
 
 
         //Make sure fps fits within frame time

@@ -24,7 +24,7 @@ public class Camera implements Logic {
     private Camera() {
 
         // Register with the sprite system
-        LogicSystem.getInstance().registerLogicSprite(this);
+        LogicSystem.getInstance().registerObject(this);
 
         // Default movement behavior
         cameraMovement = () -> {

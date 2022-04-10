@@ -1,13 +1,13 @@
 package com.cruntchy.suprseed.Engine.SpriteObjects.System;
 
-import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteExtensions.Resetable;
+import com.cruntchy.suprseed.Engine.ErrorLogger.CentralLogger;
+import com.cruntchy.suprseed.Engine.ErrorLogger.ErrorType;
+import com.cruntchy.suprseed.Engine.SpriteObjects.Register.ObjectRegister;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class LogicSystem implements Logic, Resetable, LogicRegister {
-
-    // OPTIMIZE: Should sprites be allowed to de-register themselves?
+public class LogicSystem implements Logic, ObjectRegister<Logic> {
 
     private final List<Logic> logicSprites;
 
@@ -25,11 +25,25 @@ public class LogicSystem implements Logic, Resetable, LogicRegister {
         return INSTANCE;
     }
 
+
     @Override
-    public void registerLogicSprite(Logic sprite) {
+    public void registerObject(Logic sprite) {
+
+        // Prevent this class from registering from to itself
+        if (sprite == this) {
+
+            CentralLogger.getInstance().logMessage(ErrorType.WARNING, "You can't register the register to itself!");
+            return;
+        }
 
         logicSprites.add(sprite);
     }
+
+    @Override
+    public void removeObject(Logic sprite) {
+        logicSprites.remove(sprite);
+    }
+
 
     // Run logic for all registered sprites
     @Override
@@ -42,7 +56,7 @@ public class LogicSystem implements Logic, Resetable, LogicRegister {
 
     // Clear currently registered sprites
     @Override
-    public void resetState() {
+    public void removeAllObjects() {
         logicSprites.clear();
     }
 }

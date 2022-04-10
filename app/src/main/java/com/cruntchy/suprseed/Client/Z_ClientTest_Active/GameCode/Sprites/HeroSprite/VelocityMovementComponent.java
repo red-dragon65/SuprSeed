@@ -17,7 +17,7 @@ public class VelocityMovementComponent implements Movable, InputListener {
     public VelocityMovementComponent(Sprite sprite) {
 
         this.sprite = sprite;
-        InputManager.getInstance().registerListener(this);
+        InputManager.getInstance().listenerRegister.registerObject(this);
     }
 
 

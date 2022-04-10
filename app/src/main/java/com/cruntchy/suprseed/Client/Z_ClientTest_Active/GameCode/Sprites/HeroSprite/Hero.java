@@ -25,7 +25,7 @@ public class Hero extends Sprite implements Logic {
         super(imageHandler);
 
         // Register this to the system
-        LogicSystem.getInstance().registerLogicSprite(this);
+        LogicSystem.getInstance().registerObject(this);
 
 
         // Instantiate behavior here if you want
