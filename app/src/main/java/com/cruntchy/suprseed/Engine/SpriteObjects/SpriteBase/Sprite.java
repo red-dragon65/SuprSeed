@@ -139,8 +139,6 @@ public abstract class Sprite implements RenderableAndLayerable, Boundable {
     @Override
     public void getRectF(RectF result) {
 
-        // TODO: VERIFY THAT THIS IS WORKING AS EXPECTED!
-
         result.left = CanvasData.getInstance().formatCoordinateToCanvas(this.getX());
         result.right = result.left + this.getImageHandler().getSelectedImageSet().getImage().getWidth();
 

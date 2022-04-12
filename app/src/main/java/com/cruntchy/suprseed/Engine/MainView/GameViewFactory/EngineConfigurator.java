@@ -26,11 +26,6 @@ import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Graphics.Rende
 
 public class EngineConfigurator extends BaseEngineConfigurator {
 
-    // TODO: Make this a lazy loading singleton
-    //  This will protect the user from creating duplicate dependency instances
-    //  if they want to create their own custom builder while using some default
-    //  dependency instances from this class.
-
     private final SceneController rootScene;
     private RunnableConfig<GameView> loopManager;
     private LocationScaler locationTemporalScaler;
