@@ -8,13 +8,13 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import com.cruntchy.suprseed.Client.Z_ClientTest_Active.EngineSetup.ClientEngineBuilderTest;
-import com.cruntchy.suprseed.Engine.MainView.GameViewBuilder.BaseEngineBuilder;
+import com.cruntchy.suprseed.Client.ClientEngineConfigurator;
+import com.cruntchy.suprseed.Engine.MainView.GameViewFactory.BaseEngineConfigurator;
 import com.cruntchy.suprseed.R;
 
 public class MainActivity extends AppCompatActivity {
 
-    private BaseEngineBuilder engineBuilder;
+    private BaseEngineConfigurator engineConfigurator;
 
 
     @Override
@@ -29,12 +29,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
 
         // Re-apply window config
-        if(engineBuilder != null){
-            engineBuilder.setWindowConfig(this);
+        if (engineConfigurator != null) {
+            engineConfigurator.setWindowConfig(this);
         }
     }
 
@@ -46,12 +46,12 @@ public class MainActivity extends AppCompatActivity {
         ConstraintLayout cLayout = findViewById(R.id.game_layout);
 
         // Create a builder
-        engineBuilder = new ClientEngineBuilderTest(context, res, saveData);
+        engineConfigurator = new ClientEngineConfigurator(context, res, saveData);
 
         // Apply the window settings
-        engineBuilder.setWindowConfig(this);
+        engineConfigurator.setWindowConfig(this);
 
         // Add custom view to the layout
-        cLayout.addView(engineBuilder.getView());
+        cLayout.addView(engineConfigurator.buildView());
     }
 }
