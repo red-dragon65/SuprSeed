@@ -4,11 +4,10 @@ import android.graphics.RectF;
 
 import com.cruntchy.suprseed.Engine.Collisions.Boundable;
 import com.cruntchy.suprseed.Engine.Collisions.CollisionDiagnosticsOverlay;
-import com.cruntchy.suprseed.Engine.MainView.GameProcessor.BetterScene.BaseScene;
+import com.cruntchy.suprseed.Engine.Scenes.SceneHeirarchy.BaseScene;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.CanvasData;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import com.cruntchy.suprseed.Engine.SpriteObjects.System.Logic;
-import com.cruntchy.suprseed.Engine.SpriteObjects.System.RenderSystem;
 import com.cruntchy.suprseed.Engine.SpriteObjects.System.RenderableAndLayerable;
 
 public abstract class Sprite implements RenderableAndLayerable, Boundable, Logic {

@@ -1,10 +1,8 @@
-package com.cruntchy.suprseed.Engine.MainView.GameProcessor.BetterScene;
+package com.cruntchy.suprseed.Engine.Scenes.SceneHeirarchy;
 
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Graphics.RenderHandler;
-import com.cruntchy.suprseed.Engine.MainView.Scenes.AppInfo;
-import com.cruntchy.suprseed.Engine.MainView.Scenes.SceneChangeStrategy;
-import com.cruntchy.suprseed.Engine.MainView.Scenes.SceneController;
-import com.cruntchy.suprseed.Engine.MainView.Scenes.SceneRegister;
+import com.cruntchy.suprseed.Engine.Scenes.AppInfo;
+import com.cruntchy.suprseed.Engine.Scenes.SceneStrategy.SceneChangeStrategy;
 import com.cruntchy.suprseed.Engine.SpriteObjects.Register.ListRegister;
 
 public abstract class SceneManager extends BaseScene implements SceneController<BaseScene> {

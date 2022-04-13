@@ -1,4 +1,4 @@
-package com.cruntchy.suprseed.Engine.MainView.GameProcessor.BetterScene;
+package com.cruntchy.suprseed.Engine.Scenes.SceneHeirarchy;
 
 import android.content.Context;
 import android.content.SharedPreferences;

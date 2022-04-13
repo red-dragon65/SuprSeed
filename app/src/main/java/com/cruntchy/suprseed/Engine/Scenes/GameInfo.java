@@ -1,4 +1,4 @@
-package com.cruntchy.suprseed.Engine.MainView.Scenes;
+package com.cruntchy.suprseed.Engine.Scenes;
 
 import android.content.Context;
 import android.content.SharedPreferences;

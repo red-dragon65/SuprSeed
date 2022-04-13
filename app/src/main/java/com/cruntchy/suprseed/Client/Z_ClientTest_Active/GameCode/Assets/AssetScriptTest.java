@@ -5,7 +5,7 @@ import com.cruntchy.suprseed.Engine.AssetLoader.FolderParser;
 import com.cruntchy.suprseed.Engine.AssetLoader.Streamable;
 import com.cruntchy.suprseed.Engine.Images.ImageCollectionAnimator;
 import com.cruntchy.suprseed.Engine.Images.ImageSingle;
-import com.cruntchy.suprseed.Engine.MainView.GameProcessor.BetterScene.BaseScene;
+import com.cruntchy.suprseed.Engine.Scenes.SceneHeirarchy.BaseScene;
 
 public class AssetScriptTest extends AssetLoader {
 

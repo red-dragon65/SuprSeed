@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.cruntchy.suprseed.Client.Z_ClientTest_Active.GameCode.Scenes.SceneManagerTest;
 import com.cruntchy.suprseed.Engine.MainView.EngineSettings.ViewConfig;
-import com.cruntchy.suprseed.Engine.MainView.GameProcessor.BetterScene.RootScene;
+import com.cruntchy.suprseed.Engine.Scenes.SceneHeirarchy.RootScene;
 import com.cruntchy.suprseed.Engine.MainView.GameViewBuilder.BaseEngineConfigurator;
 import com.cruntchy.suprseed.Engine.MainView.GameViewBuilder.EngineConfigurator;
 

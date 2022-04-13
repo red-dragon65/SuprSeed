@@ -1,8 +1,8 @@
-package com.cruntchy.suprseed.Engine.MainView.Scenes;
+package com.cruntchy.suprseed.Engine.Scenes.SceneStrategy;
 
 import com.cruntchy.suprseed.Client.Z_ClientTest_Active.GameCode.Scenes.GameScene.MainScene;
-import com.cruntchy.suprseed.Engine.MainView.GameProcessor.BetterScene.BaseScene;
-import com.cruntchy.suprseed.Engine.MainView.GameProcessor.BetterScene.SceneManager;
+import com.cruntchy.suprseed.Engine.Scenes.SceneHeirarchy.BaseScene;
+import com.cruntchy.suprseed.Engine.Scenes.SceneHeirarchy.SceneManager;
 import com.cruntchy.suprseed.Engine.SpriteObjects.System.LogicSystem;
 
 public class SceneHardChange implements SceneChangeStrategy<BaseScene> {

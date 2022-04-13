@@ -1,6 +1,5 @@
-package com.cruntchy.suprseed.Engine.MainView.Scenes;
+package com.cruntchy.suprseed.Engine.Scenes.SceneHeirarchy;
 
-import com.cruntchy.suprseed.Engine.MainView.GameProcessor.BetterScene.BaseScene;
 import com.cruntchy.suprseed.Engine.SpriteObjects.Register.ListRegister;
 
 import java.util.ArrayList;

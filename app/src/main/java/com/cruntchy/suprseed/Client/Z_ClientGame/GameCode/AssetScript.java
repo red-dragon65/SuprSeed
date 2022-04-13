@@ -3,7 +3,7 @@ package com.cruntchy.suprseed.Client.Z_ClientGame.GameCode;
 import com.cruntchy.suprseed.Engine.AssetLoader.AssetLoader;
 import com.cruntchy.suprseed.Engine.AssetLoader.FolderParser;
 import com.cruntchy.suprseed.Engine.AssetLoader.Streamable;
-import com.cruntchy.suprseed.Engine.MainView.GameProcessor.BetterScene.BaseScene;
+import com.cruntchy.suprseed.Engine.Scenes.SceneHeirarchy.BaseScene;
 
 public class AssetScript extends AssetLoader {
 

@@ -7,15 +7,12 @@ import android.content.res.Resources;
 import com.cruntchy.suprseed.Client.Z_ClientTest_Active.GameCode.Scenes.GameScene.MainScene;
 import com.cruntchy.suprseed.Engine.InputHandler.TouchInput.InputManager;
 import com.cruntchy.suprseed.Engine.InputHandler.TouchInput.TouchHandler;
-import com.cruntchy.suprseed.Engine.MainView.GameProcessor.BetterScene.BaseScene;
-import com.cruntchy.suprseed.Engine.MainView.GameProcessor.BetterScene.RootScene;
-import com.cruntchy.suprseed.Engine.MainView.GameProcessor.BetterScene.SceneManager;
-import com.cruntchy.suprseed.Engine.MainView.Scenes.GameInfo;
+import com.cruntchy.suprseed.Engine.Scenes.SceneHeirarchy.BaseScene;
+import com.cruntchy.suprseed.Engine.Scenes.SceneHeirarchy.RootScene;
+import com.cruntchy.suprseed.Engine.Scenes.SceneHeirarchy.SceneManager;
+import com.cruntchy.suprseed.Engine.Scenes.GameInfo;
 import com.cruntchy.suprseed.Engine.SpriteObjects.System.LogicSystem;
 import com.cruntchy.suprseed.Engine.SpriteObjects.System.RenderSystem;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class SceneManagerTest extends SceneManager implements RootScene {
 

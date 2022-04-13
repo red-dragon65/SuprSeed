@@ -1,19 +1,15 @@
-package com.cruntchy.suprseed.Engine.MainView.GameProcessor.BetterScene;
+package com.cruntchy.suprseed.Engine.Scenes.SceneHeirarchy;
 
 import com.cruntchy.suprseed.Engine.Images.Animator;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Graphics.RenderHandler;
-import com.cruntchy.suprseed.Engine.SpriteObjects.Register.ObjectRegister;
 import com.cruntchy.suprseed.Engine.SpriteObjects.Register.RenderRegister;
 import com.cruntchy.suprseed.Engine.SpriteObjects.Register.UpdatableRegister;
-import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase.Sprite;
 import com.cruntchy.suprseed.Engine.SpriteObjects.System.AnimationRenderer;
 import com.cruntchy.suprseed.Engine.SpriteObjects.System.ImageRenderer;
 import com.cruntchy.suprseed.Engine.SpriteObjects.System.LayerableQueueComparator;
 import com.cruntchy.suprseed.Engine.SpriteObjects.System.Logic;
 import com.cruntchy.suprseed.Engine.SpriteObjects.System.ObjectLogicizer;
 import com.cruntchy.suprseed.Engine.SpriteObjects.System.RenderableAndLayerable;
-
-import java.util.ArrayList;
 
 public abstract class BaseScene implements Logic, RenderableAndLayerable, Animator {
 

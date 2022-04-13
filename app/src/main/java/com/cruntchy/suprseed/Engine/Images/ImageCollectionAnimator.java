@@ -6,8 +6,7 @@ import android.util.Log;
 
 import com.cruntchy.suprseed.Engine.AssetLoader.FolderParser;
 import com.cruntchy.suprseed.Engine.AssetLoader.Streamable;
-import com.cruntchy.suprseed.Engine.MainView.GameProcessor.BetterScene.BaseScene;
-import com.cruntchy.suprseed.Engine.SpriteObjects.System.RenderSystem;
+import com.cruntchy.suprseed.Engine.Scenes.SceneHeirarchy.BaseScene;
 
 
 public class ImageCollectionAnimator extends ImageCollection implements Animator{

@@ -11,10 +11,9 @@ import android.view.SurfaceView;
 import androidx.annotation.NonNull;
 
 import com.cruntchy.suprseed.Engine.InputHandler.TouchInput.InputManager;
-import com.cruntchy.suprseed.Engine.MainView.GameProcessor.BetterScene.RootScene;
+import com.cruntchy.suprseed.Engine.Scenes.SceneHeirarchy.RootScene;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.CanvasData;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Graphics.RenderHandler;
-import com.cruntchy.suprseed.Engine.MainView.Scenes.SceneController;
 
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 

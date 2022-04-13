@@ -2,7 +2,7 @@ package com.cruntchy.suprseed.Client.Z_ClientTest_Active.GameCode.Sprites.HeroSp
 
 import com.cruntchy.suprseed.Engine.Collisions.CollisionHandler;
 import com.cruntchy.suprseed.Engine.Collisions.RectangleCollision;
-import com.cruntchy.suprseed.Engine.MainView.GameProcessor.BetterScene.BaseScene;
+import com.cruntchy.suprseed.Engine.Scenes.SceneHeirarchy.BaseScene;
 import com.cruntchy.suprseed.Engine.SoundPlayer.SoundMixer;
 import com.cruntchy.suprseed.Engine.SpriteObjects.DefaultComponents.Collidable;
 import com.cruntchy.suprseed.Engine.SpriteObjects.DefaultComponents.Movable;
