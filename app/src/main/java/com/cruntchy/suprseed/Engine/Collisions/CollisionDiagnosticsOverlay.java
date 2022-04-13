@@ -53,11 +53,6 @@ public class CollisionDiagnosticsOverlay implements RenderableAndLayerable, Rect
     @Override
     public void draw(RenderHandler renderer) {
 
-        // See if this is allowed to run
-        if (!isEnabled) {
-            return;
-        }
-
         // Check if rectangles exist
         if (!(collisionBounds != null && collisionBounds.size() > 0)) {
 
@@ -80,5 +75,10 @@ public class CollisionDiagnosticsOverlay implements RenderableAndLayerable, Rect
     @Override
     public int getLayerDepth() {
         return 10;
+    }
+
+    @Override
+    public boolean isDrawable() {
+        return isEnabled;
     }
 }

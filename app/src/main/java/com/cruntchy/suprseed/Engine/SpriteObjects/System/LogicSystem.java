@@ -3,11 +3,12 @@ package com.cruntchy.suprseed.Engine.SpriteObjects.System;
 import com.cruntchy.suprseed.Engine.ErrorLogger.CentralLogger;
 import com.cruntchy.suprseed.Engine.ErrorLogger.ErrorType;
 import com.cruntchy.suprseed.Engine.SpriteObjects.Register.ObjectRegister;
+import com.cruntchy.suprseed.Engine.SpriteObjects.Register.UpdatableRegister;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class LogicSystem implements Logic, ObjectRegister<Logic> {
+public class LogicSystem implements UpdatableRegister<Logic> {
 
     private final List<Logic> logicSprites;
 
@@ -47,10 +48,14 @@ public class LogicSystem implements Logic, ObjectRegister<Logic> {
 
     // Run logic for all registered sprites
     @Override
-    public void runLogic() {
+    public void update() {
 
+        // Run logic for active sprites
         for (Logic s : logicSprites) {
-            s.runLogic();
+
+            if(s.isActive()){
+                s.runLogic();
+            }
         }
     }
 

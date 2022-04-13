@@ -1,4 +1,4 @@
-package com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop;
+package com.cruntchy.suprseed.Engine.MainView.Scenes;
 
 import com.cruntchy.suprseed.Engine.SpriteObjects.System.Logic;
 import com.cruntchy.suprseed.Engine.SpriteObjects.System.LogicSystem;
@@ -38,7 +38,6 @@ public abstract class Scene implements Logic {
     public void setHidden(boolean hidden){
         this.hidden = hidden;
     }
-
     public void setActive(boolean active){
         this.active = active;
     }

@@ -1,7 +1,7 @@
 package com.cruntchy.suprseed.Client.Z_ClientTest_Active.GameCode.Scenes.UIOverlayScene;
 
-import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.Scene;
-import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.SceneController;
+import com.cruntchy.suprseed.Engine.MainView.Scenes.Scene;
+import com.cruntchy.suprseed.Engine.MainView.Scenes.SceneController;
 
 public class GameOverOverlayScene extends Scene {
 

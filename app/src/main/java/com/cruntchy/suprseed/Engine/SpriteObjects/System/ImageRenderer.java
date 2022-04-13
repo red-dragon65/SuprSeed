@@ -35,7 +35,9 @@ public class ImageRenderer implements RenderRegister<RenderableAndLayerable> {
         // Draw the sprites
         for (RenderableAndLayerable item : renderQueue) {
 
-            item.draw(renderer);
+            if(item.isDrawable()){
+                item.draw(renderer);
+            }
 
             // Ignore this old code
             // This is not the desired behavior

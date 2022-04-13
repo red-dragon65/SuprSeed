@@ -14,7 +14,7 @@ import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.LogicRates;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.LoopManager;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.RefreshTypes;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.RunnableConfig;
-import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.SceneController;
+import com.cruntchy.suprseed.Engine.MainView.Scenes.SceneController;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Coordinates.CartesianHandler;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Coordinates.CoordinateHandler;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Coordinates.CoordinateProcessor;

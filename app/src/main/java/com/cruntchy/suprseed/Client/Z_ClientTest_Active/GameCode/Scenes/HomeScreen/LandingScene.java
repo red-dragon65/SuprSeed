@@ -1,21 +1,17 @@
 package com.cruntchy.suprseed.Client.Z_ClientTest_Active.GameCode.Scenes.HomeScreen;
 
 import com.cruntchy.suprseed.Engine.AssetLoader.AssetLoader;
-import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.Scene;
-import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.SceneController;
+import com.cruntchy.suprseed.Engine.MainView.Scenes.Scene;
+import com.cruntchy.suprseed.Engine.MainView.Scenes.SceneController;
 
 public class LandingScene extends Scene {
-
-    private final AssetLoader assets;
 
     private Scene charScene;
 
 
     // Constructor
-    public LandingScene(SceneController sceneManager, String id, AssetLoader assets){
+    public LandingScene(SceneController sceneManager, String id){
         super(sceneManager, id);
-
-        this.assets = assets;
 
 
 

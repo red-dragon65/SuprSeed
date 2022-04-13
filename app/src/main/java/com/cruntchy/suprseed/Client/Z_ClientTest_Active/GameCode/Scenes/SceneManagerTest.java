@@ -4,30 +4,24 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 
-import com.cruntchy.suprseed.Client.Z_ClientTest_Active.GameCode.Assets.AssetScriptTest;
 import com.cruntchy.suprseed.Client.Z_ClientTest_Active.GameCode.Scenes.GameScene.MainScene;
-import com.cruntchy.suprseed.Engine.AssetLoader.AssetLoader;
-import com.cruntchy.suprseed.Engine.AssetLoader.FolderParser;
-import com.cruntchy.suprseed.Engine.AssetLoader.LocalFolderParser;
-import com.cruntchy.suprseed.Engine.AssetLoader.LocalImageFileStreamer;
-import com.cruntchy.suprseed.Engine.AssetLoader.Streamable;
 import com.cruntchy.suprseed.Engine.InputHandler.TouchInput.InputManager;
 import com.cruntchy.suprseed.Engine.InputHandler.TouchInput.TouchHandler;
-import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.Scene;
-import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.SceneController;
-import com.cruntchy.suprseed.Engine.SpriteObjects.System.Logic;
-import com.cruntchy.suprseed.Engine.SpriteObjects.System.LogicSystem;
+import com.cruntchy.suprseed.Engine.MainView.Scenes.Scene;
+import com.cruntchy.suprseed.Engine.MainView.Scenes.SceneController;
+import com.cruntchy.suprseed.Engine.MainView.Scenes.SceneChangeStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SceneManagerTest implements Logic, SceneController {
-
-    // VERIFY: Observer pattern
+public class SceneManagerTest implements SceneController {
 
 
     private final List<Scene> myScenes = new ArrayList<>();
 
+    private Context context;
+    private Resources res;
+    private SharedPreferences gameData;
 
     // Constructor
     public SceneManagerTest() {
@@ -37,6 +31,11 @@ public class SceneManagerTest implements Logic, SceneController {
 
     @Override
     public void initStartingState(Context context, Resources res, SharedPreferences gameData) {
+
+        this.context = context;
+        this.res = res;
+        this.gameData = gameData;
+
 
         // Load any third party game function
 
@@ -48,62 +47,69 @@ public class SceneManagerTest implements Logic, SceneController {
 
         // OR, initialize a scene
 
-        FolderParser localFolderParser = new LocalFolderParser(res);
-        Streamable localStreamer = new LocalImageFileStreamer(res);
-        AssetLoader myAssets = new AssetScriptTest(localStreamer, localFolderParser);
-
 
         // Add the input listener here
         InputManager.getInstance().processorRegister.registerObject(new TouchHandler());
 
 
-        // Add scenes here
-        myScenes.add(new MainScene(this, "MainScene", myAssets, context));
+        // Add starting scenes here
+        myScenes.add(new MainScene(this, "MainScene", context));
 
 
-        // Activate start scene
+        // Activate starting scenes
         myScenes.get(0).setActive(true);
-
-
-        // Register this scenes logic
-        //spriteSystem.registerLogicSprite(this);
     }
-
-
-
-
-    @Override
-    public void runLogic() {
-
-        // We don't need this for now...
-    }
-
 
 
 
 
     // Used by a scene to change to another scene using the specified scenes id
     @Override
-    public void changeScene(Scene oldScene, String sceneId) {
+    public void changeScene(SceneChangeStrategy strategy, Scene oldScene, String... sceneId) {
 
-        for(Scene scene : myScenes){
-
-            if(scene.getId().equals(sceneId)){
-
-                // Disable the old scene
-                oldScene.setActive(false);
-                oldScene.setHidden(true);
-
-                // Clear the system register
-                LogicSystem.getInstance().removeAllObjects();
-
-                // Enable the new scene
-                scene.setActive(true);
-                scene.setHidden(false);
-
-                break;
-            }
-        }
+        strategy.changeScene(this, oldScene, sceneId);
     }
 
+
+    @Override
+    public Context getContext() {
+        return context;
+    }
+
+    @Override
+    public Resources getResources() {
+        return res;
+    }
+
+    @Override
+    public SharedPreferences getSharedPreferences() {
+        return gameData;
+    }
+
+    @Override
+    public List<Scene> getScenes() {
+        return myScenes;
+    }
+
+
+
+
+
+    @Override
+    public void registerObject(Scene object) {
+
+        myScenes.add(object);
+    }
+
+    @Override
+    public void removeObject(Scene object) {
+
+        myScenes.remove(object);
+    }
+
+    @Override
+    public void removeAllObjects() {
+
+        myScenes.clear();
+    }
 }

@@ -46,6 +46,11 @@ public class Camera implements Logic {
         cameraMovement.move();
     }
 
+    @Override
+    public boolean isActive() {
+        return true;
+    }
+
 
     // Getters/setters
     public Movable getCameraMovement() {

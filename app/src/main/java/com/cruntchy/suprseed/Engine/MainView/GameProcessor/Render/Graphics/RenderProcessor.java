@@ -56,7 +56,7 @@ public class RenderProcessor implements RenderHandler {
 
 
         // Actually draw sprite
-        if(sprite.isEnabled() && sprite.isShow()){
+        //if(sprite.isActive() && sprite.isDrawable()){ // IGNORE THIS! RENDERSYSTEM HANDLES DRAWABILITY
 
             // Get drawing location of sprite
             float[] finalLoc = coordinateHandler.parseLocation(sprite);
@@ -68,7 +68,7 @@ public class RenderProcessor implements RenderHandler {
                     finalLoc[1],
                     paint
             );
-        }
+        //}
 
     }
 

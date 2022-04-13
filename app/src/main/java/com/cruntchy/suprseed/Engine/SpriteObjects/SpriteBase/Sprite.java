@@ -83,21 +83,27 @@ public abstract class Sprite implements RenderableAndLayerable, Boundable {
         this.yVel = yVel;
     }
 
-    public boolean isEnabled() {
-        return enabled;
+
+
+
+    @Override
+    public boolean isDrawable(){
+        return show;
+    }
+    public void setShow(boolean show) {
+        this.show = show;
     }
 
+
+
+    public boolean isActive(){
+        return enabled;
+    }
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
 
-    public boolean isShow() {
-        return show;
-    }
 
-    public void setShow(boolean show) {
-        this.show = show;
-    }
 
     public ImageHandler getImageHandler() {
         return imageHandler;
