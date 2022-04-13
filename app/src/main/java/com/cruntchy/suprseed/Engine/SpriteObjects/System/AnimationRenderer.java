@@ -3,6 +3,7 @@ package com.cruntchy.suprseed.Engine.SpriteObjects.System;
 import com.cruntchy.suprseed.Engine.Images.Animator;
 import com.cruntchy.suprseed.Engine.SpriteObjects.Register.UpdatableRegister;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AnimationRenderer implements UpdatableRegister<Animator> {
@@ -12,9 +13,9 @@ public class AnimationRenderer implements UpdatableRegister<Animator> {
 
 
     // Constructor
-    public AnimationRenderer(List<Animator> animatorQueue) {
+    public AnimationRenderer() {
 
-        this.animationQueue = animatorQueue;
+        this.animationQueue = new ArrayList<>();
     }
 
 

@@ -9,9 +9,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.cruntchy.suprseed.Client.Z_ClientTest_Active.GameCode.Scenes.SceneManagerTest;
 import com.cruntchy.suprseed.Engine.MainView.EngineSettings.ViewConfig;
-import com.cruntchy.suprseed.Engine.MainView.Scenes.SceneController;
-import com.cruntchy.suprseed.Engine.MainView.GameViewFactory.BaseEngineConfigurator;
-import com.cruntchy.suprseed.Engine.MainView.GameViewFactory.EngineConfigurator;
+import com.cruntchy.suprseed.Engine.MainView.GameProcessor.BetterScene.RootScene;
+import com.cruntchy.suprseed.Engine.MainView.GameViewBuilder.BaseEngineConfigurator;
+import com.cruntchy.suprseed.Engine.MainView.GameViewBuilder.EngineConfigurator;
 
 public class ClientEngineConfigurator extends BaseEngineConfigurator {
 
@@ -21,7 +21,7 @@ public class ClientEngineConfigurator extends BaseEngineConfigurator {
         super(context, res, gameData);
 
         // User can specify their root scene here
-        SceneController clientSpecifiedRootScene = new SceneManagerTest();
+        RootScene clientSpecifiedRootScene = new SceneManagerTest();
 
         // User can build the engine configuration here
         engineConfigurator = new EngineConfigurator(this, clientSpecifiedRootScene)

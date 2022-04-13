@@ -7,34 +7,32 @@ import android.content.res.Resources;
 import com.cruntchy.suprseed.Client.Z_ClientTest_Active.GameCode.Scenes.GameScene.MainScene;
 import com.cruntchy.suprseed.Engine.InputHandler.TouchInput.InputManager;
 import com.cruntchy.suprseed.Engine.InputHandler.TouchInput.TouchHandler;
-import com.cruntchy.suprseed.Engine.MainView.Scenes.Scene;
-import com.cruntchy.suprseed.Engine.MainView.Scenes.SceneController;
-import com.cruntchy.suprseed.Engine.MainView.Scenes.SceneChangeStrategy;
+import com.cruntchy.suprseed.Engine.MainView.GameProcessor.BetterScene.BaseScene;
+import com.cruntchy.suprseed.Engine.MainView.GameProcessor.BetterScene.RootScene;
+import com.cruntchy.suprseed.Engine.MainView.GameProcessor.BetterScene.SceneManager;
+import com.cruntchy.suprseed.Engine.MainView.Scenes.GameInfo;
+import com.cruntchy.suprseed.Engine.SpriteObjects.System.LogicSystem;
+import com.cruntchy.suprseed.Engine.SpriteObjects.System.RenderSystem;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SceneManagerTest implements SceneController {
-
-
-    private final List<Scene> myScenes = new ArrayList<>();
-
-    private Context context;
-    private Resources res;
-    private SharedPreferences gameData;
+public class SceneManagerTest extends SceneManager implements RootScene {
 
     // Constructor
     public SceneManagerTest() {
+        super(null, "root");
 
+        LogicSystem.getInstance().registerObject(this);
+        RenderSystem.getInstance().imageRegister.registerObject(this);
+        RenderSystem.getInstance().animationRegister.registerObject(this);
     }
 
 
     @Override
     public void initStartingState(Context context, Resources res, SharedPreferences gameData) {
 
-        this.context = context;
-        this.res = res;
-        this.gameData = gameData;
+        gameInfo = new GameInfo(context, res, gameData);
 
 
         // Load any third party game function
@@ -52,64 +50,10 @@ public class SceneManagerTest implements SceneController {
         InputManager.getInstance().processorRegister.registerObject(new TouchHandler());
 
 
-        // Add starting scenes here
-        myScenes.add(new MainScene(this, "MainScene", context));
+        // Add starting scenes/all scenes here
+        BaseScene startingScene = new MainScene(this, "MainScene");
 
-
-        // Activate starting scenes
-        myScenes.get(0).setActive(true);
+        sceneRegister.registerObject(startingScene);
     }
 
-
-
-
-    // Used by a scene to change to another scene using the specified scenes id
-    @Override
-    public void changeScene(SceneChangeStrategy strategy, Scene oldScene, String... sceneId) {
-
-        strategy.changeScene(this, oldScene, sceneId);
-    }
-
-
-    @Override
-    public Context getContext() {
-        return context;
-    }
-
-    @Override
-    public Resources getResources() {
-        return res;
-    }
-
-    @Override
-    public SharedPreferences getSharedPreferences() {
-        return gameData;
-    }
-
-    @Override
-    public List<Scene> getScenes() {
-        return myScenes;
-    }
-
-
-
-
-
-    @Override
-    public void registerObject(Scene object) {
-
-        myScenes.add(object);
-    }
-
-    @Override
-    public void removeObject(Scene object) {
-
-        myScenes.remove(object);
-    }
-
-    @Override
-    public void removeAllObjects() {
-
-        myScenes.clear();
-    }
 }

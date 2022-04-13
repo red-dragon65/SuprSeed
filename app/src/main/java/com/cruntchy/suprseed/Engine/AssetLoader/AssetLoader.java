@@ -4,6 +4,7 @@ import com.cruntchy.suprseed.Engine.ErrorLogger.CentralLogger;
 import com.cruntchy.suprseed.Engine.ErrorLogger.ErrorType;
 import com.cruntchy.suprseed.Engine.Images.Animator;
 import com.cruntchy.suprseed.Engine.Images.SpriteImage;
+import com.cruntchy.suprseed.Engine.MainView.GameProcessor.BetterScene.BaseScene;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,16 +21,16 @@ abstract public class AssetLoader {
 
 
     // Constructor
-    public AssetLoader(Streamable assetStreamer, FolderParser folderParser){
+    public AssetLoader(BaseScene parentScene, Streamable assetStreamer, FolderParser folderParser){
 
         this.assetStreamer = assetStreamer;
         this.folderParser = folderParser;
 
-        loadAssets();
+        loadAssets(parentScene);
     }
 
 
-    abstract public void loadAssets();
+    abstract public void loadAssets(BaseScene parentScene);
 
 
     public SpriteImage getImage(String imageId) {

@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.cruntchy.suprseed.Engine.AssetLoader.FolderParser;
 import com.cruntchy.suprseed.Engine.AssetLoader.Streamable;
+import com.cruntchy.suprseed.Engine.MainView.GameProcessor.BetterScene.BaseScene;
 import com.cruntchy.suprseed.Engine.SpriteObjects.System.RenderSystem;
 
 
@@ -21,11 +22,11 @@ public class ImageCollectionAnimator extends ImageCollection implements Animator
 
 
     // Constructor for animating images
-    public ImageCollectionAnimator(String folderPath, float imageScale, Streamable imageStreamer, FolderParser folderParser, int fps, boolean loop) {
+    public ImageCollectionAnimator(BaseScene parentScene, String folderPath, float imageScale, Streamable imageStreamer, FolderParser folderParser, int fps, boolean loop) {
         super(folderPath, imageScale, imageStreamer, folderParser);
 
-        // Register with system
-        RenderSystem.getInstance().animationRegister.registerObject(this);
+        // Register with the parent scene
+        parentScene.animationRegister.registerObject(this);
 
 
         //Make sure fps fits within frame time

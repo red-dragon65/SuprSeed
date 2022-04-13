@@ -4,12 +4,14 @@ import android.graphics.RectF;
 
 import com.cruntchy.suprseed.Engine.Collisions.Boundable;
 import com.cruntchy.suprseed.Engine.Collisions.CollisionDiagnosticsOverlay;
+import com.cruntchy.suprseed.Engine.MainView.GameProcessor.BetterScene.BaseScene;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.CanvasData;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Graphics.RenderHandler;
+import com.cruntchy.suprseed.Engine.SpriteObjects.System.Logic;
 import com.cruntchy.suprseed.Engine.SpriteObjects.System.RenderSystem;
 import com.cruntchy.suprseed.Engine.SpriteObjects.System.RenderableAndLayerable;
 
-public abstract class Sprite implements RenderableAndLayerable, Boundable {
+public abstract class Sprite implements RenderableAndLayerable, Boundable, Logic {
 
     // TODO: Apply SOLID to this
 
@@ -27,17 +29,21 @@ public abstract class Sprite implements RenderableAndLayerable, Boundable {
     private int layerDepth = 0;
 
     // Dependency
-    private ImageHandler imageHandler;
+    protected ImageHandler imageHandler;
+    protected BaseScene parentScene;
 
 
     // Constructor that takes one sprite image set
-    protected Sprite(ImageHandler imageHandler) {
+    protected Sprite(BaseScene parentScene, ImageHandler imageHandler) {
 
         // Dependency injection
         this.imageHandler = imageHandler;
+        this.parentScene = parentScene;
 
-        // Register this renderable
-        RenderSystem.getInstance().imageRegister.registerObject(this);
+
+        // Register this to the scene
+        parentScene.imageRegister.registerObject(this);
+        parentScene.logicRegister.registerObject(this);
     }
 
 

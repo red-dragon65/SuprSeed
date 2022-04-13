@@ -3,6 +3,7 @@ package com.cruntchy.suprseed.Engine.SpriteObjects.System;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import com.cruntchy.suprseed.Engine.SpriteObjects.Register.RenderRegister;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -15,9 +16,9 @@ public class ImageRenderer implements RenderRegister<RenderableAndLayerable> {
 
 
     // Constructor
-    public ImageRenderer(List<RenderableAndLayerable> renderQueue, Comparator<Layerable> layerableComparator) {
+    public ImageRenderer(Comparator<Layerable> layerableComparator) {
 
-        this.renderQueue = renderQueue;
+        this.renderQueue = new ArrayList<>();
         this.layerableComparator = layerableComparator;
     }
 

@@ -23,9 +23,9 @@ public class RenderSystem implements Renderable {
     // Private to prevent client use of 'new' keyword
     private RenderSystem() {
 
-        imageRegister = new ImageRenderer(new ArrayList<>(), new LayerableQueueComparator());
+        imageRegister = new ImageRenderer(new LayerableQueueComparator());
 
-        animationRegister = new AnimationRenderer(new ArrayList<>());
+        animationRegister = new AnimationRenderer();
     }
 
 

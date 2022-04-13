@@ -1,6 +1,8 @@
 package com.cruntchy.suprseed.Engine.MainView.Scenes;
 
-public interface SceneChangeStrategy {
+import com.cruntchy.suprseed.Engine.MainView.GameProcessor.BetterScene.SceneManager;
 
-    void changeScene(SceneController controller, Scene oldScene, String... sceneId);
+public interface SceneChangeStrategy<T> {
+
+    void changeScene(SceneManager parentScene, T oldScene, String... sceneId);
 }

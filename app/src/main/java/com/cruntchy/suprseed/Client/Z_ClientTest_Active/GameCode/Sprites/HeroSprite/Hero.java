@@ -2,7 +2,7 @@ package com.cruntchy.suprseed.Client.Z_ClientTest_Active.GameCode.Sprites.HeroSp
 
 import com.cruntchy.suprseed.Engine.Collisions.CollisionHandler;
 import com.cruntchy.suprseed.Engine.Collisions.RectangleCollision;
-import com.cruntchy.suprseed.Engine.MainView.Scenes.Scene;
+import com.cruntchy.suprseed.Engine.MainView.GameProcessor.BetterScene.BaseScene;
 import com.cruntchy.suprseed.Engine.SoundPlayer.SoundMixer;
 import com.cruntchy.suprseed.Engine.SpriteObjects.DefaultComponents.Collidable;
 import com.cruntchy.suprseed.Engine.SpriteObjects.DefaultComponents.Movable;
@@ -10,10 +10,8 @@ import com.cruntchy.suprseed.Engine.SpriteObjects.DefaultComponents.StartingStat
 import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase.ImageHandler;
 import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase.Sprite;
 import com.cruntchy.suprseed.Engine.SpriteObjects.System.Logic;
-import com.cruntchy.suprseed.Engine.SpriteObjects.System.LogicSystem;
 
 public class Hero extends Sprite implements Logic {
-
 
     // Behavior components
     private final StartingState startingState;
@@ -22,12 +20,8 @@ public class Hero extends Sprite implements Logic {
     private final CollisionHandler collider;
 
 
-    public Hero(ImageHandler imageHandler, SoundMixer<String> soundEngine) {
-        super(imageHandler);
-
-        // Register this to the system
-        LogicSystem.getInstance().registerObject(this);
-
+    public Hero(BaseScene parentScene, ImageHandler imageHandler, SoundMixer<String> soundEngine) {
+        super(parentScene, imageHandler);
 
         // Instantiate behavior here if you want
         // but it is probably better to dependency inject these
@@ -44,7 +38,6 @@ public class Hero extends Sprite implements Logic {
         collider = new RectangleCollision();
     }
 
-
     @Override
     public void runLogic() {
 
@@ -55,7 +48,6 @@ public class Hero extends Sprite implements Logic {
         applyVelocity.move();
 
         collider.checkCollision(this, this);
-
     }
 
 }

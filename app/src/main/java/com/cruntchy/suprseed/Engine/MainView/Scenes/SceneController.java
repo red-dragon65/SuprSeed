@@ -4,19 +4,16 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 
+import com.cruntchy.suprseed.Engine.SpriteObjects.Register.ListRegister;
 import com.cruntchy.suprseed.Engine.SpriteObjects.Register.ObjectRegister;
 
 import java.util.List;
 
-public interface SceneController extends ObjectRegister<Scene> {
+public interface SceneController<T> {
 
-    void initStartingState(Context context, Resources res, SharedPreferences gameData);
+    void changeScene(SceneChangeStrategy<T> strategy, T oldScene, String... sceneId);
 
-    void changeScene(SceneChangeStrategy strategy, Scene oldScene, String... sceneId);
+    ListRegister<T> getRegister();
 
-    Context getContext();
-    Resources getResources();
-    SharedPreferences getSharedPreferences();
-
-    List<Scene> getScenes();
+    AppInfo getGameInfo();
 }

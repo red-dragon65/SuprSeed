@@ -1,4 +1,4 @@
-package com.cruntchy.suprseed.Engine.MainView.GameViewFactory;
+package com.cruntchy.suprseed.Engine.MainView.GameViewBuilder;
 
 import android.view.View;
 
@@ -9,6 +9,7 @@ import com.cruntchy.suprseed.Engine.AssetLoader.ImageTransformer;
 import com.cruntchy.suprseed.Engine.MainView.EngineSettings.CanvasConfig;
 import com.cruntchy.suprseed.Engine.MainView.EngineSettings.LoopConfig;
 import com.cruntchy.suprseed.Engine.MainView.EngineSettings.ViewConfig;
+import com.cruntchy.suprseed.Engine.MainView.GameProcessor.BetterScene.RootScene;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.GameView;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.LogicRates;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.LoopManager;
@@ -26,7 +27,7 @@ import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Graphics.Rende
 
 public class EngineConfigurator extends BaseEngineConfigurator {
 
-    private final SceneController rootScene;
+    private final RootScene rootScene;
     private RunnableConfig<GameView> loopManager;
     private LocationScaler locationTemporalScaler;
     private RenderHandler renderProcessor;
@@ -39,7 +40,7 @@ public class EngineConfigurator extends BaseEngineConfigurator {
 
 
     // Constructor
-    public EngineConfigurator(BaseEngineConfigurator configurator, SceneController rootScene) {
+    public EngineConfigurator(BaseEngineConfigurator configurator, RootScene rootScene) {
         super(configurator.context, configurator.res, configurator.gameData);
 
         this.rootScene = rootScene;

@@ -1,4 +1,4 @@
-package com.cruntchy.suprseed.Engine.MainView.GameViewFactory;
+package com.cruntchy.suprseed.Engine.MainView.GameViewBuilder;
 
 import android.content.Context;
 import android.content.SharedPreferences;

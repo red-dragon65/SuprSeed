@@ -11,6 +11,7 @@ import android.view.SurfaceView;
 import androidx.annotation.NonNull;
 
 import com.cruntchy.suprseed.Engine.InputHandler.TouchInput.InputManager;
+import com.cruntchy.suprseed.Engine.MainView.GameProcessor.BetterScene.RootScene;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.CanvasData;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import com.cruntchy.suprseed.Engine.MainView.Scenes.SceneController;
@@ -21,7 +22,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     // Dependencies
     protected RunnableConfig<GameView> loopRunner;
     protected RenderHandler renderer;
-    protected SceneController sceneManager;
+    protected RootScene sceneManager;
 
     protected Context context;
     protected Resources resources;
@@ -37,7 +38,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     // Constructor
     public GameView(Context context, Resources resources, SharedPreferences gameData,
                     RunnableConfig<GameView> loopRunner, RenderHandler renderer,
-                    SceneController sceneManager) {
+                    RootScene sceneManager) {
         super(context);
 
         this.context = context;

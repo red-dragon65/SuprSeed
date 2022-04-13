@@ -1,13 +1,16 @@
 package com.cruntchy.suprseed.Engine.MainView.Scenes;
 
+import com.cruntchy.suprseed.Engine.MainView.GameProcessor.BetterScene.BaseScene;
+import com.cruntchy.suprseed.Engine.MainView.GameProcessor.BetterScene.SceneManager;
+import com.cruntchy.suprseed.Engine.SpriteObjects.Register.ListRegister;
 import com.cruntchy.suprseed.Engine.SpriteObjects.System.LogicSystem;
 
-public class SceneSoftChange implements SceneChangeStrategy {
+public class SceneSoftChange implements SceneChangeStrategy<BaseScene> {
 
     @Override
-    public void changeScene(SceneController controller, Scene oldScene, String... sceneId) {
+    public void changeScene(SceneManager parentScene, BaseScene oldScene, String... sceneId) {
 
-        for(Scene scene : controller.getScenes()){
+        for(BaseScene scene : parentScene.getRegister().getRegisterList()){
 
             for(String s : sceneId) {
 
@@ -15,14 +18,14 @@ public class SceneSoftChange implements SceneChangeStrategy {
 
                     // Disable the old scene
                     oldScene.setActive(false);
-                    oldScene.setHidden(true);
+                    oldScene.setDrawable(false);
 
                     // Clear the system register
                     LogicSystem.getInstance().removeAllObjects();
 
                     // Enable the new scene
                     scene.setActive(true);
-                    scene.setHidden(false);
+                    scene.setDrawable(true);
 
                     break;
                 }

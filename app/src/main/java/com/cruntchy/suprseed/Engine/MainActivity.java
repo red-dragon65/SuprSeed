@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.cruntchy.suprseed.Client.ClientEngineConfigurator;
-import com.cruntchy.suprseed.Engine.MainView.GameViewFactory.BaseEngineConfigurator;
+import com.cruntchy.suprseed.Engine.MainView.GameViewBuilder.BaseEngineConfigurator;
 import com.cruntchy.suprseed.R;
 
 public class MainActivity extends AppCompatActivity {

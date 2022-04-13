@@ -5,24 +5,25 @@ import com.cruntchy.suprseed.Engine.AssetLoader.FolderParser;
 import com.cruntchy.suprseed.Engine.AssetLoader.Streamable;
 import com.cruntchy.suprseed.Engine.Images.ImageCollectionAnimator;
 import com.cruntchy.suprseed.Engine.Images.ImageSingle;
+import com.cruntchy.suprseed.Engine.MainView.GameProcessor.BetterScene.BaseScene;
 
 public class AssetScriptTest extends AssetLoader {
 
 
-    public AssetScriptTest(Streamable assetStreamer, FolderParser folderParser){
-        super(assetStreamer, folderParser);
+    public AssetScriptTest(BaseScene parentScene, Streamable assetStreamer, FolderParser folderParser){
+        super(parentScene, assetStreamer, folderParser);
     }
 
 
     @Override
-    public void loadAssets() {
+    public void loadAssets(BaseScene parentScene) {
 
         // CLIENT CODE GOES HERE!!!
 
         //ImageSingle hero = new ImageSingle("Images/Hero/frog_jump_fullframe.png", 10, assetStreamer);
         //images.put("hero", hero);
 
-        ImageCollectionAnimator hero = new ImageCollectionAnimator("Images/Hero", 10, assetStreamer, folderParser, 2, true);
+        ImageCollectionAnimator hero = new ImageCollectionAnimator(parentScene,"Images/Hero", 10, assetStreamer, folderParser, 2, true);
         animations.put("hero", hero);
 
 
