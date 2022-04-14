@@ -10,8 +10,8 @@ import java.util.List;
 public class ImageRenderer implements RenderRegister<RenderableAndLayerable> {
 
 
-    private final List<RenderableAndLayerable> renderQueue;
-    private final Comparator<Layerable> layerableComparator;
+    private List<RenderableAndLayerable> renderQueue;
+    private Comparator<Layerable> layerableComparator;
     private boolean isLayerSynced = false;
 
 

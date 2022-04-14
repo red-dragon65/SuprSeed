@@ -33,7 +33,7 @@ public abstract class Sprite implements RenderableAndLayerable, Boundable, Logic
 
 
     // Constructor that takes one sprite image set
-    protected Sprite(BaseScene parentScene, ImageHandler imageHandler) {
+    public Sprite(BaseScene parentScene, ImageHandler imageHandler) {
 
         // Dependency injection
         this.imageHandler = imageHandler;

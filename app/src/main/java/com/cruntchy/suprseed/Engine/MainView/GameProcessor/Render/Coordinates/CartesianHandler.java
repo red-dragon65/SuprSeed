@@ -45,6 +45,7 @@ public class CartesianHandler implements LocationHandler {
 
 
     // Getters/setters
+    @Override
     public void setTopLeftOrigin(boolean enableTopLeftOrigin) {
         isTopLeftOrigin = enableTopLeftOrigin;
     }

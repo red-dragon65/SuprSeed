@@ -9,7 +9,7 @@ import java.util.List;
 public class AnimationRenderer implements UpdatableRegister<Animator> {
 
 
-    private final List<Animator> animationQueue;
+    private List<Animator> animationQueue;
 
 
     // Constructor

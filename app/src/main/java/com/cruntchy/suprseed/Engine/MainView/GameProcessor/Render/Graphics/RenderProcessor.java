@@ -21,7 +21,7 @@ public class RenderProcessor implements RenderHandler {
 
 
     // Constructor
-    public RenderProcessor(CoordinateHandler coordinateHandler){
+    public RenderProcessor(CoordinateHandler coordinateHandler) {
 
         // Dependency injection
         this.coordinateHandler = coordinateHandler;
@@ -29,7 +29,7 @@ public class RenderProcessor implements RenderHandler {
 
 
     @Override
-    public void setCanvas(Canvas canvas){
+    public void setCanvas(Canvas canvas) {
 
         // Get the latest canvas from onDraw
         this.canvas = canvas;
@@ -37,10 +37,10 @@ public class RenderProcessor implements RenderHandler {
 
 
     @Override
-    public void drawSprite(Sprite sprite){
+    public void drawSprite(Sprite sprite) {
 
         // Show warning if canvas is not set
-        if(this.canvas == null){
+        if (this.canvas == null) {
 
             CentralLogger.getInstance().logMessage(ErrorType.WARNING, "The canvas has not been initialized!");
 
@@ -58,8 +58,12 @@ public class RenderProcessor implements RenderHandler {
         // Actually draw sprite
         //if(sprite.isActive() && sprite.isDrawable()){ // IGNORE THIS! RENDERSYSTEM HANDLES DRAWABILITY
 
-            // Get drawing location of sprite
-            float[] finalLoc = coordinateHandler.parseLocation(sprite);
+        // Get drawing location of sprite
+        float[] finalLoc = coordinateHandler.parseLocation(sprite);
+
+
+        // Make sure the image exists
+        if (sprite.getImageHandler() != null) {
 
             // Draw the sprite at the final location
             canvas.drawBitmap(
@@ -68,7 +72,7 @@ public class RenderProcessor implements RenderHandler {
                     finalLoc[1],
                     paint
             );
-        //}
+        }
 
     }
 

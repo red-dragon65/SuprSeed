@@ -34,6 +34,11 @@ public abstract class BaseScene implements Logic, RenderableAndLayerable, Animat
         imageRegister = new ImageRenderer(new LayerableQueueComparator());
         animationRegister = new AnimationRenderer();
         logicRegister = new ObjectLogicizer();
+
+        // Register the base scene to it's parent
+        if(parentScene != null){
+            this.parentScene.sceneRegister.registerObject(this);
+        }
     }
 
 

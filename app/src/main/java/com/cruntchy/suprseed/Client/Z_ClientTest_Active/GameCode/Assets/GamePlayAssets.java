@@ -7,10 +7,10 @@ import com.cruntchy.suprseed.Engine.Images.ImageCollectionAnimator;
 import com.cruntchy.suprseed.Engine.Images.ImageSingle;
 import com.cruntchy.suprseed.Engine.Scenes.SceneHeirarchy.BaseScene;
 
-public class AssetScriptTest extends AssetLoader {
+public class GamePlayAssets extends AssetLoader {
 
 
-    public AssetScriptTest(BaseScene parentScene, Streamable assetStreamer, FolderParser folderParser){
+    public GamePlayAssets(BaseScene parentScene, Streamable assetStreamer, FolderParser folderParser){
         super(parentScene, assetStreamer, folderParser);
     }
 

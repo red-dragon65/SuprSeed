@@ -14,10 +14,10 @@ import com.cruntchy.suprseed.Engine.Scenes.GameInfo;
 import com.cruntchy.suprseed.Engine.SpriteObjects.System.LogicSystem;
 import com.cruntchy.suprseed.Engine.SpriteObjects.System.RenderSystem;
 
-public class SceneManagerTest extends SceneManager implements RootScene {
+public class GatewayScene extends SceneManager implements RootScene {
 
     // Constructor
-    public SceneManagerTest() {
+    public GatewayScene() {
         super(null, "root");
 
         LogicSystem.getInstance().registerObject(this);
@@ -49,8 +49,6 @@ public class SceneManagerTest extends SceneManager implements RootScene {
 
         // Add starting scenes/all scenes here
         BaseScene startingScene = new MainScene(this, "MainScene");
-
-        sceneRegister.registerObject(startingScene);
     }
 
 }

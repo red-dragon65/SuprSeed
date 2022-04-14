@@ -7,7 +7,7 @@ import java.util.List;
 
 public class ObjectLogicizer implements UpdatableRegister<Logic> {
 
-    private final List<Logic> logicSprites;
+    private List<Logic> logicSprites;
 
 
     // Constructor

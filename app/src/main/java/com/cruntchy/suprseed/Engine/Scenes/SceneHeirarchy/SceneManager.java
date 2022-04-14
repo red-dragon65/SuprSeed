@@ -46,6 +46,7 @@ public abstract class SceneManager extends BaseScene implements SceneController<
      */
     @Override
     public void generateNextFrame() {
+        super.generateNextFrame();
 
         for(BaseScene scene : sceneRegister.getRegisterList()){
             scene.generateNextFrame();
@@ -55,6 +56,7 @@ public abstract class SceneManager extends BaseScene implements SceneController<
 
     @Override
     public void runLogic() {
+        super.runLogic();
 
         for(BaseScene scene : sceneRegister.getRegisterList()){
             scene.runLogic();
@@ -64,8 +66,7 @@ public abstract class SceneManager extends BaseScene implements SceneController<
 
     @Override
     public void draw(RenderHandler renderer) {
-
-        imageRegister.update(renderer);
+        super.draw(renderer);
 
         for(BaseScene scene : sceneRegister.getRegisterList()){
             scene.draw(renderer);
