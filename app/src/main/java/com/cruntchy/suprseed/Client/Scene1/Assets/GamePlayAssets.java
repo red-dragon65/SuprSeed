@@ -1,4 +1,4 @@
-package com.cruntchy.suprseed.Client.Z_ClientTest_Active.GameCode.Assets;
+package com.cruntchy.suprseed.Client.Scene1.Assets;
 
 import com.cruntchy.suprseed.Engine.AssetLoader.AssetLoader;
 import com.cruntchy.suprseed.Engine.AssetLoader.FolderParser;
@@ -18,7 +18,7 @@ public class GamePlayAssets extends AssetLoader {
     @Override
     public void loadAssets(BaseScene parentScene) {
 
-        // CLIENT CODE GOES HERE!!!
+        // Client can load sprites images here
 
         //ImageSingle hero = new ImageSingle("Images/Hero/frog_jump_fullframe.png", 10, assetStreamer);
         //images.put("hero", hero);

@@ -10,16 +10,12 @@ import androidx.appcompat.app.AppCompatActivity;
 public abstract class BaseEngineConfigurator {
 
     protected Context context;
-    protected Resources res;
-    protected SharedPreferences gameData;
 
 
     // Constructor
-    public BaseEngineConfigurator(Context context, Resources res, SharedPreferences gameData) {
+    public BaseEngineConfigurator(Context context) {
 
         this.context = context;
-        this.res = res;
-        this.gameData = gameData;
     }
 
 

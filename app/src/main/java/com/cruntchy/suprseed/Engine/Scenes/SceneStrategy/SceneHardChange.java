@@ -1,6 +1,6 @@
 package com.cruntchy.suprseed.Engine.Scenes.SceneStrategy;
 
-import com.cruntchy.suprseed.Client.Z_ClientTest_Active.GameCode.Scenes.GameScene.MainScene;
+import com.cruntchy.suprseed.Client.Scene1.Subscenes.TopScene;
 import com.cruntchy.suprseed.Engine.Scenes.SceneHeirarchy.BaseScene;
 import com.cruntchy.suprseed.Engine.Scenes.SceneHeirarchy.SceneManager;
 import com.cruntchy.suprseed.Engine.SpriteObjects.System.LogicSystem;
@@ -29,7 +29,7 @@ public class SceneHardChange implements SceneChangeStrategy<BaseScene> {
                     // Create the new scene
                     switch (s) {
                         case "MainScene":
-                            someScene = new MainScene(parentScene, "MainScene");
+                            someScene = new TopScene(parentScene, "MainScene");
                             break;
                         //case "LandingScene":
                             //someScene = new LandingScene(parentScene, "LandingScene");

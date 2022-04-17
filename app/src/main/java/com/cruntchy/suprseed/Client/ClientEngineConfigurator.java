@@ -7,7 +7,8 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.cruntchy.suprseed.Client.Z_ClientTest_Active.GameCode.Scenes.GatewayScene;
+import com.cruntchy.suprseed.Engine.InputHandler.TouchInput.InputManager;
+import com.cruntchy.suprseed.Engine.InputHandler.TouchInput.TouchHandler;
 import com.cruntchy.suprseed.Engine.MainView.EngineSettings.ViewConfig;
 import com.cruntchy.suprseed.Engine.MainView.GameViewBuilder.BaseEngineConfigurator;
 import com.cruntchy.suprseed.Engine.MainView.GameViewBuilder.EngineConfigurator;
@@ -17,15 +18,18 @@ public class ClientEngineConfigurator extends BaseEngineConfigurator {
 
     private final EngineConfigurator engineConfigurator;
 
-    public ClientEngineConfigurator(Context context, Resources res, SharedPreferences gameData) {
-        super(context, res, gameData);
+    public ClientEngineConfigurator(Context context) {
+        super(context);
 
         // User can specify their root scene here
-        RootScene clientSpecifiedRootScene = new GatewayScene();
+        RootScene clientSpecifiedRootScene = new MainScene(context);
 
         // User can build the engine configuration here
         engineConfigurator = new EngineConfigurator(this, clientSpecifiedRootScene)
                 .setViewConfig(new ViewConfig(true, true, true, false));
+
+        // Add the input handlers here
+        InputManager.getInstance().processorRegister.registerObject(new TouchHandler());
     }
 
     @Override

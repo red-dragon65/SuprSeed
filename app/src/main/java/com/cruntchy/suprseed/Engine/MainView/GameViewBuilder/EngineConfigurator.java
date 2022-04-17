@@ -40,7 +40,7 @@ public class EngineConfigurator extends BaseEngineConfigurator {
 
     // Constructor
     public EngineConfigurator(BaseEngineConfigurator configurator, RootScene rootScene) {
-        super(configurator.context, configurator.res, configurator.gameData);
+        super(configurator.context);
 
         this.rootScene = rootScene;
     }
@@ -48,7 +48,7 @@ public class EngineConfigurator extends BaseEngineConfigurator {
     @Override
     public View buildView() {
 
-        return new GameView(context, res, gameData, getLoopManager(), getRenderProcessor(), rootScene);
+        return new GameView(context, getLoopManager(), getRenderProcessor(), rootScene);
     }
 
     @Override

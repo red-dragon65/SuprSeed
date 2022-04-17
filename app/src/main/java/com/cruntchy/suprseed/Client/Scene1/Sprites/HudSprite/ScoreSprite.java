@@ -1,18 +1,10 @@
-package com.cruntchy.suprseed.Client.Z_ClientTest_Active.GameCode.Sprites.HudSprite;
+package com.cruntchy.suprseed.Client.Scene1.Sprites.HudSprite;
 
 import android.content.Context;
 import android.graphics.Color;
 
 import com.cruntchy.suprseed.Engine.Images.FontHolder;
 import com.cruntchy.suprseed.Engine.Images.FontRetriever;
-import com.cruntchy.suprseed.Engine.MainView.EngineSettings.BaseConfig;
-import com.cruntchy.suprseed.Engine.MainView.EngineSettings.CanvasConfig;
-import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Coordinates.CartesianHandler;
-import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Coordinates.CoordinateHandler;
-import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Coordinates.CoordinateProcessor;
-import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Coordinates.LocationHandler;
-import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Coordinates.LocationScaler;
-import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Coordinates.LocationTemporalScaler;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import com.cruntchy.suprseed.Engine.Scenes.SceneHeirarchy.BaseScene;
 import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase.Sprite;

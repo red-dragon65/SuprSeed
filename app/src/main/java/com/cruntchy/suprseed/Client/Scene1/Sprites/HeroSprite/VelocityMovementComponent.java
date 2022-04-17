@@ -1,4 +1,4 @@
-package com.cruntchy.suprseed.Client.Z_ClientTest_Active.GameCode.Sprites.HeroSprite;
+package com.cruntchy.suprseed.Client.Scene1.Sprites.HeroSprite;
 
 import android.graphics.RectF;
 import android.view.MotionEvent;

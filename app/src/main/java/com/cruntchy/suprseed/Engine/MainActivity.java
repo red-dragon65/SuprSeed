@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Load the game view
-        loadGameView(this.getApplicationContext(), this.getResources(), this.getSharedPreferences("GAME_DATA", MODE_PRIVATE));
+        loadGameView(this.getApplicationContext());
 
 
     }
@@ -40,13 +40,13 @@ public class MainActivity extends AppCompatActivity {
 
 
     // Load the game view based on builder results
-    private void loadGameView(Context context, Resources res, SharedPreferences saveData){
+    private void loadGameView(Context context){
 
         // Get layout
         ConstraintLayout cLayout = findViewById(R.id.game_layout);
 
         // Create a builder
-        engineConfigurator = new ClientEngineConfigurator(context, res, saveData);
+        engineConfigurator = new ClientEngineConfigurator(context);
 
         // Apply the window settings
         engineConfigurator.setWindowConfig(this);

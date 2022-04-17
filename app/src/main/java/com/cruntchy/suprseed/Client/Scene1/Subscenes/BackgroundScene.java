@@ -1,6 +1,6 @@
-package com.cruntchy.suprseed.Client.Z_ClientTest_Active.GameCode.Scenes.GameScene;
+package com.cruntchy.suprseed.Client.Scene1.Subscenes;
 
-import com.cruntchy.suprseed.Client.Z_ClientTest_Active.GameCode.Sprites.BackgroundSprite.Background;
+import com.cruntchy.suprseed.Client.Scene1.Sprites.BackgroundSprite.Background;
 import com.cruntchy.suprseed.Engine.AssetLoader.AssetLoader;
 import com.cruntchy.suprseed.Engine.Scenes.SceneHeirarchy.BaseScene;
 import com.cruntchy.suprseed.Engine.Scenes.SceneHeirarchy.SceneManager;

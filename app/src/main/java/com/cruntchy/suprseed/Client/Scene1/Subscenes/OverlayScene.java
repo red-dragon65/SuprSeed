@@ -1,8 +1,6 @@
-package com.cruntchy.suprseed.Client.Z_ClientTest_Active.GameCode.Scenes.GameScene;
+package com.cruntchy.suprseed.Client.Scene1.Subscenes;
 
-import androidx.core.graphics.drawable.IconCompat;
-
-import com.cruntchy.suprseed.Client.Z_ClientTest_Active.GameCode.Sprites.HudSprite.ScoreSprite;
+import com.cruntchy.suprseed.Client.Scene1.Sprites.HudSprite.ScoreSprite;
 import com.cruntchy.suprseed.Engine.Scenes.SceneHeirarchy.BaseScene;
 import com.cruntchy.suprseed.Engine.Scenes.SceneHeirarchy.SceneManager;
 import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase.Sprite;
@@ -13,7 +11,7 @@ public class OverlayScene extends BaseScene {
         super(parentScene, sceneId);
 
         // Load HUD scenes here
-        Sprite scoreSprite = new ScoreSprite(this, parentScene.getGameInfo().getContext());
+        Sprite scoreSprite = new ScoreSprite(this, context);
 
     }
 }

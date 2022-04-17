@@ -24,8 +24,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     protected RootScene sceneManager;
 
     protected Context context;
-    protected Resources resources;
-    protected SharedPreferences gameData;
 
 
 
@@ -35,14 +33,11 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
 
     // Constructor
-    public GameView(Context context, Resources resources, SharedPreferences gameData,
-                    RunnableConfig<GameView> loopRunner, RenderHandler renderer,
-                    RootScene sceneManager) {
+    public GameView(Context context, RunnableConfig<GameView> loopRunner,
+                    RenderHandler renderer, RootScene sceneManager) {
         super(context);
 
         this.context = context;
-        this.resources = resources;
-        this.gameData = gameData;
 
         // Dependency inject
         this.loopRunner = loopRunner;
@@ -64,7 +59,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         // Initialize static game objects
         // Initialize a new game loop
         if (!initialized) {
-            sceneManager.initStartingState(context, resources, gameData);
+            sceneManager.initStartingState(context);
             initialized = true;
         }
 

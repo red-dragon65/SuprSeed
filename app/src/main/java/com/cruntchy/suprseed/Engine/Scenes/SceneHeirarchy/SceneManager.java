@@ -1,5 +1,7 @@
 package com.cruntchy.suprseed.Engine.Scenes.SceneHeirarchy;
 
+import android.content.Context;
+
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import com.cruntchy.suprseed.Engine.Scenes.AppInfo;
 import com.cruntchy.suprseed.Engine.Scenes.SceneStrategy.SceneChangeStrategy;
@@ -8,13 +10,24 @@ import com.cruntchy.suprseed.Engine.SpriteObjects.Register.ListRegister;
 public abstract class SceneManager extends BaseScene implements SceneController<BaseScene> {
 
     protected ListRegister<BaseScene> sceneRegister;
-    protected static AppInfo gameInfo;
 
 
     // Constructor
-    public SceneManager(SceneManager parentScene, String sceneId){
-        super(parentScene, sceneId);
+    public SceneManager(SceneManager parentScene, String sceneId, Context context){
+        super(parentScene, sceneId, context);
 
+        init();
+    }
+
+    // Constructor
+    public SceneManager(SceneManager parentScene, String sceneId){
+        super(parentScene, sceneId, context);
+
+        init();
+    }
+
+    // Constructor initializer
+    private void init(){
         sceneRegister = new SceneRegister();
     }
 
@@ -29,12 +42,6 @@ public abstract class SceneManager extends BaseScene implements SceneController<
     public ListRegister<BaseScene> getRegister() {
         return sceneRegister;
     }
-
-    @Override
-    public AppInfo getGameInfo() {
-        return gameInfo;
-    }
-
 
 
 

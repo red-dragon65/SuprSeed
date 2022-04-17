@@ -1,4 +1,4 @@
-package com.cruntchy.suprseed.Client.Z_ClientTest_Active.GameCode.Sprites.HeroSprite;
+package com.cruntchy.suprseed.Client.Scene1.Sprites.HeroSprite;
 
 import com.cruntchy.suprseed.Engine.SoundPlayer.SoundMixer;
 import com.cruntchy.suprseed.Engine.SpriteObjects.DefaultComponents.Collidable;

@@ -1,5 +1,7 @@
 package com.cruntchy.suprseed.Engine.Scenes.SceneHeirarchy;
 
+import android.content.Context;
+
 import com.cruntchy.suprseed.Engine.Images.Animator;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import com.cruntchy.suprseed.Engine.SpriteObjects.Register.RenderRegister;
@@ -16,6 +18,7 @@ public abstract class BaseScene implements Logic, RenderableAndLayerable, Animat
     protected String sceneId;
     protected boolean isActive = true;
     protected boolean isDrawable = true;
+    protected static Context context;
 
     public RenderRegister<RenderableAndLayerable> imageRegister;
     public UpdatableRegister<Animator> animationRegister;
@@ -26,10 +29,26 @@ public abstract class BaseScene implements Logic, RenderableAndLayerable, Animat
 
 
     // Constructor
+    public BaseScene(SceneManager parentScene, String sceneId, Context appContext){
+
+        init(parentScene, sceneId, appContext);
+    }
+
+    // Constructor
     public BaseScene(SceneManager parentScene, String sceneId){
+
+        init(parentScene, sceneId, null);
+    }
+
+    // Constructor initializer
+    private void init(SceneManager parentScene, String sceneId, Context appContext){
 
         this.parentScene = parentScene;
         this.sceneId = sceneId;
+
+        if(appContext != null){
+            context = appContext;
+        }
 
         imageRegister = new ImageRenderer(new LayerableQueueComparator());
         animationRegister = new AnimationRenderer();
@@ -52,6 +71,10 @@ public abstract class BaseScene implements Logic, RenderableAndLayerable, Animat
 
     public void setDrawable(boolean drawable){
         isDrawable = drawable;
+    }
+
+    public Context getContext(){
+        return context;
     }
 
 

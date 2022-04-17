@@ -4,7 +4,21 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 
-public interface RootScene {
+import androidx.core.graphics.drawable.IconCompat;
 
-    void initStartingState(Context context, Resources res, SharedPreferences gameData);
+import com.cruntchy.suprseed.Engine.SpriteObjects.System.LogicSystem;
+import com.cruntchy.suprseed.Engine.SpriteObjects.System.RenderSystem;
+
+public abstract class RootScene extends SceneManager {
+
+    public RootScene(Context context) {
+        super(null, "root", context);
+
+        // Register the top level scene to the system managers
+        LogicSystem.getInstance().registerObject(this);
+        RenderSystem.getInstance().imageRegister.registerObject(this);
+        RenderSystem.getInstance().animationRegister.registerObject(this);
+    }
+
+    public abstract void initStartingState(Context context);
 }
