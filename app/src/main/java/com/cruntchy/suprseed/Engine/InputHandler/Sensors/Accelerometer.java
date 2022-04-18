@@ -10,11 +10,11 @@ import android.hardware.SensorManager;
 
 public class Accelerometer implements SensorEventListener, DeviceSensor<Float[]> {
 
-    private Float[] tiltValues = new Float[2];
+    private static Float[] tiltValues = new Float[2];
 
     // Variables for tilting
-    private SensorManager mSensorManager;
-    private Sensor mAccelerometer;
+    private static SensorManager mSensorManager;
+    private static Sensor mAccelerometer;
 
 
     // Constructor
@@ -24,6 +24,10 @@ public class Accelerometer implements SensorEventListener, DeviceSensor<Float[]>
         mSensorManager = (SensorManager) context.getSystemService(SENSOR_SERVICE);
         mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_GAME);
+
+        // Set starting tilt value values
+        tiltValues[0] = 0f;
+        tiltValues[1] = 0f;
     }
 
     @Override

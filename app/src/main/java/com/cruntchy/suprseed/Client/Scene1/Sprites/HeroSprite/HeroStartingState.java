@@ -17,10 +17,7 @@ public class HeroStartingState implements StartingState {
     public void setStartingState() {
 
         // Initialize starting state
-        sprite.setX(0); // This should be half the width of the screen
-        sprite.setY(0); // This should be half the width of the screen from the top
-
-        sprite.setxVel(0.4f); // This should move from the left side of the screen to the right in about 4 seconds
-        sprite.setyVel(0.8f);
+        sprite.setX(50);
+        sprite.setY(50);
     }
 }

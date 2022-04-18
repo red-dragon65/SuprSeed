@@ -25,34 +25,30 @@ public class WallCollisionComponent implements Collidable {
         float height = sprite.getImageHandler().getSelectedImageSet().getScaledHeight();
 
 
-        // Flip velocity if wall collision occurs
+        // Prevent hero from moving off left/right side of screen
 
         // This should see if the sprite moves off the right side of the screen
         if (sprite.getX() > sprite.getCanvasScaledWidth() - width) {
 
             sprite.setX(sprite.getCanvasScaledWidth() - width);
-            sprite.setxVel(-sprite.getxVel());
-            soundEngine.playSound("bounce");
 
         } else if (sprite.getX() < 0) { // Check if the sprite moves off the left side of the screen
 
             sprite.setX(0);
-            sprite.setxVel(-sprite.getxVel());
-            soundEngine.playSound("bounce");
         }
+
+
+
+        // Prevent sprite from moving off bottom/top of screen
 
         // Check if sprite moves off bottom of screen
         if (sprite.getY() > sprite.getCanvasScaledHeight() - height) {
 
             sprite.setY(sprite.getCanvasScaledHeight() - height);
-            sprite.setyVel(-sprite.getyVel());
-            soundEngine.playSound("bounce");
 
         } else if (sprite.getY() < 0) { // Check if sprite moves off top of screen
 
             sprite.setY(0);
-            sprite.setyVel(-sprite.getyVel());
-            soundEngine.playSound("bounce");
         }
     }
 }

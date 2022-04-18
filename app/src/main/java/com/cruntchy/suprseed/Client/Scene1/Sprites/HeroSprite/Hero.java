@@ -16,7 +16,8 @@ public class Hero extends Sprite implements Logic {
     // Behavior components
     private final StartingState startingState;
     private final Collidable wallCollision;
-    private final Movable applyVelocity;
+    private final Movable bounceMovement;
+    private final Movable tiltMovement;
     private final CollisionHandler collider;
 
 
@@ -27,7 +28,8 @@ public class Hero extends Sprite implements Logic {
         // but it is probably better to dependency inject these
         startingState = new HeroStartingState(this);
         wallCollision = new WallCollisionComponent(this, soundEngine);
-        applyVelocity = new VelocityMovementComponent(this);
+        bounceMovement = new BounceMovementComponent(this);
+        tiltMovement = new TiltMovementComponent(this, parentScene.getContext());
 
 
         // Run starting state behavior
@@ -44,9 +46,15 @@ public class Hero extends Sprite implements Logic {
         // Update velocity based on wall collisions
         wallCollision.collide();
 
-        // Apply final sprite movement
-        applyVelocity.move();
+        // Apply sprite transform
+        bounceMovement.move();
+        tiltMovement.move();
 
+        // Update to new location values
+        setX(getX() + getxVel());
+        setY(getY() + getyVel());
+
+        // Check for wall collisions
         collider.checkCollision(this, this);
     }
 
