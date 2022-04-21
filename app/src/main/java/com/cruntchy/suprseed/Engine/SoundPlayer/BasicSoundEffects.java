@@ -22,6 +22,7 @@ public class BasicSoundEffects<T> implements SoundMixer<T> {
     // Hold user sounds
     private Map<T, Integer> soundMap;
 
+    private int loopVal = 0;
 
     // Constructor
     public BasicSoundEffects() {
@@ -59,6 +60,13 @@ public class BasicSoundEffects<T> implements SoundMixer<T> {
     @Override
     public void playSound(T soundId, boolean loop) {
 
+        if(loop){
+            loopVal = -1;
+        }else{
+            loopVal = 0;
+        }
+
+
         // See if sound is enabled
         if (isSoundEnabled) {
 
@@ -67,7 +75,7 @@ public class BasicSoundEffects<T> implements SoundMixer<T> {
 
                 Optional<Integer> item = Optional.ofNullable(soundMap.get(soundId));
 
-                item.ifPresent(integer -> soundPool.play(integer, volume, volume, 1, 0, 1f));
+                item.ifPresent(integer -> soundPool.play(integer, volume, volume, 1, loopVal, 1f));
 
             } else {
 

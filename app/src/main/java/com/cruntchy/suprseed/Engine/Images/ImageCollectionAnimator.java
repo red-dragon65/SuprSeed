@@ -11,6 +11,7 @@ import com.cruntchy.suprseed.Engine.Scenes.SceneHeirarchy.BaseScene;
 
 public class ImageCollectionAnimator extends ImageCollection implements Animator{
 
+    // TODO: Enforce fps options! Or handle fps to prevent runtime crash!
     // This number must fit equally within the frame time
     // FPS options: 1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30, 60
     private int frameDelay = 0;

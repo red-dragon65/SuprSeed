@@ -10,12 +10,16 @@ import com.cruntchy.suprseed.Engine.Scenes.SceneHeirarchy.BaseScene;
 import com.cruntchy.suprseed.Engine.Scenes.SceneHeirarchy.SceneManager;
 import com.cruntchy.suprseed.Engine.SoundPlayer.BasicSoundEffects;
 import com.cruntchy.suprseed.Engine.SoundPlayer.SoundMixer;
+import com.cruntchy.suprseed.Engine.SpriteObjects.System.Logic;
 import com.cruntchy.suprseed.R;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class TopScene extends SceneManager {
+
+    private boolean musicHasStarted = false;
+    private SoundMixer<String> soundEngine;
 
     // Constructor
     public TopScene(SceneManager parentScene, String sceneId){
@@ -30,7 +34,10 @@ public class TopScene extends SceneManager {
         SoundMixer<String> soundEngine = new BasicSoundEffects<>();
         Map<String, Integer> sounds = new HashMap<>();
         sounds.put("bounce", R.raw.bounce);
+        sounds.put("hit", R.raw.hit);
+        sounds.put("background_music", R.raw.background_music);
         soundEngine.loadSounds(sounds, context);
+        this.soundEngine = soundEngine;
 
 
         // Create leaf scenes here
@@ -38,7 +45,20 @@ public class TopScene extends SceneManager {
         // NOTE: ORDER MATTERS! OR you can set the scenes priority value!
         BaseScene background = new BackgroundScene(this, "background", gamePlayAssets);
         BaseScene entities = new EntityScene(this, "entities", gamePlayAssets, soundEngine);
-        BaseScene overlay = new OverlayScene(this, "overlay");
+        BaseScene overlay = new OverlayScene(this, "overlay", gamePlayAssets);
 
+    }
+
+    @Override
+    public void runLogic(){
+        super.runLogic();
+
+        // TODO: Add code to sound effects to verify sound has loaded before playing
+        if(!musicHasStarted){
+
+            // Start background music
+            soundEngine.playSound("background_music", true);
+            musicHasStarted = true;
+        }
     }
 }

@@ -1,5 +1,6 @@
 package com.cruntchy.suprseed.Client.Scene1.Sprites.HeroSprite;
 
+import com.cruntchy.suprseed.Client.Scene1.Data.BounceData;
 import com.cruntchy.suprseed.Engine.Collisions.CollisionHandler;
 import com.cruntchy.suprseed.Engine.Collisions.RectangleCollision;
 import com.cruntchy.suprseed.Engine.Scenes.SceneHeirarchy.BaseScene;
@@ -21,14 +22,14 @@ public class Hero extends Sprite implements Logic {
     private final CollisionHandler collider;
 
 
-    public Hero(BaseScene parentScene, ImageHandler imageHandler, SoundMixer<String> soundEngine) {
+    public Hero(BaseScene parentScene, ImageHandler imageHandler, SoundMixer<String> soundEngine, BounceData bounceData) {
         super(parentScene, imageHandler);
 
         // Instantiate behavior here if you want
         // but it is probably better to dependency inject these
         startingState = new HeroStartingState(this);
-        wallCollision = new WallCollisionComponent(this, soundEngine);
-        bounceMovement = new BounceMovementComponent(this);
+        wallCollision = new WallCollisionComponent(this);
+        bounceMovement = new BounceMovementComponent(this, bounceData, soundEngine);
         tiltMovement = new TiltMovementComponent(this, parentScene.getContext());
 
 
@@ -56,6 +57,10 @@ public class Hero extends Sprite implements Logic {
 
         // Check for wall collisions
         collider.checkCollision(this, this);
+    }
+
+    public BounceMovementComponent getBouncer(){
+        return (BounceMovementComponent) bounceMovement;
     }
 
 }

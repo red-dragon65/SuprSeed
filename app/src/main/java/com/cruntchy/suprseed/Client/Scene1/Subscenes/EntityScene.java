@@ -1,6 +1,8 @@
 package com.cruntchy.suprseed.Client.Scene1.Subscenes;
 
+import com.cruntchy.suprseed.Client.Scene1.Data.BounceData;
 import com.cruntchy.suprseed.Client.Scene1.Sprites.HeroSprite.Hero;
+import com.cruntchy.suprseed.Client.Scene1.Sprites.Obstacles.ObstacleCollection;
 import com.cruntchy.suprseed.Engine.AssetLoader.AssetLoader;
 import com.cruntchy.suprseed.Engine.Images.SpriteImage;
 import com.cruntchy.suprseed.Engine.Scenes.SceneHeirarchy.BaseScene;
@@ -15,9 +17,12 @@ public class EntityScene extends BaseScene {
     public EntityScene(SceneManager parentScene, String sceneId, AssetLoader gamePlayAssets, SoundMixer<String> gamePlaySounds) {
         super(parentScene, sceneId);
 
-        // Create the character sprites here
-        hero = new Hero(this, new ImageHandler("hero", (SpriteImage) gamePlayAssets.getAnimation("hero")), gamePlaySounds);
+        BounceData bounceData = new BounceData();
 
+        // Create the character sprites here
+        hero = new Hero(this, new ImageHandler("hero", (SpriteImage) gamePlayAssets.getAnimation("hero")), gamePlaySounds, bounceData);
+
+        ObstacleCollection obstacleHandler = new ObstacleCollection(this, gamePlayAssets, bounceData, hero, gamePlaySounds);
     }
 
 

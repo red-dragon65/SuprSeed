@@ -7,13 +7,11 @@ import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase.Sprite;
 public class WallCollisionComponent implements Collidable {
 
     private final Sprite sprite;
-    private final SoundMixer<String> soundEngine;
 
     // Constructor
-    public WallCollisionComponent(Sprite sprite, SoundMixer<String> soundEngine) {
+    public WallCollisionComponent(Sprite sprite) {
 
         this.sprite = sprite;
-        this.soundEngine = soundEngine;
     }
 
 

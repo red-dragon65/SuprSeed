@@ -29,12 +29,18 @@ public class LoopManager implements RunnableConfig<GameView> {
     private final LocationScaler locationScaler;
 
 
+    // TODO: This is temporary. Figure out a better way for client to get loop manager
+    //  to handle pausing behavior
+    public static LoopManager loopy = null;
+
     // Constructor
     public LoopManager(BaseConfig<RunnableConfig<GameView>> config, LocationScaler locationScaler) {
 
         config.applySettings(this);
 
         this.locationScaler = locationScaler;
+
+        loopy = this;
     }
 
 

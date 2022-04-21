@@ -8,6 +8,9 @@ public class Background extends Sprite {
 
     public Background(BaseScene parentScene, ImageHandler imageHandler) {
         super(parentScene, imageHandler);
+
+        // Disable camera
+        disableCamera();
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.cruntchy.suprseed.Engine.Collisions;
 import android.graphics.Color;
 import android.graphics.RectF;
 
+import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.CanvasData;
 import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase.Sprite;
 
 public class PixelPerfectCollision implements CollisionHandler {
@@ -47,15 +48,15 @@ public class PixelPerfectCollision implements CollisionHandler {
 
         // TODO: VERIFY THAT THIS IS WORKING AS EXPECTED!
         // Offset the overlap area so it corresponds to sprite pixel indices
-        first.left -= one.getX();
-        first.right -= one.getX();
-        first.top -= one.getY();
-        first.bottom -= one.getY();
+        first.left -= CanvasData.getInstance().formatCoordinateToCanvas(one.getX());
+        first.right -= CanvasData.getInstance().formatCoordinateToCanvas(one.getX());
+        first.top -= CanvasData.getInstance().formatCoordinateToCanvas(one.getY());
+        first.bottom -= CanvasData.getInstance().formatCoordinateToCanvas(one.getY());
 
-        second.left -= two.getX();
-        second.right -= two.getX();
-        second.top -= two.getY();
-        second.bottom -= two.getY();
+        second.left -= CanvasData.getInstance().formatCoordinateToCanvas(two.getX());
+        second.right -= CanvasData.getInstance().formatCoordinateToCanvas(two.getX());
+        second.top -= CanvasData.getInstance().formatCoordinateToCanvas(two.getY());
+        second.bottom -= CanvasData.getInstance().formatCoordinateToCanvas(two.getY());
 
 
         // Calculate if a collision has occurred

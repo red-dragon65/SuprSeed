@@ -14,12 +14,12 @@ import com.cruntchy.suprseed.R;
 public class ScoreSprite extends Sprite implements Logic {
 
     private FontRetriever<String> scoreFont;
-    private String text = "-- Frog Dance --";
+    private String text = "Score: 0000";
 
     public ScoreSprite(BaseScene parentScene, Context context) {
         super(parentScene, null);
 
-        scoreFont = new FontHolder(R.font.peaberry_base, 5, context);
+        scoreFont = new FontHolder(R.font.peaberry_base, 10, context);
         disableCamera();
 
 
@@ -27,13 +27,14 @@ public class ScoreSprite extends Sprite implements Logic {
         //  Calculate text offset value to center text!
 
         /*
+        FontSize: 5
         8 chars = ~20 units
         size 50 = ~20 units
          */
 
 
-        setX(30); // Should be middle of screen
-        setY(10); // Reasonable margin from top
+        setX(5); // Should be middle of screen
+        setY(20); // Reasonable margin from top
     }
 
     @Override
@@ -52,7 +53,7 @@ public class ScoreSprite extends Sprite implements Logic {
 
 
         // Set the font
-        renderer.getPaint().setColor(Color.GREEN);
+        renderer.getPaint().setColor(Color.WHITE);
         renderer.getPaint().setTypeface(scoreFont.getFont());
         renderer.getPaint().setAntiAlias(true);
         renderer.getPaint().setTextSize(scoreFont.getFontSize());
@@ -60,6 +61,7 @@ public class ScoreSprite extends Sprite implements Logic {
         float[] output = renderer.getCoordinateHandler().parseLocation(this);
 
         // TODO: Get the correctly scaled location!
+        // TODO: Make 'RenderProcessor' draw text! This allows the camera to offset the text.
         // Draw the font
         renderer.getCanvas().drawText(text, output[0], output[1], renderer.getPaint());
 

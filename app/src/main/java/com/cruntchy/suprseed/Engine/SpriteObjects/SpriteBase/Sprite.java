@@ -95,7 +95,7 @@ public abstract class Sprite implements RenderableAndLayerable, Boundable, Logic
     public boolean isDrawable(){
         return show;
     }
-    public void setShow(boolean show) {
+    public void setDrawable(boolean show) {
         this.show = show;
     }
 
@@ -104,7 +104,7 @@ public abstract class Sprite implements RenderableAndLayerable, Boundable, Logic
     public boolean isActive(){
         return enabled;
     }
-    public void setEnabled(boolean enabled) {
+    public void setActive(boolean enabled) {
         this.enabled = enabled;
     }
 

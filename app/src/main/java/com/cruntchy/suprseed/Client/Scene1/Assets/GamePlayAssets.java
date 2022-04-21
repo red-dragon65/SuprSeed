@@ -20,24 +20,44 @@ public class GamePlayAssets extends AssetLoader {
 
         // Client can load sprites images here
 
-        //ImageSingle hero = new ImageSingle("Images/Hero/frog_jump_fullframe.png", 10, assetStreamer);
-        //images.put("hero", hero);
 
+        // Hero
         ImageCollectionAnimator hero = new ImageCollectionAnimator(parentScene,"Images/Hero", 10, assetStreamer, folderParser, 2, true);
         animations.put("hero", hero);
 
 
-        ImageSingle background = new ImageSingle("Images/Grassy_Mountains_preview_fullcolor.png", 11f, assetStreamer);
+        // Background
+        ImageSingle background = new ImageSingle("Images/Background/Grassy_Mountains_preview_fullcolor.png", 11f, assetStreamer);
         images.put("background", background);
 
 
-        //ImageSingle hero = new ImageSingle("path/to/image.png", 1, assetStreamer);
 
-        //ImageSingle enemies = new ImageSingle("path/to/image.png", 1, assetStreamer);
+        // Enemies
+        int enemyAnimationSpeed = 15;
 
-        //ImageCollection enemy = new ImageCollection("path/to/folder", 1, assetStreamer, folderParser);
+        ImageCollectionAnimator bat = new ImageCollectionAnimator(parentScene,"Images/Enemies/bat", 7, assetStreamer, folderParser, enemyAnimationSpeed, true);
+        animations.put("bat", bat);
 
-        //ImageCollectionAnimator bullets = new ImageCollectionAnimator("some/folder/path", 1, assetStreamer, folderParser, 20, true);
+        ImageCollectionAnimator bee = new ImageCollectionAnimator(parentScene,"Images/Enemies/bee", 7, assetStreamer, folderParser, enemyAnimationSpeed, true);
+        animations.put("bee", bee);
+
+        ImageCollectionAnimator bird = new ImageCollectionAnimator(parentScene,"Images/Enemies/bird", 7, assetStreamer, folderParser, enemyAnimationSpeed, true);
+        animations.put("bird", bird);
+
+        ImageCollectionAnimator duck = new ImageCollectionAnimator(parentScene,"Images/Enemies/duck", 7, assetStreamer, folderParser, enemyAnimationSpeed, true);
+        animations.put("duck", duck);
+
+        ImageCollectionAnimator ghost = new ImageCollectionAnimator(parentScene,"Images/Enemies/ghost", 7, assetStreamer, folderParser, enemyAnimationSpeed, true);
+        animations.put("ghost", ghost);
+
+
+
+        // User interface
+        ImageSingle pause = new ImageSingle("Images/UI/pause_button.png", 1f, assetStreamer);
+        images.put("pause_button", pause);
+
+        ImageSingle pauseText = new ImageSingle("Images/UI/pause_text.png", 1f, assetStreamer);
+        images.put("pause_text", pauseText);
     }
 
 }
