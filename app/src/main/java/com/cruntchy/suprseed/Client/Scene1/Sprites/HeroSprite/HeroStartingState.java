@@ -16,8 +16,14 @@ public class HeroStartingState implements StartingState {
     @Override
     public void setStartingState() {
 
+        // Allow sprite to be active again
+        sprite.setActive(true);
+
         // Initialize starting state
         sprite.setX(50);
-        sprite.setY(50);
+        sprite.setY(30);
+
+        sprite.setxVel(0);
+        sprite.setyVel(0);
     }
 }

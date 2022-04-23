@@ -1,6 +1,7 @@
 package com.cruntchy.suprseed.Client.Scene1.Subscenes;
 
 import com.cruntchy.suprseed.Client.Scene1.Data.BounceData;
+import com.cruntchy.suprseed.Client.Scene1.Data.GameOverData;
 import com.cruntchy.suprseed.Client.Scene1.Sprites.HeroSprite.Hero;
 import com.cruntchy.suprseed.Client.Scene1.Sprites.Obstacles.ObstacleCollection;
 import com.cruntchy.suprseed.Engine.AssetLoader.AssetLoader;
@@ -12,17 +13,19 @@ import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase.ImageHandler;
 
 public class EntityScene extends BaseScene {
 
-    private Hero hero;
+    private final Hero hero;
+    private final ObstacleCollection obstacleHandler;
+    private final GameOverData gameOverData;
 
-    public EntityScene(SceneManager parentScene, String sceneId, AssetLoader gamePlayAssets, SoundMixer<String> gamePlaySounds) {
+    public EntityScene(SceneManager parentScene, String sceneId, AssetLoader gamePlayAssets, SoundMixer<String> gamePlaySounds, BounceData bounceData, GameOverData gameOverData) {
         super(parentScene, sceneId);
 
-        BounceData bounceData = new BounceData();
+        this.gameOverData = gameOverData;
 
         // Create the character sprites here
-        hero = new Hero(this, new ImageHandler("hero", (SpriteImage) gamePlayAssets.getAnimation("hero")), gamePlaySounds, bounceData);
+        this.hero = new Hero(this, new ImageHandler("hero", (SpriteImage) gamePlayAssets.getAnimation("hero")), gamePlaySounds, bounceData);
 
-        ObstacleCollection obstacleHandler = new ObstacleCollection(this, gamePlayAssets, bounceData, hero, gamePlaySounds);
+        this.obstacleHandler = new ObstacleCollection(this, gamePlayAssets, bounceData, hero, gamePlaySounds, gameOverData);
     }
 
 
@@ -31,7 +34,16 @@ public class EntityScene extends BaseScene {
 
     @Override
     public void runLogic() {
-        super.runLogic();
+
+        // TODO: Move this to 'TopScene'
+        //  Make 'Home' scene run instead of restarting this scene
+        if (gameOverData.isRestart()) {
+
+            hero.resetState();
+            obstacleHandler.resetState();
+
+            gameOverData.setRestart(false);
+        }
 
         // ignore this for now
 
@@ -48,12 +60,14 @@ public class EntityScene extends BaseScene {
 
 
         // See if hero has died
-        if(!hero.isActive()){
+        if (!hero.isActive()) {
 
             // Start the game over overlay scene
             //Scene gameOverUI = new GameOverOverlayScene(sceneManager, "GameOver");
 
             //sceneManager.getRegister().registerObject(gameOverUI);
         }
+
+        super.runLogic();
     }
 }

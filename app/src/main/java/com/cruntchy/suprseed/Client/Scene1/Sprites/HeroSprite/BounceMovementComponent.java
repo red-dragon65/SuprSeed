@@ -15,12 +15,12 @@ public class BounceMovementComponent implements Movable {
 
     private final Sprite sprite;
 
-    private final float boundary = 100;
+    private final float boundary = 80;
     private final float gravity = 0.05f;
-    private InputListener screenListener;
+    private final InputListener screenListener;
     private boolean hold = false;
-    private BounceData bounceData;
-    private SoundMixer<String> soundEngine;
+    private final BounceData bounceData;
+    private final SoundMixer<String> soundEngine;
 
     // Constructor
     public BounceMovementComponent(Sprite sprite, BounceData bounceData, SoundMixer<String> soundEngine) {
@@ -32,16 +32,13 @@ public class BounceMovementComponent implements Movable {
         screenListener = new InputListener() {
 
             @Override
-            public void processInput(String action, MotionEvent event) {
+            public boolean processInput(String action, MotionEvent event) {
 
-                if(action.equals("hold") || action.equals("drag")){
+                hold = action.equals("hold") || action.equals("drag");
 
-                    hold = true;
-                }else{
+                return sprite.isActive();
 
-                    hold = false;
-                }
-
+                // Pass to next input listener if hero is inactive
             }
 
             @Override
@@ -56,7 +53,7 @@ public class BounceMovementComponent implements Movable {
             // This should be above everything else
             @Override
             public int getLayerDepth() {
-                return 100;
+                return 101;
             }
         };
 
@@ -117,5 +114,10 @@ public class BounceMovementComponent implements Movable {
             }
 
         }
+    }
+
+    public void resetState() {
+        bounceData.setBounceValue(0);
+        hold = false;
     }
 }

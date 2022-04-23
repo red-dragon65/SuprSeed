@@ -1,8 +1,6 @@
 package com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -11,9 +9,9 @@ import android.view.SurfaceView;
 import androidx.annotation.NonNull;
 
 import com.cruntchy.suprseed.Engine.InputHandler.TouchInput.InputManager;
-import com.cruntchy.suprseed.Engine.Scenes.SceneHeirarchy.RootScene;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.CanvasData;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Graphics.RenderHandler;
+import com.cruntchy.suprseed.Engine.Scenes.SceneHeirarchy.RootScene;
 
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
@@ -127,8 +125,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     public void surfaceCreated(@NonNull SurfaceHolder surfaceHolder) {
 
-        //TODO: Initialize the sensors?
-
         // Update the loop config
         loopRunner.initLoop(this);
 
@@ -150,6 +146,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         // Pause game drawing (in game pause)
         if(!hasWindowFocus){
 
+            // Stop logic only (drawing still allowed)
             loopRunner.setSoftPause(true);
         }
 

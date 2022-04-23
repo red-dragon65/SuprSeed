@@ -17,13 +17,17 @@ public class Hero extends Sprite implements Logic {
     // Behavior components
     private final StartingState startingState;
     private final Collidable wallCollision;
-    private final Movable bounceMovement;
+    //private final Movable bounceMovement;
+    private final BounceMovementComponent bounceMovement;
     private final Movable tiltMovement;
     private final CollisionHandler collider;
+    private final BounceData bounceData;
 
 
     public Hero(BaseScene parentScene, ImageHandler imageHandler, SoundMixer<String> soundEngine, BounceData bounceData) {
         super(parentScene, imageHandler);
+
+        this.bounceData = bounceData;
 
         // Instantiate behavior here if you want
         // but it is probably better to dependency inject these
@@ -59,8 +63,16 @@ public class Hero extends Sprite implements Logic {
         collider.checkCollision(this, this);
     }
 
-    public BounceMovementComponent getBouncer(){
-        return (BounceMovementComponent) bounceMovement;
+    @Override
+    public void setActive(boolean enabled) {
+        super.setActive(enabled);
+
+        // Stop bounceData
+        bounceData.setBounceValue(0);
     }
 
+    public void resetState() {
+        startingState.setStartingState();
+        bounceMovement.resetState();
+    }
 }

@@ -1,8 +1,6 @@
 package com.cruntchy.suprseed.Engine;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;

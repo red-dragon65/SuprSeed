@@ -1,16 +1,21 @@
 package com.cruntchy.suprseed.Client.Scene1.Subscenes;
 
+import android.media.MediaPlayer;
+
 import com.cruntchy.suprseed.Client.Scene1.Assets.GamePlayAssets;
+import com.cruntchy.suprseed.Client.Scene1.Data.BounceData;
+import com.cruntchy.suprseed.Client.Scene1.Data.GameOverData;
 import com.cruntchy.suprseed.Engine.AssetLoader.AssetLoader;
 import com.cruntchy.suprseed.Engine.AssetLoader.FolderParser;
 import com.cruntchy.suprseed.Engine.AssetLoader.LocalFolderParser;
 import com.cruntchy.suprseed.Engine.AssetLoader.LocalImageFileStreamer;
 import com.cruntchy.suprseed.Engine.AssetLoader.Streamable;
+import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.LoopManager;
+import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import com.cruntchy.suprseed.Engine.Scenes.SceneHeirarchy.BaseScene;
 import com.cruntchy.suprseed.Engine.Scenes.SceneHeirarchy.SceneManager;
 import com.cruntchy.suprseed.Engine.SoundPlayer.BasicSoundEffects;
 import com.cruntchy.suprseed.Engine.SoundPlayer.SoundMixer;
-import com.cruntchy.suprseed.Engine.SpriteObjects.System.Logic;
 import com.cruntchy.suprseed.R;
 
 import java.util.HashMap;
@@ -19,10 +24,11 @@ import java.util.Map;
 public class TopScene extends SceneManager {
 
     private boolean musicHasStarted = false;
-    private SoundMixer<String> soundEngine;
+    private final SoundMixer<String> soundEngine;
+    private final MediaPlayer mediaPlayer;
 
     // Constructor
-    public TopScene(SceneManager parentScene, String sceneId){
+    public TopScene(SceneManager parentScene, String sceneId) {
         super(parentScene, sceneId);
 
         // Instantiate the assets for this scene
@@ -35,17 +41,25 @@ public class TopScene extends SceneManager {
         Map<String, Integer> sounds = new HashMap<>();
         sounds.put("bounce", R.raw.bounce);
         sounds.put("hit", R.raw.hit);
-        sounds.put("background_music", R.raw.background_music);
         soundEngine.loadSounds(sounds, context);
         this.soundEngine = soundEngine;
 
+        // Set the background music
+        mediaPlayer = MediaPlayer.create(context, R.raw.background_music);
+        mediaPlayer.setLooping(true);
+        mediaPlayer.setVolume(0.60f, 0.60f);
+
+
+        // Shared data
+        BounceData bounceData = new BounceData();
+        GameOverData gameOverData = new GameOverData();
 
         // Create leaf scenes here
         // AND/OR create the sprites for this scene
         // NOTE: ORDER MATTERS! OR you can set the scenes priority value!
         BaseScene background = new BackgroundScene(this, "background", gamePlayAssets);
-        BaseScene entities = new EntityScene(this, "entities", gamePlayAssets, soundEngine);
-        BaseScene overlay = new OverlayScene(this, "overlay", gamePlayAssets);
+        BaseScene entities = new EntityScene(this, "entities", gamePlayAssets, soundEngine, bounceData, gameOverData);
+        BaseScene overlay = new OverlayScene(this, "overlay", gamePlayAssets, bounceData, gameOverData);
 
     }
 
@@ -53,12 +67,25 @@ public class TopScene extends SceneManager {
     public void runLogic(){
         super.runLogic();
 
-        // TODO: Add code to sound effects to verify sound has loaded before playing
-        if(!musicHasStarted){
+        // Start/resume background music
+        if (!musicHasStarted) {
 
-            // Start background music
-            soundEngine.playSound("background_music", true);
+            mediaPlayer.start();
             musicHasStarted = true;
+        }
+
+    }
+
+    @Override
+    public void draw(RenderHandler renderer) {
+        super.draw(renderer);
+
+        // Pause sound if necessary
+        if (LoopManager.loopy.isSoftPause()) {
+
+            mediaPlayer.pause();
+            musicHasStarted = false;
+
         }
     }
 }

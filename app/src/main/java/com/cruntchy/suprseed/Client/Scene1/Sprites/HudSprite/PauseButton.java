@@ -12,13 +12,17 @@ import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase.Sprite;
 
 public class PauseButton extends Sprite implements InputListener {
 
+    private final InputListener screenListener;
+
     // Constructor
     public PauseButton(BaseScene parentScene, ImageHandler imageHandler) {
         super(parentScene, imageHandler);
 
-        setLayerDepth(200);
+        setLayerDepth(102);
+        screenListener = new FullScreenPauseInput();
 
         InputManager.getInstance().listenerRegister.registerObject(this);
+        InputManager.getInstance().listenerRegister.registerObject(screenListener);
 
         setX(CanvasData.getInstance().getScaledWidth() - imageHandler.getSelectedImageSet().getScaledWidth());
 
@@ -31,11 +35,15 @@ public class PauseButton extends Sprite implements InputListener {
     }
 
     @Override
-    public void processInput(String action, MotionEvent event) {
+    public boolean processInput(String action, MotionEvent event) {
 
-        if(action.equals("tap")){
+        // Toggle pausing if pause button tapped
+        if (action.equals("tap")) {
 
             LoopManager.loopy.toggleSoftPause();
         }
+
+        // Prevent touch fall through
+        return true;
     }
 }

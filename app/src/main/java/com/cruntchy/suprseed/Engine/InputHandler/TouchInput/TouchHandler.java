@@ -17,6 +17,10 @@ public class TouchHandler implements InputProcessor {
 
     private String actionPerformed;
 
+    private boolean processed = false;
+
+    private InputListener lastListenerHeld;
+
     @Override
     public void processEvent(List<InputListener> listeners, MotionEvent event) {
 
@@ -37,20 +41,7 @@ public class TouchHandler implements InputProcessor {
         }
 
         // Get top most listener being touched
-        InputListener il = getTopListener(listeners, event);
 
-        // Notify listener
-        if (il != null) {
-            il.processInput(actionPerformed, event);
-
-            CentralLogger.getInstance().logMessage(ErrorType.INFO, "An event was passed to the client!");
-        }
-
-
-    }
-
-
-    private InputListener getTopListener(List<InputListener> listeners, MotionEvent event) {
 
         // Loop through listeners top down
         for (int i = listeners.size() - 1; i >= 0; i--) {
@@ -58,13 +49,19 @@ public class TouchHandler implements InputProcessor {
             // See if the listener was touched
             if (isTouching(listeners.get(i), event)) {
 
-                // Return the listener for processing
-                return listeners.get(i);
+                // Notify listener
+                processed = listeners.get(i).processInput(actionPerformed, event);
+
+                // If listener handled request, end input processing
+                if (processed) {
+                    return;
+                }
+
+                CentralLogger.getInstance().logMessage(ErrorType.INFO, "An event was passed to the client!");
             }
         }
 
-        // No listener was touched
-        return null;
+
     }
 
     private boolean isTouching(InputListener listener, MotionEvent event) {
@@ -85,16 +82,27 @@ public class TouchHandler implements InputProcessor {
                 // Hold the last location
                 lastDownX = event.getX();
                 lastDownY = event.getY();
+
+                // Hold the listener that is being helded
+                lastListenerHeld = listener;
+
                 return true;
             case MotionEvent.ACTION_UP:
+
+                // Make sure same listener that was holding is same listener lifting
+                if (lastListenerHeld != null && listener != lastListenerHeld) {
+
+                    break;
+                }
 
                 if (bounds.contains(lastDownX, lastDownY)) {
 
                     // Hold and lift are at the same point
                     actionPerformed = "tap";
+
                 } else {
 
-                    // Left is at a different point then hold
+                    // Lift is at a different point then hold
                     actionPerformed = "lift";
                 }
                 return true;

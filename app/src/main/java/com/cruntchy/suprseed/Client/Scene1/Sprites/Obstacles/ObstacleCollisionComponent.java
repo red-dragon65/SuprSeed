@@ -1,6 +1,7 @@
 package com.cruntchy.suprseed.Client.Scene1.Sprites.Obstacles;
 
 import com.cruntchy.suprseed.Client.Scene1.Data.CameraShaker;
+import com.cruntchy.suprseed.Client.Scene1.Data.GameOverData;
 import com.cruntchy.suprseed.Engine.Collisions.CollisionHandler;
 import com.cruntchy.suprseed.Engine.Collisions.PixelPerfectCollision;
 import com.cruntchy.suprseed.Engine.Collisions.RectangleCollision;
@@ -12,22 +13,25 @@ import java.util.List;
 
 public class ObstacleCollisionComponent implements Collidable {
 
-    private List<Sprite> obstacles;
-    private Sprite hero;
+    private final List<Sprite> obstacles;
+    private final Sprite hero;
 
-    private CollisionHandler collisionMethod;
-    private SoundMixer<String> soundEngine;
+    private final CollisionHandler collisionMethod;
+    private final SoundMixer<String> soundEngine;
 
-    private CameraShaker cameraShaker;
+    private final CameraShaker cameraShaker;
+
+    private final GameOverData gameOverData;
 
 
-    public ObstacleCollisionComponent(Sprite hero, List<Sprite> obstacles, SoundMixer<String> soundEngine){
+    public ObstacleCollisionComponent(Sprite hero, List<Sprite> obstacles, SoundMixer<String> soundEngine, GameOverData gameOverData) {
 
         this.hero = hero;
         this.obstacles = obstacles;
         this.soundEngine = soundEngine;
+        this.gameOverData = gameOverData;
 
-        // TODO: This should be injected for flexibility...
+        // TODO: This should be injected for better flexibility...
         collisionMethod = new PixelPerfectCollision(new RectangleCollision(), 1);
         cameraShaker = new CameraShaker();
         cameraShaker.loadCameraShake();
@@ -46,7 +50,7 @@ public class ObstacleCollisionComponent implements Collidable {
                 hero.setActive(false);
 
                 // Stop all obstacles from moving
-                for(Sprite ob : obstacles){
+                for (Sprite ob : obstacles) {
                     ob.setyVel(0);
                 }
 
@@ -56,11 +60,10 @@ public class ObstacleCollisionComponent implements Collidable {
                 // Shake camera
                 cameraShaker.triggerShake();
 
-                // TODO:
-                //  - Do camera shake
-                //  - Show game over overlay
+                // Notify game over has occurred
+                gameOverData.setGameOver(true);
 
-                // Stop processing collisions
+                // Stop processing furuther collisions
                 return;
             }
         }

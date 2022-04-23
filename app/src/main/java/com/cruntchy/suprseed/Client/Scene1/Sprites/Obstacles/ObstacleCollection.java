@@ -1,6 +1,7 @@
 package com.cruntchy.suprseed.Client.Scene1.Sprites.Obstacles;
 
 import com.cruntchy.suprseed.Client.Scene1.Data.BounceData;
+import com.cruntchy.suprseed.Client.Scene1.Data.GameOverData;
 import com.cruntchy.suprseed.Engine.AssetLoader.AssetLoader;
 import com.cruntchy.suprseed.Engine.Images.SpriteImage;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Graphics.RenderHandler;
@@ -19,24 +20,24 @@ import java.util.Random;
 public class ObstacleCollection implements Logic, RenderableAndLayerable {
 
 
-    private ArrayList<Sprite> obstacleSprites;
-    private ArrayList<ImageHandler> obstacleImages;
-    private Sprite hero;
+    private final ArrayList<Sprite> obstacleSprites;
+    private final ArrayList<ImageHandler> obstacleImages;
 
     private final int maxObstacles = 15;
 
-    private Random rand = new Random();
+    private final Random rand = new Random();
 
 
     // Dependencies
-    private Collidable obstacleCollision;
-    private ObstacleSpawnerComponent obstacleSpawner;
-    private Movable obstacleMovement;
+    private final Collidable obstacleCollision;
+    private final ObstacleSpawnerComponent obstacleSpawner;
+    private final Movable obstacleMovement;
+    private final GameOverData gameOverData;
 
 
-    public ObstacleCollection(BaseScene parentScene, AssetLoader assets, BounceData heroBounceData, Sprite hero, SoundMixer<String> soundEngine){
+    public ObstacleCollection(BaseScene parentScene, AssetLoader assets, BounceData heroBounceData, Sprite hero, SoundMixer<String> soundEngine, GameOverData gameOverData) {
 
-        this.hero = hero;
+        this.gameOverData = gameOverData;
 
         obstacleSprites = new ArrayList<>();
         obstacleImages = new ArrayList<>();
@@ -57,7 +58,7 @@ public class ObstacleCollection implements Logic, RenderableAndLayerable {
 
 
         // Initialize obstacle components
-        obstacleCollision = new ObstacleCollisionComponent(hero, obstacleSprites, soundEngine);
+        obstacleCollision = new ObstacleCollisionComponent(hero, obstacleSprites, soundEngine, gameOverData);
         obstacleSpawner = new ObstacleSpawnerComponent(obstacleSprites, obstacleImages);
         obstacleMovement = new ObstacleMovementComponent(heroBounceData, obstacleSprites, hero);
 
@@ -78,7 +79,7 @@ public class ObstacleCollection implements Logic, RenderableAndLayerable {
     public void runLogic() {
 
         // Stop logic if hero dies
-        if(hero.isActive()){
+        if (!gameOverData.isGameOver()) {
             obstacleSpawner.runLogic();
             obstacleMovement.move();
             obstacleCollision.collide();
@@ -98,7 +99,7 @@ public class ObstacleCollection implements Logic, RenderableAndLayerable {
     @Override
     public void draw(RenderHandler renderer) {
 
-        for(Sprite s : obstacleSprites){
+        for (Sprite s : obstacleSprites) {
             s.draw(renderer);
         }
     }
@@ -106,5 +107,9 @@ public class ObstacleCollection implements Logic, RenderableAndLayerable {
     @Override
     public boolean isDrawable() {
         return true;
+    }
+
+    public void resetState() {
+        obstacleSpawner.setStartingState();
     }
 }

@@ -7,5 +7,5 @@ import com.cruntchy.suprseed.Engine.SpriteObjects.System.Layerable;
 
 public interface InputListener extends Layerable, Boundable {
 
-    void processInput(String action, MotionEvent event);
+    boolean processInput(String action, MotionEvent event);
 }

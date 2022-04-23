@@ -1,8 +1,10 @@
 package com.cruntchy.suprseed.Client.Scene1.Sprites.HudSprite;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 
+import com.cruntchy.suprseed.Client.Scene1.Data.BounceData;
 import com.cruntchy.suprseed.Engine.Images.FontHolder;
 import com.cruntchy.suprseed.Engine.Images.FontRetriever;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Graphics.RenderHandler;
@@ -13,33 +15,49 @@ import com.cruntchy.suprseed.R;
 
 public class ScoreSprite extends Sprite implements Logic {
 
-    private FontRetriever<String> scoreFont;
-    private String text = "Score: 0000";
+    private final FontRetriever<String> scoreFont;
+    private final String text = "Score: ";
+    private final BounceData bounceData;
+    private final SharedPreferences gameData;
+    private int scoreCounter = 0;
+    private boolean saved = false;
 
-    public ScoreSprite(BaseScene parentScene, Context context) {
+    public ScoreSprite(BaseScene parentScene, BounceData bounceData) {
         super(parentScene, null);
 
-        scoreFont = new FontHolder(R.font.peaberry_base, 10, context);
-        disableCamera();
+        this.bounceData = bounceData;
 
+        this.scoreFont = new FontHolder(R.font.peaberry_base, 10, parentScene.getContext());
 
-        // TODO: Set the correct location!
-        //  Calculate text offset value to center text!
+        // Load saved score value
+        this.gameData = parentScene.getContext().getSharedPreferences("GAME_DATA", Context.MODE_PRIVATE);
 
-        /*
-        FontSize: 5
-        8 chars = ~20 units
-        size 50 = ~20 units
-         */
+        // TODO: Load everytime user dies and restarts
+        // TODO: Reset counter if when user begins game
+        loadScore();
 
-
-        setX(5); // Should be middle of screen
+        // Set text margins
+        setX(5); // Reasonable margin from left
         setY(20); // Reasonable margin from top
     }
 
     @Override
     public void runLogic() {
 
+        if (bounceData.getBounceValue() != 0) {
+
+            // TODO: Dynamically calculate this using the logic rate!
+            //  Otherwise value will increase faster if logic rate is changed!
+            scoreCounter++;
+
+            saved = false;
+
+        } else if (!saved) {
+
+            // Save data
+            saveScore();
+            saved = true;
+        }
     }
 
     @Override
@@ -48,8 +66,7 @@ public class ScoreSprite extends Sprite implements Logic {
         // Don't draw the 'image handler!' It is null...
         //super.draw(renderer);
 
-
-        // Draw the score text here
+        // Draw the score text here instead
 
 
         // Set the font
@@ -58,12 +75,25 @@ public class ScoreSprite extends Sprite implements Logic {
         renderer.getPaint().setAntiAlias(true);
         renderer.getPaint().setTextSize(scoreFont.getFontSize());
 
+        // Scale the location
         float[] output = renderer.getCoordinateHandler().parseLocation(this);
 
-        // TODO: Get the correctly scaled location!
-        // TODO: Make 'RenderProcessor' draw text! This allows the camera to offset the text.
         // Draw the font
-        renderer.getCanvas().drawText(text, output[0], output[1], renderer.getPaint());
+        renderer.getCanvas().drawText(text + scoreCounter, output[0], output[1], renderer.getPaint());
+    }
 
+
+    private void saveScore() {
+
+        SharedPreferences.Editor editor = gameData.edit();
+
+        editor.putInt("score", scoreCounter);
+
+        editor.apply();
+    }
+
+    private void loadScore() {
+
+        //scoreCounter = gameData.getInt("score", 0);
     }
 }
