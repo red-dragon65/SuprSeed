@@ -3,10 +3,10 @@ package com.cruntchy.suprseed.Client.Scene1.Sprites.HeroSprite;
 import android.content.Context;
 
 import com.cruntchy.suprseed.Engine.InputHandler.Sensors.Accelerometer;
-import com.cruntchy.suprseed.Engine.SpriteObjects.DefaultComponents.Movable;
+import com.cruntchy.suprseed.Engine.SpriteObjects.DefaultComponents.Component;
 import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase.Sprite;
 
-public class TiltMovementComponent implements Movable {
+public class TiltMovementComponent implements Component {
 
     private final Sprite sprite;
 
@@ -16,14 +16,14 @@ public class TiltMovementComponent implements Movable {
 
 
     // Constructor
-    public TiltMovementComponent(Sprite sprite, Context context){
+    public TiltMovementComponent(Sprite sprite, Context context) {
 
         this.sprite = sprite;
         tiltometer = new Accelerometer(context);
     }
 
     @Override
-    public void move() {
+    public void update() {
 
         // Process phone tilt value for horizontal movement
         tilt();

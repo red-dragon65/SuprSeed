@@ -1,6 +1,6 @@
 package com.cruntchy.suprseed.Engine.SpriteObjects.DefaultComponents;
 
-public interface Collidable {
+public interface Component {
 
-    void collide();
+    void update();
 }

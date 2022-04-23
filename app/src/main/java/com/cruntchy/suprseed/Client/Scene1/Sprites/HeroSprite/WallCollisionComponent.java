@@ -1,10 +1,9 @@
 package com.cruntchy.suprseed.Client.Scene1.Sprites.HeroSprite;
 
-import com.cruntchy.suprseed.Engine.SoundPlayer.SoundMixer;
-import com.cruntchy.suprseed.Engine.SpriteObjects.DefaultComponents.Collidable;
+import com.cruntchy.suprseed.Engine.SpriteObjects.DefaultComponents.Component;
 import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase.Sprite;
 
-public class WallCollisionComponent implements Collidable {
+public class WallCollisionComponent implements Component {
 
     private final Sprite sprite;
 
@@ -16,7 +15,7 @@ public class WallCollisionComponent implements Collidable {
 
 
     @Override
-    public void collide() {
+    public void update() {
 
         // Get the current images scaled dimensions
         float width = sprite.getImageHandler().getSelectedImageSet().getScaledWidth();

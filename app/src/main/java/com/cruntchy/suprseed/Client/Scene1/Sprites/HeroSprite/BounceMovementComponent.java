@@ -9,10 +9,10 @@ import com.cruntchy.suprseed.Engine.InputHandler.TouchInput.InputListener;
 import com.cruntchy.suprseed.Engine.InputHandler.TouchInput.InputManager;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.CanvasData;
 import com.cruntchy.suprseed.Engine.SoundPlayer.SoundMixer;
-import com.cruntchy.suprseed.Engine.SpriteObjects.DefaultComponents.Movable;
+import com.cruntchy.suprseed.Engine.SpriteObjects.DefaultComponents.ResetableComponent;
 import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase.Sprite;
 
-public class BounceMovementComponent implements Movable {
+public class BounceMovementComponent implements ResetableComponent {
 
     private final Sprite sprite;
 
@@ -67,7 +67,7 @@ public class BounceMovementComponent implements Movable {
 
 
     @Override
-    public void move() {
+    public void update() {
 
         // Bounce hero if necessary
         bounce();
@@ -121,6 +121,7 @@ public class BounceMovementComponent implements Movable {
         }
     }
 
+    @Override
     public void resetState() {
         bounceData.setBounceValue(0);
         hold = false;

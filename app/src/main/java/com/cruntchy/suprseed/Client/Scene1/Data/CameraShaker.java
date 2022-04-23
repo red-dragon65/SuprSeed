@@ -1,14 +1,14 @@
 package com.cruntchy.suprseed.Client.Scene1.Data;
 
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Coordinates.Camera;
-import com.cruntchy.suprseed.Engine.SpriteObjects.DefaultComponents.Movable;
+import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Coordinates.Movable;
 
 import java.util.Random;
 
 public class CameraShaker {
 
     private static Movable cameraShake;
-    private Random rand = new Random();
+    private final Random rand = new Random();
 
     // TODO: Calculate number of frames using client specified game logic/render rate
     private final int targetFrameTime = 15; // Number of frames to shake camera

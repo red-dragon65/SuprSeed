@@ -4,13 +4,14 @@ import android.graphics.RectF;
 
 import com.cruntchy.suprseed.Engine.Collisions.Boundable;
 import com.cruntchy.suprseed.Engine.Collisions.CollisionDiagnosticsOverlay;
-import com.cruntchy.suprseed.Engine.Scenes.SceneHeirarchy.BaseScene;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.CanvasData;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Graphics.RenderHandler;
+import com.cruntchy.suprseed.Engine.Scenes.SceneHeirarchy.BaseScene;
+import com.cruntchy.suprseed.Engine.SpriteObjects.DefaultComponents.Resetable;
 import com.cruntchy.suprseed.Engine.SpriteObjects.System.Logic;
 import com.cruntchy.suprseed.Engine.SpriteObjects.System.RenderableAndLayerable;
 
-public abstract class Sprite implements RenderableAndLayerable, Boundable, Logic {
+public abstract class Sprite implements RenderableAndLayerable, Boundable, Logic, Resetable {
 
     // TODO: Apply SOLID to this
 
@@ -100,14 +101,18 @@ public abstract class Sprite implements RenderableAndLayerable, Boundable, Logic
     }
 
 
-
-    public boolean isActive(){
+    public boolean isActive() {
         return enabled;
     }
+
     public void setActive(boolean enabled) {
         this.enabled = enabled;
     }
 
+
+    public void resetState() {
+
+    }
 
 
     public ImageHandler getImageHandler() {

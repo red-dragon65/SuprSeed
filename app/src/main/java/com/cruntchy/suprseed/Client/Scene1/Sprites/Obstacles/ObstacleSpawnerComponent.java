@@ -1,26 +1,24 @@
 package com.cruntchy.suprseed.Client.Scene1.Sprites.Obstacles;
 
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.CanvasData;
-import com.cruntchy.suprseed.Engine.SpriteObjects.DefaultComponents.StartingState;
+import com.cruntchy.suprseed.Engine.SpriteObjects.DefaultComponents.ResetableComponent;
 import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase.ImageHandler;
 import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase.Sprite;
-import com.cruntchy.suprseed.Engine.SpriteObjects.System.Logic;
 
 import java.util.List;
 import java.util.Random;
 
-public class ObstacleSpawnerComponent implements Logic, StartingState {
+public class ObstacleSpawnerComponent implements ResetableComponent {
 
-    private List<Sprite> obstacles;
-    private List<ImageHandler> obstacleImages;
+    private final List<Sprite> obstacles;
+    private final List<ImageHandler> obstacleImages;
 
-    private Random rand;
+    private final Random rand;
 
     private final int yGenerationDistance = 3000;
 
 
-
-    public ObstacleSpawnerComponent(List<Sprite> obstacles, List<ImageHandler> obstacleImages){
+    public ObstacleSpawnerComponent(List<Sprite> obstacles, List<ImageHandler> obstacleImages) {
 
         this.obstacles = obstacles;
         this.obstacleImages = obstacleImages;
@@ -29,7 +27,7 @@ public class ObstacleSpawnerComponent implements Logic, StartingState {
 
 
     @Override
-    public void runLogic() {
+    public void update() {
 
         /*
         Find non-active sprite
@@ -37,9 +35,9 @@ public class ObstacleSpawnerComponent implements Logic, StartingState {
 
          */
 
-        for(Sprite s : obstacles){
+        for (Sprite s : obstacles) {
 
-            if(!s.isActive()){
+            if (!s.isActive()) {
 
                 activateSprite(s);
 
@@ -51,14 +49,9 @@ public class ObstacleSpawnerComponent implements Logic, StartingState {
     }
 
     @Override
-    public boolean isActive() {
-        return true;
-    }
+    public void resetState() {
 
-    @Override
-    public void setStartingState() {
-
-        for(Sprite s : obstacles){
+        for (Sprite s : obstacles) {
             setLocation(s);
         }
     }

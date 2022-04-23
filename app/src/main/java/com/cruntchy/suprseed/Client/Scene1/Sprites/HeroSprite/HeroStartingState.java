@@ -1,9 +1,9 @@
 package com.cruntchy.suprseed.Client.Scene1.Sprites.HeroSprite;
 
-import com.cruntchy.suprseed.Engine.SpriteObjects.DefaultComponents.StartingState;
+import com.cruntchy.suprseed.Engine.SpriteObjects.DefaultComponents.Component;
 import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase.Sprite;
 
-public class HeroStartingState implements StartingState {
+public class HeroStartingState implements Component {
 
     private final Sprite sprite;
 
@@ -14,7 +14,7 @@ public class HeroStartingState implements StartingState {
     }
 
     @Override
-    public void setStartingState() {
+    public void update() {
 
         // Allow sprite to be active again
         sprite.setActive(true);

@@ -7,8 +7,8 @@ import com.cruntchy.suprseed.Engine.Images.SpriteImage;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import com.cruntchy.suprseed.Engine.Scenes.SceneHeirarchy.BaseScene;
 import com.cruntchy.suprseed.Engine.SoundPlayer.SoundMixer;
-import com.cruntchy.suprseed.Engine.SpriteObjects.DefaultComponents.Collidable;
-import com.cruntchy.suprseed.Engine.SpriteObjects.DefaultComponents.Movable;
+import com.cruntchy.suprseed.Engine.SpriteObjects.DefaultComponents.Component;
+import com.cruntchy.suprseed.Engine.SpriteObjects.DefaultComponents.ResetableComponent;
 import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase.ImageHandler;
 import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase.Sprite;
 import com.cruntchy.suprseed.Engine.SpriteObjects.System.Logic;
@@ -29,9 +29,9 @@ public class ObstacleCollection implements Logic, RenderableAndLayerable {
 
 
     // Dependencies
-    private final Collidable obstacleCollision;
-    private final ObstacleSpawnerComponent obstacleSpawner;
-    private final Movable obstacleMovement;
+    private final Component obstacleCollision;
+    private final ResetableComponent obstacleSpawner;
+    private final Component obstacleMovement;
     private final GameOverData gameOverData;
 
 
@@ -64,7 +64,7 @@ public class ObstacleCollection implements Logic, RenderableAndLayerable {
 
 
         // Set starting state of obstacles
-        obstacleSpawner.setStartingState();
+        obstacleSpawner.resetState();
 
 
         // Register this with the parent
@@ -80,9 +80,9 @@ public class ObstacleCollection implements Logic, RenderableAndLayerable {
 
         // Stop logic if hero dies
         if (!gameOverData.isGameOver()) {
-            obstacleSpawner.runLogic();
-            obstacleMovement.move();
-            obstacleCollision.collide();
+            obstacleSpawner.update();
+            obstacleMovement.update();
+            obstacleCollision.update();
         }
     }
 
@@ -110,6 +110,6 @@ public class ObstacleCollection implements Logic, RenderableAndLayerable {
     }
 
     public void resetState() {
-        obstacleSpawner.setStartingState();
+        obstacleSpawner.resetState();
     }
 }

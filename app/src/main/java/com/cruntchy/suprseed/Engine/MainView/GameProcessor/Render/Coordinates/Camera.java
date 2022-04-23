@@ -1,6 +1,5 @@
 package com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Coordinates;
 
-import com.cruntchy.suprseed.Engine.SpriteObjects.DefaultComponents.Movable;
 import com.cruntchy.suprseed.Engine.SpriteObjects.System.Logic;
 import com.cruntchy.suprseed.Engine.SpriteObjects.System.LogicSystem;
 

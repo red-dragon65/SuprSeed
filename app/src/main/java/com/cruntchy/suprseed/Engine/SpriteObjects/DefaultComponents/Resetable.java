@@ -1,6 +1,6 @@
 package com.cruntchy.suprseed.Engine.SpriteObjects.DefaultComponents;
 
-public interface StartingState {
+public interface Resetable {
 
-    void setStartingState();
+    void resetState();
 }

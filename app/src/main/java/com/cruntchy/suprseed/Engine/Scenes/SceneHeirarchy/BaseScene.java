@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.cruntchy.suprseed.Engine.Images.Animator;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Graphics.RenderHandler;
+import com.cruntchy.suprseed.Engine.SpriteObjects.DefaultComponents.Resetable;
 import com.cruntchy.suprseed.Engine.SpriteObjects.Register.RenderRegister;
 import com.cruntchy.suprseed.Engine.SpriteObjects.Register.UpdatableRegister;
 import com.cruntchy.suprseed.Engine.SpriteObjects.System.AnimationRenderer;
@@ -13,7 +14,7 @@ import com.cruntchy.suprseed.Engine.SpriteObjects.System.Logic;
 import com.cruntchy.suprseed.Engine.SpriteObjects.System.ObjectLogicizer;
 import com.cruntchy.suprseed.Engine.SpriteObjects.System.RenderableAndLayerable;
 
-public abstract class BaseScene implements Logic, RenderableAndLayerable, Animator {
+public abstract class BaseScene implements Logic, RenderableAndLayerable, Animator, Resetable {
 
     protected String sceneId;
     protected boolean isActive = true;
@@ -77,6 +78,7 @@ public abstract class BaseScene implements Logic, RenderableAndLayerable, Animat
         return context;
     }
 
+    @Override
     public void resetState() {
 
     }

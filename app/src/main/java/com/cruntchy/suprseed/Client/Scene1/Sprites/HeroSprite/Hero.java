@@ -6,9 +6,8 @@ import com.cruntchy.suprseed.Engine.Collisions.CollisionHandler;
 import com.cruntchy.suprseed.Engine.Collisions.RectangleCollision;
 import com.cruntchy.suprseed.Engine.Scenes.SceneHeirarchy.BaseScene;
 import com.cruntchy.suprseed.Engine.SoundPlayer.SoundMixer;
-import com.cruntchy.suprseed.Engine.SpriteObjects.DefaultComponents.Collidable;
-import com.cruntchy.suprseed.Engine.SpriteObjects.DefaultComponents.Movable;
-import com.cruntchy.suprseed.Engine.SpriteObjects.DefaultComponents.StartingState;
+import com.cruntchy.suprseed.Engine.SpriteObjects.DefaultComponents.Component;
+import com.cruntchy.suprseed.Engine.SpriteObjects.DefaultComponents.ResetableComponent;
 import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase.ImageHandler;
 import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase.Sprite;
 import com.cruntchy.suprseed.Engine.SpriteObjects.System.Logic;
@@ -16,11 +15,11 @@ import com.cruntchy.suprseed.Engine.SpriteObjects.System.Logic;
 public class Hero extends Sprite implements Logic {
 
     // Behavior components
-    private final StartingState startingState;
-    private final Collidable wallCollision;
+    private final Component startingState;
+    private final Component wallCollision;
     //private final Movable bounceMovement;
-    private final BounceMovementComponent bounceMovement;
-    private final Movable tiltMovement;
+    private final ResetableComponent bounceMovement;
+    private final Component tiltMovement;
     private final CollisionHandler collider;
     private final BounceData bounceData;
 
@@ -39,7 +38,7 @@ public class Hero extends Sprite implements Logic {
 
 
         // Run starting state behavior
-        startingState.setStartingState();
+        startingState.update();
 
         //CollisionDiagnosticsOverlay.getInstance().enable();
 
@@ -50,11 +49,11 @@ public class Hero extends Sprite implements Logic {
     public void runLogic() {
 
         // Update velocity based on wall collisions
-        wallCollision.collide();
+        wallCollision.update();
 
         // Apply sprite transform
-        bounceMovement.move();
-        tiltMovement.move();
+        bounceMovement.update();
+        tiltMovement.update();
 
         // Update to new location values
         setX(getX() + getxVel());
@@ -73,7 +72,7 @@ public class Hero extends Sprite implements Logic {
     }
 
     public void resetState() {
-        startingState.setStartingState();
+        startingState.update();
         bounceMovement.resetState();
     }
 }

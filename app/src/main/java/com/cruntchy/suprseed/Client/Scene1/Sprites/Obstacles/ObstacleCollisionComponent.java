@@ -6,12 +6,12 @@ import com.cruntchy.suprseed.Engine.Collisions.CollisionHandler;
 import com.cruntchy.suprseed.Engine.Collisions.PixelPerfectCollision;
 import com.cruntchy.suprseed.Engine.Collisions.RectangleCollision;
 import com.cruntchy.suprseed.Engine.SoundPlayer.SoundMixer;
-import com.cruntchy.suprseed.Engine.SpriteObjects.DefaultComponents.Collidable;
+import com.cruntchy.suprseed.Engine.SpriteObjects.DefaultComponents.Component;
 import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase.Sprite;
 
 import java.util.List;
 
-public class ObstacleCollisionComponent implements Collidable {
+public class ObstacleCollisionComponent implements Component {
 
     private final List<Sprite> obstacles;
     private final Sprite hero;
@@ -39,12 +39,12 @@ public class ObstacleCollisionComponent implements Collidable {
 
 
     @Override
-    public void collide() {
+    public void update() {
 
         // See if hero touches any obstacles
-        for(Sprite s : obstacles){
+        for (Sprite s : obstacles) {
 
-            if(collisionMethod.checkCollision(hero, s)){
+            if (collisionMethod.checkCollision(hero, s)) {
 
                 // Disable hero
                 hero.setActive(false);
