@@ -62,8 +62,9 @@ public class ObstacleCollisionComponent implements Collidable {
 
                 // Notify game over has occurred
                 gameOverData.setGameOver(true);
+                gameOverData.setStarted(false);
 
-                // Stop processing furuther collisions
+                // Stop processing further collisions
                 return;
             }
         }

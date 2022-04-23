@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 
 import com.cruntchy.suprseed.Client.Scene1.Data.BounceData;
+import com.cruntchy.suprseed.Client.Scene1.Data.GameOverData;
 import com.cruntchy.suprseed.Engine.Images.FontHolder;
 import com.cruntchy.suprseed.Engine.Images.FontRetriever;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Graphics.RenderHandler;
@@ -16,13 +17,17 @@ import com.cruntchy.suprseed.R;
 public class ScoreSprite extends Sprite implements Logic {
 
     private final FontRetriever<String> scoreFont;
-    private final String text = "Score: ";
+    private final String scoreText = "Score: ";
+    private final String highScoreText = "Top: ";
+    private final GameOverData gameOverData;
+
     private final BounceData bounceData;
     private final SharedPreferences gameData;
     private int scoreCounter = 0;
     private boolean saved = false;
+    private int highScore = 0;
 
-    public ScoreSprite(BaseScene parentScene, BounceData bounceData) {
+    public ScoreSprite(BaseScene parentScene, BounceData bounceData, GameOverData gameOverData) {
         super(parentScene, null);
 
         this.bounceData = bounceData;
@@ -31,6 +36,8 @@ public class ScoreSprite extends Sprite implements Logic {
 
         // Load saved score value
         this.gameData = parentScene.getContext().getSharedPreferences("GAME_DATA", Context.MODE_PRIVATE);
+
+        this.gameOverData = gameOverData;
 
         // TODO: Load everytime user dies and restarts
         // TODO: Reset counter if when user begins game
@@ -68,7 +75,6 @@ public class ScoreSprite extends Sprite implements Logic {
 
         // Draw the score text here instead
 
-
         // Set the font
         renderer.getPaint().setColor(Color.WHITE);
         renderer.getPaint().setTypeface(scoreFont.getFont());
@@ -78,22 +84,42 @@ public class ScoreSprite extends Sprite implements Logic {
         // Scale the location
         float[] output = renderer.getCoordinateHandler().parseLocation(this);
 
+
         // Draw the font
-        renderer.getCanvas().drawText(text + scoreCounter, output[0], output[1], renderer.getPaint());
+        if (!gameOverData.isStarted() && !gameOverData.isGameOver()) {
+
+            renderer.getCanvas().drawText(highScoreText + highScore, output[0], output[1], renderer.getPaint());
+        } else {
+
+            renderer.getCanvas().drawText(scoreText + scoreCounter, output[0], output[1], renderer.getPaint());
+        }
     }
 
 
     private void saveScore() {
 
-        SharedPreferences.Editor editor = gameData.edit();
+        // Only save new high scores
+        if (scoreCounter > highScore) {
 
-        editor.putInt("score", scoreCounter);
+            SharedPreferences.Editor editor = gameData.edit();
 
-        editor.apply();
+            editor.putInt("score", scoreCounter);
+
+            editor.apply();
+
+            // Load new score into system
+            loadScore();
+        }
     }
 
     private void loadScore() {
 
-        //scoreCounter = gameData.getInt("score", 0);
+        highScore = gameData.getInt("score", 0);
+    }
+
+    public void resetState() {
+
+        loadScore();
+        scoreCounter = 0;
     }
 }

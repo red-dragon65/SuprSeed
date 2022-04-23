@@ -69,14 +69,17 @@ public abstract class BaseScene implements Logic, RenderableAndLayerable, Animat
         isActive = active;
     }
 
-    public void setDrawable(boolean drawable){
+    public void setDrawable(boolean drawable) {
         isDrawable = drawable;
     }
 
-    public Context getContext(){
+    public Context getContext() {
         return context;
     }
 
+    public void resetState() {
+
+    }
 
     @Override
     public void resetLoop() {

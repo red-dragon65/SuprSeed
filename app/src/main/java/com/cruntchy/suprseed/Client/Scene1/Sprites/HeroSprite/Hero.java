@@ -1,6 +1,7 @@
 package com.cruntchy.suprseed.Client.Scene1.Sprites.HeroSprite;
 
 import com.cruntchy.suprseed.Client.Scene1.Data.BounceData;
+import com.cruntchy.suprseed.Client.Scene1.Data.GameOverData;
 import com.cruntchy.suprseed.Engine.Collisions.CollisionHandler;
 import com.cruntchy.suprseed.Engine.Collisions.RectangleCollision;
 import com.cruntchy.suprseed.Engine.Scenes.SceneHeirarchy.BaseScene;
@@ -24,7 +25,7 @@ public class Hero extends Sprite implements Logic {
     private final BounceData bounceData;
 
 
-    public Hero(BaseScene parentScene, ImageHandler imageHandler, SoundMixer<String> soundEngine, BounceData bounceData) {
+    public Hero(BaseScene parentScene, ImageHandler imageHandler, SoundMixer<String> soundEngine, BounceData bounceData, GameOverData gameOverData) {
         super(parentScene, imageHandler);
 
         this.bounceData = bounceData;
@@ -33,7 +34,7 @@ public class Hero extends Sprite implements Logic {
         // but it is probably better to dependency inject these
         startingState = new HeroStartingState(this);
         wallCollision = new WallCollisionComponent(this);
-        bounceMovement = new BounceMovementComponent(this, bounceData, soundEngine);
+        bounceMovement = new BounceMovementComponent(this, bounceData, soundEngine, gameOverData);
         tiltMovement = new TiltMovementComponent(this, parentScene.getContext());
 
 

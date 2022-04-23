@@ -4,6 +4,7 @@ public class GameOverData {
 
     private boolean gameOver = false;
     private boolean restart = false;
+    private boolean started = false;
 
     public boolean isGameOver() {
         return gameOver;
@@ -19,5 +20,13 @@ public class GameOverData {
 
     public void setRestart(boolean restart) {
         this.restart = restart;
+    }
+
+    public boolean isStarted() {
+        return started;
+    }
+
+    public void setStarted(boolean started) {
+        this.started = started;
     }
 }

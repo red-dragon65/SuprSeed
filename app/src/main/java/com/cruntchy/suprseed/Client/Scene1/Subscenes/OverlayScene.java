@@ -14,12 +14,14 @@ import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase.Sprite;
 
 public class OverlayScene extends BaseScene {
 
+    private final ScoreSprite scoreSprite;
+
     public OverlayScene(SceneManager parentScene, String sceneId, AssetLoader gamePlayAssets, BounceData bounceData, GameOverData gameOverData) {
         super(parentScene, sceneId);
 
         // Load HUD scenes here
 
-        Sprite scoreSprite = new ScoreSprite(this, bounceData);
+        scoreSprite = new ScoreSprite(this, bounceData, gameOverData);
 
         // This runs independent of the pause button
         Sprite pauseText = new PauseText(this, new ImageHandler("pause_text", gamePlayAssets.getImage("pause_text")));
@@ -27,5 +29,11 @@ public class OverlayScene extends BaseScene {
         Sprite pauseButton = new PauseButton(this, new ImageHandler("pause_button", gamePlayAssets.getImage("pause_button")));
 
         Sprite gameOverText = new GameOver(this, gameOverData);
+    }
+
+    @Override
+    public void resetState() {
+
+        scoreSprite.resetState();
     }
 }

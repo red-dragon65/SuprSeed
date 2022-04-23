@@ -4,6 +4,7 @@ import android.graphics.RectF;
 import android.view.MotionEvent;
 
 import com.cruntchy.suprseed.Client.Scene1.Data.BounceData;
+import com.cruntchy.suprseed.Client.Scene1.Data.GameOverData;
 import com.cruntchy.suprseed.Engine.InputHandler.TouchInput.InputListener;
 import com.cruntchy.suprseed.Engine.InputHandler.TouchInput.InputManager;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.CanvasData;
@@ -23,7 +24,7 @@ public class BounceMovementComponent implements Movable {
     private final SoundMixer<String> soundEngine;
 
     // Constructor
-    public BounceMovementComponent(Sprite sprite, BounceData bounceData, SoundMixer<String> soundEngine) {
+    public BounceMovementComponent(Sprite sprite, BounceData bounceData, SoundMixer<String> soundEngine, GameOverData gameOverData) {
 
         this.sprite = sprite;
         this.bounceData = bounceData;
@@ -36,9 +37,13 @@ public class BounceMovementComponent implements Movable {
 
                 hold = action.equals("hold") || action.equals("drag");
 
-                return sprite.isActive();
+                // Notify that user has triggered game to start
+                if (!gameOverData.isStarted() && !gameOverData.isGameOver()) {
+                    gameOverData.setStarted(true);
+                }
 
-                // Pass to next input listener if hero is inactive
+                // Pass to 'gameRestart' input if hero is inactive
+                return sprite.isActive();
             }
 
             @Override

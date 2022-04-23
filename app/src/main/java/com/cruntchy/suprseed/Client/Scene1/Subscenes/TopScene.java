@@ -27,6 +27,11 @@ public class TopScene extends SceneManager {
     private final SoundMixer<String> soundEngine;
     private final MediaPlayer mediaPlayer;
 
+    private final EntityScene entities;
+    private final OverlayScene overlay;
+
+    private final GameOverData gameOverData;
+
     // Constructor
     public TopScene(SceneManager parentScene, String sceneId) {
         super(parentScene, sceneId);
@@ -52,20 +57,29 @@ public class TopScene extends SceneManager {
 
         // Shared data
         BounceData bounceData = new BounceData();
-        GameOverData gameOverData = new GameOverData();
+        gameOverData = new GameOverData();
 
         // Create leaf scenes here
         // AND/OR create the sprites for this scene
         // NOTE: ORDER MATTERS! OR you can set the scenes priority value!
         BaseScene background = new BackgroundScene(this, "background", gamePlayAssets);
-        BaseScene entities = new EntityScene(this, "entities", gamePlayAssets, soundEngine, bounceData, gameOverData);
-        BaseScene overlay = new OverlayScene(this, "overlay", gamePlayAssets, bounceData, gameOverData);
+        entities = new EntityScene(this, "entities", gamePlayAssets, soundEngine, bounceData, gameOverData);
+        overlay = new OverlayScene(this, "overlay", gamePlayAssets, bounceData, gameOverData);
 
     }
 
     @Override
-    public void runLogic(){
-        super.runLogic();
+    public void runLogic() {
+
+        // TODO: Make 'Home' scene show after restarting scenes
+        if (gameOverData.isRestart()) {
+
+            overlay.resetState();
+            entities.resetState();
+
+            gameOverData.setRestart(false);
+        }
+
 
         // Start/resume background music
         if (!musicHasStarted) {
@@ -74,6 +88,8 @@ public class TopScene extends SceneManager {
             musicHasStarted = true;
         }
 
+
+        super.runLogic();
     }
 
     @Override

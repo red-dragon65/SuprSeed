@@ -23,51 +23,21 @@ public class EntityScene extends BaseScene {
         this.gameOverData = gameOverData;
 
         // Create the character sprites here
-        this.hero = new Hero(this, new ImageHandler("hero", (SpriteImage) gamePlayAssets.getAnimation("hero")), gamePlaySounds, bounceData);
+        this.hero = new Hero(this, new ImageHandler("hero", (SpriteImage) gamePlayAssets.getAnimation("hero")), gamePlaySounds, bounceData, gameOverData);
 
         this.obstacleHandler = new ObstacleCollection(this, gamePlayAssets, bounceData, hero, gamePlaySounds, gameOverData);
     }
 
 
-
-
-
     @Override
     public void runLogic() {
-
-        // TODO: Move this to 'TopScene'
-        //  Make 'Home' scene run instead of restarting this scene
-        if (gameOverData.isRestart()) {
-
-            hero.resetState();
-            obstacleHandler.resetState();
-
-            gameOverData.setRestart(false);
-        }
-
-        // ignore this for now
-
-        /*
-        // See if hero has died
-        if(!hero.isActive()){
-
-            // Switch to a different scene
-
-            SceneStrategy softChange = new SceneSoftChange();
-            sceneManager.changeScene(softChange, this, "LandingScene");
-        }
-         */
-
-
-        // See if hero has died
-        if (!hero.isActive()) {
-
-            // Start the game over overlay scene
-            //Scene gameOverUI = new GameOverOverlayScene(sceneManager, "GameOver");
-
-            //sceneManager.getRegister().registerObject(gameOverUI);
-        }
-
         super.runLogic();
+    }
+
+    @Override
+    public void resetState() {
+
+        hero.resetState();
+        obstacleHandler.resetState();
     }
 }

@@ -20,7 +20,7 @@ public class HeroStartingState implements StartingState {
         sprite.setActive(true);
 
         // Initialize starting state
-        sprite.setX(50);
+        sprite.setX(40);
         sprite.setY(30);
 
         sprite.setxVel(0);
