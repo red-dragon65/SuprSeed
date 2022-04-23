@@ -42,7 +42,6 @@ public class GameOver extends Sprite {
 
         InputManager.getInstance().listenerRegister.registerObject(screenListener);
 
-
         // Set text location
         setX(gameOverTextLocX);
         setY(gameOverTextLocY);

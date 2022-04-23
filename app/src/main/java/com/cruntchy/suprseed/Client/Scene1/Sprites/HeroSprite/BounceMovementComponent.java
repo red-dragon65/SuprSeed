@@ -1,13 +1,8 @@
 package com.cruntchy.suprseed.Client.Scene1.Sprites.HeroSprite;
 
-import android.graphics.RectF;
-import android.view.MotionEvent;
-
 import com.cruntchy.suprseed.Client.Scene1.Data.BounceData;
 import com.cruntchy.suprseed.Client.Scene1.Data.GameOverData;
-import com.cruntchy.suprseed.Engine.InputHandler.TouchInput.InputListener;
 import com.cruntchy.suprseed.Engine.InputHandler.TouchInput.InputManager;
-import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.CanvasData;
 import com.cruntchy.suprseed.Engine.SoundPlayer.SoundMixer;
 import com.cruntchy.suprseed.Engine.SpriteObjects.DefaultComponents.ResetableComponent;
 import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase.Sprite;
@@ -15,11 +10,9 @@ import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase.Sprite;
 public class BounceMovementComponent implements ResetableComponent {
 
     private final Sprite sprite;
-
     private final float boundary = 80;
     private final float gravity = 0.05f;
-    private final InputListener screenListener;
-    private boolean hold = false;
+    private final FullScreenHeroTouchInput screenListener;
     private final BounceData bounceData;
     private final SoundMixer<String> soundEngine;
 
@@ -30,37 +23,7 @@ public class BounceMovementComponent implements ResetableComponent {
         this.bounceData = bounceData;
         this.soundEngine = soundEngine;
 
-        screenListener = new InputListener() {
-
-            @Override
-            public boolean processInput(String action, MotionEvent event) {
-
-                hold = action.equals("hold") || action.equals("drag");
-
-                // Notify that user has triggered game to start
-                if (!gameOverData.isStarted() && !gameOverData.isGameOver()) {
-                    gameOverData.setStarted(true);
-                }
-
-                // Pass to 'gameRestart' input if hero is inactive
-                return sprite.isActive();
-            }
-
-            @Override
-            public void getRectF(RectF result) {
-
-                float height = CanvasData.getInstance().getOriginalHeight();
-                float width = CanvasData.getInstance().getOriginalWidth();
-
-                result.set(0, 0, width, height);
-            }
-
-            // This should be above everything else
-            @Override
-            public int getLayerDepth() {
-                return 101;
-            }
-        };
+        screenListener = new FullScreenHeroTouchInput(sprite, gameOverData);
 
         InputManager.getInstance().listenerRegister.registerObject(screenListener);
     }
@@ -91,16 +54,16 @@ public class BounceMovementComponent implements ResetableComponent {
             // Reset to boundary limit
             sprite.setY(boundary);
 
-            if(hold){ // Stop hero fall
+            if (screenListener.isHold()) { // Stop hero fall
 
                 // Save fall velocity
-                if(bounceData.getBounceValue() == 0){
+                if (bounceData.getBounceValue() == 0) {
                     bounceData.setBounceValue(sprite.getyVel());
                 }
 
                 sprite.setyVel(0);
 
-            }else{ // Bounce hero
+            } else { // Bounce hero
 
                 // Hero is past boundary. Reverse velocity for bounce.
                 if(bounceData.getBounceValue() == 0){
@@ -124,6 +87,6 @@ public class BounceMovementComponent implements ResetableComponent {
     @Override
     public void resetState() {
         bounceData.setBounceValue(0);
-        hold = false;
+        screenListener.setHold(false);
     }
 }

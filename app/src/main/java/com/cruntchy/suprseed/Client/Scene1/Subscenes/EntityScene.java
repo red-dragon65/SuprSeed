@@ -10,28 +10,20 @@ import com.cruntchy.suprseed.Engine.Scenes.SceneHeirarchy.BaseScene;
 import com.cruntchy.suprseed.Engine.Scenes.SceneHeirarchy.SceneManager;
 import com.cruntchy.suprseed.Engine.SoundPlayer.SoundMixer;
 import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase.ImageHandler;
+import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase.Sprite;
 
 public class EntityScene extends BaseScene {
 
-    private final Hero hero;
+    private final Sprite hero;
     private final ObstacleCollection obstacleHandler;
-    private final GameOverData gameOverData;
 
     public EntityScene(SceneManager parentScene, String sceneId, AssetLoader gamePlayAssets, SoundMixer<String> gamePlaySounds, BounceData bounceData, GameOverData gameOverData) {
         super(parentScene, sceneId);
-
-        this.gameOverData = gameOverData;
 
         // Create the character sprites here
         this.hero = new Hero(this, new ImageHandler("hero", (SpriteImage) gamePlayAssets.getAnimation("hero")), gamePlaySounds, bounceData, gameOverData);
 
         this.obstacleHandler = new ObstacleCollection(this, gamePlayAssets, bounceData, hero, gamePlaySounds, gameOverData);
-    }
-
-
-    @Override
-    public void runLogic() {
-        super.runLogic();
     }
 
     @Override

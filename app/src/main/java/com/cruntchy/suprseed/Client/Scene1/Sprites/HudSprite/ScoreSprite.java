@@ -39,8 +39,6 @@ public class ScoreSprite extends Sprite implements Logic {
 
         this.gameOverData = gameOverData;
 
-        // TODO: Load everytime user dies and restarts
-        // TODO: Reset counter if when user begins game
         loadScore();
 
         // Set text margins

@@ -14,7 +14,6 @@ public class TiltMovementComponent implements Component {
     private final float tiltAmplification = -0.80f;
     private float xValue = 0;
 
-
     // Constructor
     public TiltMovementComponent(Sprite sprite, Context context) {
 

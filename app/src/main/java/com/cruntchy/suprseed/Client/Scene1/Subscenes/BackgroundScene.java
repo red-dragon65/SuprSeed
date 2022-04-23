@@ -14,6 +14,5 @@ public class BackgroundScene extends BaseScene {
 
         // Load background sprites here
         Sprite background = new Background(this, new ImageHandler("background", gamePlayAssets.getImage("background")));
-
     }
 }

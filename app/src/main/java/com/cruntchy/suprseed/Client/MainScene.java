@@ -21,14 +21,6 @@ public class MainScene extends RootScene {
         // Use this to get the asset resources
         //context.getResources();
 
-        /*
-        -> Read in assets
-        -> Instantiate dependencies
-
-        -> Create game objects OR initialize game sub scenes
-         */
-
-
         // Starts the scene 1 example package
         BaseScene startingScene = new TopScene(this, "TopScene");
     }

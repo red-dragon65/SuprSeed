@@ -14,7 +14,7 @@ import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase.Sprite;
 
 public class OverlayScene extends BaseScene {
 
-    private final ScoreSprite scoreSprite;
+    private final Sprite scoreSprite;
 
     public OverlayScene(SceneManager parentScene, String sceneId, AssetLoader gamePlayAssets, BounceData bounceData, GameOverData gameOverData) {
         super(parentScene, sceneId);

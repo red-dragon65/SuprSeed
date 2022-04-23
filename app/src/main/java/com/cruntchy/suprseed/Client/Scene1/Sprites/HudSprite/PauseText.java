@@ -27,6 +27,7 @@ public class PauseText extends Sprite {
     @Override
     public void runLogic() {
 
+        // Ignore this
     }
 
     @Override

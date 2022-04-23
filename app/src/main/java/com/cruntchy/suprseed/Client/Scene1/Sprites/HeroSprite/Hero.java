@@ -27,6 +27,9 @@ public class Hero extends Sprite implements Logic {
     public Hero(BaseScene parentScene, ImageHandler imageHandler, SoundMixer<String> soundEngine, BounceData bounceData, GameOverData gameOverData) {
         super(parentScene, imageHandler);
 
+        // Show collision boxes
+        //CollisionDiagnosticsOverlay.getInstance().enable();
+
         this.bounceData = bounceData;
 
         // Instantiate behavior here if you want
@@ -35,14 +38,10 @@ public class Hero extends Sprite implements Logic {
         wallCollision = new WallCollisionComponent(this);
         bounceMovement = new BounceMovementComponent(this, bounceData, soundEngine, gameOverData);
         tiltMovement = new TiltMovementComponent(this, parentScene.getContext());
-
+        collider = new RectangleCollision();
 
         // Run starting state behavior
         startingState.update();
-
-        //CollisionDiagnosticsOverlay.getInstance().enable();
-
-        collider = new RectangleCollision();
     }
 
     @Override
@@ -51,16 +50,22 @@ public class Hero extends Sprite implements Logic {
         // Update velocity based on wall collisions
         wallCollision.update();
 
-        // Apply sprite transform
+        // Calculate sprite translation
         bounceMovement.update();
         tiltMovement.update();
+
+        // Apply sprite translation
+        moveSprite();
+
+        // Check for wall collisions
+        collider.checkCollision(this, this);
+    }
+
+    private void moveSprite() {
 
         // Update to new location values
         setX(getX() + getxVel());
         setY(getY() + getyVel());
-
-        // Check for wall collisions
-        collider.checkCollision(this, this);
     }
 
     @Override
@@ -71,6 +76,7 @@ public class Hero extends Sprite implements Logic {
         bounceData.setBounceValue(0);
     }
 
+    @Override
     public void resetState() {
         startingState.update();
         bounceMovement.resetState();

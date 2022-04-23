@@ -24,7 +24,6 @@ import java.util.Map;
 public class TopScene extends SceneManager {
 
     private boolean musicHasStarted = false;
-    private final SoundMixer<String> soundEngine;
     private final MediaPlayer mediaPlayer;
 
     private final EntityScene entities;
@@ -47,7 +46,6 @@ public class TopScene extends SceneManager {
         sounds.put("bounce", R.raw.bounce);
         sounds.put("hit", R.raw.hit);
         soundEngine.loadSounds(sounds, context);
-        this.soundEngine = soundEngine;
 
         // Set the background music
         mediaPlayer = MediaPlayer.create(context, R.raw.background_music);
