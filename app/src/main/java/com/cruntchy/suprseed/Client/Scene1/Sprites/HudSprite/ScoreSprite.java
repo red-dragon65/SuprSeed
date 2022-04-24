@@ -2,12 +2,10 @@ package com.cruntchy.suprseed.Client.Scene1.Sprites.HudSprite;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 
 import com.cruntchy.suprseed.Client.Scene1.Data.BounceData;
 import com.cruntchy.suprseed.Client.Scene1.Data.GameOverData;
 import com.cruntchy.suprseed.Engine.Images.FontHolder;
-import com.cruntchy.suprseed.Engine.Images.FontRetriever;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import com.cruntchy.suprseed.Engine.Scenes.SceneHeirarchy.BaseScene;
 import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase.Sprite;
@@ -16,7 +14,7 @@ import com.cruntchy.suprseed.R;
 
 public class ScoreSprite extends Sprite implements Logic {
 
-    private final FontRetriever<String> scoreFont;
+    private final FontHolder scoreFont;
     private final String scoreText = "Score: ";
     private final String highScoreText = "Top: ";
     private final GameOverData gameOverData;
@@ -32,7 +30,7 @@ public class ScoreSprite extends Sprite implements Logic {
 
         this.bounceData = bounceData;
 
-        this.scoreFont = new FontHolder(R.font.peaberry_base, 10, parentScene.getContext());
+        this.scoreFont = new FontHolder(R.font.peaberry_base, 10, parentScene.getContext(), new ScorePaintStrategy());
 
         // Load saved score value
         this.gameData = parentScene.getContext().getSharedPreferences("GAME_DATA", Context.MODE_PRIVATE);
@@ -74,10 +72,7 @@ public class ScoreSprite extends Sprite implements Logic {
         // Draw the score text here instead
 
         // Set the font
-        renderer.getPaint().setColor(Color.WHITE);
-        renderer.getPaint().setTypeface(scoreFont.getFont());
-        renderer.getPaint().setAntiAlias(true);
-        renderer.getPaint().setTextSize(scoreFont.getFontSize());
+        scoreFont.updatePaint(renderer.getPaint());
 
         // Scale the location
         float[] output = renderer.getCoordinateHandler().parseLocation(this);

@@ -1,10 +1,8 @@
 package com.cruntchy.suprseed.Client.Scene1.Sprites.HudSprite;
 
-import android.graphics.Color;
 
 import com.cruntchy.suprseed.Client.Scene1.Data.GameOverData;
 import com.cruntchy.suprseed.Engine.Images.FontHolder;
-import com.cruntchy.suprseed.Engine.Images.FontRetriever;
 import com.cruntchy.suprseed.Engine.InputHandler.TouchInput.InputListener;
 import com.cruntchy.suprseed.Engine.InputHandler.TouchInput.InputManager;
 import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Graphics.RenderHandler;
@@ -16,7 +14,7 @@ public class GameOver extends Sprite {
 
     private final InputListener screenListener;
     private final GameOverData gameOverData;
-    private final FontRetriever<String> gameOverFont;
+    private final FontHolder gameOverFont;
 
     private final int gameOverTextLocY = 100;
     private final int gameOverTextLocX = 20;
@@ -31,7 +29,7 @@ public class GameOver extends Sprite {
     public GameOver(BaseScene parentScene, GameOverData gameOverData) {
         super(parentScene, null);
 
-        gameOverFont = new FontHolder(R.font.peaberry_base, 12, parentScene.getContext());
+        gameOverFont = new FontHolder(R.font.peaberry_base, 12, parentScene.getContext(), new GameOverPaintStrategy());
 
         // Start hidden until game over occurs
         setDrawable(false);
@@ -67,10 +65,7 @@ public class GameOver extends Sprite {
 
 
         // Set the font settings
-        renderer.getPaint().setColor(Color.WHITE);
-        renderer.getPaint().setTypeface(gameOverFont.getFont());
-        renderer.getPaint().setAntiAlias(true);
-        renderer.getPaint().setTextSize(gameOverFont.getFontSize());
+        gameOverFont.updatePaint(renderer.getPaint());
 
 
         // Scale the location then draw text

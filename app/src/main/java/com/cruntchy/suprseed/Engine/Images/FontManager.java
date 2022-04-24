@@ -1,55 +1,34 @@
 package com.cruntchy.suprseed.Engine.Images;
 
 import android.content.Context;
-import android.graphics.Typeface;
 
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class FontManager {
 
-    // TODO: Finish this
-    //  This allows the client to put all fonts related to a scene / scene group in one spot
-
-    private Map<String, Typeface> loadedFonts;
-
+    private final List<FontHolder> fonts;
 
     // Constructor
-    public FontManager(){
+    public FontManager(Context context) {
 
+        fonts = new ArrayList<>();
 
+        loadFonts(context);
     }
 
-
-    /*
-    FontRId
-    TypeFace
-    Font size * scale value
-    String id
-     */
+    protected abstract void loadFonts(Context context);
 
 
+    public FontHolder getFont(String fontId) {
 
-    public void loadFonts(Map<String, Integer> fonts, Context context){
+        for (FontHolder f : fonts) {
 
-        //Typeface someFont = context.getResources().getFont(R.font.something);
+            if (f.getFontId().equals(fontId)) {
 
-        /*
-        for(Font f : fonts){
-
-            loadedFonts.key = f.key
-            loadedFonts.value = context.getResources().getFont(f.value);
+                return f;
+            }
         }
-         */
-    }
-
-
-    public Typeface getFont(String fontId){
-
-
-        /*
-        return loadedFonts.find(fontId).value;
-         */
-
 
         return null;
     }
