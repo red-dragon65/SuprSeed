@@ -1,11 +1,11 @@
 package com.cruntchy.suprseed.Client.Scene1.Sprites.HudSprite;
 
-import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.LoopManager;
-import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.CanvasData;
-import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Graphics.RenderHandler;
-import com.cruntchy.suprseed.Engine.Scenes.SceneHeirarchy.BaseScene;
-import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase.ImageHandler;
-import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase.Sprite;
+import com.cruntchy.suprseed.Engine.Core.MainView.GameProcessor.Loop.LoopManager;
+import com.cruntchy.suprseed.Engine.Core.MainView.GameProcessor.Render.CanvasData;
+import com.cruntchy.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
+import com.cruntchy.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
+import com.cruntchy.suprseed.Engine.Core.SpriteObjects.SpriteBase.ImageHandler;
+import com.cruntchy.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
 
 public class PauseText extends Sprite {
 

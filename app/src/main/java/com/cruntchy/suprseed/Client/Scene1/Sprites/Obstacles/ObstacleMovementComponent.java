@@ -1,8 +1,8 @@
 package com.cruntchy.suprseed.Client.Scene1.Sprites.Obstacles;
 
 import com.cruntchy.suprseed.Client.Scene1.Data.BounceData;
-import com.cruntchy.suprseed.Engine.SpriteObjects.DefaultComponents.Component;
-import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase.Sprite;
+import com.cruntchy.suprseed.Engine.Core.SpriteObjects.DefaultComponents.Component;
+import com.cruntchy.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package com.cruntchy.suprseed.Client.Scene1.Data;
 
-import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Coordinates.Camera;
-import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Coordinates.Movable;
+import com.cruntchy.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates.Camera;
+import com.cruntchy.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates.Movable;
 
 import java.util.Random;
 

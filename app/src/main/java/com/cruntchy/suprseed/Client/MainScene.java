@@ -3,8 +3,8 @@ package com.cruntchy.suprseed.Client;
 import android.content.Context;
 
 import com.cruntchy.suprseed.Client.Scene1.Subscenes.TopScene;
-import com.cruntchy.suprseed.Engine.Scenes.SceneHeirarchy.BaseScene;
-import com.cruntchy.suprseed.Engine.Scenes.SceneHeirarchy.RootScene;
+import com.cruntchy.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
+import com.cruntchy.suprseed.Engine.Core.Scenes.SceneHeirarchy.RootScene;
 
 public class MainScene extends RootScene {
 

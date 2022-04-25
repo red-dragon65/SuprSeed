@@ -2,10 +2,10 @@ package com.cruntchy.suprseed.Client.Scene1.Sprites.HeroSprite;
 
 import com.cruntchy.suprseed.Client.Scene1.Data.BounceData;
 import com.cruntchy.suprseed.Client.Scene1.Data.GameOverData;
-import com.cruntchy.suprseed.Engine.InputHandler.TouchInput.InputManager;
-import com.cruntchy.suprseed.Engine.SoundPlayer.SoundMixer;
-import com.cruntchy.suprseed.Engine.SpriteObjects.DefaultComponents.ResetableComponent;
-import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase.Sprite;
+import com.cruntchy.suprseed.Engine.Core.InputHandler.TouchInput.InputManager;
+import com.cruntchy.suprseed.Engine.Core.SpriteObjects.DefaultComponents.ResetableComponent;
+import com.cruntchy.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
+import com.cruntchy.suprseed.Engine.Lib.SoundPlayer.SoundMixer;
 
 public class BounceMovementComponent implements ResetableComponent {
 

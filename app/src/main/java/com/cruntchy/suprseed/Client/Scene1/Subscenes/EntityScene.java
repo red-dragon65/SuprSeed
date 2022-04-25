@@ -4,13 +4,13 @@ import com.cruntchy.suprseed.Client.Scene1.Data.BounceData;
 import com.cruntchy.suprseed.Client.Scene1.Data.GameOverData;
 import com.cruntchy.suprseed.Client.Scene1.Sprites.HeroSprite.Hero;
 import com.cruntchy.suprseed.Client.Scene1.Sprites.Obstacles.ObstacleCollection;
-import com.cruntchy.suprseed.Engine.AssetLoader.AssetLoader;
-import com.cruntchy.suprseed.Engine.Images.SpriteImage;
-import com.cruntchy.suprseed.Engine.Scenes.SceneHeirarchy.BaseScene;
-import com.cruntchy.suprseed.Engine.Scenes.SceneHeirarchy.SceneManager;
-import com.cruntchy.suprseed.Engine.SoundPlayer.SoundMixer;
-import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase.ImageHandler;
-import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase.Sprite;
+import com.cruntchy.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
+import com.cruntchy.suprseed.Engine.Core.Scenes.SceneHeirarchy.SceneManager;
+import com.cruntchy.suprseed.Engine.Core.SpriteObjects.SpriteBase.ImageHandler;
+import com.cruntchy.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
+import com.cruntchy.suprseed.Engine.Lib.AssetLoader.AssetLoader;
+import com.cruntchy.suprseed.Engine.Lib.Images.SpriteImage;
+import com.cruntchy.suprseed.Engine.Lib.SoundPlayer.SoundMixer;
 
 public class EntityScene extends BaseScene {
 

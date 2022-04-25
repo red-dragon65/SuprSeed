@@ -1,11 +1,11 @@
 package com.cruntchy.suprseed.Client.Scene1.Assets;
 
-import com.cruntchy.suprseed.Engine.AssetLoader.AssetLoader;
-import com.cruntchy.suprseed.Engine.AssetLoader.FolderParser;
-import com.cruntchy.suprseed.Engine.AssetLoader.Streamable;
-import com.cruntchy.suprseed.Engine.Images.ImageCollectionAnimator;
-import com.cruntchy.suprseed.Engine.Images.ImageSingle;
-import com.cruntchy.suprseed.Engine.Scenes.SceneHeirarchy.BaseScene;
+import com.cruntchy.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
+import com.cruntchy.suprseed.Engine.Lib.AssetLoader.AssetLoader;
+import com.cruntchy.suprseed.Engine.Lib.AssetLoader.FolderParser;
+import com.cruntchy.suprseed.Engine.Lib.AssetLoader.Streamable;
+import com.cruntchy.suprseed.Engine.Lib.Images.ImageCollectionAnimator;
+import com.cruntchy.suprseed.Engine.Lib.Images.ImageSingle;
 
 public class GamePlayAssets extends AssetLoader {
 

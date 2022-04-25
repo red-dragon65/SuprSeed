@@ -3,9 +3,9 @@ package com.cruntchy.suprseed.Client.Scene1.Sprites.HudSprite;
 import android.graphics.RectF;
 import android.view.MotionEvent;
 
-import com.cruntchy.suprseed.Engine.InputHandler.TouchInput.InputListener;
-import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Loop.LoopManager;
-import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.CanvasData;
+import com.cruntchy.suprseed.Engine.Core.InputHandler.TouchInput.InputListener;
+import com.cruntchy.suprseed.Engine.Core.MainView.GameProcessor.Loop.LoopManager;
+import com.cruntchy.suprseed.Engine.Core.MainView.GameProcessor.Render.CanvasData;
 
 public class FullScreenPauseInput implements InputListener {
 

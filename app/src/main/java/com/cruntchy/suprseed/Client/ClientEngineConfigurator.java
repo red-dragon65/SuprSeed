@@ -1,18 +1,16 @@
 package com.cruntchy.suprseed.Client;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.cruntchy.suprseed.Engine.InputHandler.TouchInput.InputManager;
-import com.cruntchy.suprseed.Engine.InputHandler.TouchInput.TouchHandler;
-import com.cruntchy.suprseed.Engine.MainView.EngineSettings.ViewConfig;
-import com.cruntchy.suprseed.Engine.MainView.GameViewBuilder.BaseEngineConfigurator;
-import com.cruntchy.suprseed.Engine.MainView.GameViewBuilder.EngineConfigurator;
-import com.cruntchy.suprseed.Engine.Scenes.SceneHeirarchy.RootScene;
+import com.cruntchy.suprseed.Engine.Core.InputHandler.TouchInput.InputManager;
+import com.cruntchy.suprseed.Engine.Core.InputHandler.TouchInput.TouchHandler;
+import com.cruntchy.suprseed.Engine.Core.MainView.EngineSettings.ViewConfig;
+import com.cruntchy.suprseed.Engine.Core.MainView.GameViewBuilder.BaseEngineConfigurator;
+import com.cruntchy.suprseed.Engine.Core.MainView.GameViewBuilder.EngineConfigurator;
+import com.cruntchy.suprseed.Engine.Core.Scenes.SceneHeirarchy.RootScene;
 
 public class ClientEngineConfigurator extends BaseEngineConfigurator {
 

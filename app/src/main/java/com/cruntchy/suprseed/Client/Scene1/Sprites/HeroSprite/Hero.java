@@ -2,15 +2,15 @@ package com.cruntchy.suprseed.Client.Scene1.Sprites.HeroSprite;
 
 import com.cruntchy.suprseed.Client.Scene1.Data.BounceData;
 import com.cruntchy.suprseed.Client.Scene1.Data.GameOverData;
-import com.cruntchy.suprseed.Engine.Collisions.CollisionHandler;
-import com.cruntchy.suprseed.Engine.Collisions.RectangleCollision;
-import com.cruntchy.suprseed.Engine.Scenes.SceneHeirarchy.BaseScene;
-import com.cruntchy.suprseed.Engine.SoundPlayer.SoundMixer;
-import com.cruntchy.suprseed.Engine.SpriteObjects.DefaultComponents.Component;
-import com.cruntchy.suprseed.Engine.SpriteObjects.DefaultComponents.ResetableComponent;
-import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase.ImageHandler;
-import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase.Sprite;
-import com.cruntchy.suprseed.Engine.SpriteObjects.System.Logic;
+import com.cruntchy.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
+import com.cruntchy.suprseed.Engine.Core.SpriteObjects.DefaultComponents.Component;
+import com.cruntchy.suprseed.Engine.Core.SpriteObjects.DefaultComponents.ResetableComponent;
+import com.cruntchy.suprseed.Engine.Core.SpriteObjects.SpriteBase.ImageHandler;
+import com.cruntchy.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
+import com.cruntchy.suprseed.Engine.Core.System.Logic;
+import com.cruntchy.suprseed.Engine.Lib.Collisions.CollisionHandler;
+import com.cruntchy.suprseed.Engine.Lib.Collisions.RectangleCollision;
+import com.cruntchy.suprseed.Engine.Lib.SoundPlayer.SoundMixer;
 
 public class Hero extends Sprite implements Logic {
 

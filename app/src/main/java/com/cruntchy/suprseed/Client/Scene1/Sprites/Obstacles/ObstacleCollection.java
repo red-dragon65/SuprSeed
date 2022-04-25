@@ -2,17 +2,17 @@ package com.cruntchy.suprseed.Client.Scene1.Sprites.Obstacles;
 
 import com.cruntchy.suprseed.Client.Scene1.Data.BounceData;
 import com.cruntchy.suprseed.Client.Scene1.Data.GameOverData;
-import com.cruntchy.suprseed.Engine.AssetLoader.AssetLoader;
-import com.cruntchy.suprseed.Engine.Images.SpriteImage;
-import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Graphics.RenderHandler;
-import com.cruntchy.suprseed.Engine.Scenes.SceneHeirarchy.BaseScene;
-import com.cruntchy.suprseed.Engine.SoundPlayer.SoundMixer;
-import com.cruntchy.suprseed.Engine.SpriteObjects.DefaultComponents.Component;
-import com.cruntchy.suprseed.Engine.SpriteObjects.DefaultComponents.ResetableComponent;
-import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase.ImageHandler;
-import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase.Sprite;
-import com.cruntchy.suprseed.Engine.SpriteObjects.System.Logic;
-import com.cruntchy.suprseed.Engine.SpriteObjects.System.RenderableAndLayerable;
+import com.cruntchy.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
+import com.cruntchy.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
+import com.cruntchy.suprseed.Engine.Core.SpriteObjects.DefaultComponents.Component;
+import com.cruntchy.suprseed.Engine.Core.SpriteObjects.DefaultComponents.ResetableComponent;
+import com.cruntchy.suprseed.Engine.Core.SpriteObjects.SpriteBase.ImageHandler;
+import com.cruntchy.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
+import com.cruntchy.suprseed.Engine.Core.System.Logic;
+import com.cruntchy.suprseed.Engine.Core.System.RenderableAndLayerable;
+import com.cruntchy.suprseed.Engine.Lib.AssetLoader.AssetLoader;
+import com.cruntchy.suprseed.Engine.Lib.Images.SpriteImage;
+import com.cruntchy.suprseed.Engine.Lib.SoundPlayer.SoundMixer;
 
 import java.util.ArrayList;
 import java.util.Random;

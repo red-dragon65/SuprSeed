@@ -2,12 +2,12 @@ package com.cruntchy.suprseed.Client.Scene1.Sprites.HudSprite;
 
 
 import com.cruntchy.suprseed.Client.Scene1.Data.GameOverData;
-import com.cruntchy.suprseed.Engine.Images.FontHolder;
-import com.cruntchy.suprseed.Engine.InputHandler.TouchInput.InputListener;
-import com.cruntchy.suprseed.Engine.InputHandler.TouchInput.InputManager;
-import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.Graphics.RenderHandler;
-import com.cruntchy.suprseed.Engine.Scenes.SceneHeirarchy.BaseScene;
-import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase.Sprite;
+import com.cruntchy.suprseed.Engine.Core.InputHandler.TouchInput.InputListener;
+import com.cruntchy.suprseed.Engine.Core.InputHandler.TouchInput.InputManager;
+import com.cruntchy.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
+import com.cruntchy.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
+import com.cruntchy.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
+import com.cruntchy.suprseed.Engine.Lib.Fonts.FontHolder;
 import com.cruntchy.suprseed.R;
 
 public class GameOver extends Sprite {

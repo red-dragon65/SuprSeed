@@ -3,7 +3,7 @@ package com.cruntchy.suprseed.Client.Scene1.Sprites.HudSprite;
 import android.graphics.Color;
 import android.graphics.Paint;
 
-import com.cruntchy.suprseed.Engine.Images.FontPaintRoller;
+import com.cruntchy.suprseed.Engine.Lib.Fonts.FontPaintRoller;
 
 public class GameOverPaintStrategy extends FontPaintRoller {
 

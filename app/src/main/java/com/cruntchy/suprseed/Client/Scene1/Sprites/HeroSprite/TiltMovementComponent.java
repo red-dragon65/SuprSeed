@@ -2,9 +2,9 @@ package com.cruntchy.suprseed.Client.Scene1.Sprites.HeroSprite;
 
 import android.content.Context;
 
-import com.cruntchy.suprseed.Engine.InputHandler.Sensors.Accelerometer;
-import com.cruntchy.suprseed.Engine.SpriteObjects.DefaultComponents.Component;
-import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase.Sprite;
+import com.cruntchy.suprseed.Engine.Core.InputHandler.Sensors.Accelerometer;
+import com.cruntchy.suprseed.Engine.Core.SpriteObjects.DefaultComponents.Component;
+import com.cruntchy.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
 
 public class TiltMovementComponent implements Component {
 

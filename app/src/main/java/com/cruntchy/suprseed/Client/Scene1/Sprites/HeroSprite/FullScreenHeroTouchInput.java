@@ -4,9 +4,9 @@ import android.graphics.RectF;
 import android.view.MotionEvent;
 
 import com.cruntchy.suprseed.Client.Scene1.Data.GameOverData;
-import com.cruntchy.suprseed.Engine.InputHandler.TouchInput.InputListener;
-import com.cruntchy.suprseed.Engine.MainView.GameProcessor.Render.CanvasData;
-import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase.Sprite;
+import com.cruntchy.suprseed.Engine.Core.InputHandler.TouchInput.InputListener;
+import com.cruntchy.suprseed.Engine.Core.MainView.GameProcessor.Render.CanvasData;
+import com.cruntchy.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
 
 public class FullScreenHeroTouchInput implements InputListener {
 

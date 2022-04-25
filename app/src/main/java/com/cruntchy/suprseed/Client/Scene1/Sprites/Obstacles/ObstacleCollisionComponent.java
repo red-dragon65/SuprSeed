@@ -2,12 +2,12 @@ package com.cruntchy.suprseed.Client.Scene1.Sprites.Obstacles;
 
 import com.cruntchy.suprseed.Client.Scene1.Data.CameraShaker;
 import com.cruntchy.suprseed.Client.Scene1.Data.GameOverData;
-import com.cruntchy.suprseed.Engine.Collisions.CollisionHandler;
-import com.cruntchy.suprseed.Engine.Collisions.PixelPerfectCollision;
-import com.cruntchy.suprseed.Engine.Collisions.RectangleCollision;
-import com.cruntchy.suprseed.Engine.SoundPlayer.SoundMixer;
-import com.cruntchy.suprseed.Engine.SpriteObjects.DefaultComponents.Component;
-import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase.Sprite;
+import com.cruntchy.suprseed.Engine.Core.SpriteObjects.DefaultComponents.Component;
+import com.cruntchy.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
+import com.cruntchy.suprseed.Engine.Lib.Collisions.CollisionHandler;
+import com.cruntchy.suprseed.Engine.Lib.Collisions.PixelPerfectCollision;
+import com.cruntchy.suprseed.Engine.Lib.Collisions.RectangleCollision;
+import com.cruntchy.suprseed.Engine.Lib.SoundPlayer.SoundMixer;
 
 import java.util.List;
 

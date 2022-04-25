@@ -1,7 +1,7 @@
 package com.cruntchy.suprseed.Client.Scene1.Sprites.HeroSprite;
 
-import com.cruntchy.suprseed.Engine.SpriteObjects.DefaultComponents.Component;
-import com.cruntchy.suprseed.Engine.SpriteObjects.SpriteBase.Sprite;
+import com.cruntchy.suprseed.Engine.Core.SpriteObjects.DefaultComponents.Component;
+import com.cruntchy.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
 
 public class HeroStartingState implements Component {
 
