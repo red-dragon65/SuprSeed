@@ -2,7 +2,7 @@ package com.cruntchy.suprseed.Client;
 
 import android.content.Context;
 
-import com.cruntchy.suprseed.Client.Scene1.Subscenes.TopScene;
+import com.cruntchy.suprseed.Client.DemoScene.Subscenes.GameDemoMainScene;
 import com.cruntchy.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
 import com.cruntchy.suprseed.Engine.Core.Scenes.SceneHeirarchy.RootScene;
 
@@ -22,6 +22,6 @@ public class MainScene extends RootScene {
         //context.getResources();
 
         // Starts the scene 1 example package
-        BaseScene startingScene = new TopScene(this, "TopScene");
+        BaseScene startingScene = new GameDemoMainScene(this, "TopScene");
     }
 }
