@@ -7,7 +7,9 @@
 
 **SuprSeed is a light weight 2D Android game development engine.** The flexibility and modularity offered allows it to become the foundation of mobile games, custom game engines, as well as UI driven applications.
 
-With the power of SOLID principles and Design Patterns, any component of the `Core` package can be swapped out to a custom implementation using the 'EngineConfigurator' (which handles the engines dependency injection). The framework also comes with a library `Lib` package that offers offers default classes to help provide a starting point for creating games.
+With the power of SOLID principles and Design Patterns, any component of the `Core` package can be swapped out to a custom implementation using the 'EngineConfigurator' (which handles the engines dependency injection). The framework also comes with a library `Lib` package that offers default classes to help provide a starting point for creating games.
+
+For creating games, the engine uses scenes which can contain sub-scenes or sprites. Each sprite can then be configured using components and shared data. This allows a separation of concerns as well as code reusability to help create games faster.
 
 <br/>
 
@@ -16,6 +18,7 @@ Some of the engines `Core` features are:
 - Bitmap resolution scaling across different screen sizes
 - Coordinate scaling
 - Logic tick rate / Screen refresh rate scaling
+- Input handler
 
 The engines `Lib` features are:
 - Sound effect player
