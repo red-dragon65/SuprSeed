@@ -1,6 +1,6 @@
 
 <p align="center">
-<img src="app/src/main/res/drawable-v24/suprseed_widebanner.png" width=650>
+<img src="app/src/main/res/drawable-v24/suprseed_widebanner.png" width=650 title="SuprSeed - Grow Games">
 </p>
 
 ---
