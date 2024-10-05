@@ -6,7 +6,7 @@ android {
     compileSdk 35
 
     defaultConfig {
-        applicationId "com.cruntchy.suprseed"
+        applicationId "dev.suprseed.demo"
         minSdk 26
         targetSdk 35
         versionCode 1
@@ -25,7 +25,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    namespace 'com.cruntchy.suprseed'
+    namespace 'dev.suprseed.demo'
 }
 
 dependencies {

@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/BaseTheme">
         <activity
-            android:name=".Engine.MainActivity"
+            android:name="dev.suprseed.demo.Engine.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
