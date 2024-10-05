@@ -7,7 +7,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import dev.suprseed.Engine.Core.MainView.GameViewBuilder.BaseEngineConfigurator;
 import dev.suprseed.Engine.DefaultEngineConfiguration;
 import dev.suprseed.Engine.EngineActivity;
-import dev.suprseed.demo.R;
 
 public class MainActivity extends EngineActivity {
 

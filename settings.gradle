@@ -7,5 +7,5 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "SuprSeed"
-include ':app'
+include ':DemoApp'
 include ':SuprSeed'
