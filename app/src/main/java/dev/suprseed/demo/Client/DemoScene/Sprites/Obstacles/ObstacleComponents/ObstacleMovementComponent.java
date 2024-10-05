@@ -1,8 +1,8 @@
 package dev.suprseed.demo.Client.DemoScene.Sprites.Obstacles.ObstacleComponents;
 
 import dev.suprseed.demo.Client.DemoScene.SharedData.BounceData;
-import dev.suprseed.demo.Engine.Core.SpriteObjects.DefaultComponents.Component;
-import dev.suprseed.demo.Engine.Core.SpriteObjects.SpriteBase.Sprite;
+import dev.suprseed.Engine.Core.SpriteObjects.DefaultComponents.Component;
+import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
 
 import java.util.List;
 

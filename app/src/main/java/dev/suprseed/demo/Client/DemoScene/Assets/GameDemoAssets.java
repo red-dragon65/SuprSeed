@@ -1,11 +1,11 @@
 package dev.suprseed.demo.Client.DemoScene.Assets;
 
-import dev.suprseed.demo.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
-import dev.suprseed.demo.Engine.Lib.AssetLoader.AssetLoader;
-import dev.suprseed.demo.Engine.Lib.AssetLoader.FolderParser;
-import dev.suprseed.demo.Engine.Lib.AssetLoader.Streamable;
-import dev.suprseed.demo.Engine.Lib.Images.ImageCollectionAnimator;
-import dev.suprseed.demo.Engine.Lib.Images.ImageSingle;
+import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
+import dev.suprseed.Engine.Lib.AssetLoader.AssetLoader;
+import dev.suprseed.Engine.Lib.AssetLoader.FolderParser;
+import dev.suprseed.Engine.Lib.AssetLoader.Streamable;
+import dev.suprseed.Engine.Lib.Images.ImageCollectionAnimator;
+import dev.suprseed.Engine.Lib.Images.ImageSingle;
 
 public class GameDemoAssets extends AssetLoader {
 

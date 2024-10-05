@@ -4,9 +4,9 @@ import android.graphics.RectF;
 import android.view.MotionEvent;
 
 import dev.suprseed.demo.Client.DemoScene.SharedData.GameOverData;
-import dev.suprseed.demo.Engine.Core.InputHandler.TouchInput.InputListener;
-import dev.suprseed.demo.Engine.Core.MainView.GameProcessor.Render.CanvasData;
-import dev.suprseed.demo.Engine.Core.SpriteObjects.SpriteBase.Sprite;
+import dev.suprseed.Engine.Core.InputHandler.TouchInput.InputListener;
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.CanvasData;
+import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
 
 public class FullScreenHeroTouchInput implements InputListener {
 

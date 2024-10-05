@@ -1,8 +1,8 @@
 package dev.suprseed.demo.Client.DemoScene.Sprites.Obstacles;
 
-import dev.suprseed.demo.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
-import dev.suprseed.demo.Engine.Core.SpriteObjects.SpriteBase.ImageHandler;
-import dev.suprseed.demo.Engine.Core.SpriteObjects.SpriteBase.Sprite;
+import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
+import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.ImageHandler;
+import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
 
 public class ObstacleSprite extends Sprite {
 

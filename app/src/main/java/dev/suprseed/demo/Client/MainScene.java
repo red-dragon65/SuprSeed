@@ -3,8 +3,8 @@ package dev.suprseed.demo.Client;
 import android.content.Context;
 
 import dev.suprseed.demo.Client.DemoScene.Subscenes.GameDemoMainScene;
-import dev.suprseed.demo.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
-import dev.suprseed.demo.Engine.Core.Scenes.SceneHeirarchy.RootScene;
+import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
+import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.RootScene;
 
 public class MainScene extends RootScene {
 

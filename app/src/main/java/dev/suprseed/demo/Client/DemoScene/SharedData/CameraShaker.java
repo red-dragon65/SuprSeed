@@ -1,7 +1,7 @@
 package dev.suprseed.demo.Client.DemoScene.SharedData;
 
-import dev.suprseed.demo.Engine.Core.MainView.GameProcessor.Render.Coordinates.Camera;
-import dev.suprseed.demo.Engine.Core.MainView.GameProcessor.Render.Coordinates.Movable;
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates.Camera;
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates.Movable;
 
 import java.util.Random;
 

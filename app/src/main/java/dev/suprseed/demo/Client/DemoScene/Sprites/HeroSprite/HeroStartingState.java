@@ -1,7 +1,7 @@
 package dev.suprseed.demo.Client.DemoScene.Sprites.HeroSprite;
 
-import dev.suprseed.demo.Engine.Core.SpriteObjects.DefaultComponents.Component;
-import dev.suprseed.demo.Engine.Core.SpriteObjects.SpriteBase.Sprite;
+import dev.suprseed.Engine.Core.SpriteObjects.DefaultComponents.Component;
+import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
 
 public class HeroStartingState implements Component {
 

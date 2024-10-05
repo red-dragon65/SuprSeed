@@ -1,11 +1,11 @@
 package dev.suprseed.demo.Client.DemoScene.Sprites.HudSprite.OverlaySprites;
 
-import dev.suprseed.demo.Engine.Core.MainView.GameProcessor.Loop.LoopManager;
-import dev.suprseed.demo.Engine.Core.MainView.GameProcessor.Render.CanvasData;
-import dev.suprseed.demo.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
-import dev.suprseed.demo.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
-import dev.suprseed.demo.Engine.Core.SpriteObjects.SpriteBase.ImageHandler;
-import dev.suprseed.demo.Engine.Core.SpriteObjects.SpriteBase.Sprite;
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LoopManager;
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.CanvasData;
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
+import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
+import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.ImageHandler;
+import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
 
 public class PauseText extends Sprite {
 

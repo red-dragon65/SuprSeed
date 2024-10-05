@@ -1,9 +1,9 @@
 package dev.suprseed.demo.Client.DemoScene.Sprites.Obstacles.ObstacleComponents;
 
-import dev.suprseed.demo.Engine.Core.MainView.GameProcessor.Render.CanvasData;
-import dev.suprseed.demo.Engine.Core.SpriteObjects.DefaultComponents.ResetableComponent;
-import dev.suprseed.demo.Engine.Core.SpriteObjects.SpriteBase.ImageHandler;
-import dev.suprseed.demo.Engine.Core.SpriteObjects.SpriteBase.Sprite;
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.CanvasData;
+import dev.suprseed.Engine.Core.SpriteObjects.DefaultComponents.ResetableComponent;
+import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.ImageHandler;
+import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
 
 import java.util.List;
 import java.util.Random;

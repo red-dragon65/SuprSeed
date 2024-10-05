@@ -2,12 +2,12 @@ package dev.suprseed.demo.Client.DemoScene.Sprites.Obstacles.ObstacleComponents;
 
 import dev.suprseed.demo.Client.DemoScene.SharedData.CameraShaker;
 import dev.suprseed.demo.Client.DemoScene.SharedData.GameOverData;
-import dev.suprseed.demo.Engine.Core.SpriteObjects.DefaultComponents.Component;
-import dev.suprseed.demo.Engine.Core.SpriteObjects.SpriteBase.Sprite;
-import dev.suprseed.demo.Engine.Lib.Collisions.CollisionHandler;
-import dev.suprseed.demo.Engine.Lib.Collisions.PixelPerfectCollision;
-import dev.suprseed.demo.Engine.Lib.Collisions.RectangleCollision;
-import dev.suprseed.demo.Engine.Lib.SoundPlayer.SoundMixer;
+import dev.suprseed.Engine.Core.SpriteObjects.DefaultComponents.Component;
+import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
+import dev.suprseed.Engine.Lib.Collisions.CollisionHandler;
+import dev.suprseed.Engine.Lib.Collisions.PixelPerfectCollision;
+import dev.suprseed.Engine.Lib.Collisions.RectangleCollision;
+import dev.suprseed.Engine.Lib.SoundPlayer.SoundMixer;
 
 import java.util.List;
 

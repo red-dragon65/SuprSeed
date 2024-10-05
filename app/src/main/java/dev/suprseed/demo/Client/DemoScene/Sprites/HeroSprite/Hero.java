@@ -5,15 +5,15 @@ import dev.suprseed.demo.Client.DemoScene.SharedData.GameOverData;
 import dev.suprseed.demo.Client.DemoScene.Sprites.HeroSprite.HeroComponents.BounceMovementComponent;
 import dev.suprseed.demo.Client.DemoScene.Sprites.HeroSprite.HeroComponents.TiltMovementComponent;
 import dev.suprseed.demo.Client.DemoScene.Sprites.HeroSprite.HeroComponents.WallCollisionComponent;
-import dev.suprseed.demo.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
-import dev.suprseed.demo.Engine.Core.SpriteObjects.DefaultComponents.Component;
-import dev.suprseed.demo.Engine.Core.SpriteObjects.DefaultComponents.ResetableComponent;
-import dev.suprseed.demo.Engine.Core.SpriteObjects.SpriteBase.ImageHandler;
-import dev.suprseed.demo.Engine.Core.SpriteObjects.SpriteBase.Sprite;
-import dev.suprseed.demo.Engine.Core.System.Logic;
-import dev.suprseed.demo.Engine.Lib.Collisions.CollisionHandler;
-import dev.suprseed.demo.Engine.Lib.Collisions.RectangleCollision;
-import dev.suprseed.demo.Engine.Lib.SoundPlayer.SoundMixer;
+import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
+import dev.suprseed.Engine.Core.SpriteObjects.DefaultComponents.Component;
+import dev.suprseed.Engine.Core.SpriteObjects.DefaultComponents.ResetableComponent;
+import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.ImageHandler;
+import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
+import dev.suprseed.Engine.Core.System.Logic;
+import dev.suprseed.Engine.Lib.Collisions.CollisionHandler;
+import dev.suprseed.Engine.Lib.Collisions.RectangleCollision;
+import dev.suprseed.Engine.Lib.SoundPlayer.SoundMixer;
 
 public class Hero extends Sprite implements Logic {
 

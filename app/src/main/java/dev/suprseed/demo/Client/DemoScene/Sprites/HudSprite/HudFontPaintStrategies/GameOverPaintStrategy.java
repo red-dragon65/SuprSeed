@@ -3,7 +3,7 @@ package dev.suprseed.demo.Client.DemoScene.Sprites.HudSprite.HudFontPaintStrateg
 import android.graphics.Color;
 import android.graphics.Paint;
 
-import dev.suprseed.demo.Engine.Lib.Fonts.FontPaintRoller;
+import dev.suprseed.Engine.Lib.Fonts.FontPaintRoller;
 
 public class GameOverPaintStrategy extends FontPaintRoller {
 

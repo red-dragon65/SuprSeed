@@ -4,13 +4,13 @@ import dev.suprseed.demo.Client.DemoScene.SharedData.BounceData;
 import dev.suprseed.demo.Client.DemoScene.SharedData.GameOverData;
 import dev.suprseed.demo.Client.DemoScene.Sprites.HeroSprite.Hero;
 import dev.suprseed.demo.Client.DemoScene.Sprites.Obstacles.ObstacleCollection;
-import dev.suprseed.demo.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
-import dev.suprseed.demo.Engine.Core.Scenes.SceneHeirarchy.SceneManager;
-import dev.suprseed.demo.Engine.Core.SpriteObjects.SpriteBase.ImageHandler;
-import dev.suprseed.demo.Engine.Core.SpriteObjects.SpriteBase.Sprite;
-import dev.suprseed.demo.Engine.Lib.AssetLoader.AssetLoader;
-import dev.suprseed.demo.Engine.Lib.Images.SpriteImage;
-import dev.suprseed.demo.Engine.Lib.SoundPlayer.SoundMixer;
+import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
+import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.SceneManager;
+import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.ImageHandler;
+import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
+import dev.suprseed.Engine.Lib.AssetLoader.AssetLoader;
+import dev.suprseed.Engine.Lib.Images.SpriteImage;
+import dev.suprseed.Engine.Lib.SoundPlayer.SoundMixer;
 
 public class EntityScene extends BaseScene {
 

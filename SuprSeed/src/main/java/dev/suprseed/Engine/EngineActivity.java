@@ -2,7 +2,6 @@ package dev.suprseed.Engine;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -17,7 +16,7 @@ public abstract class EngineActivity extends AppCompatActivity {
      * Specify the activity to use for the engine (hint: it's probably 'activity_main')
      * @return The user specified view to load in the 'onCreate()' function
      */
-    protected abstract View loadView();
+    protected abstract int loadView();
 
     // Todo: Remove this? Can't we get the layout from the 'View' object?
     /**

@@ -5,13 +5,17 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import dev.suprseed.demo.Engine.Core.InputHandler.TouchInput.InputManager;
-import dev.suprseed.demo.Engine.Core.InputHandler.TouchInput.TouchHandler;
-import dev.suprseed.demo.Engine.Core.MainView.EngineSettings.ViewConfig;
-import dev.suprseed.demo.Engine.Core.MainView.GameViewBuilder.BaseEngineConfigurator;
-import dev.suprseed.demo.Engine.Core.MainView.GameViewBuilder.EngineConfigurator;
-import dev.suprseed.demo.Engine.Core.Scenes.SceneHeirarchy.RootScene;
+import dev.suprseed.Engine.Core.InputHandler.TouchInput.InputManager;
+import dev.suprseed.Engine.Core.InputHandler.TouchInput.TouchHandler;
+import dev.suprseed.Engine.Core.MainView.EngineSettings.ViewConfig;
+import dev.suprseed.Engine.Core.MainView.GameViewBuilder.BaseEngineConfigurator;
+import dev.suprseed.Engine.Core.MainView.GameViewBuilder.EngineConfigurator;
+import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.RootScene;
 
+
+/*
+You can set your custom engine configuration here as needed
+ */
 public class ClientEngineConfigurator extends BaseEngineConfigurator {
 
     private final EngineConfigurator engineConfigurator;

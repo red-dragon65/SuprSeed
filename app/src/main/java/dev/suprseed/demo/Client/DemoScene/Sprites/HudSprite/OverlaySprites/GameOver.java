@@ -4,12 +4,12 @@ package dev.suprseed.demo.Client.DemoScene.Sprites.HudSprite.OverlaySprites;
 import dev.suprseed.demo.Client.DemoScene.SharedData.GameOverData;
 import dev.suprseed.demo.Client.DemoScene.Sprites.HudSprite.HudInput.FullScreenRestartInput;
 import dev.suprseed.demo.Client.DemoScene.Sprites.HudSprite.HudFontPaintStrategies.GameOverPaintStrategy;
-import dev.suprseed.demo.Engine.Core.InputHandler.TouchInput.InputListener;
-import dev.suprseed.demo.Engine.Core.InputHandler.TouchInput.InputManager;
-import dev.suprseed.demo.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
-import dev.suprseed.demo.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
-import dev.suprseed.demo.Engine.Core.SpriteObjects.SpriteBase.Sprite;
-import dev.suprseed.demo.Engine.Lib.Fonts.FontHolder;
+import dev.suprseed.Engine.Core.InputHandler.TouchInput.InputListener;
+import dev.suprseed.Engine.Core.InputHandler.TouchInput.InputManager;
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
+import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
+import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
+import dev.suprseed.Engine.Lib.Fonts.FontHolder;
 import dev.suprseed.demo.R;
 
 public class GameOver extends Sprite {

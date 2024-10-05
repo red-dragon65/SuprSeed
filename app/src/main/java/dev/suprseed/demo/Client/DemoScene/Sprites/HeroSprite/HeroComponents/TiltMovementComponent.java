@@ -2,9 +2,9 @@ package dev.suprseed.demo.Client.DemoScene.Sprites.HeroSprite.HeroComponents;
 
 import android.content.Context;
 
-import dev.suprseed.demo.Engine.Core.InputHandler.Sensors.Accelerometer;
-import dev.suprseed.demo.Engine.Core.SpriteObjects.DefaultComponents.Component;
-import dev.suprseed.demo.Engine.Core.SpriteObjects.SpriteBase.Sprite;
+import dev.suprseed.Engine.Core.InputHandler.Sensors.Accelerometer;
+import dev.suprseed.Engine.Core.SpriteObjects.DefaultComponents.Component;
+import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
 
 public class TiltMovementComponent implements Component {
 

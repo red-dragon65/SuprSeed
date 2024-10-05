@@ -3,10 +3,10 @@ package dev.suprseed.demo.Client.DemoScene.Sprites.HeroSprite.HeroComponents;
 import dev.suprseed.demo.Client.DemoScene.SharedData.BounceData;
 import dev.suprseed.demo.Client.DemoScene.SharedData.GameOverData;
 import dev.suprseed.demo.Client.DemoScene.Sprites.HeroSprite.FullScreenHeroTouchInput;
-import dev.suprseed.demo.Engine.Core.InputHandler.TouchInput.InputManager;
-import dev.suprseed.demo.Engine.Core.SpriteObjects.DefaultComponents.ResetableComponent;
-import dev.suprseed.demo.Engine.Core.SpriteObjects.SpriteBase.Sprite;
-import dev.suprseed.demo.Engine.Lib.SoundPlayer.SoundMixer;
+import dev.suprseed.Engine.Core.InputHandler.TouchInput.InputManager;
+import dev.suprseed.Engine.Core.SpriteObjects.DefaultComponents.ResetableComponent;
+import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
+import dev.suprseed.Engine.Lib.SoundPlayer.SoundMixer;
 
 public class BounceMovementComponent implements ResetableComponent {
 

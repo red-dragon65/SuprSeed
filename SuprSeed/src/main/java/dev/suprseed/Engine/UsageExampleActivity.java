@@ -1,7 +1,6 @@
 package dev.suprseed.Engine;
 
 import android.content.Context;
-import android.view.View;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -13,14 +12,16 @@ public class UsageExampleActivity extends EngineActivity{
     RootScene mainScene;
 
     @Override
-    protected View loadView() {
-        //return setContentView(R.layout.activity_main);
-        return null;
+    protected int loadView() {
+        // This should be the main activity of your app
+        //return R.layout.activity_main;
+        return 0;
     }
 
     @Override
     protected ConstraintLayout loadViewLayout() {
-        //return findViewById(R.id.game_layoupt);
+        // this should should be the id that is set for your main activity
+        //return findViewById(R.id.main);
         return null;
     }
 

@@ -3,13 +3,13 @@ package dev.suprseed.demo.Client.DemoScene.Sprites.HudSprite.OverlaySprites;
 import android.view.MotionEvent;
 
 import dev.suprseed.demo.Client.DemoScene.Sprites.HudSprite.HudInput.FullScreenPauseInput;
-import dev.suprseed.demo.Engine.Core.InputHandler.TouchInput.InputListener;
-import dev.suprseed.demo.Engine.Core.InputHandler.TouchInput.InputManager;
-import dev.suprseed.demo.Engine.Core.MainView.GameProcessor.Loop.LoopManager;
-import dev.suprseed.demo.Engine.Core.MainView.GameProcessor.Render.CanvasData;
-import dev.suprseed.demo.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
-import dev.suprseed.demo.Engine.Core.SpriteObjects.SpriteBase.ImageHandler;
-import dev.suprseed.demo.Engine.Core.SpriteObjects.SpriteBase.Sprite;
+import dev.suprseed.Engine.Core.InputHandler.TouchInput.InputListener;
+import dev.suprseed.Engine.Core.InputHandler.TouchInput.InputManager;
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LoopManager;
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.CanvasData;
+import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
+import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.ImageHandler;
+import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
 
 public class PauseButton extends Sprite implements InputListener {
 
