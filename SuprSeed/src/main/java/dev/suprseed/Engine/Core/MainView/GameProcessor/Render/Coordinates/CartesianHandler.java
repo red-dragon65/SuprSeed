@@ -16,10 +16,10 @@ public class CartesianHandler implements LocationHandler {
 
 
     @Override
-    public float[] parseLocation(float[] loc){
+    public float[] parseLocation(float[] loc) {
 
         // Set center origin if necessary
-        if(!isTopLeftOrigin){
+        if (!isTopLeftOrigin) {
 
             loc = canvasCenter(loc);
         }
@@ -30,7 +30,7 @@ public class CartesianHandler implements LocationHandler {
 
     // Returns the coordinates for the center of the canvas
     @Override
-    public float[] canvasCenter(float[] loc){
+    public float[] canvasCenter(float[] loc) {
 
         // Offset x to center
         float middle_x = CanvasData.getInstance().getOriginalWidth() / 2;

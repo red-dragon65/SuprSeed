@@ -2,9 +2,9 @@ package dev.suprseed.demo.Subscenes;
 
 import android.media.MediaPlayer;
 
-import dev.suprseed.demo.Assets.GameDemoAssets;
-import dev.suprseed.demo.SharedData.BounceData;
-import dev.suprseed.demo.SharedData.GameOverData;
+import java.util.HashMap;
+import java.util.Map;
+
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LoopManager;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
@@ -16,10 +16,10 @@ import dev.suprseed.Engine.Lib.AssetLoader.LocalImageFileStreamer;
 import dev.suprseed.Engine.Lib.AssetLoader.Streamable;
 import dev.suprseed.Engine.Lib.SoundPlayer.BasicSoundEffects;
 import dev.suprseed.Engine.Lib.SoundPlayer.SoundMixer;
+import dev.suprseed.demo.Assets.GameDemoAssets;
 import dev.suprseed.demo.R;
-
-import java.util.HashMap;
-import java.util.Map;
+import dev.suprseed.demo.SharedData.BounceData;
+import dev.suprseed.demo.SharedData.GameOverData;
 
 public class GameDemoMainScene extends SceneManager {
 

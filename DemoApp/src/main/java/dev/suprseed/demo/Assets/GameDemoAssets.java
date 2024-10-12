@@ -10,7 +10,7 @@ import dev.suprseed.Engine.Lib.Images.ImageSingle;
 public class GameDemoAssets extends AssetLoader {
 
 
-    public GameDemoAssets(BaseScene parentScene, Streamable assetStreamer, FolderParser folderParser){
+    public GameDemoAssets(BaseScene parentScene, Streamable assetStreamer, FolderParser folderParser) {
         super(parentScene, assetStreamer, folderParser);
     }
 
@@ -22,7 +22,7 @@ public class GameDemoAssets extends AssetLoader {
 
 
         // Hero
-        ImageCollectionAnimator hero = new ImageCollectionAnimator(parentScene,"Images/Hero", 10, assetStreamer, folderParser, 2, true);
+        ImageCollectionAnimator hero = new ImageCollectionAnimator(parentScene, "Images/Hero", 10, assetStreamer, folderParser, 2, true);
         animations.put("hero", hero);
 
 
@@ -31,25 +31,23 @@ public class GameDemoAssets extends AssetLoader {
         images.put("background", background);
 
 
-
         // Enemies
         int enemyAnimationSpeed = 15;
 
-        ImageCollectionAnimator bat = new ImageCollectionAnimator(parentScene,"Images/Enemies/bat", 7, assetStreamer, folderParser, enemyAnimationSpeed, true);
+        ImageCollectionAnimator bat = new ImageCollectionAnimator(parentScene, "Images/Enemies/bat", 7, assetStreamer, folderParser, enemyAnimationSpeed, true);
         animations.put("bat", bat);
 
-        ImageCollectionAnimator bee = new ImageCollectionAnimator(parentScene,"Images/Enemies/bee", 7, assetStreamer, folderParser, enemyAnimationSpeed, true);
+        ImageCollectionAnimator bee = new ImageCollectionAnimator(parentScene, "Images/Enemies/bee", 7, assetStreamer, folderParser, enemyAnimationSpeed, true);
         animations.put("bee", bee);
 
-        ImageCollectionAnimator bird = new ImageCollectionAnimator(parentScene,"Images/Enemies/bird", 7, assetStreamer, folderParser, enemyAnimationSpeed, true);
+        ImageCollectionAnimator bird = new ImageCollectionAnimator(parentScene, "Images/Enemies/bird", 7, assetStreamer, folderParser, enemyAnimationSpeed, true);
         animations.put("bird", bird);
 
-        ImageCollectionAnimator duck = new ImageCollectionAnimator(parentScene,"Images/Enemies/duck", 7, assetStreamer, folderParser, enemyAnimationSpeed, true);
+        ImageCollectionAnimator duck = new ImageCollectionAnimator(parentScene, "Images/Enemies/duck", 7, assetStreamer, folderParser, enemyAnimationSpeed, true);
         animations.put("duck", duck);
 
-        ImageCollectionAnimator ghost = new ImageCollectionAnimator(parentScene,"Images/Enemies/ghost", 7, assetStreamer, folderParser, enemyAnimationSpeed, true);
+        ImageCollectionAnimator ghost = new ImageCollectionAnimator(parentScene, "Images/Enemies/ghost", 7, assetStreamer, folderParser, enemyAnimationSpeed, true);
         animations.put("ghost", ghost);
-
 
 
         // User interface

@@ -3,10 +3,10 @@ package dev.suprseed.demo.Sprites.HudSprite.HudInput;
 import android.graphics.RectF;
 import android.view.MotionEvent;
 
-import dev.suprseed.demo.SharedData.GameOverData;
 import dev.suprseed.Engine.Core.InputHandler.TouchInput.InputListener;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.CanvasData;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
+import dev.suprseed.demo.SharedData.GameOverData;
 
 public class FullScreenRestartInput implements InputListener {
 

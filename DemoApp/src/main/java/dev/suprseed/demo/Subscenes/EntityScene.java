@@ -1,9 +1,5 @@
 package dev.suprseed.demo.Subscenes;
 
-import dev.suprseed.demo.SharedData.BounceData;
-import dev.suprseed.demo.SharedData.GameOverData;
-import dev.suprseed.demo.Sprites.HeroSprite.Hero;
-import dev.suprseed.demo.Sprites.Obstacles.ObstacleCollection;
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.SceneManager;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.ImageHandler;
@@ -11,6 +7,10 @@ import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
 import dev.suprseed.Engine.Lib.AssetLoader.AssetLoader;
 import dev.suprseed.Engine.Lib.Images.SpriteImage;
 import dev.suprseed.Engine.Lib.SoundPlayer.SoundMixer;
+import dev.suprseed.demo.SharedData.BounceData;
+import dev.suprseed.demo.SharedData.GameOverData;
+import dev.suprseed.demo.Sprites.HeroSprite.Hero;
+import dev.suprseed.demo.Sprites.Obstacles.ObstacleCollection;
 
 public class EntityScene extends BaseScene {
 

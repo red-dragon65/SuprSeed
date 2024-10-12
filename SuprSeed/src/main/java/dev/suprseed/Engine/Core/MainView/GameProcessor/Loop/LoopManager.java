@@ -44,9 +44,8 @@ public class LoopManager implements RunnableConfig<GameView> {
     }
 
 
-
     @Override
-    public void initLoop(GameView gameView){
+    public void initLoop(GameView gameView) {
 
         CentralLogger.getInstance().logMessage(ErrorType.INFO, "Initializing loop config...");
 
@@ -82,14 +81,14 @@ public class LoopManager implements RunnableConfig<GameView> {
 
             CentralLogger.getInstance().logMessage(ErrorType.INFO, "The refresh rate has been set. RefreshRate: " + refreshSpeed);
 
-        }else{
+        } else {
 
             CentralLogger.getInstance().logMessage(ErrorType.WARNING, "Cannot set the refresh rate! Android version below 'R'! Reverting to 60hz default value!");
             refreshSpeed = RefreshTypes.SIXTY_FPS;
         }
     }
 
-    private void initLogicSpeed(){
+    private void initLogicSpeed() {
 
         /*
         Verify speeds make sense
@@ -101,33 +100,33 @@ public class LoopManager implements RunnableConfig<GameView> {
          */
 
 
-        if(logicRate.getTickRate() < refreshSpeed.getHertz()){ // logicRate < refreshSpeed
+        if (logicRate.getTickRate() < refreshSpeed.getHertz()) { // logicRate < refreshSpeed
 
             CentralLogger.getInstance().logMessage(ErrorType.WARNING, "The logicRate is less than the refreshSpeed! FPS will be locked to the logicRate!");
 
             // Verify multiplicity
-            if(refreshSpeed.getHertz() % logicRate.getTickRate() == 0){
+            if (refreshSpeed.getHertz() % logicRate.getTickRate() == 0) {
 
                 // The number of frames the logic should skip
                 refreshMultiple = refreshSpeed.getHertz() / logicRate.getTickRate();
 
-            }else{
+            } else {
 
                 CentralLogger.getInstance().logMessage(ErrorType.CONFIG_ERROR, "The given refresh rate (" + refreshSpeed.getHertz() + ") is not a multiple of the logic rate (" + logicRate.getTickRate() + ")!");
                 throw new RuntimeException();
             }
 
-        }else if(logicRate.getTickRate() > refreshSpeed.getHertz()) { // logicRate > refreshSpeed
+        } else if (logicRate.getTickRate() > refreshSpeed.getHertz()) { // logicRate > refreshSpeed
 
             CentralLogger.getInstance().logMessage(ErrorType.WARNING, "The logicRate is greater than the refreshSpeed! Lag is more likely to occur!");
 
             // Verify multiplicity
-            if(logicRate.getTickRate() % refreshSpeed.getHertz() == 0){
+            if (logicRate.getTickRate() % refreshSpeed.getHertz() == 0) {
 
                 // Number of times the logic should run in one frame
                 logicMultiple = logicRate.getTickRate() / refreshSpeed.getHertz();
 
-            }else{
+            } else {
 
                 CentralLogger.getInstance().logMessage(ErrorType.CONFIG_ERROR, "The given logic rate (" + logicRate.getTickRate() + ") is not a multiple of the refresh rate (" + refreshSpeed.getHertz() + ") !");
                 throw new RuntimeException();
@@ -147,23 +146,20 @@ public class LoopManager implements RunnableConfig<GameView> {
     }
 
 
-
-
-
     @Override
-    public void run(GameView gameView){
+    public void run(GameView gameView) {
 
-        if(hardPause){
+        if (hardPause) {
 
             // Stop logic and drawing
 
-        } else{
+        } else {
 
-            if(softPause){
+            if (softPause) {
 
                 // Stop logic but allow drawing
 
-            }else{
+            } else {
 
                 // Run the game logic
                 runLogic();
@@ -194,58 +190,58 @@ public class LoopManager implements RunnableConfig<GameView> {
 
 
     // Handle logic run rate (scaled relative to refresh rate)
-    private void runLogic(){
+    private void runLogic() {
 
         // Number of times to run logic based on logic tick rate
         // (logic rate is greater than refresh rate)
-        if(logicMultiple > 0){
+        if (logicMultiple > 0) {
 
-            for(int i = 0; i < logicMultiple; i++){
+            for (int i = 0; i < logicMultiple; i++) {
 
                 // Run client logic code
                 //gameView.logicLoop();
                 LogicSystem.getInstance().update();
             }
-        }else
+        } else
 
-        // Number of frames to skip
-        // (logic rate is less than refresh rate)
-        if(refreshMultiple > 0){
+            // Number of frames to skip
+            // (logic rate is less than refresh rate)
+            if (refreshMultiple > 0) {
 
-            // Track which frame the logic should run
-            if(frameCounter == refreshMultiple){
+                // Track which frame the logic should run
+                if (frameCounter == refreshMultiple) {
 
-                // Run client logic code
-                //gameView.logicLoop();
-                LogicSystem.getInstance().update();
+                    // Run client logic code
+                    //gameView.logicLoop();
+                    LogicSystem.getInstance().update();
 
-                frameCounter = 0;
+                    frameCounter = 0;
+                }
+
+                frameCounter++;
             }
 
-            frameCounter++;
-        }
 
+            // Ignore frame pacing
+            else {
 
-        // Ignore frame pacing
-        else{
-
-            // Run client logic code
-            LogicSystem.getInstance().update();
-        }
+                // Run client logic code
+                LogicSystem.getInstance().update();
+            }
     }
 
     @Override
-    public boolean isHardPause(){
+    public boolean isHardPause() {
         return hardPause;
     }
 
     @Override
-    public boolean isSoftPause(){
+    public boolean isSoftPause() {
         return softPause;
     }
 
     @Override
-    public void setHardPause(boolean pause){
+    public void setHardPause(boolean pause) {
 
         hardPause = pause;
     }

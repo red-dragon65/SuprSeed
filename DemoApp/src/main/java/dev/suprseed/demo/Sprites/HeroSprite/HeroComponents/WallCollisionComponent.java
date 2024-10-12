@@ -35,7 +35,6 @@ public class WallCollisionComponent implements Component {
         }
 
 
-
         // Prevent sprite from moving off bottom/top of screen
 
         // Check if sprite moves off bottom of screen

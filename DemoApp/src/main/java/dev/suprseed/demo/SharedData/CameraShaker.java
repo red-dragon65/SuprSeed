@@ -1,9 +1,9 @@
 package dev.suprseed.demo.SharedData;
 
+import java.util.Random;
+
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates.Camera;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates.Movable;
-
-import java.util.Random;
 
 public class CameraShaker {
 
@@ -18,20 +18,20 @@ public class CameraShaker {
 
 
     // Constructor
-    public CameraShaker(){
+    public CameraShaker() {
 
         cameraShake = () -> {
 
             // Set camera to random point every five frames until
-            if(currentFrameTime < targetFrameTime){
+            if (currentFrameTime < targetFrameTime) {
 
-                if(currentFrameTime % shakeRate == 0){ // Check frame interval to run movement
+                if (currentFrameTime % shakeRate == 0) { // Check frame interval to run movement
 
-                    if(currentFrameTime % 2 == 0){ // Alternate movement between the two below
+                    if (currentFrameTime % 2 == 0) { // Alternate movement between the two below
 
                         Camera.getInstance().setxOffset(0);
                         Camera.getInstance().setyOffset(0);
-                    }else{
+                    } else {
 
                         Camera.getInstance().setxOffset(rand.nextInt(maxShakeDistance));
                         Camera.getInstance().setyOffset(rand.nextInt(maxShakeDistance));
@@ -42,7 +42,7 @@ public class CameraShaker {
             }
 
             // Force camera back to original position
-            if(currentFrameTime == targetFrameTime){
+            if (currentFrameTime == targetFrameTime) {
 
                 Camera.getInstance().setxOffset(0);
                 Camera.getInstance().setyOffset(0);
@@ -50,12 +50,12 @@ public class CameraShaker {
         };
     }
 
-    public void triggerShake(){
+    public void triggerShake() {
 
         currentFrameTime = 0;
     }
 
-    public void loadCameraShake(){
+    public void loadCameraShake() {
 
         Camera.getInstance().setCameraMovement(cameraShake);
     }

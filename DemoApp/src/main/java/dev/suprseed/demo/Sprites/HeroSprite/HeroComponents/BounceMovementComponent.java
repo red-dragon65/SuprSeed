@@ -1,12 +1,12 @@
 package dev.suprseed.demo.Sprites.HeroSprite.HeroComponents;
 
-import dev.suprseed.demo.SharedData.BounceData;
-import dev.suprseed.demo.SharedData.GameOverData;
-import dev.suprseed.demo.Sprites.HeroSprite.FullScreenHeroTouchInput;
 import dev.suprseed.Engine.Core.InputHandler.TouchInput.InputManager;
 import dev.suprseed.Engine.Core.SpriteObjects.DefaultComponents.ResetableComponent;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
 import dev.suprseed.Engine.Lib.SoundPlayer.SoundMixer;
+import dev.suprseed.demo.SharedData.BounceData;
+import dev.suprseed.demo.SharedData.GameOverData;
+import dev.suprseed.demo.Sprites.HeroSprite.FullScreenHeroTouchInput;
 
 public class BounceMovementComponent implements ResetableComponent {
 
@@ -43,14 +43,14 @@ public class BounceMovementComponent implements ResetableComponent {
 
     If hold input, then don't bounce sprite
     */
-    private void bounce(){
+    private void bounce() {
 
-        if(sprite.getY() + gravity < boundary){ // Let hero fall
+        if (sprite.getY() + gravity < boundary) { // Let hero fall
 
             // Increase velocity of sprite downwards unless boundary is hit
             sprite.setyVel(sprite.getyVel() + gravity);
 
-        }else{
+        } else {
 
             // Reset to boundary limit
             sprite.setY(boundary);
@@ -67,10 +67,10 @@ public class BounceMovementComponent implements ResetableComponent {
             } else { // Bounce hero
 
                 // Hero is past boundary. Reverse velocity for bounce.
-                if(bounceData.getBounceValue() == 0){
+                if (bounceData.getBounceValue() == 0) {
 
                     sprite.setyVel(-sprite.getyVel());
-                }else{
+                } else {
 
                     sprite.setyVel(-bounceData.getBounceValue());
 

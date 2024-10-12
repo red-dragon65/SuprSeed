@@ -12,21 +12,21 @@ public abstract class SceneManager extends BaseScene implements SceneController<
 
 
     // Constructor
-    public SceneManager(SceneManager parentScene, String sceneId, Context context){
+    public SceneManager(SceneManager parentScene, String sceneId, Context context) {
         super(parentScene, sceneId, context);
 
         init();
     }
 
     // Constructor
-    public SceneManager(SceneManager parentScene, String sceneId){
+    public SceneManager(SceneManager parentScene, String sceneId) {
         super(parentScene, sceneId, context);
 
         init();
     }
 
     // Constructor initializer
-    private void init(){
+    private void init() {
         sceneRegister = new SceneRegister();
     }
 
@@ -43,10 +43,6 @@ public abstract class SceneManager extends BaseScene implements SceneController<
     }
 
 
-
-
-
-
     /*
     This calls the sub scenes / sceneManagers code
      */
@@ -54,7 +50,7 @@ public abstract class SceneManager extends BaseScene implements SceneController<
     public void generateNextFrame() {
         super.generateNextFrame();
 
-        for(BaseScene scene : sceneRegister.getRegisterList()){
+        for (BaseScene scene : sceneRegister.getRegisterList()) {
             scene.generateNextFrame();
         }
     }
@@ -64,7 +60,7 @@ public abstract class SceneManager extends BaseScene implements SceneController<
     public void runLogic() {
         super.runLogic();
 
-        for(BaseScene scene : sceneRegister.getRegisterList()){
+        for (BaseScene scene : sceneRegister.getRegisterList()) {
             scene.runLogic();
         }
     }
@@ -74,7 +70,7 @@ public abstract class SceneManager extends BaseScene implements SceneController<
     public void draw(RenderHandler renderer) {
         super.draw(renderer);
 
-        for(BaseScene scene : sceneRegister.getRegisterList()){
+        for (BaseScene scene : sceneRegister.getRegisterList()) {
             scene.draw(renderer);
         }
     }

@@ -28,7 +28,7 @@ public class TiltMovementComponent implements Component {
         tilt();
     }
 
-    private void tilt(){
+    private void tilt() {
 
         // Get tilt value
         xValue = tiltometer.getSensorData()[0];

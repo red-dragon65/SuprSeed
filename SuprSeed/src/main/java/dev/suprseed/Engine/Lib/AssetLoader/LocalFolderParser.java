@@ -10,7 +10,7 @@ public class LocalFolderParser implements FolderParser {
 
 
     // Constructor
-    public LocalFolderParser(Resources res){
+    public LocalFolderParser(Resources res) {
 
         this.res = res;
     }
@@ -28,7 +28,7 @@ public class LocalFolderParser implements FolderParser {
             imagePaths = res.getAssets().list(basePath);
 
             // Add base path to file name
-            for(int i = 0; i < imagePaths.length; i++){
+            for (int i = 0; i < imagePaths.length; i++) {
 
                 imagePaths[i] = basePath + "/" + imagePaths[i];
             }

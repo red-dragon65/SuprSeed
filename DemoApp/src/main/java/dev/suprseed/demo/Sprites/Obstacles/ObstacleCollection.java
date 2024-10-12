@@ -1,10 +1,8 @@
 package dev.suprseed.demo.Sprites.Obstacles;
 
-import dev.suprseed.demo.SharedData.BounceData;
-import dev.suprseed.demo.SharedData.GameOverData;
-import dev.suprseed.demo.Sprites.Obstacles.ObstacleComponents.ObstacleCollisionComponent;
-import dev.suprseed.demo.Sprites.Obstacles.ObstacleComponents.ObstacleMovementComponent;
-import dev.suprseed.demo.Sprites.Obstacles.ObstacleComponents.ObstacleSpawnerComponent;
+import java.util.ArrayList;
+import java.util.Random;
+
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
 import dev.suprseed.Engine.Core.SpriteObjects.DefaultComponents.Component;
@@ -16,9 +14,11 @@ import dev.suprseed.Engine.Core.System.RenderableAndLayerable;
 import dev.suprseed.Engine.Lib.AssetLoader.AssetLoader;
 import dev.suprseed.Engine.Lib.Images.SpriteImage;
 import dev.suprseed.Engine.Lib.SoundPlayer.SoundMixer;
-
-import java.util.ArrayList;
-import java.util.Random;
+import dev.suprseed.demo.SharedData.BounceData;
+import dev.suprseed.demo.SharedData.GameOverData;
+import dev.suprseed.demo.Sprites.Obstacles.ObstacleComponents.ObstacleCollisionComponent;
+import dev.suprseed.demo.Sprites.Obstacles.ObstacleComponents.ObstacleMovementComponent;
+import dev.suprseed.demo.Sprites.Obstacles.ObstacleComponents.ObstacleSpawnerComponent;
 
 public class ObstacleCollection implements Logic, RenderableAndLayerable {
 
@@ -54,7 +54,7 @@ public class ObstacleCollection implements Logic, RenderableAndLayerable {
         obstacleImages.add(new ImageHandler("ghost", (SpriteImage) assets.getAnimation("ghost")));
 
         // Initialize obstacle sprites here
-        for(int i = 0; i < maxObstacles; i++){
+        for (int i = 0; i < maxObstacles; i++) {
 
             obstacleSprites.add(new ObstacleSprite(parentScene, obstacleImages.get(rand.nextInt(obstacleImages.size()))));
         }
@@ -74,8 +74,6 @@ public class ObstacleCollection implements Logic, RenderableAndLayerable {
         parentScene.logicRegister.registerObject(this);
         parentScene.imageRegister.registerObject(this);
     }
-
-
 
 
     @Override

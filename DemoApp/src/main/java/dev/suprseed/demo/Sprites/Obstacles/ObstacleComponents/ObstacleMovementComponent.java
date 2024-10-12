@@ -1,10 +1,10 @@
 package dev.suprseed.demo.Sprites.Obstacles.ObstacleComponents;
 
-import dev.suprseed.demo.SharedData.BounceData;
+import java.util.List;
+
 import dev.suprseed.Engine.Core.SpriteObjects.DefaultComponents.Component;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
-
-import java.util.List;
+import dev.suprseed.demo.SharedData.BounceData;
 
 public class ObstacleMovementComponent implements Component {
 

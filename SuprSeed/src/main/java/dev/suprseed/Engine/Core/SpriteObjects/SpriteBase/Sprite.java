@@ -47,13 +47,11 @@ public abstract class Sprite implements RenderableAndLayerable, Boundable, Logic
     }
 
 
-
     @Override
-    public void draw(RenderHandler renderer){
+    public void draw(RenderHandler renderer) {
 
         renderer.drawSprite(this);
     }
-
 
 
     // Getters / setters
@@ -90,12 +88,11 @@ public abstract class Sprite implements RenderableAndLayerable, Boundable, Logic
     }
 
 
-
-
     @Override
-    public boolean isDrawable(){
+    public boolean isDrawable() {
         return show;
     }
+
     public void setDrawable(boolean show) {
         this.show = show;
     }
@@ -123,7 +120,7 @@ public abstract class Sprite implements RenderableAndLayerable, Boundable, Logic
         this.imageHandler = imageHandler;
     }
 
-    public void enableCamera(){
+    public void enableCamera() {
         cameraRegistered = true;
     }
 

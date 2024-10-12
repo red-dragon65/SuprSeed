@@ -1,10 +1,5 @@
 package dev.suprseed.demo.Sprites.HeroSprite;
 
-import dev.suprseed.demo.SharedData.BounceData;
-import dev.suprseed.demo.SharedData.GameOverData;
-import dev.suprseed.demo.Sprites.HeroSprite.HeroComponents.BounceMovementComponent;
-import dev.suprseed.demo.Sprites.HeroSprite.HeroComponents.TiltMovementComponent;
-import dev.suprseed.demo.Sprites.HeroSprite.HeroComponents.WallCollisionComponent;
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
 import dev.suprseed.Engine.Core.SpriteObjects.DefaultComponents.Component;
 import dev.suprseed.Engine.Core.SpriteObjects.DefaultComponents.ResetableComponent;
@@ -14,6 +9,11 @@ import dev.suprseed.Engine.Core.System.Logic;
 import dev.suprseed.Engine.Lib.Collisions.CollisionHandler;
 import dev.suprseed.Engine.Lib.Collisions.RectangleCollision;
 import dev.suprseed.Engine.Lib.SoundPlayer.SoundMixer;
+import dev.suprseed.demo.SharedData.BounceData;
+import dev.suprseed.demo.SharedData.GameOverData;
+import dev.suprseed.demo.Sprites.HeroSprite.HeroComponents.BounceMovementComponent;
+import dev.suprseed.demo.Sprites.HeroSprite.HeroComponents.TiltMovementComponent;
+import dev.suprseed.demo.Sprites.HeroSprite.HeroComponents.WallCollisionComponent;
 
 public class Hero extends Sprite implements Logic {
 

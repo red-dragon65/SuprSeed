@@ -2,7 +2,6 @@ package dev.suprseed.demo.Sprites.HudSprite.OverlaySprites;
 
 import android.view.MotionEvent;
 
-import dev.suprseed.demo.Sprites.HudSprite.HudInput.FullScreenPauseInput;
 import dev.suprseed.Engine.Core.InputHandler.TouchInput.InputListener;
 import dev.suprseed.Engine.Core.InputHandler.TouchInput.InputManager;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LoopManager;
@@ -10,6 +9,7 @@ import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.CanvasData;
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.ImageHandler;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
+import dev.suprseed.demo.Sprites.HudSprite.HudInput.FullScreenPauseInput;
 
 public class PauseButton extends Sprite implements InputListener {
 

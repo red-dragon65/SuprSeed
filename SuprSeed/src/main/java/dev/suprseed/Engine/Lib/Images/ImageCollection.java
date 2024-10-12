@@ -30,7 +30,7 @@ public class ImageCollection implements SpriteImage {
             imageSet.add(imageStreamer.loadImage(singleImagePath, imageScale));
         }
 
-        if(imageSet.size() == 0){
+        if (imageSet.size() == 0) {
             CentralLogger.getInstance().logMessage(ErrorType.FATAL_ERROR, "No images found in folder! Folder: " + folderPath);
         }
     }
@@ -38,7 +38,7 @@ public class ImageCollection implements SpriteImage {
     @Override
     public Bitmap getImage() {
 
-        if(imageSet != null){
+        if (imageSet != null) {
             return imageSet.get(0);
         }
 

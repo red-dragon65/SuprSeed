@@ -17,7 +17,7 @@ public class DefaultEngineConfiguration extends BaseEngineConfigurator {
     private final EngineConfigurator engineConfigurator;
 
 
-    public DefaultEngineConfiguration(Context context, RootScene clientScene){
+    public DefaultEngineConfiguration(Context context, RootScene clientScene) {
         super(context);
 
         // User can build the engine configuration here
