@@ -7,7 +7,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import dev.suprseed.Engine.Core.MainView.GameViewBuilder.BaseEngineConfigurator;
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.RootScene;
 
-public class UsageExampleActivity extends EngineActivity {
+public class UsageExampleActivity extends EngineActivity{
 
     RootScene mainScene;
 

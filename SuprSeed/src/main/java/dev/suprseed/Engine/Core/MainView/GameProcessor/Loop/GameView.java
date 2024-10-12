@@ -24,6 +24,8 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     protected Context context;
 
 
+
+
     // TODO: REMOVE THIS! Instead, override 'instance state configuration changes'!!!
     protected static boolean initialized = false;
 
@@ -41,6 +43,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
         this.sceneManager = sceneManager;
     }
+
+
+
 
 
     @Override
@@ -65,6 +70,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
         super.onSizeChanged(w, h, oldw, oldh);
     }
+
+
+
 
 
     @Override
@@ -136,7 +144,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         super.onWindowFocusChanged(hasWindowFocus);
 
         // Pause game drawing (in game pause)
-        if (!hasWindowFocus) {
+        if(!hasWindowFocus){
 
             // Stop logic only (drawing still allowed)
             loopRunner.setSoftPause(true);

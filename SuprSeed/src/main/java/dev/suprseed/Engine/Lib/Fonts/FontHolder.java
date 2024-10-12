@@ -47,7 +47,7 @@ public class FontHolder extends FontPaintRoller implements FontRetriever<String>
      */
 
     @Override
-    public Typeface getFont() {
+    public Typeface getFont(){
 
         return loadedFont;
     }

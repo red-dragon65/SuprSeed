@@ -60,9 +60,9 @@ public class BasicSoundEffects<T> implements SoundMixer<T> {
     @Override
     public void playSound(T soundId, boolean loop) {
 
-        if (loop) {
+        if(loop){
             loopVal = -1;
-        } else {
+        }else{
             loopVal = 0;
         }
 

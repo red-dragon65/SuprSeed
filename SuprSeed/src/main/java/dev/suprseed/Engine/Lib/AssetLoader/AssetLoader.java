@@ -21,7 +21,7 @@ abstract public class AssetLoader {
 
 
     // Constructor
-    public AssetLoader(BaseScene parentScene, Streamable assetStreamer, FolderParser folderParser) {
+    public AssetLoader(BaseScene parentScene, Streamable assetStreamer, FolderParser folderParser){
 
         this.assetStreamer = assetStreamer;
         this.folderParser = folderParser;
@@ -50,13 +50,13 @@ abstract public class AssetLoader {
     }
 
 
-    public Animator getAnimation(String imageId) {
+    public Animator getAnimation(String imageId){
 
-        try {
+        try{
 
             return animations.get(imageId);
 
-        } catch (Exception e) {
+        }catch(Exception e){
 
             e.printStackTrace();
 

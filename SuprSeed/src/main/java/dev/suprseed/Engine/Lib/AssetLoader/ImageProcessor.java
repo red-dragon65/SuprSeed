@@ -16,7 +16,7 @@ public class ImageProcessor implements ImageTransformer {
     }*/
 
 
-    public void rotateSprite(/*Sprite sprite,*/ float degrees) {
+    public void rotateSprite(/*Sprite sprite,*/ float degrees){
 
 
         // TODO: Figure out if canvas is needed for rotations
@@ -31,11 +31,11 @@ public class ImageProcessor implements ImageTransformer {
     }
 
 
-    public void flipSprite(/*Sprite sprite*/ boolean vertical) {
+    public void flipSprite(/*Sprite sprite*/ boolean vertical){
 
     }
 
-    public void invertColors(/*Sprite sprite*/) {
+    public void invertColors(/*Sprite sprite*/){
 
     }
 

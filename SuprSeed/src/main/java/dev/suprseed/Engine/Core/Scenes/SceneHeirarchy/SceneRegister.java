@@ -11,10 +11,11 @@ public class SceneRegister implements ListRegister<BaseScene> {
 
 
     // Constructor
-    public SceneRegister() {
+    public SceneRegister(){
 
         myScenes = new ArrayList<>();
     }
+
 
 
     @Override
@@ -36,7 +37,7 @@ public class SceneRegister implements ListRegister<BaseScene> {
     }
 
     @Override
-    public List<BaseScene> getRegisterList() {
+    public List<BaseScene> getRegisterList(){
 
         return myScenes;
     }

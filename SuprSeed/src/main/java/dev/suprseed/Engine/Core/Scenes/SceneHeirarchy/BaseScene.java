@@ -30,24 +30,24 @@ public abstract class BaseScene implements Logic, RenderableAndLayerable, Animat
 
 
     // Constructor
-    public BaseScene(SceneManager parentScene, String sceneId, Context appContext) {
+    public BaseScene(SceneManager parentScene, String sceneId, Context appContext){
 
         init(parentScene, sceneId, appContext);
     }
 
     // Constructor
-    public BaseScene(SceneManager parentScene, String sceneId) {
+    public BaseScene(SceneManager parentScene, String sceneId){
 
         init(parentScene, sceneId, null);
     }
 
     // Constructor initializer
-    private void init(SceneManager parentScene, String sceneId, Context appContext) {
+    private void init(SceneManager parentScene, String sceneId, Context appContext){
 
         this.parentScene = parentScene;
         this.sceneId = sceneId;
 
-        if (appContext != null) {
+        if(appContext != null){
             context = appContext;
         }
 
@@ -56,17 +56,17 @@ public abstract class BaseScene implements Logic, RenderableAndLayerable, Animat
         logicRegister = new ObjectLogicizer();
 
         // Register the base scene to it's parent
-        if (parentScene != null) {
+        if(parentScene != null){
             this.parentScene.sceneRegister.registerObject(this);
         }
     }
 
 
-    public String getId() {
+    public String getId(){
         return sceneId;
     }
 
-    public void setActive(boolean active) {
+    public void setActive(boolean active){
         isActive = active;
     }
 

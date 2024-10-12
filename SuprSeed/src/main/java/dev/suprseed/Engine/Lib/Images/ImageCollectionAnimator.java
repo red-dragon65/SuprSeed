@@ -48,7 +48,7 @@ public class ImageCollectionAnimator extends ImageCollection implements Animator
 
 
     @Override
-    public void resetLoop() {
+    public void resetLoop(){
         lockLoop = false;
         currentFrameIndex = 0;
     }
@@ -61,7 +61,7 @@ public class ImageCollectionAnimator extends ImageCollection implements Animator
 
 
     @Override
-    public void generateNextFrame() {
+    public void generateNextFrame(){
 
         // Cycle to the next frame index
         if (cycledImage == false && GlobalFrameStepper.getInstance().getFrameStep() % frameDelay == 0 && lockLoop == false) {
@@ -75,18 +75,18 @@ public class ImageCollectionAnimator extends ImageCollection implements Animator
             if (currentFrameIndex >= imageSet.size()) {
 
                 // Lock the animation to the last frame
-                if (enableLooping == false) {
+                if(enableLooping == false){
                     lockLoop = true;
                     currentFrameIndex = imageSet.size() - 1;
 
-                } else {
+                }else{
 
                     currentFrameIndex = 0;
                 }
             }
 
             cycledImage = true;
-        } else {
+        }else{
             cycledImage = false;
         }
     }

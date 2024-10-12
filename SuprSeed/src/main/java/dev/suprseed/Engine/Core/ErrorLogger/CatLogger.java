@@ -13,7 +13,7 @@ public class CatLogger implements Logable {
 
 
     @Override
-    public void logMessage(ErrorType errorType, String message) {
+    public void logMessage(ErrorType errorType, String message){
 
         // Build the log data
 
@@ -29,7 +29,7 @@ public class CatLogger implements Logable {
 
 
         // Log message using correct logging level
-        switch (errorType) {
+        switch(errorType){
             case INFO:
                 Log.i(tag, topStackTrace);
                 Log.i(tag, message);

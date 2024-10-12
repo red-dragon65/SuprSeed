@@ -9,9 +9,9 @@ public class SceneSoftChange implements SceneChangeStrategy<BaseScene> {
     @Override
     public void changeScene(SceneManager parentScene, BaseScene oldScene, String... sceneId) {
 
-        for (BaseScene scene : parentScene.getRegister().getRegisterList()) {
+        for(BaseScene scene : parentScene.getRegister().getRegisterList()){
 
-            for (String s : sceneId) {
+            for(String s : sceneId) {
 
                 if (scene.getId().equals(s)) {
 

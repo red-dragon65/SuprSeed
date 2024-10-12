@@ -18,7 +18,7 @@ public class Accelerometer implements SensorEventListener, DeviceSensor<Float[]>
 
 
     // Constructor
-    public Accelerometer(Context context) {
+    public Accelerometer(Context context){
 
         // Initialize variables for tilt
         mSensorManager = (SensorManager) context.getSystemService(SENSOR_SERVICE);
@@ -34,7 +34,7 @@ public class Accelerometer implements SensorEventListener, DeviceSensor<Float[]>
     public void onSensorChanged(SensorEvent sensorEvent) {
 
         // Ignore non-accelerometer input
-        if (sensorEvent.sensor.getType() != Sensor.TYPE_ACCELEROMETER) {
+        if(sensorEvent.sensor.getType() != Sensor.TYPE_ACCELEROMETER){
             return;
         }
 
