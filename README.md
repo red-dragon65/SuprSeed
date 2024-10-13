@@ -37,6 +37,9 @@ Progress
 
 The project is currently around 95% complete. However, there are still a few quality of life features missing.
 
+**Current Status:**
+- Engine is being updated in preparation for initial jitpack publishing
+
 **Backlog:**
 - Custom exception handling
 - More logging for verbosity
