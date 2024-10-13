@@ -29,15 +29,15 @@ public abstract class Sprite implements RenderableAndLayerable, Boundable, Logic
     private int layerDepth = 0;
 
     // Dependency
-    protected ImageHandler imageHandler;
+    protected AssetBundle assetBundle;
     protected BaseScene parentScene;
 
 
     // Constructor that takes one sprite image set
-    public Sprite(BaseScene parentScene, ImageHandler imageHandler) {
+    public Sprite(BaseScene parentScene, AssetBundle assetBundle) {
 
         // Dependency injection
-        this.imageHandler = imageHandler;
+        this.assetBundle = assetBundle;
         this.parentScene = parentScene;
 
 
@@ -115,12 +115,12 @@ public abstract class Sprite implements RenderableAndLayerable, Boundable, Logic
     }
 
 
-    public ImageHandler getImageHandler() {
-        return imageHandler;
+    public AssetBundle getAssetBundle() {
+        return assetBundle;
     }
 
-    public void setImageHandler(ImageHandler imageHandler) {
-        this.imageHandler = imageHandler;
+    public void setImageHandler(AssetBundle assetBundle) {
+        this.assetBundle = assetBundle;
     }
 
     public void enableCamera(){
@@ -156,10 +156,10 @@ public abstract class Sprite implements RenderableAndLayerable, Boundable, Logic
     public void getRectF(RectF result) {
 
         result.left = CanvasData.getInstance().formatCoordinateToCanvas(this.getX());
-        result.right = result.left + this.getImageHandler().getSelectedImageSet().getImage().getWidth();
+        result.right = result.left + this.getAssetBundle().getSelectedImageSet().getImage().getWidth();
 
         result.top = CanvasData.getInstance().formatCoordinateToCanvas(this.getY());
-        result.bottom = result.top + this.getImageHandler().getSelectedImageSet().getImage().getHeight();
+        result.bottom = result.top + this.getAssetBundle().getSelectedImageSet().getImage().getHeight();
 
         CollisionDiagnosticsOverlay.getInstance().addRect(result);
     }

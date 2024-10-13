@@ -3,7 +3,7 @@ package dev.suprseed.demo.Sprites.HeroSprite;
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
 import dev.suprseed.Engine.Core.SpriteObjects.DefaultComponents.Component;
 import dev.suprseed.Engine.Core.SpriteObjects.DefaultComponents.ResetableComponent;
-import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.ImageHandler;
+import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.AssetBundle;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
 import dev.suprseed.Engine.Core.System.Logic;
 import dev.suprseed.Engine.Lib.Collisions.CollisionHandler;
@@ -27,8 +27,8 @@ public class Hero extends Sprite implements Logic {
     private final BounceData bounceData;
 
 
-    public Hero(BaseScene parentScene, ImageHandler imageHandler, SoundMixer<String> soundEngine, BounceData bounceData, GameOverData gameOverData) {
-        super(parentScene, imageHandler);
+    public Hero(BaseScene parentScene, AssetBundle assetBundle, SoundMixer<String> soundEngine, BounceData bounceData, GameOverData gameOverData) {
+        super(parentScene, assetBundle);
 
         // Show collision boxes
         //CollisionDiagnosticsOverlay.getInstance().enable();

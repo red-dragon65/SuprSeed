@@ -71,8 +71,8 @@ public class PixelPerfectCollision implements CollisionHandler {
         ) {
 
             // Get pixels from both images
-            int pixel1 = one.getImageHandler().getSelectedImageSet().getImage().getPixel(xStarting1, yStarting1);
-            int pixel2 = two.getImageHandler().getSelectedImageSet().getImage().getPixel(xStarting2, yStarting2);
+            int pixel1 = one.getAssetBundle().getSelectedImageSet().getImage().getPixel(xStarting1, yStarting1);
+            int pixel2 = two.getAssetBundle().getSelectedImageSet().getImage().getPixel(xStarting2, yStarting2);
 
             // See if collision has occurred
             if (pixel1 != Color.TRANSPARENT && pixel2 != Color.TRANSPARENT) {

@@ -5,20 +5,20 @@ import java.util.Random;
 
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.CanvasData;
 import dev.suprseed.Engine.Core.SpriteObjects.DefaultComponents.ResetableComponent;
-import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.ImageHandler;
+import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.AssetBundle;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
 
 public class ObstacleSpawnerComponent implements ResetableComponent {
 
     private final List<Sprite> obstacles;
-    private final List<ImageHandler> obstacleImages;
+    private final List<AssetBundle> obstacleImages;
 
     private final Random rand;
 
     private final int yGenerationDistance = 3000;
 
 
-    public ObstacleSpawnerComponent(List<Sprite> obstacles, List<ImageHandler> obstacleImages) {
+    public ObstacleSpawnerComponent(List<Sprite> obstacles, List<AssetBundle> obstacleImages) {
 
         this.obstacles = obstacles;
         this.obstacleImages = obstacleImages;
@@ -67,7 +67,7 @@ public class ObstacleSpawnerComponent implements ResetableComponent {
     private void setLocation(Sprite s) {
 
         // Set location to random value below screen
-        s.setX(rand.nextInt((int) (CanvasData.getInstance().getScaledWidth() - s.getImageHandler().getSelectedImageSet().getScaledWidth())));
+        s.setX(rand.nextInt((int) (CanvasData.getInstance().getScaledWidth() - s.getAssetBundle().getSelectedImageSet().getScaledWidth())));
 
         float height = rand.nextInt(yGenerationDistance);
         height += CanvasData.getInstance().getScaledHeight();

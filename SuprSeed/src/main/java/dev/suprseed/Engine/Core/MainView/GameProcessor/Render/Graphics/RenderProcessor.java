@@ -63,11 +63,11 @@ public class RenderProcessor implements RenderHandler {
 
 
         // Make sure the image exists
-        if (sprite.getImageHandler() != null) {
+        if (sprite.getAssetBundle() != null) {
 
             // Draw the sprite at the final location
             canvas.drawBitmap(
-                    sprite.getImageHandler().getSelectedImageSet().getImage(),
+                    sprite.getAssetBundle().getSelectedImageSet().getImage(),
                     finalLoc[0],
                     finalLoc[1],
                     paint

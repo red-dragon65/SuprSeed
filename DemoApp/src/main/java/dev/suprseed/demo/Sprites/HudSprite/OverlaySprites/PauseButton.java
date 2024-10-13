@@ -7,7 +7,7 @@ import dev.suprseed.Engine.Core.InputHandler.TouchInput.InputManager;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LoopManager;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.CanvasData;
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
-import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.ImageHandler;
+import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.AssetBundle;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
 import dev.suprseed.demo.Sprites.HudSprite.HudInput.FullScreenPauseInput;
 
@@ -16,8 +16,8 @@ public class PauseButton extends Sprite implements InputListener {
     private final InputListener screenListener;
 
     // Constructor
-    public PauseButton(BaseScene parentScene, ImageHandler imageHandler) {
-        super(parentScene, imageHandler);
+    public PauseButton(BaseScene parentScene, AssetBundle assetBundle) {
+        super(parentScene, assetBundle);
 
         setLayerDepth(102);
         screenListener = new FullScreenPauseInput();
@@ -25,7 +25,7 @@ public class PauseButton extends Sprite implements InputListener {
         InputManager.getInstance().listenerRegister.registerObject(this);
         InputManager.getInstance().listenerRegister.registerObject(screenListener);
 
-        setX(CanvasData.getInstance().getScaledWidth() - imageHandler.getSelectedImageSet().getScaledWidth());
+        setX(CanvasData.getInstance().getScaledWidth() - assetBundle.getSelectedImageSet().getScaledWidth());
 
     }
 

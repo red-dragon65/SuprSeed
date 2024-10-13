@@ -1,12 +1,11 @@
 package dev.suprseed.Engine.Lib.AssetLoader;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
 
 import dev.suprseed.Engine.Core.ErrorLogger.CentralLogger;
 import dev.suprseed.Engine.Core.ErrorLogger.ErrorType;
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
-import dev.suprseed.Engine.Lib.Images.Animator;
+import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.AssetBundle;
 import dev.suprseed.Engine.Lib.Images.SpriteImage;
 
 abstract public class AssetLoader {
@@ -16,8 +15,7 @@ abstract public class AssetLoader {
     protected FolderParser folderParser;
 
     // Hold image data
-    protected Map<String, SpriteImage> images = new HashMap<>();
-    protected Map<String, Animator> animations = new HashMap<>();
+    protected ArrayList<SpriteImage> images = new ArrayList<>();
 
 
     // Constructor
@@ -32,12 +30,27 @@ abstract public class AssetLoader {
 
     abstract public void loadAssets(BaseScene parentScene);
 
+    public AssetBundle getAssetBundle(String tag){
+
+        return new AssetBundle(getImage(tag));
+    }
+
+    public AssetBundle getAssetBundle(ArrayList<String> tags){
+
+        ArrayList<SpriteImage> assets = new ArrayList<>();
+
+        for(String s : tags){
+            assets.add(getImage(s));
+        }
+
+        return new AssetBundle(assets);
+    }
 
     public SpriteImage getImage(String imageId) {
 
         try {
 
-            return images.get(imageId);
+            return images.stream().filter(i -> i.getTag().equals(imageId)).findFirst().orElseThrow();
 
         } catch (Exception e) {
 
@@ -49,21 +62,4 @@ abstract public class AssetLoader {
         }
     }
 
-
-    public Animator getAnimation(String imageId){
-
-        try{
-
-            return animations.get(imageId);
-
-        }catch(Exception e){
-
-            e.printStackTrace();
-
-            CentralLogger.getInstance().logMessage(ErrorType.FATAL_ERROR, "Could not find the animation specified!");
-
-            throw new NullPointerException();
-        }
-
-    }
 }

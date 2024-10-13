@@ -1,24 +1,23 @@
 package dev.suprseed.Engine.Core.SpriteObjects.SpriteBase;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
 import java.util.Optional;
 
 import dev.suprseed.Engine.Lib.Images.SpriteImage;
 
-public class ImageHandler {
+public class AssetBundle {
 
-    private Map<String, SpriteImage> spriteImage;
+    private ArrayList<SpriteImage> spriteImage;
     private String selectedImage;
 
 
     // Constructor that takes one sprite image set
-    public ImageHandler(String name, SpriteImage spriteImageSet) {
+    public AssetBundle(SpriteImage spriteImageSet) {
 
-        if (name != null && spriteImageSet != null) {
+        if (spriteImageSet != null) {
 
-            spriteImage = new HashMap<>();
-            spriteImage.put(name, spriteImageSet);
+            spriteImage = new ArrayList<>();
+            spriteImage.add(spriteImageSet);
 
             selectedImage = getFirstImageSetId();
         }
@@ -26,7 +25,7 @@ public class ImageHandler {
     }
 
     // Constructor that takes multiple sprite image sets
-    public ImageHandler(Map<String, SpriteImage> sprites) {
+    public AssetBundle(ArrayList<SpriteImage> sprites) {
 
         if (sprites != null) {
 
@@ -37,17 +36,32 @@ public class ImageHandler {
 
     }
 
+    public int getNumAssets(){
+        return spriteImage.size();
+    }
+
+    public ArrayList<String> getAllIds(){
+
+        ArrayList<String> ids = new ArrayList<>();
+
+        for(SpriteImage s : spriteImage){
+            ids.add(s.getTag());
+        }
+
+        return ids;
+    }
 
     public SpriteImage getSpriteImageSetById(String imageName) {
 
         verifySpriteList();
 
-        if (spriteImage.containsKey(imageName)) {
+        try{
 
-            return spriteImage.get(imageName);
+            return spriteImage.stream().filter(s -> s.getTag().equals(imageName)).findFirst().orElseThrow();
+        }catch (Exception e){
+
+            throw new NullPointerException("Image with key: '" + imageName + "' does not exist!");
         }
-
-        throw new NullPointerException("Image with key: '" + imageName + "' does not exist!");
     }
 
 
@@ -55,14 +69,13 @@ public class ImageHandler {
 
         verifySpriteList();
 
-        return spriteImage.get(selectedImage);
+        return spriteImage.stream().filter(s -> s.getTag().equals(selectedImage)).findFirst().orElseThrow();
     }
 
     public void setSelectedImageSet(String selected) {
 
         // Verify id exists
-        if (spriteImage.containsKey(selected)) {
-
+        if(spriteImage.stream().anyMatch(s -> s.getTag().equals(selected))){
             selectedImage = selected;
             return;
         }
@@ -76,23 +89,23 @@ public class ImageHandler {
         verifySpriteList();
 
         // Get the first key
-        Optional<String> firstKey = spriteImage.keySet().stream().findFirst();
+        Optional<SpriteImage> firstKey = spriteImage.stream().findFirst();
 
         // Verify key exists
         if (firstKey.isPresent()) {
 
-            return firstKey.get();
+            return firstKey.get().getTag();
         }
 
         throw new NullPointerException("Could not get image id! Verify sprite list is initialized!");
     }
 
 
-    public void addImageSet(String name, SpriteImage spriteSet) {
+    public void addImageSet(SpriteImage spriteSet) {
 
         verifySpriteList();
 
-        spriteImage.put(name, spriteSet);
+        spriteImage.add(spriteSet);
     }
 
     public void verifySpriteList() {

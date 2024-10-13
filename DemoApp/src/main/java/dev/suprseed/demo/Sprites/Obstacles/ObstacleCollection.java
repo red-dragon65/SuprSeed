@@ -7,12 +7,11 @@ import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHan
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
 import dev.suprseed.Engine.Core.SpriteObjects.DefaultComponents.Component;
 import dev.suprseed.Engine.Core.SpriteObjects.DefaultComponents.ResetableComponent;
-import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.ImageHandler;
+import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.AssetBundle;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
 import dev.suprseed.Engine.Core.System.Logic;
 import dev.suprseed.Engine.Core.System.RenderableAndLayerable;
 import dev.suprseed.Engine.Lib.AssetLoader.AssetLoader;
-import dev.suprseed.Engine.Lib.Images.SpriteImage;
 import dev.suprseed.Engine.Lib.SoundPlayer.SoundMixer;
 import dev.suprseed.demo.SharedData.BounceData;
 import dev.suprseed.demo.SharedData.GameOverData;
@@ -24,7 +23,7 @@ public class ObstacleCollection implements Logic, RenderableAndLayerable {
 
 
     private final ArrayList<Sprite> obstacleSprites;
-    private final ArrayList<ImageHandler> obstacleImages;
+    private final ArrayList<AssetBundle> obstacleImages;
 
     private final int maxObstacles = 15;
 
@@ -47,11 +46,11 @@ public class ObstacleCollection implements Logic, RenderableAndLayerable {
 
         // TODO: actually load images in asset loader!!!
         // Load images here
-        obstacleImages.add(new ImageHandler("bat", (SpriteImage) assets.getAnimation("bat")));
-        obstacleImages.add(new ImageHandler("bee", (SpriteImage) assets.getAnimation("bee")));
-        obstacleImages.add(new ImageHandler("bird", (SpriteImage) assets.getAnimation("bird")));
-        obstacleImages.add(new ImageHandler("duck", (SpriteImage) assets.getAnimation("duck")));
-        obstacleImages.add(new ImageHandler("ghost", (SpriteImage) assets.getAnimation("ghost")));
+        obstacleImages.add(assets.getAssetBundle("bat"));
+        obstacleImages.add(assets.getAssetBundle("bee"));
+        obstacleImages.add(assets.getAssetBundle("bird"));
+        obstacleImages.add(assets.getAssetBundle("duck"));
+        obstacleImages.add(assets.getAssetBundle("ghost"));
 
         // Initialize obstacle sprites here
         for (int i = 0; i < maxObstacles; i++) {

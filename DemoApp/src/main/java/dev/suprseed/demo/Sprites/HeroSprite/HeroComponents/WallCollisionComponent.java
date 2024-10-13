@@ -18,8 +18,8 @@ public class WallCollisionComponent implements Component {
     public void update() {
 
         // Get the current images scaled dimensions
-        float width = sprite.getImageHandler().getSelectedImageSet().getScaledWidth();
-        float height = sprite.getImageHandler().getSelectedImageSet().getScaledHeight();
+        float width = sprite.getAssetBundle().getSelectedImageSet().getScaledWidth();
+        float height = sprite.getAssetBundle().getSelectedImageSet().getScaledHeight();
 
 
         // Prevent hero from moving off left/right side of screen

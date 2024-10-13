@@ -5,14 +5,21 @@ import android.graphics.Bitmap;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.CanvasData;
 import dev.suprseed.Engine.Lib.AssetLoader.Streamable;
 
-public class ImageSingle implements SpriteImage {
+public class BitmapSingle implements SpriteImage {
 
     private final Bitmap image;
+    private String tag;
 
     // Constructor
-    public ImageSingle(String filePath, float imageScale, Streamable imageStreamer) {
+    public BitmapSingle(String filePath, float imageScale, Streamable imageStreamer, String tag) {
 
         this.image = imageStreamer.loadImage(filePath, imageScale);
+        this.tag = tag;
+    }
+
+    @Override
+    public String getTag(){
+        return tag;
     }
 
     @Override

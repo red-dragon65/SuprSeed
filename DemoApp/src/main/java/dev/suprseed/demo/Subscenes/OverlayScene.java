@@ -2,7 +2,7 @@ package dev.suprseed.demo.Subscenes;
 
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.SceneManager;
-import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.ImageHandler;
+import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.AssetBundle;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
 import dev.suprseed.Engine.Lib.AssetLoader.AssetLoader;
 import dev.suprseed.demo.SharedData.BounceData;
@@ -24,9 +24,9 @@ public class OverlayScene extends BaseScene {
         scoreSprite = new ScoreSprite(this, bounceData, gameOverData);
 
         // This runs independent of the pause button
-        Sprite pauseText = new PauseText(this, new ImageHandler("pause_text", gamePlayAssets.getImage("pause_text")));
+        Sprite pauseText = new PauseText(this, gamePlayAssets.getAssetBundle("pause_text"));
 
-        Sprite pauseButton = new PauseButton(this, new ImageHandler("pause_button", gamePlayAssets.getImage("pause_button")));
+        Sprite pauseButton = new PauseButton(this, gamePlayAssets.getAssetBundle("pause_button"));
 
         Sprite gameOverText = new GameOver(this, gameOverData);
     }

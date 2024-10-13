@@ -11,12 +11,13 @@ import dev.suprseed.Engine.Lib.AssetLoader.FolderParser;
 import dev.suprseed.Engine.Lib.AssetLoader.Streamable;
 
 
-public class ImageCollection implements SpriteImage {
+public class BitmapCollection implements SpriteImage {
 
     protected ArrayList<Bitmap> imageSet;
+    private String tag;
 
     // Constructor for collection of images
-    public ImageCollection(String folderPath, float imageScale, Streamable imageStreamer, FolderParser folderParser) {
+    public BitmapCollection(String folderPath, float imageScale, Streamable imageStreamer, FolderParser folderParser, String tag) {
 
         // Initialize array list
         imageSet = new ArrayList<>();
@@ -33,6 +34,13 @@ public class ImageCollection implements SpriteImage {
         if(imageSet.size() == 0){
             CentralLogger.getInstance().logMessage(ErrorType.FATAL_ERROR, "No images found in folder! Folder: " + folderPath);
         }
+
+        this.tag = tag;
+    }
+
+    @Override
+    public String getTag(){
+        return tag;
     }
 
     @Override

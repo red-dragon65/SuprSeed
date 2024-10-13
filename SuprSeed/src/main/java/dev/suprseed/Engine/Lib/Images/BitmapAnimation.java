@@ -9,7 +9,7 @@ import dev.suprseed.Engine.Lib.AssetLoader.FolderParser;
 import dev.suprseed.Engine.Lib.AssetLoader.Streamable;
 
 
-public class ImageCollectionAnimator extends ImageCollection implements Animator {
+public class BitmapAnimation extends BitmapCollection implements Animator {
 
     // TODO: Enforce fps options! Or handle fps to prevent runtime crash!
     // This number must fit equally within the frame time
@@ -22,8 +22,8 @@ public class ImageCollectionAnimator extends ImageCollection implements Animator
 
 
     // Constructor for animating images
-    public ImageCollectionAnimator(BaseScene parentScene, String folderPath, float imageScale, Streamable imageStreamer, FolderParser folderParser, int fps, boolean loop) {
-        super(folderPath, imageScale, imageStreamer, folderParser);
+    public BitmapAnimation(BaseScene parentScene, String folderPath, float imageScale, Streamable imageStreamer, FolderParser folderParser, int fps, boolean loop, String tag) {
+        super(folderPath, imageScale, imageStreamer, folderParser, tag);
 
         // Register with the parent scene
         parentScene.animationRegister.registerObject(this);
