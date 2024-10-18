@@ -1,13 +1,13 @@
 
 <p align="center">
-<img src="DemoApp/src/main/res/drawable-v24/suprseed_widebanner.png" width=650 title="SuprSeed - Grow Games">
+<img src="DemoApp/src/main/res/drawable-v24/suprseed_widebanner.png" width=650 title="SuprSeed - Grow Games" alt="SuprSeed Engine Logo Banner">
 </p>
 
 ---
 
-**SuprSeed is a light weight 2D Android game development framework.** SuprSeed offers flexibility and modularity which allows it become the foundation for mobile games, custom game engines, as well as UI driven applications.
+**SuprSeed is a light weight 2D Android game development framework.** SuprSeed offers flexibility and modularity, allowing it to become the foundation for mobile games, custom game engines, as well as UI driven applications.
 
-With the power of SOLID principles and Design Patterns, any component of the `Core` package can be swapped out to a custom implementation using the 'EngineConfigurator' (which handles the engines dependency injection). The framework also comes with a library `Lib` package that offers default classes to help provide a starting point for creating games. This allows the framework to be used 'as is' or to be customized as needed.
+The frameworks architecture is built following SOLID principles and Design Patterns. As a result, any component of the `Core` package can be swapped out to a custom implementation using the `EngineConfigurator` (which handles the engines dependency injection). The framework also comes with a library `Lib` package that offers default classes to help provide a starting point for creating games. This allows the framework to be used 'as is' or to be customized as needed.
 
 For creating games, the engine uses scenes which can contain sub-scenes or sprites. Each sprite can then be configured using components and shared data. This creates a separation of concerns which reduces code complexity, and increases code reusability.
 
@@ -35,26 +35,23 @@ The engines `Lib` features are:
 Progress
 ---
 
-The project is currently around 95% complete. However, there are still a few quality of life features missing.
-
 **Current Status:**
 - Engine is being updated in preparation for initial jitpack publishing
 
-**Backlog:**
-- Custom exception handling
-- More logging for verbosity
-- Game splash screen activity
-- Game loading activity
-- Java docs
-- Getting started guide
-- FPS counter
+<br/>
 
-**Known Issues:**
-- Changing the refresh rate is not currently supported due to incompatibilty with certain phones. A solution is currently being worked on.
+**Expected major changes coming in version 1.0.0**
+- package clean up
+- image/animation api cleanup
+- fix inconsistent exception handling
+- rename interfaces to use the `I` naming convention
+- improve the EngineConfigurator
 
+<br/>
 
-
-
+**Future**
+- various improvements (refresh rate handling, fps counter, effects emitter, etc.)
+- better docs (javadocs, wiki, guidelines, architecture etc.)
 
 <br/>
 
