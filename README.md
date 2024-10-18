@@ -36,22 +36,74 @@ Progress
 ---
 
 **Current Status:**
-- Engine is being updated in preparation for initial jitpack publishing
+- first public release is available, more changes are being worked on
 
 <br/>
 
-**Expected major changes coming in version 1.0.0**
+**Expected major changes coming in version v1.0.0**
 - package clean up
 - image/animation api cleanup
 - fix inconsistent exception handling
 - rename interfaces to use the `I` naming convention
 - improve the EngineConfigurator
+- other stuff
 
 <br/>
 
 **Future**
 - various improvements (refresh rate handling, fps counter, effects emitter, etc.)
 - better docs (javadocs, wiki, guidelines, architecture etc.)
+
+<br/>
+
+Project Usage
+---
+
+**Initializing the project**
+- Import the SuprSeed dependency via gradle
+  - follow the steps at https://jitpack.io/#red-dragon65/SuprSeed
+  - or, use the steps down below if you are using kotlin
+- Create a new "Empty views activity" project in Android Studio.
+- Remove the `<Textview ... />` from the `activity_main.xml` layout
+- Remove the `onCreate()` function from the `MainActivity` class
+- Update the `MainActivity` class to extend the `EngineActivity`
+  - implement the methods as needed
+- Add the `assets` folder
+  - Right click the `app` folder -> `New` -> `Folder` -> `Assets Folder`
+- The project is now ready to use the framework
+  - use the repo's demo as a guide<sub> better docs will be available <sup>someday</sup></sub>
+
+<br/>
+
+**Dependency install for gradle + kotlin (.gradle.kts) files**
+
+1. Add `maven { url = uri("https://jitpack.io") }` to your `settings.gradle.kts` file
+```
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        // Include this repo
+        maven { url = uri("https://jitpack.io") }
+    }
+}
+```
+
+2. Add `implementation("com.github.red-dragon65:SuprSeed:v0.1.0")` to your `build.gradle.kts` file
+
+(note: this is the _Module:app_ level one)
+```
+dependencies {
+
+    implementation(libs.androidx.core.ktx)
+    ...
+    androidTestImplementation(libs.androidx.espresso.core)
+    // Add this dependency
+    implementation("com.github.red-dragon65:SuprSeed:v0.1.0")
+}
+```
+
 
 <br/>
 
