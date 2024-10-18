@@ -5,6 +5,12 @@
 
 ---
 
+<div align="center">
+
+  [![](https://jitpack.io/v/red-dragon65/SuprSeed.svg)](https://jitpack.io/#red-dragon65/SuprSeed)
+
+</div>
+
 **SuprSeed is a light weight 2D Android game development framework.** SuprSeed offers flexibility and modularity, allowing it to become the foundation for mobile games, custom game engines, as well as UI driven applications.
 
 The frameworks architecture is built following SOLID principles and Design Patterns. As a result, any component of the `Core` package can be swapped out to a custom implementation using the `EngineConfigurator` (which handles the engines dependency injection). The framework also comes with a library `Lib` package that offers default classes to help provide a starting point for creating games. This allows the framework to be used 'as is' or to be customized as needed.
