@@ -20,7 +20,7 @@ public abstract class SceneManager extends BaseScene implements SceneController<
 
     // Constructor
     public SceneManager(SceneManager parentScene, String sceneId){
-        super(parentScene, sceneId, context);
+        super(parentScene, sceneId, parentScene.getContext());
 
         init();
     }

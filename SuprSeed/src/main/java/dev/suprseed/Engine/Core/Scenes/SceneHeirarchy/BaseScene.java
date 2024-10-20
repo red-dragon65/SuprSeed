@@ -20,7 +20,7 @@ public abstract class BaseScene implements ILogicRunnable, IRenderableAndILayera
     protected String sceneId;
     protected boolean isActive = true;
     protected boolean isDrawable = true;
-    protected static Context context;
+    protected Context context;
 
     public IImageRegister<IRenderableAndILayerable> imageRegister;
     public IAnimationRegister animationRegister;
@@ -39,7 +39,7 @@ public abstract class BaseScene implements ILogicRunnable, IRenderableAndILayera
     // Constructor
     public BaseScene(SceneManager parentScene, String sceneId){
 
-        init(parentScene, sceneId, null);
+        init(parentScene, sceneId, parentScene.getContext());
     }
 
     // Constructor initializer
