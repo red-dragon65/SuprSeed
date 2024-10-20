@@ -1,8 +1,8 @@
-package dev.suprseed.Engine.Core.System.Register;
+package dev.suprseed.Engine.Core.System.RegisterTypes;
 
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
 
-public interface RenderRegister<T> extends ObjectRegister<T> {
+public interface IImageRegister<T> extends IObjectRegister<T> {
 
     void update(RenderHandler handler);
 }

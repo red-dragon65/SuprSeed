@@ -8,9 +8,9 @@ import java.util.List;
 
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import dev.suprseed.Engine.Core.System.RenderSystem;
-import dev.suprseed.Engine.Core.System.RenderableAndLayerable;
+import dev.suprseed.Engine.Core.System.Registerables.IRenderableAndILayerable;
 
-public class CollisionDiagnosticsOverlay implements RenderableAndLayerable, RectCollector {
+public class CollisionDiagnosticsOverlay implements IRenderableAndILayerable, RectCollector {
 
     private final List<RectF> collisionBounds;
     private boolean isEnabled = false;
@@ -24,7 +24,7 @@ public class CollisionDiagnosticsOverlay implements RenderableAndLayerable, Rect
     private CollisionDiagnosticsOverlay() {
         collisionBounds = new ArrayList<>();
 
-        RenderSystem.getInstance().imageRegister.registerObject(this);
+        RenderSystem.getInstance().getImageRegister().registerObject(this);
     }
 
     public static CollisionDiagnosticsOverlay getInstance() {

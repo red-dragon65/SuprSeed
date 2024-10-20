@@ -6,14 +6,14 @@ import android.content.SharedPreferences;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
-import dev.suprseed.Engine.Core.System.Logic;
+import dev.suprseed.Engine.Core.System.Registerables.ILogicRunnable;
 import dev.suprseed.Engine.Lib.Fonts.FontHolder;
 import dev.suprseed.demo.R;
 import dev.suprseed.demo.SharedData.BounceData;
 import dev.suprseed.demo.SharedData.GameOverData;
 import dev.suprseed.demo.Sprites.HudSprite.HudFontPaintStrategies.ScorePaintStrategy;
 
-public class ScoreSprite extends Sprite implements Logic {
+public class ScoreSprite extends Sprite implements ILogicRunnable {
 
     private final FontHolder scoreFont;
     private final String scoreText = "Score: ";

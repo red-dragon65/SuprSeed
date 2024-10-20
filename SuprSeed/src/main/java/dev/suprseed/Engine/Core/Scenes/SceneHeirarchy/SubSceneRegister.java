@@ -3,15 +3,15 @@ package dev.suprseed.Engine.Core.Scenes.SceneHeirarchy;
 import java.util.ArrayList;
 import java.util.List;
 
-import dev.suprseed.Engine.Core.System.Register.ListRegister;
+import dev.suprseed.Engine.Core.System.RegisterTypes.ISceneRegister;
 
-public class SceneRegister implements ListRegister<BaseScene> {
+public class SubSceneRegister implements ISceneRegister<BaseScene> {
 
     private final List<BaseScene> myScenes;
 
 
     // Constructor
-    public SceneRegister(){
+    public SubSceneRegister(){
 
         myScenes = new ArrayList<>();
     }

@@ -5,7 +5,7 @@ import dev.suprseed.Engine.Core.SpriteObjects.DefaultComponents.Component;
 import dev.suprseed.Engine.Core.SpriteObjects.DefaultComponents.ResetableComponent;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.AssetBundle;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
-import dev.suprseed.Engine.Core.System.Logic;
+import dev.suprseed.Engine.Core.System.Registerables.ILogicRunnable;
 import dev.suprseed.Engine.Lib.Collisions.CollisionHandler;
 import dev.suprseed.Engine.Lib.Collisions.RectangleCollision;
 import dev.suprseed.Engine.Lib.SoundPlayer.SoundMixer;
@@ -15,7 +15,7 @@ import dev.suprseed.demo.Sprites.HeroSprite.HeroComponents.BounceMovementCompone
 import dev.suprseed.demo.Sprites.HeroSprite.HeroComponents.TiltMovementComponent;
 import dev.suprseed.demo.Sprites.HeroSprite.HeroComponents.WallCollisionComponent;
 
-public class Hero extends Sprite implements Logic {
+public class Hero extends Sprite implements ILogicRunnable {
 
     // Behavior components
     private final Component startingState;

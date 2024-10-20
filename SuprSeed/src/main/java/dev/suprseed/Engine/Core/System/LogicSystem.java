@@ -1,10 +1,12 @@
 package dev.suprseed.Engine.Core.System;
 
-import dev.suprseed.Engine.Core.System.Register.UpdatableRegister;
+import dev.suprseed.Engine.Core.System.Registerables.ILogicRunnable;
+import dev.suprseed.Engine.Core.System.Registers.LogicRegister;
+import dev.suprseed.Engine.Core.System.RegisterTypes.ILogicRegister;
 
-public class LogicSystem implements UpdatableRegister<Logic> {
+public class LogicSystem implements ILogicRunnable {
 
-    private final UpdatableRegister<Logic> objectRegister;
+    private final ILogicRegister logicRegister;
 
     // Eager loading singleton
     private static final LogicSystem INSTANCE = new LogicSystem();
@@ -13,35 +15,24 @@ public class LogicSystem implements UpdatableRegister<Logic> {
     // Constructor
     // Private to prevent client use of 'new' keyword
     private LogicSystem() {
-        objectRegister = new ObjectLogicizer();
+        logicRegister = new LogicRegister();
     }
 
     public static LogicSystem getInstance() {
         return INSTANCE;
     }
 
-
-    @Override
-    public void registerObject(Logic sprite) {
-
-        objectRegister.registerObject(sprite);
+    public ILogicRegister getLogicRegister(){
+        return logicRegister;
     }
 
     @Override
-    public void removeObject(Logic sprite) {
-        objectRegister.removeObject(sprite);
+    public void runLogic() {
+        logicRegister.update();
     }
 
-
-    // Run logic for all registered sprites
     @Override
-    public void update() {
-        objectRegister.update();
-    }
-
-    // Clear currently registered sprites
-    @Override
-    public void removeAllObjects() {
-        objectRegister.removeAllObjects();
+    public boolean isActive() {
+        return true;
     }
 }

@@ -204,7 +204,7 @@ public class LoopManager implements RunnableConfig<GameView> {
 
                 // Run client logic code
                 //gameView.logicLoop();
-                LogicSystem.getInstance().update();
+                LogicSystem.getInstance().runLogic();
             }
         }else
 
@@ -217,7 +217,7 @@ public class LoopManager implements RunnableConfig<GameView> {
 
                 // Run client logic code
                 //gameView.logicLoop();
-                LogicSystem.getInstance().update();
+                LogicSystem.getInstance().runLogic();
 
                 frameCounter = 0;
             }
@@ -230,7 +230,7 @@ public class LoopManager implements RunnableConfig<GameView> {
         else{
 
             // Run client logic code
-            LogicSystem.getInstance().update();
+            LogicSystem.getInstance().runLogic();
         }
     }
 

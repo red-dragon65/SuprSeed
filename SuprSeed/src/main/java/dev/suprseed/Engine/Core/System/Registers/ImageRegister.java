@@ -1,22 +1,24 @@
-package dev.suprseed.Engine.Core.System;
+package dev.suprseed.Engine.Core.System.Registers;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
-import dev.suprseed.Engine.Core.System.Register.RenderRegister;
+import dev.suprseed.Engine.Core.System.Registerables.ILayerable;
+import dev.suprseed.Engine.Core.System.Registerables.IRenderableAndILayerable;
+import dev.suprseed.Engine.Core.System.RegisterTypes.IImageRegister;
 
-public class ImageRenderer implements RenderRegister<RenderableAndLayerable> {
+public class ImageRegister implements IImageRegister<IRenderableAndILayerable> {
 
 
-    private final List<RenderableAndLayerable> renderQueue;
-    private final Comparator<Layerable> layerableComparator;
+    private final List<IRenderableAndILayerable> renderQueue;
+    private final Comparator<ILayerable> layerableComparator;
     private boolean isLayerSynced = false;
 
 
     // Constructor
-    public ImageRenderer(Comparator<Layerable> layerableComparator) {
+    public ImageRegister(Comparator<ILayerable> layerableComparator) {
 
         this.renderQueue = new ArrayList<>();
         this.layerableComparator = layerableComparator;
@@ -34,7 +36,7 @@ public class ImageRenderer implements RenderRegister<RenderableAndLayerable> {
         }
 
         // Draw the sprites
-        for (RenderableAndLayerable item : renderQueue) {
+        for (IRenderableAndILayerable item : renderQueue) {
 
             if(item.isDrawable()){
                 item.draw(renderer);
@@ -49,14 +51,14 @@ public class ImageRenderer implements RenderRegister<RenderableAndLayerable> {
 
 
     @Override
-    public void registerObject(RenderableAndLayerable object) {
+    public void registerObject(IRenderableAndILayerable object) {
 
         renderQueue.add(object);
         isLayerSynced = false;
     }
 
     @Override
-    public void removeObject(RenderableAndLayerable object) {
+    public void removeObject(IRenderableAndILayerable object) {
 
         renderQueue.remove(object);
     }

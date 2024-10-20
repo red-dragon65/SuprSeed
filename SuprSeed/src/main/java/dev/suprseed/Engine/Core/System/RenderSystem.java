@@ -3,15 +3,18 @@ package dev.suprseed.Engine.Core.System;
 import dev.suprseed.Engine.Core.ErrorLogger.CentralLogger;
 import dev.suprseed.Engine.Core.ErrorLogger.ErrorType;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
-import dev.suprseed.Engine.Core.System.Register.RenderRegister;
-import dev.suprseed.Engine.Core.System.Register.UpdatableRegister;
-import dev.suprseed.Engine.Lib.Images.Animator;
+import dev.suprseed.Engine.Core.System.Registerables.IRenderable;
+import dev.suprseed.Engine.Core.System.Registerables.IRenderableAndILayerable;
+import dev.suprseed.Engine.Core.System.Registers.AnimationRegister;
+import dev.suprseed.Engine.Core.System.Registers.ImageRegister;
+import dev.suprseed.Engine.Core.System.RegisterTypes.IAnimationRegister;
+import dev.suprseed.Engine.Core.System.RegisterTypes.IImageRegister;
 import dev.suprseed.Engine.Lib.Images.GlobalFrameStepper;
 
-public class RenderSystem implements Renderable {
+public class RenderSystem implements IRenderable {
 
-    public final RenderRegister<RenderableAndLayerable> imageRegister;
-    public final UpdatableRegister<Animator> animationRegister;
+    private final IImageRegister<IRenderableAndILayerable> imageRegister;
+    private final IAnimationRegister animationRegister;
 
     // Eager loading singleton
     private static final RenderSystem INSTANCE = new RenderSystem();
@@ -21,9 +24,9 @@ public class RenderSystem implements Renderable {
     // Private to prevent client use of 'new' keyword
     private RenderSystem() {
 
-        imageRegister = new ImageRenderer(new LayerableQueueComparator());
+        imageRegister = new ImageRegister(new LayerableQueueComparator());
 
-        animationRegister = new AnimationRenderer();
+        animationRegister = new AnimationRegister();
     }
 
 
@@ -31,6 +34,13 @@ public class RenderSystem implements Renderable {
         return INSTANCE;
     }
 
+    public IImageRegister<IRenderableAndILayerable> getImageRegister(){
+        return imageRegister;
+    }
+
+    public IAnimationRegister getAnimationRegister(){
+        return animationRegister;
+    }
 
     // Draw registered sprites
     @Override

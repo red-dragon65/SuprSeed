@@ -3,17 +3,17 @@ package dev.suprseed.Engine.Core.InputHandler.TouchInput;
 import java.util.Comparator;
 import java.util.List;
 
-import dev.suprseed.Engine.Core.System.Layerable;
+import dev.suprseed.Engine.Core.System.Registerables.ILayerable;
 
 public class InputListenerHolder implements InputRegister<InputListener> {
 
 
     private final List<InputListener> listeners;
-    private final Comparator<Layerable> layerableComparator;
+    private final Comparator<ILayerable> layerableComparator;
 
 
     // Constructor
-    public InputListenerHolder(List<InputListener> listeners, Comparator<Layerable> layerableComparator) {
+    public InputListenerHolder(List<InputListener> listeners, Comparator<ILayerable> layerableComparator) {
         this.listeners = listeners;
         this.layerableComparator = layerableComparator;
     }

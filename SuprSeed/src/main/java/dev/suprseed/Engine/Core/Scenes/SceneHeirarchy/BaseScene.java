@@ -4,26 +4,27 @@ import android.content.Context;
 
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import dev.suprseed.Engine.Core.SpriteObjects.DefaultComponents.Resetable;
-import dev.suprseed.Engine.Core.System.AnimationRenderer;
-import dev.suprseed.Engine.Core.System.ImageRenderer;
+import dev.suprseed.Engine.Core.System.Registers.AnimationRegister;
+import dev.suprseed.Engine.Core.System.Registers.ImageRegister;
 import dev.suprseed.Engine.Core.System.LayerableQueueComparator;
-import dev.suprseed.Engine.Core.System.Logic;
-import dev.suprseed.Engine.Core.System.ObjectLogicizer;
-import dev.suprseed.Engine.Core.System.Register.RenderRegister;
-import dev.suprseed.Engine.Core.System.Register.UpdatableRegister;
-import dev.suprseed.Engine.Core.System.RenderableAndLayerable;
+import dev.suprseed.Engine.Core.System.Registerables.ILogicRunnable;
+import dev.suprseed.Engine.Core.System.Registers.LogicRegister;
+import dev.suprseed.Engine.Core.System.RegisterTypes.IAnimationRegister;
+import dev.suprseed.Engine.Core.System.RegisterTypes.IImageRegister;
+import dev.suprseed.Engine.Core.System.RegisterTypes.ILogicRegister;
+import dev.suprseed.Engine.Core.System.Registerables.IRenderableAndILayerable;
 import dev.suprseed.Engine.Lib.Images.Animator;
 
-public abstract class BaseScene implements Logic, RenderableAndLayerable, Animator, Resetable {
+public abstract class BaseScene implements ILogicRunnable, IRenderableAndILayerable, Animator, Resetable {
 
     protected String sceneId;
     protected boolean isActive = true;
     protected boolean isDrawable = true;
     protected static Context context;
 
-    public RenderRegister<RenderableAndLayerable> imageRegister;
-    public UpdatableRegister<Animator> animationRegister;
-    public UpdatableRegister<Logic> logicRegister;
+    public IImageRegister<IRenderableAndILayerable> imageRegister;
+    public IAnimationRegister animationRegister;
+    public ILogicRegister logicRegister;
 
     // Dependency injection
     protected SceneManager parentScene;
@@ -51,9 +52,9 @@ public abstract class BaseScene implements Logic, RenderableAndLayerable, Animat
             context = appContext;
         }
 
-        imageRegister = new ImageRenderer(new LayerableQueueComparator());
-        animationRegister = new AnimationRenderer();
-        logicRegister = new ObjectLogicizer();
+        imageRegister = new ImageRegister(new LayerableQueueComparator());
+        animationRegister = new AnimationRegister();
+        logicRegister = new LogicRegister();
 
         // Register the base scene to it's parent
         if(parentScene != null){

@@ -20,7 +20,7 @@ public class SceneSoftChange implements SceneChangeStrategy<BaseScene> {
                     oldScene.setDrawable(false);
 
                     // Clear the system register
-                    LogicSystem.getInstance().removeAllObjects();
+                    LogicSystem.getInstance().getLogicRegister().removeAllObjects();
 
                     // Enable the new scene
                     scene.setActive(true);

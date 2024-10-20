@@ -11,9 +11,9 @@ public abstract class RootScene extends SceneManager {
         super(null, "root", context);
 
         // Register the top level scene to the system managers
-        LogicSystem.getInstance().registerObject(this);
-        RenderSystem.getInstance().imageRegister.registerObject(this);
-        RenderSystem.getInstance().animationRegister.registerObject(this);
+        LogicSystem.getInstance().getLogicRegister().registerObject(this);
+        RenderSystem.getInstance().getImageRegister().registerObject(this);
+        RenderSystem.getInstance().getAnimationRegister().registerObject(this);
     }
 
     public abstract void initStartingState(Context context);

@@ -6,12 +6,12 @@ import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.CanvasData;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
 import dev.suprseed.Engine.Core.SpriteObjects.DefaultComponents.Resetable;
-import dev.suprseed.Engine.Core.System.Logic;
-import dev.suprseed.Engine.Core.System.RenderableAndLayerable;
+import dev.suprseed.Engine.Core.System.Registerables.ILogicRunnable;
+import dev.suprseed.Engine.Core.System.Registerables.IRenderableAndILayerable;
 import dev.suprseed.Engine.Lib.Collisions.Boundable;
 import dev.suprseed.Engine.Lib.Collisions.CollisionDiagnosticsOverlay;
 
-public abstract class Sprite implements RenderableAndLayerable, Boundable, Logic, Resetable {
+public abstract class Sprite implements IRenderableAndILayerable, Boundable, ILogicRunnable, Resetable {
 
     // TODO: Apply SOLID to this
 

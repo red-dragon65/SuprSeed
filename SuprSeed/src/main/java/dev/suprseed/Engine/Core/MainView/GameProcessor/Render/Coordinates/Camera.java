@@ -1,9 +1,9 @@
 package dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates;
 
-import dev.suprseed.Engine.Core.System.Logic;
+import dev.suprseed.Engine.Core.System.Registerables.ILogicRunnable;
 import dev.suprseed.Engine.Core.System.LogicSystem;
 
-public class Camera implements Logic {
+public class Camera implements ILogicRunnable {
 
     private float xOffset;
     private float yOffset;
@@ -23,7 +23,7 @@ public class Camera implements Logic {
     private Camera() {
 
         // Register with the sprite system
-        LogicSystem.getInstance().registerObject(this);
+        LogicSystem.getInstance().getLogicRegister().registerObject(this);
 
         // Default movement behavior
         cameraMovement = () -> {

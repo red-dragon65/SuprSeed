@@ -19,7 +19,7 @@ public class SceneHardChange implements SceneChangeStrategy<BaseScene> {
                     parentScene.getRegister().removeObject(scene);
 
                     // Clear the system register of any scene or sprites
-                    LogicSystem.getInstance().removeAllObjects();
+                    LogicSystem.getInstance().getLogicRegister().removeAllObjects();
 
 
                     // Hold the new scene

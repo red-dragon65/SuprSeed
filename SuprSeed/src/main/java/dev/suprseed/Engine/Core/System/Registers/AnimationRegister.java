@@ -1,19 +1,19 @@
-package dev.suprseed.Engine.Core.System;
+package dev.suprseed.Engine.Core.System.Registers;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import dev.suprseed.Engine.Core.System.Register.UpdatableRegister;
+import dev.suprseed.Engine.Core.System.RegisterTypes.IAnimationRegister;
 import dev.suprseed.Engine.Lib.Images.Animator;
 
-public class AnimationRenderer implements UpdatableRegister<Animator> {
+public class AnimationRegister implements IAnimationRegister {
 
 
     private final List<Animator> animationQueue;
 
 
     // Constructor
-    public AnimationRenderer() {
+    public AnimationRegister() {
 
         this.animationQueue = new ArrayList<>();
     }
