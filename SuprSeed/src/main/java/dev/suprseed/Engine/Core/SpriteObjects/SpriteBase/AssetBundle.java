@@ -1,13 +1,15 @@
 package dev.suprseed.Engine.Core.SpriteObjects.SpriteBase;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import dev.suprseed.Engine.Lib.Images.SpriteImage;
 
 public class AssetBundle {
 
-    private ArrayList<SpriteImage> spriteImage;
+    private List<SpriteImage> spriteImage;
     private String selectedImage;
 
 
@@ -25,7 +27,7 @@ public class AssetBundle {
     }
 
     // Constructor that takes multiple sprite image sets
-    public AssetBundle(ArrayList<SpriteImage> sprites) {
+    public AssetBundle(List<SpriteImage> sprites) {
 
         if (sprites != null) {
 
@@ -36,29 +38,24 @@ public class AssetBundle {
 
     }
 
-    public int getNumAssets(){
+    public int getNumAssets() {
         return spriteImage.size();
     }
 
-    public ArrayList<String> getAllIds(){
+    public List<String> getAllIds() {
 
-        ArrayList<String> ids = new ArrayList<>();
+        return spriteImage.stream().map(SpriteImage::getTag).collect(Collectors.toList());
 
-        for(SpriteImage s : spriteImage){
-            ids.add(s.getTag());
-        }
-
-        return ids;
     }
 
     public SpriteImage getSpriteImageSetById(String imageName) {
 
         verifySpriteList();
 
-        try{
+        try {
 
             return spriteImage.stream().filter(s -> s.getTag().equals(imageName)).findFirst().orElseThrow();
-        }catch (Exception e){
+        } catch (Exception e) {
 
             throw new NullPointerException("Image with key: '" + imageName + "' does not exist!");
         }
@@ -75,7 +72,7 @@ public class AssetBundle {
     public void setSelectedImageSet(String selected) {
 
         // Verify id exists
-        if(spriteImage.stream().anyMatch(s -> s.getTag().equals(selected))){
+        if (spriteImage.stream().anyMatch(s -> s.getTag().equals(selected))) {
             selectedImage = selected;
             return;
         }

@@ -7,16 +7,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
-import dev.suprseed.Engine.Core.System.RenderSystem;
 import dev.suprseed.Engine.Core.System.Registerables.IRenderableAndILayerable;
+import dev.suprseed.Engine.Core.System.RenderSystem;
 
 public class CollisionDiagnosticsOverlay implements IRenderableAndILayerable, RectCollector {
 
-    private final List<RectF> collisionBounds;
-    private boolean isEnabled = false;
-
     // Eager loading singleton
     private static final CollisionDiagnosticsOverlay INSTANCE = new CollisionDiagnosticsOverlay();
+    private final List<RectF> collisionBounds;
+    private boolean isEnabled = false;
 
 
     // Constructor

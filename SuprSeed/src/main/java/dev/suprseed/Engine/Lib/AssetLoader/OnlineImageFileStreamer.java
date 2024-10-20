@@ -9,13 +9,10 @@ import android.graphics.Bitmap;
 public class OnlineImageFileStreamer implements Streamable {
 
 
-
     // Constructor
-    public OnlineImageFileStreamer(){
+    public OnlineImageFileStreamer() {
 
     }
-
-
 
 
     @Override

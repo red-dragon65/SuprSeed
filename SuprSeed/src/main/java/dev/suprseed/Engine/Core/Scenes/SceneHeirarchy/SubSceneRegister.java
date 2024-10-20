@@ -11,11 +11,10 @@ public class SubSceneRegister implements ISceneRegister<BaseScene> {
 
 
     // Constructor
-    public SubSceneRegister(){
+    public SubSceneRegister() {
 
         myScenes = new ArrayList<>();
     }
-
 
 
     @Override
@@ -37,7 +36,7 @@ public class SubSceneRegister implements ISceneRegister<BaseScene> {
     }
 
     @Override
-    public List<BaseScene> getRegisterList(){
+    public List<BaseScene> getRegisterList() {
 
         return myScenes;
     }

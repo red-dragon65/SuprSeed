@@ -3,6 +3,7 @@ package dev.suprseed.Engine.Lib.Images;
 import android.graphics.Bitmap;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import dev.suprseed.Engine.Core.ErrorLogger.CentralLogger;
 import dev.suprseed.Engine.Core.ErrorLogger.ErrorType;
@@ -13,7 +14,7 @@ import dev.suprseed.Engine.Lib.AssetLoader.Streamable;
 
 public class BitmapCollection implements SpriteImage {
 
-    protected ArrayList<Bitmap> imageSet;
+    protected List<Bitmap> imageSet;
     private String tag;
 
     // Constructor for collection of images
@@ -31,7 +32,7 @@ public class BitmapCollection implements SpriteImage {
             imageSet.add(imageStreamer.loadImage(singleImagePath, imageScale));
         }
 
-        if(imageSet.size() == 0){
+        if (imageSet.size() == 0) {
             CentralLogger.getInstance().logMessage(ErrorType.FATAL_ERROR, "No images found in folder! Folder: " + folderPath);
         }
 
@@ -39,14 +40,14 @@ public class BitmapCollection implements SpriteImage {
     }
 
     @Override
-    public String getTag(){
+    public String getTag() {
         return tag;
     }
 
     @Override
     public Bitmap getImage() {
 
-        if(imageSet != null){
+        if (imageSet != null) {
             return imageSet.get(0);
         }
 

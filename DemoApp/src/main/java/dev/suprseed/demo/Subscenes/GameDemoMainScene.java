@@ -23,13 +23,11 @@ import dev.suprseed.demo.SharedData.GameOverData;
 
 public class GameDemoMainScene extends SceneManager {
 
-    private boolean musicHasStarted = false;
     private final MediaPlayer mediaPlayer;
-
     private final EntityScene entities;
     private final OverlayScene overlay;
-
     private final GameOverData gameOverData;
+    private boolean musicHasStarted = false;
 
     // Constructor
     public GameDemoMainScene(SceneManager parentScene, String sceneId) {

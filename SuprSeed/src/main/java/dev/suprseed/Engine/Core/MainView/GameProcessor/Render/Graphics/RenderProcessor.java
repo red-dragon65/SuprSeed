@@ -11,13 +11,11 @@ import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
 
 public class RenderProcessor implements RenderHandler {
 
-    // The hardware accelerated canvas provided by a view
-    private Canvas canvas;
-
     private final Paint paint = new Paint();
-
     // Dependencies
     private final CoordinateHandler coordinateHandler;
+    // The hardware accelerated canvas provided by a view
+    private Canvas canvas;
 
 
     // Constructor
@@ -26,15 +24,6 @@ public class RenderProcessor implements RenderHandler {
         // Dependency injection
         this.coordinateHandler = coordinateHandler;
     }
-
-
-    @Override
-    public void setCanvas(Canvas canvas) {
-
-        // Get the latest canvas from onDraw
-        this.canvas = canvas;
-    }
-
 
     @Override
     public void drawSprite(Sprite sprite) {
@@ -76,7 +65,6 @@ public class RenderProcessor implements RenderHandler {
 
     }
 
-
     @Override
     public CoordinateHandler getCoordinateHandler() {
         return coordinateHandler;
@@ -90,6 +78,13 @@ public class RenderProcessor implements RenderHandler {
     @Override
     public Canvas getCanvas() {
         return canvas;
+    }
+
+    @Override
+    public void setCanvas(Canvas canvas) {
+
+        // Get the latest canvas from onDraw
+        this.canvas = canvas;
     }
 
 }

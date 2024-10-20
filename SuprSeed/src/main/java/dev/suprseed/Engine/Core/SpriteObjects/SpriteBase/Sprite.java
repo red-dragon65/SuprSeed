@@ -15,22 +15,17 @@ public abstract class Sprite implements IRenderableAndILayerable, Boundable, ILo
 
     // TODO: Apply SOLID to this
 
-    private float x;
-    private float y;
-
-    private float xVel;
-    private float yVel;
-
-    private boolean enabled = true;
-    private boolean show = true;
-
-    private boolean cameraRegistered = true;
-
-    private int layerDepth = 0;
-
     // Dependency
     protected AssetBundle assetBundle;
     protected BaseScene parentScene;
+    private float x;
+    private float y;
+    private float xVel;
+    private float yVel;
+    private boolean enabled = true;
+    private boolean show = true;
+    private boolean cameraRegistered = true;
+    private int layerDepth = 0;
 
 
     // Constructor that takes one sprite image set
@@ -47,13 +42,11 @@ public abstract class Sprite implements IRenderableAndILayerable, Boundable, ILo
     }
 
 
-
     @Override
-    public void draw(RenderHandler renderer){
+    public void draw(RenderHandler renderer) {
 
         renderer.drawSprite(this);
     }
-
 
 
     // Getters / setters
@@ -90,12 +83,11 @@ public abstract class Sprite implements IRenderableAndILayerable, Boundable, ILo
     }
 
 
-
-
     @Override
-    public boolean isDrawable(){
+    public boolean isDrawable() {
         return show;
     }
+
     public void setDrawable(boolean show) {
         this.show = show;
     }
@@ -123,7 +115,7 @@ public abstract class Sprite implements IRenderableAndILayerable, Boundable, ILo
         this.assetBundle = assetBundle;
     }
 
-    public void enableCamera(){
+    public void enableCamera() {
         cameraRegistered = true;
     }
 

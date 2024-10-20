@@ -26,15 +26,15 @@ public class LocationTemporalScaler implements LocationScaler {
         return loc;
     }
 
+    @Override
+    public float getLocationScaleRatio() {
+        return locationScaleRatio;
+    }
+
     // Setters
     @Override
     public void setLocationScaleRatio(LogicRates logicRate) {
 
         locationScaleRatio = targetLogicRate / logicRate.getTickRate();
-    }
-
-    @Override
-    public float getLocationScaleRatio() {
-        return locationScaleRatio;
     }
 }

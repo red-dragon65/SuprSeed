@@ -3,21 +3,20 @@ package dev.suprseed.Engine.Core.System;
 import dev.suprseed.Engine.Core.ErrorLogger.CentralLogger;
 import dev.suprseed.Engine.Core.ErrorLogger.ErrorType;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
+import dev.suprseed.Engine.Core.System.RegisterTypes.IAnimationRegister;
+import dev.suprseed.Engine.Core.System.RegisterTypes.IImageRegister;
 import dev.suprseed.Engine.Core.System.Registerables.IRenderable;
 import dev.suprseed.Engine.Core.System.Registerables.IRenderableAndILayerable;
 import dev.suprseed.Engine.Core.System.Registers.AnimationRegister;
 import dev.suprseed.Engine.Core.System.Registers.ImageRegister;
-import dev.suprseed.Engine.Core.System.RegisterTypes.IAnimationRegister;
-import dev.suprseed.Engine.Core.System.RegisterTypes.IImageRegister;
 import dev.suprseed.Engine.Lib.Images.GlobalFrameStepper;
 
 public class RenderSystem implements IRenderable {
 
-    private final IImageRegister<IRenderableAndILayerable> imageRegister;
-    private final IAnimationRegister animationRegister;
-
     // Eager loading singleton
     private static final RenderSystem INSTANCE = new RenderSystem();
+    private final IImageRegister<IRenderableAndILayerable> imageRegister;
+    private final IAnimationRegister animationRegister;
 
 
     // Constructor
@@ -34,11 +33,11 @@ public class RenderSystem implements IRenderable {
         return INSTANCE;
     }
 
-    public IImageRegister<IRenderableAndILayerable> getImageRegister(){
+    public IImageRegister<IRenderableAndILayerable> getImageRegister() {
         return imageRegister;
     }
 
-    public IAnimationRegister getAnimationRegister(){
+    public IAnimationRegister getAnimationRegister() {
         return animationRegister;
     }
 

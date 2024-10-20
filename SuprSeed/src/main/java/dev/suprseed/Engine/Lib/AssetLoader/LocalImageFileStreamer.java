@@ -24,33 +24,33 @@ public class LocalImageFileStreamer implements Streamable {
 
 
     @Override
-    public Bitmap loadImage(String fileName, float scale){
+    public Bitmap loadImage(String fileName, float scale) {
 
-        if(scale == 0){
+        if (scale == 0) {
             return loadImage_Unscaled(fileName);
-        }else if(scale == 1){
+        } else if (scale == 1) {
             return loadImage_WithDefaultScale(fileName);
-        }else{
+        } else {
             return loadImage_WithAdditionalScaling(fileName, scale);
         }
     }
 
     @Override
-    public Bitmap loadImage_WithDefaultScale(String fileName){
+    public Bitmap loadImage_WithDefaultScale(String fileName) {
         return loadImage_WithAdditionalScaling(fileName, 1f);
     }
 
 
     // Loads an image from the assets folder
     @Override
-    public Bitmap loadImage_WithAdditionalScaling(String fileName, float scaleFactor){
+    public Bitmap loadImage_WithAdditionalScaling(String fileName, float scaleFactor) {
 
         try {
             reader = res.getAssets().open(fileName);
 
             Bitmap temp = BitmapFactory.decodeStream(reader);
 
-            if(temp == null){
+            if (temp == null) {
 
                 Log.d("ImageLoader", "Image failed to load: " + fileName);
             }
@@ -67,7 +67,7 @@ public class LocalImageFileStreamer implements Streamable {
 
     // Loads an image from the assets folder
     @Override
-    public Bitmap loadImage_Unscaled(String fileName){
+    public Bitmap loadImage_Unscaled(String fileName) {
 
         InputStream reader;
 
@@ -78,7 +78,7 @@ public class LocalImageFileStreamer implements Streamable {
 
             reader.close();
 
-            if(temp == null){
+            if (temp == null) {
 
                 Log.d("ImageLoader", "Image failed to load: " + fileName);
             }

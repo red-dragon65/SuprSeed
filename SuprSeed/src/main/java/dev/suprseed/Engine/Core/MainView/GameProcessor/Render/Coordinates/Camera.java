@@ -1,21 +1,18 @@
 package dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates;
 
-import dev.suprseed.Engine.Core.System.Registerables.ILogicRunnable;
 import dev.suprseed.Engine.Core.System.LogicSystem;
+import dev.suprseed.Engine.Core.System.Registerables.ILogicRunnable;
 
 public class Camera implements ILogicRunnable {
 
-    private float xOffset;
-    private float yOffset;
-
-    private float xVelocity;
-    private float yVelocity;
-
-    // Modifiable behavior
-    private Movable cameraMovement;
-
     // Eager loading singleton
     private static final Camera INSTANCE = new Camera();
+    private float xOffset;
+    private float yOffset;
+    private float xVelocity;
+    private float yVelocity;
+    // Modifiable behavior
+    private Movable cameraMovement;
 
 
     // Constructor

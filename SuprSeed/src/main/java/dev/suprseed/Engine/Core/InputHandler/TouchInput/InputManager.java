@@ -11,12 +11,11 @@ import dev.suprseed.Engine.Core.System.LayerableQueueComparator;
 public class InputManager implements InputHandler {
 
 
+    // Eager loading singleton
+    private static final InputManager INSTANCE = new InputManager();
     // Dependency injection
     public final InputRegister<InputProcessor> processorRegister;
     public final InputRegister<InputListener> listenerRegister;
-
-    // Eager loading singleton
-    private static final InputManager INSTANCE = new InputManager();
 
     // Constructor
     // Private to prevent client use of 'new' keyword

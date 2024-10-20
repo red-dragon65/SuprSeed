@@ -18,7 +18,7 @@ public class BitmapSingle implements SpriteImage {
     }
 
     @Override
-    public String getTag(){
+    public String getTag() {
         return tag;
     }
 

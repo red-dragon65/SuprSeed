@@ -8,8 +8,6 @@ import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
 
 public interface RenderHandler {
 
-    void setCanvas(Canvas canvas);
-
     void drawSprite(Sprite sprite);
 
     CoordinateHandler getCoordinateHandler();
@@ -17,4 +15,6 @@ public interface RenderHandler {
     Paint getPaint();
 
     Canvas getCanvas();
+
+    void setCanvas(Canvas canvas);
 }

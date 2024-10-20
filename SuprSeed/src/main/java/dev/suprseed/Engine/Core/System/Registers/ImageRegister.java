@@ -5,9 +5,9 @@ import java.util.Comparator;
 import java.util.List;
 
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
+import dev.suprseed.Engine.Core.System.RegisterTypes.IImageRegister;
 import dev.suprseed.Engine.Core.System.Registerables.ILayerable;
 import dev.suprseed.Engine.Core.System.Registerables.IRenderableAndILayerable;
-import dev.suprseed.Engine.Core.System.RegisterTypes.IImageRegister;
 
 public class ImageRegister implements IImageRegister<IRenderableAndILayerable> {
 
@@ -38,7 +38,7 @@ public class ImageRegister implements IImageRegister<IRenderableAndILayerable> {
         // Draw the sprites
         for (IRenderableAndILayerable item : renderQueue) {
 
-            if(item.isDrawable()){
+            if (item.isDrawable()) {
                 item.draw(renderer);
             }
 

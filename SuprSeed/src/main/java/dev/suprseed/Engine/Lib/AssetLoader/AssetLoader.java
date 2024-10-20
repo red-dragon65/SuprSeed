@@ -1,6 +1,7 @@
 package dev.suprseed.Engine.Lib.AssetLoader;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import dev.suprseed.Engine.Core.ErrorLogger.CentralLogger;
 import dev.suprseed.Engine.Core.ErrorLogger.ErrorType;
@@ -15,11 +16,11 @@ abstract public class AssetLoader {
     protected FolderParser folderParser;
 
     // Hold image data
-    protected ArrayList<SpriteImage> images = new ArrayList<>();
+    protected List<SpriteImage> images = new ArrayList<>();
 
 
     // Constructor
-    public AssetLoader(BaseScene parentScene, Streamable assetStreamer, FolderParser folderParser){
+    public AssetLoader(BaseScene parentScene, Streamable assetStreamer, FolderParser folderParser) {
 
         this.assetStreamer = assetStreamer;
         this.folderParser = folderParser;
@@ -30,16 +31,16 @@ abstract public class AssetLoader {
 
     abstract public void loadAssets(BaseScene parentScene);
 
-    public AssetBundle getAssetBundle(String tag){
+    public AssetBundle getAssetBundle(String tag) {
 
         return new AssetBundle(getImage(tag));
     }
 
-    public AssetBundle getAssetBundle(ArrayList<String> tags){
+    public AssetBundle getAssetBundle(List<String> tags) {
 
-        ArrayList<SpriteImage> assets = new ArrayList<>();
+        List<SpriteImage> assets = new ArrayList<>();
 
-        for(String s : tags){
+        for (String s : tags) {
             assets.add(getImage(s));
         }
 

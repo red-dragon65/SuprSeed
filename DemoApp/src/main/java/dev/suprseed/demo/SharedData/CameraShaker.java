@@ -12,9 +12,9 @@ public class CameraShaker {
 
     // TODO: Calculate number of frames using client specified game logic/render rate
     private final int targetFrameTime = 15; // Number of frames to shake camera
-    private int currentFrameTime = targetFrameTime + 1;
     private final int maxShakeDistance = 3;
     private final int shakeRate = 1;
+    private int currentFrameTime = targetFrameTime + 1;
 
 
     // Constructor

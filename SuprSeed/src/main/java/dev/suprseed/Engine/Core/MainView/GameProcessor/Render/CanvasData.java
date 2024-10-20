@@ -9,19 +9,16 @@ public class CanvasData {
 
     // TODO: Make this an observer pattern
 
+    // Eager loading singleton
+    private static final CanvasData INSTANCE = new CanvasData();
     private final float scaledWidth = 100;
+    private final LocationTemporalScaler scaler = new LocationTemporalScaler();
     private float originalHeight;
     private float originalWidth;
     private float scaledHeight;
     private float spriteScaleRatio;
-
     // Default target resolution
     private float targetResolution = 1080;
-
-    private final LocationTemporalScaler scaler = new LocationTemporalScaler();
-
-    // Eager loading singleton
-    private static final CanvasData INSTANCE = new CanvasData();
 
 
     // Constructor

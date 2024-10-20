@@ -3,8 +3,8 @@ package dev.suprseed.Engine.Core.System.Registers;
 import java.util.ArrayList;
 import java.util.List;
 
-import dev.suprseed.Engine.Core.System.Registerables.ILogicRunnable;
 import dev.suprseed.Engine.Core.System.RegisterTypes.ILogicRegister;
+import dev.suprseed.Engine.Core.System.Registerables.ILogicRunnable;
 
 public class LogicRegister implements ILogicRegister {
 
