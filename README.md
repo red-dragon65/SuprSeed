@@ -50,7 +50,7 @@ Progress
 - package clean up
 - image/animation api cleanup
 - fix inconsistent exception handling
-- rename interfaces to use the `I` naming convention
+- rename classes/interfaces to use proper naming conventions
 - improve the EngineConfigurator
 - other stuff
 
