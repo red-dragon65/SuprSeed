@@ -8,6 +8,7 @@ import dev.suprseed.Engine.Core.MainView.EngineSettings.CanvasConfig;
 import dev.suprseed.Engine.Core.MainView.EngineSettings.LoopConfig;
 import dev.suprseed.Engine.Core.MainView.EngineSettings.ViewConfig;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.GameView;
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.InputHandler;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LogicRates;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LoopManager;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.RefreshTypes;
@@ -21,8 +22,6 @@ import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates.Locati
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderProcessor;
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.RootScene;
-import dev.suprseed.Engine.Lib.AssetLoader.ImageProcessor;
-import dev.suprseed.Engine.Lib.AssetLoader.ImageTransformer;
 
 public class EngineConfigurator extends BaseEngineConfigurator {
 
@@ -32,23 +31,23 @@ public class EngineConfigurator extends BaseEngineConfigurator {
     private RenderHandler renderProcessor;
     private CoordinateHandler coordinateHandler;
     private LocationHandler locationHandler;
-    private ImageTransformer imageTransformer;
     private LoopConfig loopConfig;
     private ViewConfig viewConfig;
     private CanvasConfig canvasConfig;
-
+    private InputHandler inputHandler;
 
     // Constructor
-    public EngineConfigurator(BaseEngineConfigurator configurator, RootScene rootScene) {
+    public EngineConfigurator(BaseEngineConfigurator configurator, RootScene rootScene, InputHandler inputHandler) {
         super(configurator.context);
 
         this.rootScene = rootScene;
+        this.inputHandler = inputHandler;
     }
 
     @Override
     public View buildView() {
 
-        return new GameView(context, getLoopManager(), getRenderProcessor(), rootScene);
+        return new GameView(context, getLoopManager(), getRenderProcessor(), rootScene, inputHandler);
     }
 
     @Override
@@ -63,6 +62,10 @@ public class EngineConfigurator extends BaseEngineConfigurator {
 
     User can change out default configuration here if needed.
 
+    Returns the users configuration if possible to the 'viewBuilder' method.
+    Otherwise, the default configuration is used where needed.
+
+    The user can also retrieve default configs here if they wish to create their own partial builder.
      */
 
     public RunnableConfig<GameView> getLoopManager() {
@@ -134,36 +137,8 @@ public class EngineConfigurator extends BaseEngineConfigurator {
 
 
 
-
-
-
-
-
-
-    /*
-
-    Returns the users configuration if possible to the 'viewBuilder' method.
-    Otherwise, the default configuration is used where needed.
-
-    The user can also retrieve default configs here if they wish to create their own partial builder.
-     */
-
     public EngineConfigurator setLocationHandler(LocationHandler locationHandler) {
         this.locationHandler = locationHandler;
-        return this;
-    }
-
-    public ImageTransformer getImageTransformer() {
-
-        if (imageTransformer == null) {
-            return new ImageProcessor();
-        }
-
-        return imageTransformer;
-    }
-
-    public EngineConfigurator setImageTransformer(ImageTransformer imageTransformer) {
-        this.imageTransformer = imageTransformer;
         return this;
     }
 

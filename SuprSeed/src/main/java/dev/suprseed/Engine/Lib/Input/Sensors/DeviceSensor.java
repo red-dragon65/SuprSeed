@@ -1,4 +1,4 @@
-package dev.suprseed.Engine.Core.InputHandler.Sensors;
+package dev.suprseed.Engine.Lib.Input.Sensors;
 
 public interface DeviceSensor<T> {
 

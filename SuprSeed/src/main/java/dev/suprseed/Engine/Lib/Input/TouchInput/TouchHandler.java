@@ -1,4 +1,4 @@
-package dev.suprseed.Engine.Core.InputHandler.TouchInput;
+package dev.suprseed.Engine.Lib.Input.TouchInput;
 
 import android.graphics.RectF;
 import android.view.InputDevice;

@@ -1,4 +1,4 @@
-package dev.suprseed.Engine.Core.InputHandler.Sensors;
+package dev.suprseed.Engine.Lib.Input.Sensors;
 
 import static android.content.Context.SENSOR_SERVICE;
 

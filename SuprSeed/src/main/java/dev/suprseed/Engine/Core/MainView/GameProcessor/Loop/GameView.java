@@ -8,7 +8,7 @@ import android.view.SurfaceView;
 
 import androidx.annotation.NonNull;
 
-import dev.suprseed.Engine.Core.InputHandler.TouchInput.InputManager;
+import dev.suprseed.Engine.Lib.Input.TouchInput.InputManager;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.CanvasData;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.RootScene;
@@ -22,12 +22,13 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     protected RunnableConfig<GameView> loopRunner;
     protected RenderHandler renderer;
     protected RootScene sceneManager;
+    protected InputHandler inputHandler;
     protected Context context;
 
 
     // Constructor
     public GameView(Context context, RunnableConfig<GameView> loopRunner,
-                    RenderHandler renderer, RootScene sceneManager) {
+                    RenderHandler renderer, RootScene sceneManager, InputHandler inputHandler) {
         super(context);
 
         this.context = context;
@@ -37,6 +38,8 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         this.renderer = renderer;
 
         this.sceneManager = sceneManager;
+
+        this.inputHandler = inputHandler;
     }
 
 
@@ -146,7 +149,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
         // Process touch input
         // Note: this runs regardless if the game loop is allowed to run
-        InputManager.getInstance().processInput(event);
+        inputHandler.processInput(event);
 
 
         // Returns whether the event was handled or not

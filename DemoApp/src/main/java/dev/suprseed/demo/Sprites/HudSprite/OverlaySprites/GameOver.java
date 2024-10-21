@@ -1,8 +1,8 @@
 package dev.suprseed.demo.Sprites.HudSprite.OverlaySprites;
 
 
-import dev.suprseed.Engine.Core.InputHandler.TouchInput.InputListener;
-import dev.suprseed.Engine.Core.InputHandler.TouchInput.InputManager;
+import dev.suprseed.Engine.Lib.Input.TouchInput.InputListener;
+import dev.suprseed.Engine.Lib.Input.TouchInput.InputManager;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;

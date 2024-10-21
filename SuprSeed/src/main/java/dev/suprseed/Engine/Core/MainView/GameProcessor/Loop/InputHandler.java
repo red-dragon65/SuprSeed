@@ -1,4 +1,4 @@
-package dev.suprseed.Engine.Core.InputHandler.TouchInput;
+package dev.suprseed.Engine.Core.MainView.GameProcessor.Loop;
 
 import android.view.MotionEvent;
 

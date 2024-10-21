@@ -5,8 +5,8 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import dev.suprseed.Engine.Core.InputHandler.TouchInput.InputManager;
-import dev.suprseed.Engine.Core.InputHandler.TouchInput.TouchHandler;
+import dev.suprseed.Engine.Lib.Input.TouchInput.InputManager;
+import dev.suprseed.Engine.Lib.Input.TouchInput.TouchHandler;
 import dev.suprseed.Engine.Core.MainView.EngineSettings.ViewConfig;
 import dev.suprseed.Engine.Core.MainView.GameViewBuilder.BaseEngineConfigurator;
 import dev.suprseed.Engine.Core.MainView.GameViewBuilder.EngineConfigurator;
@@ -21,7 +21,7 @@ public class DefaultEngineConfiguration extends BaseEngineConfigurator {
         super(context);
 
         // User can build the engine configuration here
-        engineConfigurator = new EngineConfigurator(this, clientScene)
+        engineConfigurator = new EngineConfigurator(this, clientScene, InputManager.getInstance())
                 .setViewConfig(new ViewConfig(true, true, true, false));
 
         // Add the input handlers here

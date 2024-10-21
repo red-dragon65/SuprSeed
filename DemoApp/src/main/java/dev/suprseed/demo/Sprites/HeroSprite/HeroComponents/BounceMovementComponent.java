@@ -1,6 +1,6 @@
 package dev.suprseed.demo.Sprites.HeroSprite.HeroComponents;
 
-import dev.suprseed.Engine.Core.InputHandler.TouchInput.InputManager;
+import dev.suprseed.Engine.Lib.Input.TouchInput.InputManager;
 import dev.suprseed.Engine.Core.SpriteObjects.DefaultComponents.ResetableComponent;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
 import dev.suprseed.Engine.Lib.SoundPlayer.SoundMixer;

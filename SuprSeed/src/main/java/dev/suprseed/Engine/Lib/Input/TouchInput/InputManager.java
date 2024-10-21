@@ -1,4 +1,4 @@
-package dev.suprseed.Engine.Core.InputHandler.TouchInput;
+package dev.suprseed.Engine.Lib.Input.TouchInput;
 
 import android.view.MotionEvent;
 
@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import dev.suprseed.Engine.Core.ErrorLogger.CentralLogger;
 import dev.suprseed.Engine.Core.ErrorLogger.ErrorType;
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.InputHandler;
 import dev.suprseed.Engine.Core.System.LayerableQueueComparator;
 
 public class InputManager implements InputHandler {
