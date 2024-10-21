@@ -16,13 +16,15 @@ public class RenderProcessor implements RenderHandler {
     private final CoordinateHandler coordinateHandler;
     // The hardware accelerated canvas provided by a view
     private Canvas canvas;
+    private CollisionDiagnosable collisionDiagnoser;
 
 
     // Constructor
-    public RenderProcessor(CoordinateHandler coordinateHandler) {
+    public RenderProcessor(CoordinateHandler coordinateHandler, CollisionDiagnosable collisionDiagnoser) {
 
         // Dependency injection
         this.coordinateHandler = coordinateHandler;
+        this.collisionDiagnoser = collisionDiagnoser;
     }
 
     @Override
@@ -43,6 +45,12 @@ public class RenderProcessor implements RenderHandler {
             return;
         }
 
+
+        // Only process sprite overlays if the diagnoser is enabled
+        if (collisionDiagnoser.isEnabled()) {
+
+            collisionDiagnoser.addOverlay(sprite);
+        }
 
         // Actually draw sprite
         //if(sprite.isActive() && sprite.isDrawable()){ // IGNORE THIS! RENDERSYSTEM HANDLES DRAWABILITY

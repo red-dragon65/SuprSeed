@@ -5,23 +5,38 @@ import android.graphics.RectF;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+import dev.suprseed.Engine.Core.ErrorLogger.CentralLogger;
+import dev.suprseed.Engine.Core.ErrorLogger.ErrorType;
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.CollisionDiagnosable;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
-import dev.suprseed.Engine.Core.System.Registerables.IRenderableAndILayerable;
+import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
 import dev.suprseed.Engine.Core.System.RenderSystem;
 
-public class CollisionDiagnosticsOverlay implements IRenderableAndILayerable, RectCollector {
+public class CollisionDiagnosticsOverlay implements CollisionDiagnosable {
 
     // Eager loading singleton
     private static final CollisionDiagnosticsOverlay INSTANCE = new CollisionDiagnosticsOverlay();
-    private final List<RectF> collisionBounds;
+    // Rectangle pool
+    private final List<RectF> boundsPool;
+    private final int initSize = 10;
+    private final int maxSize = 100;
     private boolean isEnabled = false;
+    private int rectColor = Color.argb(150, 200, 200, 0); //Yellow
+    private int currentSize = initSize;
+    private int currentIndex = 0;
 
 
     // Constructor
     // Private to prevent client use of 'new' keyword
     private CollisionDiagnosticsOverlay() {
-        collisionBounds = new ArrayList<>();
+
+        // Initialize the pool
+        boundsPool = new ArrayList<>();
+        for (int i = 0; i < initSize; i++) {
+            boundsPool.add(new RectF());
+        }
 
         RenderSystem.getInstance().getImageRegister().registerObject(this);
     }
@@ -30,45 +45,87 @@ public class CollisionDiagnosticsOverlay implements IRenderableAndILayerable, Re
         return INSTANCE;
     }
 
-    @Override
-    public void addRect(RectF input) {
 
-        // See if this is allowed to run
+    public void setColor(int rectColor) {
+        this.rectColor = rectColor;
+    }
+
+    private Optional<RectF> checkoutRectF() {
+
         if (isEnabled) {
-            collisionBounds.add(input);
+
+            RectF result;
+
+            // Get the box
+            if (currentIndex < currentSize - 1) {
+
+                result = boundsPool.get(currentIndex);
+                currentIndex++;
+                return Optional.ofNullable(result);
+            }
+
+            // Resize the pool, then get the box
+            if (currentSize < maxSize) {
+
+                boundsPool.add(new RectF());
+                currentSize++;
+                return checkoutRectF();
+
+            } else {
+
+                CentralLogger.getInstance().logMessage(ErrorType.WARNING,
+                        "Bounding box draw limit reached!" +
+                                "(Max size: " + maxSize + ") == (Current size: " + currentSize + ")" +
+                                "No more collision bounds can be added!");
+            }
+        }
+
+        return Optional.empty();
+    }
+
+    @Override
+    public void addOverlay(Sprite sprite) {
+
+        // Allow user to ignore collision overlay for their specified sprite
+        if (sprite.isAllowCollisionDiagnostic()) {
+
+            /*
+            Checkout a pre-instantiated box.
+            Set the box to the sprites values.
+            The collision will automatically draw any checked boxes.
+            (note: the box only gets drawn once, then added back to the pool)
+             */
+            Optional<RectF> holder = CollisionDiagnosticsOverlay.getInstance().checkoutRectF();
+            holder.ifPresent(sprite::getRectF);
         }
     }
 
     @Override
-    public void enable() {
-        isEnabled = true;
+    public boolean isEnabled() {
+        return isEnabled;
     }
 
     @Override
-    public void disable() {
-        isEnabled = false;
+    public void setEnabled(boolean isEnabled) {
+        this.isEnabled = isEnabled;
     }
 
     @Override
     public void draw(RenderHandler renderer) {
 
-        // Check if rectangles exist
-        if (!(collisionBounds != null && collisionBounds.size() > 0)) {
-
-            return;
-        }
-
         // Set the rect color
-        renderer.getPaint().setColor(Color.BLUE);
+        renderer.getPaint().setColor(rectColor);
 
         // Draw each rectangle
-        for (RectF r : collisionBounds) {
+        for (int i = 0; i <= currentIndex; i++) {
 
-            renderer.getCanvas().drawRect(r, renderer.getPaint());
+            renderer.getCanvas().drawRect(boundsPool.get(i), renderer.getPaint());
         }
 
-        // Clear out all old rectangles
-        collisionBounds.clear();
+        renderer.getPaint().reset();
+
+        // Reset the pool
+        currentIndex = 0;
     }
 
     @Override

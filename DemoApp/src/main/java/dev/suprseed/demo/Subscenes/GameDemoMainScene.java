@@ -33,6 +33,8 @@ public class GameDemoMainScene extends SceneManager {
     public GameDemoMainScene(SceneManager parentScene, String sceneId) {
         super(parentScene, sceneId);
 
+        //CollisionDiagnosticsOverlay.getInstance().setEnabled(true);
+
         // Instantiate the assets for this scene
         FolderParser localFolderParser = new LocalFolderParser(context.getResources());
         Streamable localStreamer = new LocalImageFileStreamer(context.getResources());

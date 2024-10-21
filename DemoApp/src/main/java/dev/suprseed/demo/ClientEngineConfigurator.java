@@ -5,6 +5,7 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import dev.suprseed.Engine.Lib.Collisions.CollisionDiagnosticsOverlay;
 import dev.suprseed.Engine.Lib.Input.TouchInput.InputManager;
 import dev.suprseed.Engine.Lib.Input.TouchInput.TouchHandler;
 import dev.suprseed.Engine.Core.MainView.EngineSettings.ViewConfig;
@@ -27,7 +28,7 @@ public class ClientEngineConfigurator extends BaseEngineConfigurator {
         RootScene clientSpecifiedRootScene = new MainScene(context);
 
         // User can build the engine configuration here
-        engineConfigurator = new EngineConfigurator(this, clientSpecifiedRootScene, InputManager.getInstance())
+        engineConfigurator = new EngineConfigurator(this, clientSpecifiedRootScene, InputManager.getInstance(), CollisionDiagnosticsOverlay.getInstance())
                 .setViewConfig(new ViewConfig(true, true, true, false));
 
         // Add the input handlers here

@@ -19,7 +19,7 @@ import dev.suprseed.demo.Sprites.Obstacles.ObstacleComponents.ObstacleCollisionC
 import dev.suprseed.demo.Sprites.Obstacles.ObstacleComponents.ObstacleMovementComponent;
 import dev.suprseed.demo.Sprites.Obstacles.ObstacleComponents.ObstacleSpawnerComponent;
 
-public class ObstacleCollection implements ILogicRunnable, IRenderableAndILayerable {
+public class ObstacleCollection implements ILogicRunnable {
 
 
     private final ArrayList<Sprite> obstacleSprites;
@@ -71,7 +71,6 @@ public class ObstacleCollection implements ILogicRunnable, IRenderableAndILayera
 
         // Register this with the parent
         parentScene.logicRegister.registerObject(this);
-        parentScene.imageRegister.registerObject(this);
     }
 
 
@@ -88,24 +87,6 @@ public class ObstacleCollection implements ILogicRunnable, IRenderableAndILayera
 
     @Override
     public boolean isActive() {
-        return true;
-    }
-
-    @Override
-    public int getLayerDepth() {
-        return 0;
-    }
-
-    @Override
-    public void draw(RenderHandler renderer) {
-
-        for (Sprite s : obstacleSprites) {
-            s.draw(renderer);
-        }
-    }
-
-    @Override
-    public boolean isDrawable() {
         return true;
     }
 

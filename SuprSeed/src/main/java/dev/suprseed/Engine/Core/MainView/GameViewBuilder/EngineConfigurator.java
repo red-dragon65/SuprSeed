@@ -19,6 +19,7 @@ import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates.Coordi
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates.LocationHandler;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates.LocationScaler;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates.LocationTemporalScaler;
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.CollisionDiagnosable;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderProcessor;
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.RootScene;
@@ -35,13 +36,15 @@ public class EngineConfigurator extends BaseEngineConfigurator {
     private ViewConfig viewConfig;
     private CanvasConfig canvasConfig;
     private InputHandler inputHandler;
+    private CollisionDiagnosable collisionDiagnoser;
 
     // Constructor
-    public EngineConfigurator(BaseEngineConfigurator configurator, RootScene rootScene, InputHandler inputHandler) {
+    public EngineConfigurator(BaseEngineConfigurator configurator, RootScene rootScene, InputHandler inputHandler, CollisionDiagnosable collisionDiagnoser) {
         super(configurator.context);
 
         this.rootScene = rootScene;
         this.inputHandler = inputHandler;
+        this.collisionDiagnoser = collisionDiagnoser;
     }
 
     @Override
@@ -100,7 +103,7 @@ public class EngineConfigurator extends BaseEngineConfigurator {
     public RenderHandler getRenderProcessor() {
 
         if (renderProcessor == null) {
-            return new RenderProcessor(getCoordinateHandler());
+            return new RenderProcessor(getCoordinateHandler(), collisionDiagnoser);
         }
 
         return renderProcessor;
@@ -133,8 +136,6 @@ public class EngineConfigurator extends BaseEngineConfigurator {
 
         return locationHandler;
     }
-
-
 
 
     public EngineConfigurator setLocationHandler(LocationHandler locationHandler) {

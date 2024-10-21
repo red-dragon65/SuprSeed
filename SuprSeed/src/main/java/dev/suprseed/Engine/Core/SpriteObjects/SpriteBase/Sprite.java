@@ -9,7 +9,6 @@ import dev.suprseed.Engine.Core.SpriteObjects.DefaultComponents.Resetable;
 import dev.suprseed.Engine.Core.System.Registerables.ILogicRunnable;
 import dev.suprseed.Engine.Core.System.Registerables.IRenderableAndILayerable;
 import dev.suprseed.Engine.Lib.Collisions.Boundable;
-import dev.suprseed.Engine.Lib.Collisions.CollisionDiagnosticsOverlay;
 
 public abstract class Sprite implements IRenderableAndILayerable, Boundable, ILogicRunnable, Resetable {
 
@@ -26,6 +25,7 @@ public abstract class Sprite implements IRenderableAndILayerable, Boundable, ILo
     private boolean show = true;
     private boolean cameraRegistered = true;
     private int layerDepth = 0;
+    private boolean allowCollisionDiagnostic = true;
 
 
     // Constructor that takes one sprite image set
@@ -44,7 +44,6 @@ public abstract class Sprite implements IRenderableAndILayerable, Boundable, ILo
 
     @Override
     public void draw(RenderHandler renderer) {
-
         renderer.drawSprite(this);
     }
 
@@ -152,7 +151,13 @@ public abstract class Sprite implements IRenderableAndILayerable, Boundable, ILo
 
         result.top = CanvasData.getInstance().formatCoordinateToCanvas(this.getY());
         result.bottom = result.top + this.getAssetBundle().getSelectedImageSet().getImage().getHeight();
+    }
 
-        CollisionDiagnosticsOverlay.getInstance().addRect(result);
+    public boolean isAllowCollisionDiagnostic() {
+        return allowCollisionDiagnostic;
+    }
+
+    public void setAllowCollisionDiagnostic(boolean allowCollisionDiagnostic) {
+        this.allowCollisionDiagnostic = allowCollisionDiagnostic;
     }
 }

@@ -13,5 +13,6 @@ public class BackgroundScene extends BaseScene {
 
         // Load background sprites here
         Sprite background = new Background(this, gamePlayAssets.getAssetBundle("background"));
+        background.setAllowCollisionDiagnostic(false);
     }
 }
