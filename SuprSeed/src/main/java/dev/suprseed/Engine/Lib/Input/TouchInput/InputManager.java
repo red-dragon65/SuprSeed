@@ -36,7 +36,7 @@ public class InputManager implements InputHandler {
         // Check if any processors exist
         if (processorRegister.getRegisterList().size() == 0) {
 
-            CentralLogger.getInstance().logMessage(ErrorType.WARNING, "There are no input processors to handle the given input!");
+            CentralLogger.getInstance().logMessage(ErrorType.WARN, "There are no input processors to handle the given input!");
 
             return;
         }

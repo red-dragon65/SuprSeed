@@ -35,7 +35,7 @@ public class TouchHandler implements InputProcessor {
         // Check if any listeners exist
         if (listeners.size() == 0) {
 
-            CentralLogger.getInstance().logMessage(ErrorType.WARNING, "There are no listeners taking input!");
+            CentralLogger.getInstance().logMessage(ErrorType.WARN, "There are no listeners taking input!");
 
             return;
         }

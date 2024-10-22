@@ -57,7 +57,7 @@ abstract public class AssetLoader {
 
             e.printStackTrace();
 
-            CentralLogger.getInstance().logMessage(ErrorType.FATAL_ERROR, "Could not find the image specified!");
+            CentralLogger.getInstance().logMessage(ErrorType.ERROR, "Could not find the image specified!");
 
             throw new NullPointerException();
         }

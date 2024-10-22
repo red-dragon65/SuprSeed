@@ -1,7 +1,10 @@
 package dev.suprseed.demo.Assets;
 
+import android.util.Log;
+
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
 import dev.suprseed.Engine.Lib.AssetLoader.AssetLoader;
+import dev.suprseed.Engine.Lib.Images.FPS;
 import dev.suprseed.Engine.Lib.AssetLoader.FolderParser;
 import dev.suprseed.Engine.Lib.AssetLoader.Streamable;
 import dev.suprseed.Engine.Lib.Images.BitmapAnimation;
@@ -22,7 +25,7 @@ public class GameDemoAssets extends AssetLoader {
 
 
         // Hero
-        BitmapAnimation hero = new BitmapAnimation(parentScene, "Images/Hero", 10, assetStreamer, folderParser, 2, true, "hero");
+        BitmapAnimation hero = new BitmapAnimation(parentScene, "Images/Hero", 10, assetStreamer, folderParser, FPS._2, true, "hero");
         images.add(hero);
 
 
@@ -32,7 +35,9 @@ public class GameDemoAssets extends AssetLoader {
 
 
         // Enemies
-        int enemyAnimationSpeed = 15;
+        FPS enemyAnimationSpeed = FPS._15;
+
+        Log.e("", "fps: " + enemyAnimationSpeed);
 
         BitmapAnimation bat = new BitmapAnimation(parentScene, "Images/Enemies/bat", 7, assetStreamer, folderParser, enemyAnimationSpeed, true, "bat");
         images.add(bat);

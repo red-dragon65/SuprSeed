@@ -48,7 +48,7 @@ public class RenderSystem implements IRenderable {
         // Make sure renderHandler is set
         if (renderer == null) {
 
-            CentralLogger.getInstance().logMessage(ErrorType.FATAL_ERROR, "The render is null! The engine is borked!");
+            CentralLogger.getInstance().logMessage(ErrorType.FATAL, "The render is null! The engine is borked!");
             return;
         }
 

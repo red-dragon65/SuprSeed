@@ -33,7 +33,7 @@ public class BitmapCollection implements SpriteImage {
         }
 
         if (imageSet.size() == 0) {
-            CentralLogger.getInstance().logMessage(ErrorType.FATAL_ERROR, "No images found in folder! Folder: " + folderPath);
+            CentralLogger.getInstance().logMessage(ErrorType.ERROR, "No images found in folder! Folder: " + folderPath);
         }
 
         this.tag = tag;

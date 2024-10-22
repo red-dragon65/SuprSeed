@@ -2,7 +2,7 @@ package dev.suprseed.Engine.Core.ErrorLogger;
 
 public interface Logable {
 
-    void logMessage(ErrorType errorType, String message);
+    void logMessage(ErrorType errorType, String message, Exception e);
 
-    void setLogDepth(int logDepth);
+    void logMessage(ErrorType errorType, String message);
 }

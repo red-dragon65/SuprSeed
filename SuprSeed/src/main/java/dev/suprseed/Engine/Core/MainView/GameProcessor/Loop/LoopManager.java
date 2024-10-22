@@ -78,7 +78,7 @@ public class LoopManager implements RunnableConfig<GameView> {
 
         } else {
 
-            CentralLogger.getInstance().logMessage(ErrorType.WARNING, "Cannot set the refresh rate! Android version below 'R'! Reverting to 60hz default value!");
+            CentralLogger.getInstance().logMessage(ErrorType.WARN, "Cannot set the refresh rate! Android version below 'R'! Reverting to 60hz default value!");
             refreshSpeed = RefreshTypes.SIXTY_FPS;
         }
     }
@@ -97,7 +97,7 @@ public class LoopManager implements RunnableConfig<GameView> {
 
         if (logicRate.getTickRate() < refreshSpeed.getHertz()) { // logicRate < refreshSpeed
 
-            CentralLogger.getInstance().logMessage(ErrorType.WARNING, "The logicRate is less than the refreshSpeed! FPS will be locked to the logicRate!");
+            CentralLogger.getInstance().logMessage(ErrorType.WARN, "The logicRate is less than the refreshSpeed! FPS will be locked to the logicRate!");
 
             // Verify multiplicity
             if (refreshSpeed.getHertz() % logicRate.getTickRate() == 0) {
@@ -107,13 +107,13 @@ public class LoopManager implements RunnableConfig<GameView> {
 
             } else {
 
-                CentralLogger.getInstance().logMessage(ErrorType.CONFIG_ERROR, "The given refresh rate (" + refreshSpeed.getHertz() + ") is not a multiple of the logic rate (" + logicRate.getTickRate() + ")!");
+                CentralLogger.getInstance().logMessage(ErrorType.FATAL, "The given refresh rate (" + refreshSpeed.getHertz() + ") is not a multiple of the logic rate (" + logicRate.getTickRate() + ")!");
                 throw new RuntimeException();
             }
 
         } else if (logicRate.getTickRate() > refreshSpeed.getHertz()) { // logicRate > refreshSpeed
 
-            CentralLogger.getInstance().logMessage(ErrorType.WARNING, "The logicRate is greater than the refreshSpeed! Lag is more likely to occur!");
+            CentralLogger.getInstance().logMessage(ErrorType.WARN, "The logicRate is greater than the refreshSpeed! Lag is more likely to occur!");
 
             // Verify multiplicity
             if (logicRate.getTickRate() % refreshSpeed.getHertz() == 0) {
@@ -123,7 +123,7 @@ public class LoopManager implements RunnableConfig<GameView> {
 
             } else {
 
-                CentralLogger.getInstance().logMessage(ErrorType.CONFIG_ERROR, "The given logic rate (" + logicRate.getTickRate() + ") is not a multiple of the refresh rate (" + refreshSpeed.getHertz() + ") !");
+                CentralLogger.getInstance().logMessage(ErrorType.FATAL, "The given logic rate (" + logicRate.getTickRate() + ") is not a multiple of the refresh rate (" + refreshSpeed.getHertz() + ") !");
                 throw new RuntimeException();
             }
         }

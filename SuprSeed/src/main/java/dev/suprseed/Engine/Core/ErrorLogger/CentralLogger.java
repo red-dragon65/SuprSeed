@@ -13,10 +13,7 @@ public class CentralLogger implements Logable {
     private CentralLogger() {
 
         // Use cat logging as the default
-        logMethod = new CatLogger();
-
-        // Set the log depth
-        logMethod.setLogDepth(2);
+        logMethod = new AndroidCatLogger();
     }
 
     public static CentralLogger getInstance() {
@@ -28,15 +25,13 @@ public class CentralLogger implements Logable {
     }
 
     @Override
+    public void logMessage(ErrorType errorType, String message, Exception e) {
+        logMethod.logMessage(errorType, message, e);
+    }
+
+    @Override
     public void logMessage(ErrorType errorType, String message) {
 
         logMethod.logMessage(errorType, message);
     }
-
-    @Override
-    public void setLogDepth(int logDepth) {
-
-        logMethod.setLogDepth(logDepth);
-    }
-
 }

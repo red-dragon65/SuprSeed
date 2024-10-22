@@ -2,10 +2,12 @@ package dev.suprseed.Engine.Core.ErrorLogger;
 
 public enum ErrorType {
 
+    TRACE("TRACE"),
+    DEBUG("DEBUG"),
     INFO("INFO"),
-    WARNING("WARNING"),
-    CONFIG_ERROR("CONFIG_ERROR"),
-    FATAL_ERROR("FATAL_ERROR");
+    WARN("WARN"),
+    ERROR("ERROR"),
+    FATAL("FATAL");
 
     private final String errorName;
 

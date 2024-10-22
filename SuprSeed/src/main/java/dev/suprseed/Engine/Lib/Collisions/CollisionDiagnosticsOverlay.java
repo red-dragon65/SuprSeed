@@ -73,7 +73,7 @@ public class CollisionDiagnosticsOverlay implements CollisionDiagnosable {
 
             } else {
 
-                CentralLogger.getInstance().logMessage(ErrorType.WARNING,
+                CentralLogger.getInstance().logMessage(ErrorType.WARN,
                         "Bounding box draw limit reached!" +
                                 "(Max size: " + maxSize + ") == (Current size: " + currentSize + ")" +
                                 "No more collision bounds can be added!");
