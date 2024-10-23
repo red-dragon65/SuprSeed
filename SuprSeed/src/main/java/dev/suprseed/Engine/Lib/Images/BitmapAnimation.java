@@ -3,6 +3,8 @@ package dev.suprseed.Engine.Lib.Images;
 
 import android.graphics.Bitmap;
 
+import java.io.IOException;
+
 import dev.suprseed.Engine.Core.ErrorLogger.CentralLogger;
 import dev.suprseed.Engine.Core.ErrorLogger.ErrorType;
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
@@ -22,17 +24,17 @@ public class BitmapAnimation extends BitmapCollection implements Animator {
 
 
     // Constructor for animating images
-    public BitmapAnimation(BaseScene parentScene, String folderPath, float imageScale, Streamable imageStreamer, FolderParser folderParser, FPS fps, boolean loop, String tag) {
+    public BitmapAnimation(BaseScene parentScene, String folderPath, float imageScale, Streamable imageStreamer, FolderParser folderParser, FPS fps, boolean loop, String tag) throws IOException {
         super(folderPath, imageScale, imageStreamer, folderParser, tag);
 
         // Register with the parent scene
         parentScene.animationRegister.registerObject(this);
 
         // Note: the below code should never throw an exception unless the FPS enums have been messed with
-        try{
+        try {
             String tagInfo = "{tag == " + tag + "}";
 
-            if(fps.toInt() < 1){
+            if (fps.toInt() < 1) {
                 throw new FPSMismatchException("An animations fps must be greater than 0 for animation: " + tagInfo);
             }
 
@@ -42,7 +44,7 @@ public class BitmapAnimation extends BitmapCollection implements Animator {
                 throw new FPSMismatchException(message);
             }
 
-        }catch(FPSMismatchException e){
+        } catch (FPSMismatchException e) {
 
             // Recover error by using next closest valid fps available
             fps = findValidFps(fps.toInt());
@@ -56,9 +58,9 @@ public class BitmapAnimation extends BitmapCollection implements Animator {
         this.enableLooping = loop;
     }
 
-    private FPS findValidFps(int fps){
+    private FPS findValidFps(int fps) {
 
-        if(fps < 1){
+        if (fps < 1) {
             return FPS._1;
         }
 
@@ -68,26 +70,26 @@ public class BitmapAnimation extends BitmapCollection implements Animator {
         int numTries = 10;
 
         // Find next properly divisible number
-        for(int i = 0; i < numTries; i++){
+        for (int i = 0; i < numTries; i++) {
 
-            if(GlobalFrameStepper.getInstance().getFrameTime() % lowFps != 0){
+            if (GlobalFrameStepper.getInstance().getFrameTime() % lowFps != 0) {
                 lowFps--;
             }
 
-            if(GlobalFrameStepper.getInstance().getFrameTime() % highFps != 0){
+            if (GlobalFrameStepper.getInstance().getFrameTime() % highFps != 0) {
                 highFps++;
             }
         }
 
         // See if higher or lower number is closer to users original fps
-        if((fps - lowFps) < (highFps - fps)){
+        if ((fps - lowFps) < (highFps - fps)) {
             newTarget = lowFps;
-        }else{
+        } else {
             newTarget = highFps;
         }
 
-        for(FPS i : FPS.values()){
-            if(i.toInt() == newTarget){
+        for (FPS i : FPS.values()) {
+            if (i.toInt() == newTarget) {
                 return i;
             }
         }
@@ -104,7 +106,7 @@ public class BitmapAnimation extends BitmapCollection implements Animator {
 
     @Override
     public Bitmap getImage() {
-        return super.getIndexedImage(currentFrameIndex);
+        return imageSet.get(currentFrameIndex);
     }
 
 

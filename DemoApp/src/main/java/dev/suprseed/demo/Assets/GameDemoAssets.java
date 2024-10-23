@@ -2,13 +2,15 @@ package dev.suprseed.demo.Assets;
 
 import android.util.Log;
 
+import java.io.IOException;
+
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
 import dev.suprseed.Engine.Lib.AssetLoader.AssetLoader;
-import dev.suprseed.Engine.Lib.Images.FPS;
 import dev.suprseed.Engine.Lib.AssetLoader.FolderParser;
 import dev.suprseed.Engine.Lib.AssetLoader.Streamable;
 import dev.suprseed.Engine.Lib.Images.BitmapAnimation;
 import dev.suprseed.Engine.Lib.Images.BitmapSingle;
+import dev.suprseed.Engine.Lib.Images.FPS;
 
 public class GameDemoAssets extends AssetLoader {
 
@@ -23,44 +25,46 @@ public class GameDemoAssets extends AssetLoader {
 
         // Client can load sprites images here
 
+        try {
+            // Hero
+            BitmapAnimation hero = new BitmapAnimation(parentScene, "Images/Hero", 10, assetStreamer, folderParser, FPS._2, true, "hero");
+            images.add(hero);
 
-        // Hero
-        BitmapAnimation hero = new BitmapAnimation(parentScene, "Images/Hero", 10, assetStreamer, folderParser, FPS._2, true, "hero");
-        images.add(hero);
+            // Enemies
+            FPS enemyAnimationSpeed = FPS._15;
 
+            Log.e("", "fps: " + enemyAnimationSpeed);
 
-        // Background
-        BitmapSingle background = new BitmapSingle("Images/Background/Grassy_Mountains_preview_fullcolor.png", 11f, assetStreamer, "background");
-        images.add(background);
+            BitmapAnimation bat = new BitmapAnimation(parentScene, "Images/Enemies/bat", 7, assetStreamer, folderParser, enemyAnimationSpeed, true, "bat");
+            images.add(bat);
 
+            BitmapAnimation bee = new BitmapAnimation(parentScene, "Images/Enemies/bee", 7, assetStreamer, folderParser, enemyAnimationSpeed, true, "bee");
+            images.add(bee);
 
-        // Enemies
-        FPS enemyAnimationSpeed = FPS._15;
+            BitmapAnimation bird = new BitmapAnimation(parentScene, "Images/Enemies/bird", 7, assetStreamer, folderParser, enemyAnimationSpeed, true, "bird");
+            images.add(bird);
 
-        Log.e("", "fps: " + enemyAnimationSpeed);
+            BitmapAnimation duck = new BitmapAnimation(parentScene, "Images/Enemies/duck", 7, assetStreamer, folderParser, enemyAnimationSpeed, true, "duck");
+            images.add(duck);
 
-        BitmapAnimation bat = new BitmapAnimation(parentScene, "Images/Enemies/bat", 7, assetStreamer, folderParser, enemyAnimationSpeed, true, "bat");
-        images.add(bat);
+            BitmapAnimation ghost = new BitmapAnimation(parentScene, "Images/Enemies/ghost", 7, assetStreamer, folderParser, enemyAnimationSpeed, true, "ghost");
+            images.add(ghost);
 
-        BitmapAnimation bee = new BitmapAnimation(parentScene, "Images/Enemies/bee", 7, assetStreamer, folderParser, enemyAnimationSpeed, true, "bee");
-        images.add(bee);
+            // Background
+            BitmapSingle background = new BitmapSingle("Images/Background/Grassy_Mountains_preview_fullcolor.png", 11f, assetStreamer, "background");
+            images.add(background);
 
-        BitmapAnimation bird = new BitmapAnimation(parentScene, "Images/Enemies/bird", 7, assetStreamer, folderParser, enemyAnimationSpeed, true, "bird");
-        images.add(bird);
+            // User interface
+            BitmapSingle pause = new BitmapSingle("Images/UI/pause_button.png", 1f, assetStreamer, "pause_button");
+            images.add(pause);
 
-        BitmapAnimation duck = new BitmapAnimation(parentScene, "Images/Enemies/duck", 7, assetStreamer, folderParser, enemyAnimationSpeed, true, "duck");
-        images.add(duck);
+            BitmapSingle pauseText = new BitmapSingle("Images/UI/pause_text.png", 1f, assetStreamer, "pause_text");
+            images.add(pauseText);
 
-        BitmapAnimation ghost = new BitmapAnimation(parentScene, "Images/Enemies/ghost", 7, assetStreamer, folderParser, enemyAnimationSpeed, true, "ghost");
-        images.add(ghost);
+        } catch (IOException e) {
 
-
-        // User interface
-        BitmapSingle pause = new BitmapSingle("Images/UI/pause_button.png", 1f, assetStreamer, "pause_button");
-        images.add(pause);
-
-        BitmapSingle pauseText = new BitmapSingle("Images/UI/pause_text.png", 1f, assetStreamer, "pause_text");
-        images.add(pauseText);
+            throw new RuntimeException("One or more folder paths are incorrect!", e);
+        }
     }
 
 }

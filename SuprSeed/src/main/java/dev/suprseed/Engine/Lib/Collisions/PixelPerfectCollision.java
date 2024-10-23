@@ -3,6 +3,8 @@ package dev.suprseed.Engine.Lib.Collisions;
 import android.graphics.Color;
 import android.graphics.RectF;
 
+import dev.suprseed.Engine.Core.ErrorLogger.CentralLogger;
+import dev.suprseed.Engine.Core.ErrorLogger.ErrorType;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.CanvasData;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
 
@@ -19,13 +21,14 @@ public class PixelPerfectCollision implements CollisionHandler {
     // Constructor
     public PixelPerfectCollision(CollisionHandler basicCollision, int pixelMaskResolution) {
 
-        this.pixelMaskResolution = pixelMaskResolution;
-        this.basicCollision = basicCollision;
-
         // Check user input
         if (pixelMaskResolution < 1) {
-            throw new IndexOutOfBoundsException("The pixel mask resolution must be equal to or greater than 1!");
+            CentralLogger.getInstance().logMessage(ErrorType.WARN, "The pixel mask resolution must be equal to or greater than 1! Defaulting to 1.");
+            pixelMaskResolution = 1;
         }
+
+        this.pixelMaskResolution = pixelMaskResolution;
+        this.basicCollision = basicCollision;
     }
 
 

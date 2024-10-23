@@ -20,11 +20,11 @@ public enum FPS {
 
     private final int fps;
 
-    FPS(int fps){
+    FPS(int fps) {
         this.fps = fps;
     }
 
-    public int toInt(){
+    public int toInt() {
         return fps;
     }
 }

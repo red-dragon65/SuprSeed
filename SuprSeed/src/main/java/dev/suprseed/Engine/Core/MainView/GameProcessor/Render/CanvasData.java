@@ -1,8 +1,10 @@
 package dev.suprseed.Engine.Core.MainView.GameProcessor.Render;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import dev.suprseed.Engine.Core.ErrorLogger.CentralLogger;
 import dev.suprseed.Engine.Core.ErrorLogger.ErrorType;
-import dev.suprseed.Engine.Core.MainView.EngineSettings.ViewConfig;
+import dev.suprseed.Engine.Core.MainView.EngineSettings.BaseConfig;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates.LocationTemporalScaler;
 
 public class CanvasData {
@@ -19,6 +21,7 @@ public class CanvasData {
     private float spriteScaleRatio;
     // Default target resolution
     private float targetResolution = 1080;
+    private BaseConfig<AppCompatActivity> viewConfig;
 
 
     // Constructor
@@ -29,6 +32,10 @@ public class CanvasData {
 
     public static CanvasData getInstance() {
         return INSTANCE;
+    }
+
+    public void setViewConfig(BaseConfig<AppCompatActivity> viewConfig) {
+        this.viewConfig = viewConfig;
     }
 
     // For client
@@ -51,17 +58,32 @@ public class CanvasData {
 
     private void setSpriteScale() {
 
-        ViewConfig viewy = new ViewConfig();
+        if (viewConfig != null) {
 
-        if (viewy.getSetting("orientation").active()) {
+            if (viewConfig.getSetting("orientation").isPresent()) {
 
-            // For landscape
-            spriteScaleRatio = originalHeight / targetResolution;
+                if (!viewConfig.getSetting("orientation").get().active()) {
+
+                    // For portrait
+                    spriteScaleRatio = originalWidth / targetResolution;
+
+                    return;
+                }
+
+            } else {
+
+                String message = "Could not get the orientation setting from the ViewConfig. Defaulting to landscape view. Verify the setting ID is correct.";
+                CentralLogger.getInstance().logMessage(ErrorType.ERROR, message);
+            }
+
         } else {
 
-            // For portrait
-            spriteScaleRatio = originalWidth / targetResolution;
+            String message = "The ViewConfig is null! Defaulting to landscape view!";
+            CentralLogger.getInstance().logMessage(ErrorType.ERROR, message);
         }
+
+        // Default to the landscape view
+        spriteScaleRatio = originalHeight / targetResolution;
     }
 
     private void scaleDimensions() {

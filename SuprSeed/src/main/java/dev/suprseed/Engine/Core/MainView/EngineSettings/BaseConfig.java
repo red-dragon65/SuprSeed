@@ -2,6 +2,7 @@ package dev.suprseed.Engine.Core.MainView.EngineSettings;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public abstract class BaseConfig<T> {
 
@@ -25,16 +26,16 @@ public abstract class BaseConfig<T> {
     }
 
 
-    public Configurable<T> getSetting(String id) {
+    public Optional<Configurable<T>> getSetting(String id) {
 
         for (Configurable<T> setting : settings) {
 
             if (setting.getId().equals(id)) {
 
-                return setting;
+                return Optional.of(setting);
             }
         }
 
-        throw new NullPointerException("Could not find setting specified!");
+        return Optional.empty();
     }
 }

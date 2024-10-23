@@ -15,44 +15,44 @@ public class AndroidCatLogger implements Logable {
         // Log message using correct logging level
         switch (errorType) {
             case TRACE:
-                if(e != null){
+                if (e != null) {
                     Log.v(tag, message, e);
-                }else{
+                } else {
                     Log.v(tag, message);
                 }
                 break;
             case DEBUG:
-                if(e != null){
+                if (e != null) {
                     Log.d(tag, message, e);
-                }else{
+                } else {
                     Log.d(tag, message);
                 }
                 break;
             case INFO:
-                if(e != null){
+                if (e != null) {
                     Log.i(tag, message, e);
-                }else{
+                } else {
                     Log.i(tag, message);
                 }
                 break;
             case WARN:
-                if(e != null){
+                if (e != null) {
                     Log.w(tag, message, e);
-                }else{
+                } else {
                     Log.w(tag, message);
                 }
                 break;
             case ERROR:
-                if(e != null){
+                if (e != null) {
                     Log.e(tag, message, e);
-                }else{
+                } else {
                     Log.e(tag, message);
                 }
                 break;
             case FATAL:
-                if(e != null){
+                if (e != null) {
                     Log.wtf(tag, message, e);
-                }else{
+                } else {
                     Log.wtf(tag, message);
                 }
                 break;

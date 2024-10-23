@@ -16,28 +16,22 @@ public class LocalFolderParser implements FolderParser {
     }
 
     @Override
-    public String[] getSubPaths(String basePath) {
+    public String[] getSubPaths(String basePath) throws IOException {
 
         // Hold full image path for each file in folder
         String[] imagePaths;
 
         // Try and load the file paths
-        try {
 
-            // Get file names in folder
-            imagePaths = res.getAssets().list(basePath);
+        // Get file names in folder
+        imagePaths = res.getAssets().list(basePath);
 
-            // Add base path to file name
-            for (int i = 0; i < imagePaths.length; i++) {
+        // Add base path to file name
+        for (int i = 0; i < imagePaths.length; i++) {
 
-                imagePaths[i] = basePath + "/" + imagePaths[i];
-            }
-
-        } catch (IOException e) {
-
-            e.printStackTrace();
-            throw new RuntimeException();
+            imagePaths[i] = basePath + "/" + imagePaths[i];
         }
+
 
         // Return the file paths to the caller
         return imagePaths;

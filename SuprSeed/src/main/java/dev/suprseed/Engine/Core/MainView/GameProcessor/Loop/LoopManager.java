@@ -107,8 +107,10 @@ public class LoopManager implements RunnableConfig<GameView> {
 
             } else {
 
-                CentralLogger.getInstance().logMessage(ErrorType.FATAL, "The given refresh rate (" + refreshSpeed.getHertz() + ") is not a multiple of the logic rate (" + logicRate.getTickRate() + ")!");
-                throw new RuntimeException();
+                String message = "The given refresh rate (" + refreshSpeed.getHertz() + ") is not a multiple of the logic rate (" + logicRate.getTickRate() + ")!";
+
+                CentralLogger.getInstance().logMessage(ErrorType.FATAL, message);
+                throw new TickRefreshMismatch(message);
             }
 
         } else if (logicRate.getTickRate() > refreshSpeed.getHertz()) { // logicRate > refreshSpeed
@@ -123,8 +125,10 @@ public class LoopManager implements RunnableConfig<GameView> {
 
             } else {
 
-                CentralLogger.getInstance().logMessage(ErrorType.FATAL, "The given logic rate (" + logicRate.getTickRate() + ") is not a multiple of the refresh rate (" + refreshSpeed.getHertz() + ") !");
-                throw new RuntimeException();
+                String message = "The given logic rate (" + logicRate.getTickRate() + ") is not a multiple of the refresh rate (" + refreshSpeed.getHertz() + ") !";
+
+                CentralLogger.getInstance().logMessage(ErrorType.FATAL, message);
+                throw new TickRefreshMismatch(message);
             }
         }
 

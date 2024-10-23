@@ -24,7 +24,7 @@ public class LocalImageFileStreamer implements Streamable {
 
 
     @Override
-    public Bitmap loadImage(String fileName, float scale) {
+    public Bitmap loadImage(String fileName, float scale) throws IOException {
 
         if (scale == 0) {
             return loadImage_Unscaled(fileName);
@@ -36,60 +36,46 @@ public class LocalImageFileStreamer implements Streamable {
     }
 
     @Override
-    public Bitmap loadImage_WithDefaultScale(String fileName) {
+    public Bitmap loadImage_WithDefaultScale(String fileName) throws IOException {
         return loadImage_WithAdditionalScaling(fileName, 1f);
     }
 
 
     // Loads an image from the assets folder
     @Override
-    public Bitmap loadImage_WithAdditionalScaling(String fileName, float scaleFactor) {
+    public Bitmap loadImage_WithAdditionalScaling(String fileName, float scaleFactor) throws IOException {
 
-        try {
-            reader = res.getAssets().open(fileName);
+        reader = res.getAssets().open(fileName);
 
-            Bitmap temp = BitmapFactory.decodeStream(reader);
+        Bitmap temp = BitmapFactory.decodeStream(reader);
 
-            if (temp == null) {
+        if (temp == null) {
 
-                Log.d("ImageLoader", "Image failed to load: " + fileName);
-            }
-
-            return Bitmap.createScaledBitmap(temp, ((int) ((float) temp.getWidth() * CanvasData.getInstance().getSpriteScaleRatio() * scaleFactor)), ((int) ((float) temp.getHeight() * CanvasData.getInstance().getSpriteScaleRatio() * scaleFactor)), false);
-
-        } catch (IOException e) {
-            e.printStackTrace();
+            Log.d("ImageLoader", "Image failed to load: " + fileName);
         }
 
-        return null;
+        return Bitmap.createScaledBitmap(temp, ((int) ((float) temp.getWidth() * CanvasData.getInstance().getSpriteScaleRatio() * scaleFactor)), ((int) ((float) temp.getHeight() * CanvasData.getInstance().getSpriteScaleRatio() * scaleFactor)), false);
     }
 
 
     // Loads an image from the assets folder
     @Override
-    public Bitmap loadImage_Unscaled(String fileName) {
+    public Bitmap loadImage_Unscaled(String fileName) throws IOException {
 
         InputStream reader;
 
-        try {
-            reader = res.getAssets().open(fileName);
+        reader = res.getAssets().open(fileName);
 
-            Bitmap temp = BitmapFactory.decodeStream(reader);
+        Bitmap temp = BitmapFactory.decodeStream(reader);
 
-            reader.close();
+        reader.close();
 
-            if (temp == null) {
+        if (temp == null) {
 
-                Log.d("ImageLoader", "Image failed to load: " + fileName);
-            }
-
-            return Bitmap.createScaledBitmap(temp, ((int) ((float) temp.getWidth())), ((int) ((float) temp.getHeight())), false);
-
-        } catch (IOException e) {
-            e.printStackTrace();
+            Log.d("ImageLoader", "Image failed to load: " + fileName);
         }
 
-        return null;
+        return Bitmap.createScaledBitmap(temp, ((int) ((float) temp.getWidth())), ((int) ((float) temp.getHeight())), false);
     }
 
 }

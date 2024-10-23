@@ -2,6 +2,9 @@ package dev.suprseed.Engine.Lib.Images;
 
 import android.graphics.Bitmap;
 
+import java.io.IOException;
+import java.util.Optional;
+
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.CanvasData;
 import dev.suprseed.Engine.Lib.AssetLoader.Streamable;
 
@@ -11,7 +14,7 @@ public class BitmapSingle implements SpriteImage {
     private String tag;
 
     // Constructor
-    public BitmapSingle(String filePath, float imageScale, Streamable imageStreamer, String tag) {
+    public BitmapSingle(String filePath, float imageScale, Streamable imageStreamer, String tag) throws IOException {
 
         this.image = imageStreamer.loadImage(filePath, imageScale);
         this.tag = tag;
@@ -28,8 +31,8 @@ public class BitmapSingle implements SpriteImage {
     }
 
     @Override
-    public Bitmap getIndexedImage(int index) {
-        return image;
+    public Optional<Bitmap> getIndexedImage(int index) {
+        return Optional.ofNullable(image);
     }
 
     @Override

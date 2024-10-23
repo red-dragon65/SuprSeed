@@ -13,6 +13,7 @@ import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LogicRates;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LoopManager;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.RefreshTypes;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.RunnableConfig;
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.CanvasData;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates.CartesianHandler;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates.CoordinateHandler;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates.CoordinateProcessor;
@@ -160,9 +161,12 @@ public class EngineConfigurator extends BaseEngineConfigurator {
     public ViewConfig getViewConfig() {
 
         if (viewConfig == null) {
-            return new ViewConfig(true, true, true, true);
+            ViewConfig defaultConfig = new ViewConfig(true, true, true, true);
+            CanvasData.getInstance().setViewConfig(defaultConfig);
+            return defaultConfig;
         }
 
+        CanvasData.getInstance().setViewConfig(viewConfig);
         return viewConfig;
     }
 

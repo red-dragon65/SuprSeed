@@ -2,8 +2,10 @@ package dev.suprseed.Engine.Lib.Images;
 
 import android.graphics.Bitmap;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import dev.suprseed.Engine.Core.ErrorLogger.CentralLogger;
 import dev.suprseed.Engine.Core.ErrorLogger.ErrorType;
@@ -18,7 +20,7 @@ public class BitmapCollection implements SpriteImage {
     private String tag;
 
     // Constructor for collection of images
-    public BitmapCollection(String folderPath, float imageScale, Streamable imageStreamer, FolderParser folderParser, String tag) {
+    public BitmapCollection(String folderPath, float imageScale, Streamable imageStreamer, FolderParser folderParser, String tag) throws IOException {
 
         // Initialize array list
         imageSet = new ArrayList<>();
@@ -26,14 +28,17 @@ public class BitmapCollection implements SpriteImage {
         // Get each sub file from base path
         String[] subPaths = folderParser.getSubPaths(folderPath);
 
+        if(subPaths.length == 0){
+
+            String message = "No images where found in the specified folder! Folder: " + folderPath;
+            CentralLogger.getInstance().logMessage(ErrorType.ERROR, message);
+            throw new IOException(message);
+        }
+
         // Read in each image
         for (String singleImagePath : subPaths) {
 
             imageSet.add(imageStreamer.loadImage(singleImagePath, imageScale));
-        }
-
-        if (imageSet.size() == 0) {
-            CentralLogger.getInstance().logMessage(ErrorType.ERROR, "No images found in folder! Folder: " + folderPath);
         }
 
         this.tag = tag;
@@ -47,24 +52,40 @@ public class BitmapCollection implements SpriteImage {
     @Override
     public Bitmap getImage() {
 
-        if (imageSet != null) {
-            return imageSet.get(0);
-        }
-
-        throw new NullPointerException("This 'ImageCollection' has no images in it!");
+        return imageSet.get(0);
     }
 
     // Return the specified image
     @Override
-    public Bitmap getIndexedImage(int index) {
+    public Optional<Bitmap> getIndexedImage(int index) {
 
         // Prevent overflow
-        if (index > imageSet.size() || index < 0 || imageSet.size() == 0) {
+        if (index > imageSet.size()) {
 
-            return null;
+            String tagInfo = "{tag == " + tag + "}";
+            String message = "The index is out of bounds (upper) for ImageCollection tag " + tagInfo + "!";
+            message += "\nIndex: " + index + " ImageSet.size(): " + imageSet.size();
+            CentralLogger.getInstance().logMessage(ErrorType.ERROR, message);
+
+            return Optional.empty();
+        } else if (index < 0) {
+
+            String tagInfo = "{tag == " + tag + "}";
+            String message = "The index is out of bounds (lower) for ImageCollection tag " + tagInfo + "!";
+            message += "\nIndex: " + index + " Minimum allowed: " + "0";
+            CentralLogger.getInstance().logMessage(ErrorType.ERROR, message);
+
+            return Optional.empty();
+        } else if (imageSet.isEmpty()) {
+
+            String tagInfo = "{tag == " + tag + "}";
+            String message = "The ImageCollection for tag " + tagInfo + " has no images in it!";
+            CentralLogger.getInstance().logMessage(ErrorType.ERROR, message);
+
+            return Optional.empty();
         }
 
-        return imageSet.get(index);
+        return Optional.ofNullable(imageSet.get(index));
     }
 
     @Override
@@ -87,12 +108,21 @@ public class BitmapCollection implements SpriteImage {
 
     @Override
     public float getScaledWidth(int index) {
-        return CanvasData.getInstance().formatCanvasToCoordinate(getIndexedImage(index).getWidth()) / scaler.getLocationScaleRatio();
+
+        if (getIndexedImage(index).isPresent()) {
+            return CanvasData.getInstance().formatCanvasToCoordinate(getIndexedImage(index).get().getWidth()) / scaler.getLocationScaleRatio();
+        }
+
+        return 0;
     }
 
     @Override
     public float getScaledHeight(int index) {
 
-        return CanvasData.getInstance().formatCanvasToCoordinate(getIndexedImage(index).getHeight()) / scaler.getLocationScaleRatio();
+        if (getIndexedImage(index).isPresent()) {
+            return CanvasData.getInstance().formatCanvasToCoordinate(getIndexedImage(index).get().getHeight()) / scaler.getLocationScaleRatio();
+        }
+
+        return 0;
     }
 }
