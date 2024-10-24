@@ -59,8 +59,8 @@ public class LoopManager implements RunnableConfig<GameView> {
         // Display supported display refresh modes
         Display.Mode[] modes = gameView.getDisplay().getSupportedModes();
 
-        CentralLogger.getInstance().logMessage(ErrorType.INFO, "Supported refresh rates:");
-        Arrays.stream(modes).forEach(y -> CentralLogger.getInstance().logMessage(ErrorType.INFO, "-> " + y.getRefreshRate()));
+        CentralLogger.getInstance().logMessage(ErrorType.INFO, "Getting supported refresh rates...");
+        Arrays.stream(modes).forEach(y -> CentralLogger.getInstance().logMessage(ErrorType.INFO, "-> " + y.getRefreshRate() + " hz is supported"));
 
 
         // Set the refresh rate of the display if possible
@@ -74,7 +74,7 @@ public class LoopManager implements RunnableConfig<GameView> {
 
              */
 
-            CentralLogger.getInstance().logMessage(ErrorType.INFO, "The refresh rate has been set. RefreshRate: " + refreshSpeed);
+            CentralLogger.getInstance().logMessage(ErrorType.INFO, "The refresh rate has been set. Refresh rate: " + refreshSpeed);
 
         } else {
 

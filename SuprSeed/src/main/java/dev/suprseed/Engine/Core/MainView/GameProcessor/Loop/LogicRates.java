@@ -20,6 +20,6 @@ public enum LogicRates {
 
     @Override
     public String toString() {
-        return "Logic rate: " + tickRate;
+        return tickRate + " tps";
     }
 }

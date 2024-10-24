@@ -25,9 +25,6 @@ public class GlobalFrameStepper implements FrameStepper {
     @Override
     public void moveToNextFrame() {
 
-
-        //Log.d("ImageAnimator", "NEXT FRAME QUEUED!");
-
         if (frameStep <= frameTime) {
 
             frameStep++;
@@ -35,7 +32,6 @@ public class GlobalFrameStepper implements FrameStepper {
 
             frameStep = startingFrame;
         }
-
     }
 
     @Override

@@ -62,6 +62,14 @@ public class Hero extends Sprite implements ILogicRunnable {
 
         // Check for wall collisions
         collider.checkCollision(this, this);
+
+        // Change sprite direction based on tilt
+        if (getxVel() < 0) {
+            assetBundle.trySelectingImageSet("heroLeft");
+        } else {
+            assetBundle.trySelectingImageSet("heroRight");
+        }
+
     }
 
     private void moveSprite() {

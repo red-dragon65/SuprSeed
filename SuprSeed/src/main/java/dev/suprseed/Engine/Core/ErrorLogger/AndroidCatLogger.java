@@ -6,9 +6,25 @@ public class AndroidCatLogger implements Logable {
 
     private final String applicationName = "SuprSeed";
     private String tag = "";
+    private boolean debugMode = false;
 
     @Override
     public void logMessage(ErrorType errorType, String message, Exception e) {
+
+        // Build the log data
+        if (debugMode) {
+
+            String topStackTrace = "Internal stack trace: ";
+
+            // Get the stack trace of the caller of this method
+            // Note: getting the stack trace is expensive! Disable debug for production use cases.
+            StackTraceElement[] stackTrace = new Exception().getStackTrace();
+            topStackTrace += stackTrace[3].getClassName();
+            topStackTrace += "::";
+            topStackTrace += stackTrace[3].getMethodName() + "()";
+
+            message += "    [" + topStackTrace + "]";
+        }
 
         tag = applicationName + "::" + errorType.toString();
 
@@ -62,5 +78,10 @@ public class AndroidCatLogger implements Logable {
     @Override
     public void logMessage(ErrorType errorType, String message) {
         logMessage(errorType, message, null);
+    }
+
+    @Override
+    public void setDebugMode(boolean isEnabled) {
+        debugMode = isEnabled;
     }
 }

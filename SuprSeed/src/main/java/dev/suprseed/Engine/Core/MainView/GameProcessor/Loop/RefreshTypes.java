@@ -23,6 +23,6 @@ public enum RefreshTypes {
 
     @Override
     public String toString() {
-        return "Current refresh rate: " + hertz + "hz";
+        return hertz + "hz";
     }
 }

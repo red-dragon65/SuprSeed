@@ -5,4 +5,6 @@ public interface Logable {
     void logMessage(ErrorType errorType, String message, Exception e);
 
     void logMessage(ErrorType errorType, String message);
+
+    void setDebugMode(boolean isEnabled);
 }

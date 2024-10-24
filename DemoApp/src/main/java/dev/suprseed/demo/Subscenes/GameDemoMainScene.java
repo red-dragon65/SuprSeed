@@ -9,11 +9,14 @@ import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LoopManager;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.SceneManager;
-import dev.suprseed.Engine.Lib.AssetLoader.AssetLoader;
+import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.AssetBundle;
+import dev.suprseed.Engine.Lib.AssetLoader.AssetLoadable;
 import dev.suprseed.Engine.Lib.AssetLoader.FolderParser;
 import dev.suprseed.Engine.Lib.AssetLoader.LocalFolderParser;
 import dev.suprseed.Engine.Lib.AssetLoader.LocalImageFileStreamer;
 import dev.suprseed.Engine.Lib.AssetLoader.Streamable;
+import dev.suprseed.Engine.Lib.Images.PlaceHolder;
+import dev.suprseed.Engine.Lib.Images.SpriteImage;
 import dev.suprseed.Engine.Lib.SoundPlayer.BasicSoundEffects;
 import dev.suprseed.Engine.Lib.SoundPlayer.SoundMixer;
 import dev.suprseed.demo.Assets.GameDemoAssets;
@@ -38,7 +41,14 @@ public class GameDemoMainScene extends SceneManager {
         // Instantiate the assets for this scene
         FolderParser localFolderParser = new LocalFolderParser(context.getResources());
         Streamable localStreamer = new LocalImageFileStreamer(context.getResources());
-        AssetLoader gamePlayAssets = new GameDemoAssets(this, localStreamer, localFolderParser);
+
+        PlaceHolder placeHolder;
+        try {
+            placeHolder = new PlaceHolder("Images/Placeholder.png", 1, localStreamer);
+        } catch (Exception e) {
+            throw new RuntimeException("The placeholder image could not load! Check the file path or image file!");
+        }
+        AssetLoadable<AssetBundle, SpriteImage> gamePlayAssets = new GameDemoAssets(this, localStreamer, localFolderParser, placeHolder);
 
         // Instantiate the sounds for this scene
         SoundMixer<String> soundEngine = new BasicSoundEffects<>();

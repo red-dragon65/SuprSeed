@@ -28,7 +28,7 @@ public class BitmapCollection implements SpriteImage {
         // Get each sub file from base path
         String[] subPaths = folderParser.getSubPaths(folderPath);
 
-        if(subPaths.length == 0){
+        if (subPaths.length == 0) {
 
             String message = "No images where found in the specified folder! Folder: " + folderPath;
             CentralLogger.getInstance().logMessage(ErrorType.ERROR, message);

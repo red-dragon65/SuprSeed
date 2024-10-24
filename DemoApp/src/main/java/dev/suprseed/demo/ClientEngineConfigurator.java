@@ -5,13 +5,13 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import dev.suprseed.Engine.Lib.Collisions.CollisionDiagnosticsOverlay;
-import dev.suprseed.Engine.Lib.Input.TouchInput.InputManager;
-import dev.suprseed.Engine.Lib.Input.TouchInput.TouchHandler;
 import dev.suprseed.Engine.Core.MainView.EngineSettings.ViewConfig;
 import dev.suprseed.Engine.Core.MainView.GameViewBuilder.BaseEngineConfigurator;
 import dev.suprseed.Engine.Core.MainView.GameViewBuilder.EngineConfigurator;
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.RootScene;
+import dev.suprseed.Engine.Lib.Collisions.CollisionDiagnosticsOverlay;
+import dev.suprseed.Engine.Lib.Input.TouchInput.InputManager;
+import dev.suprseed.Engine.Lib.Input.TouchInput.TouchHandler;
 
 
 /*

@@ -3,11 +3,12 @@ package dev.suprseed.Engine.Lib.AssetLoader;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.util.Log;
 
 import java.io.IOException;
 import java.io.InputStream;
 
+import dev.suprseed.Engine.Core.ErrorLogger.CentralLogger;
+import dev.suprseed.Engine.Core.ErrorLogger.ErrorType;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.CanvasData;
 
 public class LocalImageFileStreamer implements Streamable {
@@ -49,9 +50,11 @@ public class LocalImageFileStreamer implements Streamable {
 
         Bitmap temp = BitmapFactory.decodeStream(reader);
 
+        reader.close();
+
         if (temp == null) {
 
-            Log.d("ImageLoader", "Image failed to load: " + fileName);
+            CentralLogger.getInstance().logMessage(ErrorType.ERROR, "Failed to load image file: " + fileName);
         }
 
         return Bitmap.createScaledBitmap(temp, ((int) ((float) temp.getWidth() * CanvasData.getInstance().getSpriteScaleRatio() * scaleFactor)), ((int) ((float) temp.getHeight() * CanvasData.getInstance().getSpriteScaleRatio() * scaleFactor)), false);
@@ -62,8 +65,6 @@ public class LocalImageFileStreamer implements Streamable {
     @Override
     public Bitmap loadImage_Unscaled(String fileName) throws IOException {
 
-        InputStream reader;
-
         reader = res.getAssets().open(fileName);
 
         Bitmap temp = BitmapFactory.decodeStream(reader);
@@ -72,7 +73,7 @@ public class LocalImageFileStreamer implements Streamable {
 
         if (temp == null) {
 
-            Log.d("ImageLoader", "Image failed to load: " + fileName);
+            CentralLogger.getInstance().logMessage(ErrorType.ERROR, "Failed to load image file: " + fileName);
         }
 
         return Bitmap.createScaledBitmap(temp, ((int) ((float) temp.getWidth())), ((int) ((float) temp.getHeight())), false);

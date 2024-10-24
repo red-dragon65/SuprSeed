@@ -1,116 +1,95 @@
 package dev.suprseed.Engine.Core.SpriteObjects.SpriteBase;
 
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import dev.suprseed.Engine.Core.ErrorLogger.CentralLogger;
+import dev.suprseed.Engine.Core.ErrorLogger.ErrorType;
+import dev.suprseed.Engine.Lib.Images.PlaceHolder;
 import dev.suprseed.Engine.Lib.Images.SpriteImage;
 
 public class AssetBundle {
 
-    private List<SpriteImage> spriteImage;
+    private List<SpriteImage> imageSet;
     private String selectedImage;
 
 
     // Constructor that takes one sprite image set
-    public AssetBundle(SpriteImage spriteImageSet) {
+    public AssetBundle(@NonNull SpriteImage spriteImageSet) {
 
-        if (spriteImageSet != null) {
+        imageSet = new ArrayList<>();
+        imageSet.add(spriteImageSet);
 
-            spriteImage = new ArrayList<>();
-            spriteImage.add(spriteImageSet);
-
-            selectedImage = getFirstImageSetId();
-        }
-
+        selectedImage = imageSet.get(0).getTag();
     }
 
     // Constructor that takes multiple sprite image sets
-    public AssetBundle(List<SpriteImage> sprites) {
+    public AssetBundle(@NonNull List<SpriteImage> sprites) {
 
-        if (sprites != null) {
+        this.imageSet = sprites;
 
-            this.spriteImage = sprites;
-
-            selectedImage = getFirstImageSetId();
-        }
-
+        selectedImage = imageSet.get(0).getTag();
     }
 
     public int getNumAssets() {
-        return spriteImage.size();
+        return imageSet.size();
     }
 
     public List<String> getAllIds() {
 
-        return spriteImage.stream().map(SpriteImage::getTag).collect(Collectors.toList());
-
+        return imageSet.stream().map(SpriteImage::getTag).collect(Collectors.toList());
     }
 
     public SpriteImage getSpriteImageSetById(String imageName) {
 
-        verifySpriteList();
+        Optional<SpriteImage> result = imageSet.stream().filter(s -> s.getTag().equals(imageName)).findFirst();
 
-        try {
-
-            return spriteImage.stream().filter(s -> s.getTag().equals(imageName)).findFirst().orElseThrow();
-        } catch (Exception e) {
-
-            throw new NullPointerException("Image with key: '" + imageName + "' does not exist!");
+        if (result.isPresent()) {
+            return result.get();
         }
+
+        CentralLogger.getInstance().logMessage(ErrorType.ERROR, "Image with key: '" + imageName + "' does not exist in the AssetBundle!");
+
+        /*
+        There is no reason for this to ever throw for the end user
+        This can only throw if the PlaceHolder has been messed with in other parts of the code base
+         */
+        return imageSet.stream().filter(s -> s.getTag().equals(PlaceHolder.TAG.PLACEHOLDER.toString())).findFirst().orElseThrow();
     }
 
 
     public SpriteImage getSelectedImageSet() {
 
-        verifySpriteList();
-
-        return spriteImage.stream().filter(s -> s.getTag().equals(selectedImage)).findFirst().orElseThrow();
+        /*
+        This should always work for the end user
+        The constructors will throw an exception if the spriteImage tag can not be set
+        The setSelectedImageSet() method will be thrown if the provided string is invalid
+         */
+        return imageSet.stream().filter(s -> s.getTag().equals(selectedImage)).findFirst().orElseThrow();
     }
 
-    public void setSelectedImageSet(String selected) {
+    public boolean trySelectingImageSet(String selected) {
 
         // Verify id exists
-        if (spriteImage.stream().anyMatch(s -> s.getTag().equals(selected))) {
+        if (imageSet.stream().anyMatch(s -> s.getTag().equals(selected))) {
             selectedImage = selected;
-            return;
+            return true;
         }
 
-        throw new NullPointerException("Image with key: '" + selected + "' does not exist!");
+        selectedImage = PlaceHolder.TAG.PLACEHOLDER.toString();
+
+        String message = "Image with key: '" + selected + "' does not exist in the AssetBundle!";
+        CentralLogger.getInstance().logMessage(ErrorType.ERROR, message);
+
+        return false;
     }
 
+    public void addImageSet(@NonNull SpriteImage spriteSet) {
 
-    private String getFirstImageSetId() {
-
-        verifySpriteList();
-
-        // Get the first key
-        Optional<SpriteImage> firstKey = spriteImage.stream().findFirst();
-
-        // Verify key exists
-        if (firstKey.isPresent()) {
-
-            return firstKey.get().getTag();
-        }
-
-        throw new NullPointerException("Could not get image id! Verify sprite list is initialized!");
+        imageSet.add(spriteSet);
     }
-
-
-    public void addImageSet(SpriteImage spriteSet) {
-
-        verifySpriteList();
-
-        spriteImage.add(spriteSet);
-    }
-
-    public void verifySpriteList() {
-
-        if (spriteImage == null || spriteImage.size() <= 0) {
-
-            throw new NullPointerException("No sprites are in the image set!");
-        }
-    }
-
 }

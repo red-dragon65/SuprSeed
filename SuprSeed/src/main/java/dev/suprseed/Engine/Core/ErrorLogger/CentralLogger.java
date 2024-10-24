@@ -34,4 +34,9 @@ public class CentralLogger implements Logable {
 
         logMethod.logMessage(errorType, message);
     }
+
+    @Override
+    public void setDebugMode(boolean isEnabled) {
+        logMethod.setDebugMode(isEnabled);
+    }
 }

@@ -2,8 +2,10 @@ package dev.suprseed.demo.Subscenes;
 
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.SceneManager;
+import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.AssetBundle;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
-import dev.suprseed.Engine.Lib.AssetLoader.AssetLoader;
+import dev.suprseed.Engine.Lib.AssetLoader.AssetLoadable;
+import dev.suprseed.Engine.Lib.Images.SpriteImage;
 import dev.suprseed.demo.SharedData.BounceData;
 import dev.suprseed.demo.SharedData.GameOverData;
 import dev.suprseed.demo.Sprites.HudSprite.OverlaySprites.GameOver;
@@ -15,7 +17,7 @@ public class OverlayScene extends BaseScene {
 
     private final Sprite scoreSprite;
 
-    public OverlayScene(SceneManager parentScene, String sceneId, AssetLoader gamePlayAssets, BounceData bounceData, GameOverData gameOverData) {
+    public OverlayScene(SceneManager parentScene, String sceneId, AssetLoadable<AssetBundle, SpriteImage> gamePlayAssets, BounceData bounceData, GameOverData gameOverData) {
         super(parentScene, sceneId);
 
         // Load HUD scenes here

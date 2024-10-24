@@ -3,15 +3,14 @@ package dev.suprseed.demo.Sprites.Obstacles;
 import java.util.ArrayList;
 import java.util.Random;
 
-import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
 import dev.suprseed.Engine.Core.SpriteObjects.DefaultComponents.Component;
 import dev.suprseed.Engine.Core.SpriteObjects.DefaultComponents.ResetableComponent;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.AssetBundle;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
 import dev.suprseed.Engine.Core.System.Registerables.ILogicRunnable;
-import dev.suprseed.Engine.Core.System.Registerables.IRenderableAndILayerable;
-import dev.suprseed.Engine.Lib.AssetLoader.AssetLoader;
+import dev.suprseed.Engine.Lib.AssetLoader.AssetLoadable;
+import dev.suprseed.Engine.Lib.Images.SpriteImage;
 import dev.suprseed.Engine.Lib.SoundPlayer.SoundMixer;
 import dev.suprseed.demo.SharedData.BounceData;
 import dev.suprseed.demo.SharedData.GameOverData;
@@ -37,7 +36,7 @@ public class ObstacleCollection implements ILogicRunnable {
     private final GameOverData gameOverData;
 
 
-    public ObstacleCollection(BaseScene parentScene, AssetLoader assets, BounceData heroBounceData, Sprite hero, SoundMixer<String> soundEngine, GameOverData gameOverData) {
+    public ObstacleCollection(BaseScene parentScene, AssetLoadable<AssetBundle, SpriteImage> assets, BounceData heroBounceData, Sprite hero, SoundMixer<String> soundEngine, GameOverData gameOverData) {
 
         this.gameOverData = gameOverData;
 
