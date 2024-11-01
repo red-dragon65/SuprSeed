@@ -1,10 +1,12 @@
-package dev.suprseed.Engine.Lib.Input.TouchInput;
+package dev.suprseed.Engine.Lib.Input.Dispatchers;
 
 import android.view.MotionEvent;
 
 import java.util.List;
 
-public class ControllerInput implements InputProcessor {
+import dev.suprseed.Engine.Lib.Input.InputListener;
+
+public class GamepadEventDispatcher implements EventDispatcher {
 
     // Used for managing controller input
 

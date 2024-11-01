@@ -1,4 +1,4 @@
-package dev.suprseed.Engine.Lib.Input.TouchInput;
+package dev.suprseed.Engine.Lib.Input.Dispatchers;
 
 import android.graphics.RectF;
 import android.view.InputDevice;
@@ -8,8 +8,9 @@ import java.util.List;
 
 import dev.suprseed.Engine.Core.ErrorLogger.CentralLogger;
 import dev.suprseed.Engine.Core.ErrorLogger.ErrorType;
+import dev.suprseed.Engine.Lib.Input.InputListener;
 
-public class TouchHandler implements InputProcessor {
+public class TouchEventDispatcher implements EventDispatcher {
 
     private final RectF bounds = new RectF();
     private float lastDownX;

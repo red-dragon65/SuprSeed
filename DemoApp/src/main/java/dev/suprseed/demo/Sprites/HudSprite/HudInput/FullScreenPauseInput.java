@@ -5,7 +5,7 @@ import android.view.MotionEvent;
 
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LoopManager;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.CanvasData;
-import dev.suprseed.Engine.Lib.Input.TouchInput.InputListener;
+import dev.suprseed.Engine.Lib.Input.InputListener;
 
 public class FullScreenPauseInput implements InputListener {
 

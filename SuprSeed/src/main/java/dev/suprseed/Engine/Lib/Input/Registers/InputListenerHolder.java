@@ -1,9 +1,10 @@
-package dev.suprseed.Engine.Lib.Input.TouchInput;
+package dev.suprseed.Engine.Lib.Input.Registers;
 
 import java.util.Comparator;
 import java.util.List;
 
 import dev.suprseed.Engine.Core.System.Registerables.ILayerable;
+import dev.suprseed.Engine.Lib.Input.InputListener;
 
 public class InputListenerHolder implements InputRegister<InputListener> {
 

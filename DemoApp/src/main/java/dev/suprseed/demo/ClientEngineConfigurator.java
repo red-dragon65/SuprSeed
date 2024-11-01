@@ -10,8 +10,8 @@ import dev.suprseed.Engine.Core.MainView.GameViewBuilder.BaseEngineConfigurator;
 import dev.suprseed.Engine.Core.MainView.GameViewBuilder.EngineConfigurator;
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.RootScene;
 import dev.suprseed.Engine.Lib.Collisions.CollisionDiagnosticsOverlay;
-import dev.suprseed.Engine.Lib.Input.TouchInput.InputManager;
-import dev.suprseed.Engine.Lib.Input.TouchInput.TouchHandler;
+import dev.suprseed.Engine.Lib.Input.CentralInputManager;
+import dev.suprseed.Engine.Lib.Input.Dispatchers.TouchEventDispatcher;
 
 
 /*
@@ -28,11 +28,11 @@ public class ClientEngineConfigurator extends BaseEngineConfigurator {
         RootScene clientSpecifiedRootScene = new MainScene(context);
 
         // User can build the engine configuration here
-        engineConfigurator = new EngineConfigurator(this, clientSpecifiedRootScene, InputManager.getInstance(), CollisionDiagnosticsOverlay.getInstance())
+        engineConfigurator = new EngineConfigurator(this, clientSpecifiedRootScene, CentralInputManager.getInstance(), CollisionDiagnosticsOverlay.getInstance())
                 .setViewConfig(new ViewConfig(true, true, true, false));
 
         // Add the input handlers here
-        InputManager.getInstance().processorRegister.registerObject(new TouchHandler());
+        CentralInputManager.getInstance().dispatcherRegister.registerObject(new TouchEventDispatcher());
     }
 
     @Override

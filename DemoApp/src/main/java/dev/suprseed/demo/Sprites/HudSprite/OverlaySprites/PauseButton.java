@@ -7,8 +7,8 @@ import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.CanvasData;
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.AssetBundle;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
-import dev.suprseed.Engine.Lib.Input.TouchInput.InputListener;
-import dev.suprseed.Engine.Lib.Input.TouchInput.InputManager;
+import dev.suprseed.Engine.Lib.Input.InputListener;
+import dev.suprseed.Engine.Lib.Input.CentralInputManager;
 import dev.suprseed.demo.Sprites.HudSprite.HudInput.FullScreenPauseInput;
 
 public class PauseButton extends Sprite implements InputListener {
@@ -22,8 +22,8 @@ public class PauseButton extends Sprite implements InputListener {
         setLayerDepth(102);
         screenListener = new FullScreenPauseInput();
 
-        InputManager.getInstance().listenerRegister.registerObject(this);
-        InputManager.getInstance().listenerRegister.registerObject(screenListener);
+        CentralInputManager.getInstance().listenerRegister.registerObject(this);
+        CentralInputManager.getInstance().listenerRegister.registerObject(screenListener);
 
         setX(CanvasData.getInstance().getScaledWidth() - assetBundle.getSelectedImageSet().getScaledWidth());
 

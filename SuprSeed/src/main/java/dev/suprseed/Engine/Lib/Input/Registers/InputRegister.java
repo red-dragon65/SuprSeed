@@ -1,4 +1,4 @@
-package dev.suprseed.Engine.Lib.Input.TouchInput;
+package dev.suprseed.Engine.Lib.Input.Registers;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package dev.suprseed.Engine.Lib.Input.TouchInput;
+package dev.suprseed.Engine.Lib.Input;
 
 import android.view.MotionEvent;
 
