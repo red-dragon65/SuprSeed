@@ -5,6 +5,7 @@ import android.view.MotionEvent;
 
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.CanvasData;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
+import dev.suprseed.Engine.Lib.Input.Dispatchers.TouchTypes;
 import dev.suprseed.Engine.Lib.Input.InputListener;
 import dev.suprseed.demo.SharedData.GameOverData;
 
@@ -33,7 +34,7 @@ public class FullScreenRestartInput implements InputListener {
 
         // Signal that game has been restarted
         // Hide game over image
-        if (action.equals("tap")) {
+        if (action.equals(TouchTypes.TAP.toString())) {
 
             gameOverData.setGameOver(false);
             gameOverData.setRestart(true);

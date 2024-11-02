@@ -5,6 +5,7 @@ import android.view.MotionEvent;
 
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.CanvasData;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
+import dev.suprseed.Engine.Lib.Input.Dispatchers.TouchTypes;
 import dev.suprseed.Engine.Lib.Input.InputListener;
 import dev.suprseed.demo.SharedData.GameOverData;
 
@@ -23,7 +24,7 @@ public class FullScreenHeroTouchInput implements InputListener {
     @Override
     public boolean processInput(String action, MotionEvent event) {
 
-        hold = action.equals("hold") || action.equals("drag");
+        hold = action.equals(TouchTypes.HOLD.toString()) || action.equals(TouchTypes.DRAG.toString());
 
         // Notify that user has triggered game to start
         if (!gameOverData.isStarted() && !gameOverData.isGameOver()) {

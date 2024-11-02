@@ -4,6 +4,8 @@ import android.graphics.RectF;
 import android.view.InputDevice;
 import android.view.MotionEvent;
 
+import androidx.annotation.NonNull;
+
 import java.util.List;
 
 import dev.suprseed.Engine.Core.ErrorLogger.CentralLogger;
@@ -16,7 +18,7 @@ public class TouchEventDispatcher implements EventDispatcher {
     private float lastDownX;
     private float lastDownY;
 
-    private String actionPerformed;
+    private TouchTypes actionPerformed;
 
     private boolean processed = false;
 
@@ -51,7 +53,7 @@ public class TouchEventDispatcher implements EventDispatcher {
             if (isTouching(listeners.get(i), event)) {
 
                 // Notify listener
-                processed = listeners.get(i).processInput(actionPerformed, event);
+                processed = listeners.get(i).processInput(actionPerformed.toString(), event);
 
                 // If listener handled request, end input processing
                 if (processed) {
@@ -78,7 +80,7 @@ public class TouchEventDispatcher implements EventDispatcher {
         // Calculate the touch type
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                actionPerformed = "hold";
+                actionPerformed = TouchTypes.HOLD;
 
                 // Hold the last location
                 lastDownX = event.getX();
@@ -99,16 +101,16 @@ public class TouchEventDispatcher implements EventDispatcher {
                 if (bounds.contains(lastDownX, lastDownY)) {
 
                     // Hold and lift are at the same point
-                    actionPerformed = "tap";
+                    actionPerformed = TouchTypes.TAP;
 
                 } else {
 
                     // Lift is at a different point then hold
-                    actionPerformed = "lift";
+                    actionPerformed = TouchTypes.LIFT;
                 }
                 return true;
             case MotionEvent.ACTION_MOVE:
-                actionPerformed = "drag";
+                actionPerformed = TouchTypes.DRAG;
                 return true;
         }
 

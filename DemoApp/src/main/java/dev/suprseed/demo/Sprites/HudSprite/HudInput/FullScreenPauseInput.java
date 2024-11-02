@@ -5,6 +5,7 @@ import android.view.MotionEvent;
 
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LoopManager;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.CanvasData;
+import dev.suprseed.Engine.Lib.Input.Dispatchers.TouchTypes;
 import dev.suprseed.Engine.Lib.Input.InputListener;
 
 public class FullScreenPauseInput implements InputListener {
@@ -25,7 +26,7 @@ public class FullScreenPauseInput implements InputListener {
     @Override
     public boolean processInput(String action, MotionEvent event) {
 
-        if (action.equals("tap")) {
+        if (action.equals(TouchTypes.TAP.toString())) {
 
             LoopManager.loopy.setSoftPause(false);
         }
