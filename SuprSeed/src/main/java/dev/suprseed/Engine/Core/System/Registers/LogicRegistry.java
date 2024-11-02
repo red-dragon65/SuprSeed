@@ -3,27 +3,27 @@ package dev.suprseed.Engine.Core.System.Registers;
 import java.util.ArrayList;
 import java.util.List;
 
-import dev.suprseed.Engine.Core.System.RegisterTypes.ILogicRegister;
-import dev.suprseed.Engine.Core.System.Registerables.ILogicRunnable;
+import dev.suprseed.Engine.Core.System.RegisterTypes.LogicRegister;
+import dev.suprseed.Engine.Core.System.Registerables.LogicRunnable;
 
-public class LogicRegister implements ILogicRegister {
+public class LogicRegistry implements LogicRegister {
 
-    private final List<ILogicRunnable> sprites;
+    private final List<LogicRunnable> sprites;
 
 
     // Constructor
-    public LogicRegister() {
+    public LogicRegistry() {
         sprites = new ArrayList<>();
     }
 
 
     @Override
-    public void registerObject(ILogicRunnable sprite) {
+    public void registerObject(LogicRunnable sprite) {
         sprites.add(sprite);
     }
 
     @Override
-    public void removeObject(ILogicRunnable sprite) {
+    public void removeObject(LogicRunnable sprite) {
         sprites.remove(sprite);
     }
 
@@ -33,7 +33,7 @@ public class LogicRegister implements ILogicRegister {
     public void update() {
 
         // Run logic for active sprites
-        for (ILogicRunnable s : sprites) {
+        for (LogicRunnable s : sprites) {
 
             if (s.isActive()) {
                 s.runLogic();

@@ -1,6 +1,6 @@
 package dev.suprseed.Engine.Core.System.Registerables;
 
-public interface ILayerable {
+public interface Layerable {
 
     int getLayerDepth();
 }

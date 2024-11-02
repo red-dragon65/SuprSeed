@@ -5,20 +5,20 @@ import java.util.Comparator;
 import java.util.List;
 
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
-import dev.suprseed.Engine.Core.System.RegisterTypes.IImageRegister;
-import dev.suprseed.Engine.Core.System.Registerables.ILayerable;
-import dev.suprseed.Engine.Core.System.Registerables.IRenderableAndILayerable;
+import dev.suprseed.Engine.Core.System.RegisterTypes.ImageRegister;
+import dev.suprseed.Engine.Core.System.Registerables.Layerable;
+import dev.suprseed.Engine.Core.System.Registerables.RenderableAndLayerable;
 
-public class ImageRegister implements IImageRegister<IRenderableAndILayerable> {
+public class ImageRegistry implements ImageRegister<RenderableAndLayerable> {
 
 
-    private final List<IRenderableAndILayerable> renderQueue;
-    private final Comparator<ILayerable> layerableComparator;
+    private final List<RenderableAndLayerable> renderQueue;
+    private final Comparator<Layerable> layerableComparator;
     private boolean isLayerSynced = false;
 
 
     // Constructor
-    public ImageRegister(Comparator<ILayerable> layerableComparator) {
+    public ImageRegistry(Comparator<Layerable> layerableComparator) {
 
         this.renderQueue = new ArrayList<>();
         this.layerableComparator = layerableComparator;
@@ -36,7 +36,7 @@ public class ImageRegister implements IImageRegister<IRenderableAndILayerable> {
         }
 
         // Draw the sprites
-        for (IRenderableAndILayerable item : renderQueue) {
+        for (RenderableAndLayerable item : renderQueue) {
 
             if (item.isDrawable()) {
                 item.draw(renderer);
@@ -51,14 +51,14 @@ public class ImageRegister implements IImageRegister<IRenderableAndILayerable> {
 
 
     @Override
-    public void registerObject(IRenderableAndILayerable object) {
+    public void registerObject(RenderableAndLayerable object) {
 
         renderQueue.add(object);
         isLayerSynced = false;
     }
 
     @Override
-    public void removeObject(IRenderableAndILayerable object) {
+    public void removeObject(RenderableAndLayerable object) {
 
         renderQueue.remove(object);
     }

@@ -1,6 +1,6 @@
 package dev.suprseed.Engine.Core.System.Registerables;
 
-public interface ILogicRunnable {
+public interface LogicRunnable {
 
     void runLogic();
 

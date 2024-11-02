@@ -3,17 +3,17 @@ package dev.suprseed.Engine.Core.System.Registers;
 import java.util.ArrayList;
 import java.util.List;
 
-import dev.suprseed.Engine.Core.System.RegisterTypes.IAnimationRegister;
+import dev.suprseed.Engine.Core.System.RegisterTypes.AnimationRegister;
 import dev.suprseed.Engine.Lib.Images.Animator;
 
-public class AnimationRegister implements IAnimationRegister {
+public class AnimationRegistry implements AnimationRegister {
 
 
     private final List<Animator> animationQueue;
 
 
     // Constructor
-    public AnimationRegister() {
+    public AnimationRegistry() {
 
         this.animationQueue = new ArrayList<>();
     }

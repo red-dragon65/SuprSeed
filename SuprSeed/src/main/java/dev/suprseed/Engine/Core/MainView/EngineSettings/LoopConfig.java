@@ -3,9 +3,9 @@ package dev.suprseed.Engine.Core.MainView.EngineSettings;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.GameView;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LogicRates;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.RefreshTypes;
-import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.RunnableConfig;
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LoopRunnable;
 
-public class LoopConfig extends BaseConfig<RunnableConfig<GameView>> {
+public class LoopConfig extends BaseConfig<LoopRunnable<GameView>> {
 
     // Enforce only one setting across instance usages
     private static RefreshTypes refreshSpeed;
@@ -17,9 +17,9 @@ public class LoopConfig extends BaseConfig<RunnableConfig<GameView>> {
         LoopConfig.refreshSpeed = refreshSpeed;
         LoopConfig.logicRate = logicRate;
 
-        settings.add(new Configurable<RunnableConfig<GameView>>() {
+        settings.add(new Configurable<LoopRunnable<GameView>>() {
             @Override
-            public void applySettings(RunnableConfig<GameView> inputObject) {
+            public void applySettings(LoopRunnable<GameView> inputObject) {
 
                 inputObject.setRefreshSpeed(LoopConfig.refreshSpeed);
                 inputObject.setLogicRate(LoopConfig.logicRate);

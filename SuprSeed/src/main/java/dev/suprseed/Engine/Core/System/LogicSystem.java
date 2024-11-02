@@ -1,27 +1,27 @@
 package dev.suprseed.Engine.Core.System;
 
-import dev.suprseed.Engine.Core.System.RegisterTypes.ILogicRegister;
-import dev.suprseed.Engine.Core.System.Registerables.ILogicRunnable;
-import dev.suprseed.Engine.Core.System.Registers.LogicRegister;
+import dev.suprseed.Engine.Core.System.RegisterTypes.LogicRegister;
+import dev.suprseed.Engine.Core.System.Registerables.LogicRunnable;
+import dev.suprseed.Engine.Core.System.Registers.LogicRegistry;
 
-public class LogicSystem implements ILogicRunnable {
+public class LogicSystem implements LogicRunnable {
 
     // Eager loading singleton
     private static final LogicSystem INSTANCE = new LogicSystem();
-    private final ILogicRegister logicRegister;
+    private final LogicRegister logicRegister;
 
 
     // Constructor
     // Private to prevent client use of 'new' keyword
     private LogicSystem() {
-        logicRegister = new LogicRegister();
+        logicRegister = new LogicRegistry();
     }
 
     public static LogicSystem getInstance() {
         return INSTANCE;
     }
 
-    public ILogicRegister getLogicRegister() {
+    public LogicRegister getLogicRegister() {
         return logicRegister;
     }
 

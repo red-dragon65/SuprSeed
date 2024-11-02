@@ -1,9 +1,9 @@
 package dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates;
 
 import dev.suprseed.Engine.Core.System.LogicSystem;
-import dev.suprseed.Engine.Core.System.Registerables.ILogicRunnable;
+import dev.suprseed.Engine.Core.System.Registerables.LogicRunnable;
 
-public class Camera implements ILogicRunnable {
+public class Camera implements LogicRunnable {
 
     // Eager loading singleton
     private static final Camera INSTANCE = new Camera();

@@ -9,8 +9,8 @@ import dev.suprseed.Engine.Core.ErrorLogger.ErrorType;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.InputHandler;
 import dev.suprseed.Engine.Core.System.LayerableQueueComparator;
 import dev.suprseed.Engine.Lib.Input.Dispatchers.EventDispatcher;
-import dev.suprseed.Engine.Lib.Input.Registers.InputDispatchHolder;
-import dev.suprseed.Engine.Lib.Input.Registers.InputListenerHolder;
+import dev.suprseed.Engine.Lib.Input.Registers.InputDispatchRegistry;
+import dev.suprseed.Engine.Lib.Input.Registers.InputListenerRegistry;
 import dev.suprseed.Engine.Lib.Input.Registers.InputRegister;
 
 public class CentralInputManager implements InputHandler {
@@ -28,8 +28,8 @@ public class CentralInputManager implements InputHandler {
     // Private to prevent client use of 'new' keyword
     private CentralInputManager() {
 
-        dispatcherRegister = new InputDispatchHolder(new ArrayList<>());
-        listenerRegister = new InputListenerHolder(new ArrayList<>(), new LayerableQueueComparator());
+        dispatcherRegister = new InputDispatchRegistry(new ArrayList<>());
+        listenerRegister = new InputListenerRegistry(new ArrayList<>(), new LayerableQueueComparator());
     }
 
     public static CentralInputManager getInstance() {

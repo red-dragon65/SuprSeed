@@ -18,7 +18,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     // TODO: REMOVE THIS! Instead, override 'instance state configuration changes'!!!
     protected static boolean initialized = false;
     // Dependencies
-    protected RunnableConfig<GameView> loopRunner;
+    protected LoopRunnable<GameView> loopRunner;
     protected RenderHandler renderer;
     protected RootScene sceneManager;
     protected InputHandler inputHandler;
@@ -26,7 +26,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
 
     // Constructor
-    public GameView(Context context, RunnableConfig<GameView> loopRunner,
+    public GameView(Context context, LoopRunnable<GameView> loopRunner,
                     RenderHandler renderer, RootScene sceneManager, InputHandler inputHandler) {
         super(context);
 

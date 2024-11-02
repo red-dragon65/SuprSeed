@@ -4,11 +4,11 @@ import android.content.Context;
 
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import dev.suprseed.Engine.Core.Scenes.SceneStrategy.SceneChangeStrategy;
-import dev.suprseed.Engine.Core.System.RegisterTypes.ISceneRegister;
+import dev.suprseed.Engine.Core.System.RegisterTypes.SceneRegister;
 
 public abstract class SceneManager extends BaseScene implements SceneController<BaseScene> {
 
-    protected ISceneRegister<BaseScene> sceneRegister;
+    protected SceneRegister<BaseScene> sceneRegister;
 
 
     // Constructor
@@ -27,7 +27,7 @@ public abstract class SceneManager extends BaseScene implements SceneController<
 
     // Constructor initializer
     private void init() {
-        sceneRegister = new SubSceneRegister();
+        sceneRegister = new SubSceneRegistry();
     }
 
 
@@ -38,7 +38,7 @@ public abstract class SceneManager extends BaseScene implements SceneController<
     }
 
     @Override
-    public ISceneRegister<BaseScene> getRegister() {
+    public SceneRegister<BaseScene> getRegister() {
         return sceneRegister;
     }
 

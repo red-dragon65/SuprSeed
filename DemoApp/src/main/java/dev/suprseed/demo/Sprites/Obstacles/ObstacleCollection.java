@@ -8,7 +8,7 @@ import dev.suprseed.Engine.Core.SpriteObjects.DefaultComponents.Component;
 import dev.suprseed.Engine.Core.SpriteObjects.DefaultComponents.ResetableComponent;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.AssetBundle;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
-import dev.suprseed.Engine.Core.System.Registerables.ILogicRunnable;
+import dev.suprseed.Engine.Core.System.Registerables.LogicRunnable;
 import dev.suprseed.Engine.Lib.AssetLoader.AssetLoadable;
 import dev.suprseed.Engine.Lib.Images.SpriteImage;
 import dev.suprseed.Engine.Lib.SoundPlayer.SoundMixer;
@@ -18,7 +18,7 @@ import dev.suprseed.demo.Sprites.Obstacles.ObstacleComponents.ObstacleCollisionC
 import dev.suprseed.demo.Sprites.Obstacles.ObstacleComponents.ObstacleMovementComponent;
 import dev.suprseed.demo.Sprites.Obstacles.ObstacleComponents.ObstacleSpawnerComponent;
 
-public class ObstacleCollection implements ILogicRunnable {
+public class ObstacleCollection implements LogicRunnable {
 
 
     private final ArrayList<Sprite> obstacleSprites;

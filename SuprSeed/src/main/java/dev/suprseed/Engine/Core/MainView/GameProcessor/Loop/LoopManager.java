@@ -13,7 +13,7 @@ import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates.Locati
 import dev.suprseed.Engine.Core.System.LogicSystem;
 import dev.suprseed.Engine.Core.System.RenderSystem;
 
-public class LoopManager implements RunnableConfig<GameView> {
+public class LoopManager implements LoopRunnable<GameView> {
 
     // TODO: This is temporary. Figure out a better way for client to get loop manager
     //  to handle pausing behavior
@@ -29,7 +29,7 @@ public class LoopManager implements RunnableConfig<GameView> {
     private boolean hardPause = false;
 
     // Constructor
-    public LoopManager(BaseConfig<RunnableConfig<GameView>> config, LocationScaler locationScaler) {
+    public LoopManager(BaseConfig<LoopRunnable<GameView>> config, LocationScaler locationScaler) {
 
         config.applySettings(this);
 

@@ -12,7 +12,7 @@ import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.InputHandler;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LogicRates;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LoopManager;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.RefreshTypes;
-import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.RunnableConfig;
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LoopRunnable;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.CanvasData;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates.CartesianHandler;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates.CoordinateHandler;
@@ -28,7 +28,7 @@ import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.RootScene;
 public class EngineConfigurator extends BaseEngineConfigurator {
 
     private final RootScene rootScene;
-    private RunnableConfig<GameView> loopManager;
+    private LoopRunnable<GameView> loopManager;
     private LocationScaler locationTemporalScaler;
     private RenderHandler renderProcessor;
     private CoordinateHandler coordinateHandler;
@@ -72,7 +72,7 @@ public class EngineConfigurator extends BaseEngineConfigurator {
     The user can also retrieve default configs here if they wish to create their own partial builder.
      */
 
-    public RunnableConfig<GameView> getLoopManager() {
+    public LoopRunnable<GameView> getLoopManager() {
 
         if (loopManager == null) {
 
@@ -82,7 +82,7 @@ public class EngineConfigurator extends BaseEngineConfigurator {
         return loopManager;
     }
 
-    public EngineConfigurator setLoopManager(RunnableConfig<GameView> loopManager) {
+    public EngineConfigurator setLoopManager(LoopRunnable<GameView> loopManager) {
         this.loopManager = loopManager;
         return this;
     }

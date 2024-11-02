@@ -1,6 +1,6 @@
 package dev.suprseed.Engine.Core.System.RegisterTypes;
 
-public interface IObjectRegister<T> {
+public interface ObjectRegister<T> {
 
     void registerObject(T object);
 

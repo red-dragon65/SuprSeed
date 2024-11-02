@@ -4,14 +4,14 @@ import java.util.List;
 
 import dev.suprseed.Engine.Lib.Input.Dispatchers.EventDispatcher;
 
-public class InputDispatchHolder implements InputRegister<EventDispatcher> {
+public class InputDispatchRegistry implements InputRegister<EventDispatcher> {
 
 
     private final List<EventDispatcher> inputs;
 
 
     // Constructor
-    public InputDispatchHolder(List<EventDispatcher> inputs) {
+    public InputDispatchRegistry(List<EventDispatcher> inputs) {
         this.inputs = inputs;
     }
 

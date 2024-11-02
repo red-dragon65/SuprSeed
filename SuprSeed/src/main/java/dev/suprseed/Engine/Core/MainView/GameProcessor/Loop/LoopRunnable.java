@@ -3,7 +3,7 @@ package dev.suprseed.Engine.Core.MainView.GameProcessor.Loop;
 
 import android.view.SurfaceView;
 
-public interface RunnableConfig<T extends SurfaceView> {
+public interface LoopRunnable<T extends SurfaceView> {
 
     // TODO: Verify this covers the correct responsibilities
 

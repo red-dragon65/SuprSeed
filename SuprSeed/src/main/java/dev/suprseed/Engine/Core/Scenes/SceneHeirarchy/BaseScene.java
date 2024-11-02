@@ -5,21 +5,21 @@ import android.content.Context;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import dev.suprseed.Engine.Core.SpriteObjects.DefaultComponents.Resetable;
 import dev.suprseed.Engine.Core.System.LayerableQueueComparator;
-import dev.suprseed.Engine.Core.System.RegisterTypes.IAnimationRegister;
-import dev.suprseed.Engine.Core.System.RegisterTypes.IImageRegister;
-import dev.suprseed.Engine.Core.System.RegisterTypes.ILogicRegister;
-import dev.suprseed.Engine.Core.System.Registerables.ILogicRunnable;
-import dev.suprseed.Engine.Core.System.Registerables.IRenderableAndILayerable;
-import dev.suprseed.Engine.Core.System.Registers.AnimationRegister;
-import dev.suprseed.Engine.Core.System.Registers.ImageRegister;
-import dev.suprseed.Engine.Core.System.Registers.LogicRegister;
+import dev.suprseed.Engine.Core.System.RegisterTypes.AnimationRegister;
+import dev.suprseed.Engine.Core.System.RegisterTypes.ImageRegister;
+import dev.suprseed.Engine.Core.System.RegisterTypes.LogicRegister;
+import dev.suprseed.Engine.Core.System.Registerables.LogicRunnable;
+import dev.suprseed.Engine.Core.System.Registerables.RenderableAndLayerable;
+import dev.suprseed.Engine.Core.System.Registers.AnimationRegistry;
+import dev.suprseed.Engine.Core.System.Registers.ImageRegistry;
+import dev.suprseed.Engine.Core.System.Registers.LogicRegistry;
 import dev.suprseed.Engine.Lib.Images.Animator;
 
-public abstract class BaseScene implements ILogicRunnable, IRenderableAndILayerable, Animator, Resetable {
+public abstract class BaseScene implements LogicRunnable, RenderableAndLayerable, Animator, Resetable {
 
-    public IImageRegister<IRenderableAndILayerable> imageRegister;
-    public IAnimationRegister animationRegister;
-    public ILogicRegister logicRegister;
+    public ImageRegister<RenderableAndLayerable> imageRegister;
+    public AnimationRegister animationRegister;
+    public LogicRegister logicRegister;
     protected String sceneId;
     protected boolean isActive = true;
     protected boolean isDrawable = true;
@@ -50,9 +50,9 @@ public abstract class BaseScene implements ILogicRunnable, IRenderableAndILayera
             context = appContext;
         }
 
-        imageRegister = new ImageRegister(new LayerableQueueComparator());
-        animationRegister = new AnimationRegister();
-        logicRegister = new LogicRegister();
+        imageRegister = new ImageRegistry(new LayerableQueueComparator());
+        animationRegister = new AnimationRegistry();
+        logicRegister = new LogicRegistry();
 
         // Register the base scene to it's parent
         if (parentScene != null) {
