@@ -16,11 +16,11 @@ public class RenderProcessor implements RenderHandler {
     private final CoordinateHandler coordinateHandler;
     // The hardware accelerated canvas provided by a view
     private Canvas canvas;
-    private CollisionDiagnosable collisionDiagnoser;
+    private CollisionDrawable collisionDiagnoser;
 
 
     // Constructor
-    public RenderProcessor(CoordinateHandler coordinateHandler, CollisionDiagnosable collisionDiagnoser) {
+    public RenderProcessor(CoordinateHandler coordinateHandler, CollisionDrawable collisionDiagnoser) {
 
         // Dependency injection
         this.coordinateHandler = coordinateHandler;

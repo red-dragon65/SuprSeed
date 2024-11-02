@@ -14,13 +14,13 @@ import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LoopManager;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.RefreshTypes;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LoopRunnable;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.CanvasData;
-import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates.CartesianHandler;
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates.CartesianProcessor;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates.CoordinateHandler;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates.CoordinateProcessor;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates.LocationHandler;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates.LocationScaler;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates.LocationTemporalScaler;
-import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.CollisionDiagnosable;
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.CollisionDrawable;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderProcessor;
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.RootScene;
@@ -37,10 +37,10 @@ public class EngineConfigurator extends BaseEngineConfigurator {
     private ViewConfig viewConfig;
     private CanvasConfig canvasConfig;
     private InputHandler inputHandler;
-    private CollisionDiagnosable collisionDiagnoser;
+    private CollisionDrawable collisionDiagnoser;
 
     // Constructor
-    public EngineConfigurator(BaseEngineConfigurator configurator, RootScene rootScene, InputHandler inputHandler, CollisionDiagnosable collisionDiagnoser) {
+    public EngineConfigurator(BaseEngineConfigurator configurator, RootScene rootScene, InputHandler inputHandler, CollisionDrawable collisionDiagnoser) {
         super(configurator.context);
 
         this.rootScene = rootScene;
@@ -132,7 +132,7 @@ public class EngineConfigurator extends BaseEngineConfigurator {
     public LocationHandler getLocationHandler() {
 
         if (locationHandler == null) {
-            return new CartesianHandler(getCanvasConfig());
+            return new CartesianProcessor(getCanvasConfig());
         }
 
         return locationHandler;

@@ -3,13 +3,13 @@ package dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates;
 import dev.suprseed.Engine.Core.MainView.EngineSettings.BaseConfig;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.CanvasData;
 
-public class CartesianHandler implements LocationHandler {
+public class CartesianProcessor implements LocationHandler {
 
     private boolean isTopLeftOrigin;
 
 
     // Constructor
-    public CartesianHandler(BaseConfig<LocationHandler> config) {
+    public CartesianProcessor(BaseConfig<LocationHandler> config) {
 
         config.applySettings(this);
     }

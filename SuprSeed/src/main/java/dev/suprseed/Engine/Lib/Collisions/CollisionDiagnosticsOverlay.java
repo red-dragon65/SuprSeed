@@ -9,12 +9,12 @@ import java.util.Optional;
 
 import dev.suprseed.Engine.Core.ErrorLogger.CentralLogger;
 import dev.suprseed.Engine.Core.ErrorLogger.ErrorType;
-import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.CollisionDiagnosable;
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.CollisionDrawable;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
 import dev.suprseed.Engine.Core.System.RenderSystem;
 
-public class CollisionDiagnosticsOverlay implements CollisionDiagnosable {
+public class CollisionDiagnosticsOverlay implements CollisionDrawable {
 
     // Eager loading singleton
     private static final CollisionDiagnosticsOverlay INSTANCE = new CollisionDiagnosticsOverlay();
