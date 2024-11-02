@@ -7,10 +7,9 @@ import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.CanvasData;
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.AssetBundle;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
-import dev.suprseed.Engine.Lib.Input.Dispatchers.TouchEventDispatcher;
+import dev.suprseed.Engine.Lib.Input.CentralInputManager;
 import dev.suprseed.Engine.Lib.Input.Dispatchers.TouchTypes;
 import dev.suprseed.Engine.Lib.Input.InputListener;
-import dev.suprseed.Engine.Lib.Input.CentralInputManager;
 import dev.suprseed.demo.Sprites.HudSprite.HudInput.FullScreenPauseInput;
 
 public class PauseButton extends Sprite implements InputListener {

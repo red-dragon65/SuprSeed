@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.CanvasData;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.RootScene;
+import dev.suprseed.Engine.SceneStarter;
 
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
@@ -20,14 +21,15 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     // Dependencies
     protected LoopRunnable<GameView> loopRunner;
     protected RenderHandler renderer;
-    protected RootScene sceneManager;
+    protected RootScene rootScene;
+    protected SceneStarter sceneStarter;
     protected InputHandler inputHandler;
     protected Context context;
 
 
     // Constructor
     public GameView(Context context, LoopRunnable<GameView> loopRunner,
-                    RenderHandler renderer, RootScene sceneManager, InputHandler inputHandler) {
+                    RenderHandler renderer, SceneStarter sceneStarter, InputHandler inputHandler) {
         super(context);
 
         this.context = context;
@@ -36,7 +38,8 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         this.loopRunner = loopRunner;
         this.renderer = renderer;
 
-        this.sceneManager = sceneManager;
+        this.sceneStarter = sceneStarter;
+        rootScene = RootScene.getInstance(context);
 
         this.inputHandler = inputHandler;
     }
@@ -51,7 +54,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         // Initialize static game objects
         // Initialize a new game loop
         if (!initialized) {
-            sceneManager.initStartingState(context);
+            sceneStarter.initStartingState(rootScene);
             initialized = true;
         }
 

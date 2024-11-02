@@ -9,8 +9,6 @@ import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.RootScene;
 
 public class UsageExampleActivity extends EngineActivity {
 
-    RootScene mainScene;
-
     @Override
     protected int loadView() {
         // This should be the main activity of your app
@@ -26,7 +24,14 @@ public class UsageExampleActivity extends EngineActivity {
     }
 
     @Override
-    protected BaseEngineConfigurator loadConfig(Context context) {
-        return new DefaultEngineConfiguration(context, mainScene);
+    protected BaseEngineConfigurator loadEngineConfig(Context context) {
+        return new DefaultEngineConfiguration(context, this);
+    }
+
+    @Override
+    public void initStartingState(RootScene rootScene) {
+
+        // Start your game engine here
+        //new UserMainScene(this, "SomeSceneId")
     }
 }

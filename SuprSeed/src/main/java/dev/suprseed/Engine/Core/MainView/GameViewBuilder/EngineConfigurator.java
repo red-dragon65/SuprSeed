@@ -11,8 +11,8 @@ import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.GameView;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.InputHandler;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LogicRates;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LoopManager;
-import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.RefreshTypes;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LoopRunnable;
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.RefreshTypes;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.CanvasData;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates.CartesianProcessor;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates.CoordinateHandler;
@@ -23,11 +23,11 @@ import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates.Locati
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.CollisionDrawable;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderProcessor;
-import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.RootScene;
+import dev.suprseed.Engine.SceneStarter;
 
 public class EngineConfigurator extends BaseEngineConfigurator {
 
-    private final RootScene rootScene;
+    private final SceneStarter sceneStarter;
     private LoopRunnable<GameView> loopManager;
     private LocationScaler locationTemporalScaler;
     private RenderHandler renderProcessor;
@@ -40,10 +40,10 @@ public class EngineConfigurator extends BaseEngineConfigurator {
     private CollisionDrawable collisionDiagnoser;
 
     // Constructor
-    public EngineConfigurator(BaseEngineConfigurator configurator, RootScene rootScene, InputHandler inputHandler, CollisionDrawable collisionDiagnoser) {
+    public EngineConfigurator(BaseEngineConfigurator configurator, SceneStarter sceneStarter, InputHandler inputHandler, CollisionDrawable collisionDiagnoser) {
         super(configurator.context);
 
-        this.rootScene = rootScene;
+        this.sceneStarter = sceneStarter;
         this.inputHandler = inputHandler;
         this.collisionDiagnoser = collisionDiagnoser;
     }
@@ -51,7 +51,7 @@ public class EngineConfigurator extends BaseEngineConfigurator {
     @Override
     public View buildView() {
 
-        return new GameView(context, getLoopManager(), getRenderProcessor(), rootScene, inputHandler);
+        return new GameView(context, getLoopManager(), getRenderProcessor(), sceneStarter, inputHandler);
     }
 
     @Override

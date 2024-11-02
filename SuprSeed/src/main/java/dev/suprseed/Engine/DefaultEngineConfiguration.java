@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import dev.suprseed.Engine.Core.MainView.EngineSettings.ViewConfig;
 import dev.suprseed.Engine.Core.MainView.GameViewBuilder.BaseEngineConfigurator;
 import dev.suprseed.Engine.Core.MainView.GameViewBuilder.EngineConfigurator;
-import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.RootScene;
 import dev.suprseed.Engine.Lib.Collisions.CollisionDiagnosticsOverlay;
 import dev.suprseed.Engine.Lib.Input.CentralInputManager;
 import dev.suprseed.Engine.Lib.Input.Dispatchers.TouchEventDispatcher;
@@ -18,11 +17,11 @@ public class DefaultEngineConfiguration extends BaseEngineConfigurator {
     private final EngineConfigurator engineConfigurator;
 
 
-    public DefaultEngineConfiguration(Context context, RootScene clientScene) {
+    public DefaultEngineConfiguration(Context context, SceneStarter sceneStarter) {
         super(context);
 
         // User can build the engine configuration here
-        engineConfigurator = new EngineConfigurator(this, clientScene, CentralInputManager.getInstance(), CollisionDiagnosticsOverlay.getInstance())
+        engineConfigurator = new EngineConfigurator(this, sceneStarter, CentralInputManager.getInstance(), CollisionDiagnosticsOverlay.getInstance())
                 .setViewConfig(new ViewConfig(true, true, true, false));
 
         // Add the input handlers here

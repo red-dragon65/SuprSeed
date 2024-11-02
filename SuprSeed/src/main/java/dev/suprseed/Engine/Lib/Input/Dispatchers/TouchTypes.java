@@ -11,16 +11,16 @@ public enum TouchTypes {
 
     String value = "";
 
-    TouchTypes(String value){
+    TouchTypes(String value) {
         this.value = value;
     }
 
     @NonNull
-    public String toString(){
+    public String toString() {
         return value;
     }
 
-    public boolean equals(String given){
+    public boolean equals(String given) {
         return given.equals(value);
     }
 }

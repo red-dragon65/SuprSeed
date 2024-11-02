@@ -4,8 +4,6 @@ import android.graphics.RectF;
 import android.view.InputDevice;
 import android.view.MotionEvent;
 
-import androidx.annotation.NonNull;
-
 import java.util.List;
 
 import dev.suprseed.Engine.Core.ErrorLogger.CentralLogger;

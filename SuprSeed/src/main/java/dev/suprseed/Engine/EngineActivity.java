@@ -8,7 +8,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import dev.suprseed.Engine.Core.MainView.GameViewBuilder.BaseEngineConfigurator;
 
-public abstract class EngineActivity extends AppCompatActivity {
+public abstract class EngineActivity extends AppCompatActivity implements SceneStarter {
 
     private BaseEngineConfigurator engineConfigurator;
 
@@ -34,7 +34,7 @@ public abstract class EngineActivity extends AppCompatActivity {
      * @param context The application context
      * @return The user specified engine configuration to initialize the engine with
      */
-    protected abstract BaseEngineConfigurator loadConfig(Context context);
+    protected abstract BaseEngineConfigurator loadEngineConfig(Context context);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +63,7 @@ public abstract class EngineActivity extends AppCompatActivity {
         ConstraintLayout cLayout = loadViewLayout();
 
         // Create a builder
-        engineConfigurator = loadConfig(context);
+        engineConfigurator = loadEngineConfig(context);
 
         // Apply the window settings
         engineConfigurator.setWindowConfig(this);

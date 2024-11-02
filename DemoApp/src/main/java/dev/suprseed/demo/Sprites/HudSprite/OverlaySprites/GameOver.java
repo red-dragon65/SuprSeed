@@ -5,8 +5,8 @@ import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHan
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
 import dev.suprseed.Engine.Lib.Fonts.FontHolder;
-import dev.suprseed.Engine.Lib.Input.InputListener;
 import dev.suprseed.Engine.Lib.Input.CentralInputManager;
+import dev.suprseed.Engine.Lib.Input.InputListener;
 import dev.suprseed.demo.R;
 import dev.suprseed.demo.SharedData.GameOverData;
 import dev.suprseed.demo.Sprites.HudSprite.HudFontPaintStrategies.GameOverPaintStrategy;

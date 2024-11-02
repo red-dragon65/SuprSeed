@@ -2,8 +2,8 @@ package dev.suprseed.Engine.Core.MainView.EngineSettings;
 
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.GameView;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LogicRates;
-import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.RefreshTypes;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LoopRunnable;
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.RefreshTypes;
 
 public class LoopConfig extends BaseConfig<LoopRunnable<GameView>> {
 
