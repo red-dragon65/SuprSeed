@@ -23,7 +23,7 @@ import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates.Locati
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.CollisionDrawable;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderProcessor;
-import dev.suprseed.Engine.SceneStarter;
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.SceneStarter;
 
 public class EngineConfigurator extends BaseEngineConfigurator {
 

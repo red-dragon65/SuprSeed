@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.SceneStarter;
 import dev.suprseed.Engine.Core.MainView.GameViewBuilder.BaseEngineConfigurator;
 
 public abstract class EngineActivity extends AppCompatActivity implements SceneStarter {
