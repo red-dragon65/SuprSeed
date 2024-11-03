@@ -21,6 +21,11 @@ public class InputDispatchRegistry implements InputRegister<EventDispatcher> {
     }
 
     @Override
+    public void update() {
+
+    }
+
+    @Override
     public void registerObject(EventDispatcher object) {
 
         inputs.add(object);

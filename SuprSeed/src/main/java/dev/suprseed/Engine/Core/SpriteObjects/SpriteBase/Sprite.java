@@ -6,6 +6,8 @@ import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.CanvasData;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
 import dev.suprseed.Engine.Core.SpriteObjects.DefaultComponents.Resetable;
+import dev.suprseed.Engine.Core.System.LayerData;
+import dev.suprseed.Engine.Core.System.LayerHandler;
 import dev.suprseed.Engine.Core.System.Registerables.LogicRunnable;
 import dev.suprseed.Engine.Core.System.Registerables.RenderableAndLayerable;
 import dev.suprseed.Engine.Lib.Collisions.Boundable;
@@ -24,8 +26,8 @@ public abstract class Sprite implements RenderableAndLayerable, Boundable, Logic
     private boolean enabled = true;
     private boolean show = true;
     private boolean cameraRegistered = true;
-    private int layerDepth = 0;
     private boolean allowCollisionDiagnostic = true;
+    private LayerHandler layerInfo;
 
 
     // Constructor that takes one sprite image set
@@ -34,6 +36,21 @@ public abstract class Sprite implements RenderableAndLayerable, Boundable, Logic
         // Dependency injection
         this.assetBundle = assetBundle;
         this.parentScene = parentScene;
+        this.layerInfo = new LayerData();
+
+
+        // Register this to the scene
+        parentScene.imageRegister.registerObject(this);
+        parentScene.logicRegister.registerObject(this);
+    }
+
+    // Constructor that takes one sprite image set
+    public Sprite(BaseScene parentScene, AssetBundle assetBundle, int layerDepth) {
+
+        // Dependency injection
+        this.assetBundle = assetBundle;
+        this.parentScene = parentScene;
+        this.layerInfo = new LayerData(layerDepth);
 
 
         // Register this to the scene
@@ -127,12 +144,8 @@ public abstract class Sprite implements RenderableAndLayerable, Boundable, Logic
     }
 
     @Override
-    public int getLayerDepth() {
-        return layerDepth;
-    }
-
-    public void setLayerDepth(int layerDepth) {
-        this.layerDepth = layerDepth;
+    public LayerHandler getLayerInfo() {
+        return layerInfo;
     }
 
     public float getCanvasScaledWidth() {

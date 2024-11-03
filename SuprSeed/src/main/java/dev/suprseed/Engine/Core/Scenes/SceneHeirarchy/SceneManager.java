@@ -1,7 +1,5 @@
 package dev.suprseed.Engine.Core.Scenes.SceneHeirarchy;
 
-import android.content.Context;
-
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import dev.suprseed.Engine.Core.Scenes.SceneStrategy.SceneChangeStrategy;
 import dev.suprseed.Engine.Core.System.RegisterTypes.SceneRegister;
@@ -10,18 +8,15 @@ public abstract class SceneManager extends BaseScene implements SceneController<
 
     protected SceneRegister<BaseScene> sceneRegister;
 
-
     // Constructor
-    public SceneManager(SceneManager parentScene, String sceneId, Context context) {
-        super(parentScene, sceneId, context);
-
+    public SceneManager(SceneManager parentScene, String sceneId, int layerDepth) {
+        super(parentScene, sceneId, layerDepth);
         init();
     }
 
     // Constructor
     public SceneManager(SceneManager parentScene, String sceneId) {
-        super(parentScene, sceneId, parentScene.getContext());
-
+        super(parentScene, sceneId);
         init();
     }
 

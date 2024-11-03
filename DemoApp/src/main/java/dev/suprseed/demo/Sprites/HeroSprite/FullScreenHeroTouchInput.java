@@ -5,6 +5,8 @@ import android.view.MotionEvent;
 
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.CanvasData;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
+import dev.suprseed.Engine.Core.System.LayerData;
+import dev.suprseed.Engine.Core.System.LayerHandler;
 import dev.suprseed.Engine.Lib.Input.Dispatchers.TouchTypes;
 import dev.suprseed.Engine.Lib.Input.InputListener;
 import dev.suprseed.demo.SharedData.GameOverData;
@@ -14,6 +16,7 @@ public class FullScreenHeroTouchInput implements InputListener {
     private final Sprite sprite;
     private final GameOverData gameOverData;
     private boolean hold = false;
+    private LayerHandler layerInfo = new LayerData(101);
 
     // Constructor
     public FullScreenHeroTouchInput(Sprite sprite, GameOverData gameOverData) {
@@ -46,8 +49,8 @@ public class FullScreenHeroTouchInput implements InputListener {
 
     // This should be above everything else
     @Override
-    public int getLayerDepth() {
-        return 101;
+    public LayerHandler getLayerInfo() {
+        return layerInfo;
     }
 
 

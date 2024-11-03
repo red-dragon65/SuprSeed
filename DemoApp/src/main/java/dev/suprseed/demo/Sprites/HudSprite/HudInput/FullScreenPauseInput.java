@@ -5,10 +5,14 @@ import android.view.MotionEvent;
 
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LoopManager;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.CanvasData;
+import dev.suprseed.Engine.Core.System.LayerData;
+import dev.suprseed.Engine.Core.System.LayerHandler;
 import dev.suprseed.Engine.Lib.Input.Dispatchers.TouchTypes;
 import dev.suprseed.Engine.Lib.Input.InputListener;
 
 public class FullScreenPauseInput implements InputListener {
+
+    private LayerHandler layerInfo = new LayerData(103);
 
     // Constructor
     public FullScreenPauseInput() {
@@ -38,9 +42,7 @@ public class FullScreenPauseInput implements InputListener {
     }
 
     @Override
-    public int getLayerDepth() {
-
-        // This should be the top most listener
-        return 103;
+    public LayerHandler getLayerInfo() {
+        return layerInfo;
     }
 }

@@ -18,9 +18,8 @@ public class PauseButton extends Sprite implements InputListener {
 
     // Constructor
     public PauseButton(BaseScene parentScene, AssetBundle assetBundle) {
-        super(parentScene, assetBundle);
+        super(parentScene, assetBundle, 102);
 
-        setLayerDepth(102);
         screenListener = new FullScreenPauseInput();
 
         CentralInputManager.getInstance().listenerRegister.registerObject(this);

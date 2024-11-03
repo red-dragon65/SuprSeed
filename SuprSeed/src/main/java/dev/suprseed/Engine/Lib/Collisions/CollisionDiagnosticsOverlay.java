@@ -12,6 +12,8 @@ import dev.suprseed.Engine.Core.ErrorLogger.ErrorType;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.CollisionDrawable;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
+import dev.suprseed.Engine.Core.System.LayerData;
+import dev.suprseed.Engine.Core.System.LayerHandler;
 import dev.suprseed.Engine.Core.System.RenderSystem;
 
 public class CollisionDiagnosticsOverlay implements CollisionDrawable {
@@ -24,6 +26,7 @@ public class CollisionDiagnosticsOverlay implements CollisionDrawable {
     private int rectColor = Color.argb(150, 200, 200, 0); //Yellow
     private int currentSize = initSize;
     private int currentIndex = 0;
+    private LayerHandler layerInfo = new LayerData(10);
 
 
     // Constructor
@@ -138,8 +141,8 @@ public class CollisionDiagnosticsOverlay implements CollisionDrawable {
     }
 
     @Override
-    public int getLayerDepth() {
-        return 10;
+    public LayerHandler getLayerInfo() {
+        return layerInfo;
     }
 
     @Override

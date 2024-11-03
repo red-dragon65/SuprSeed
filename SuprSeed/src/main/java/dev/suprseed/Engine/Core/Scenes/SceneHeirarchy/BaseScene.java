@@ -4,6 +4,8 @@ import android.content.Context;
 
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import dev.suprseed.Engine.Core.SpriteObjects.DefaultComponents.Resetable;
+import dev.suprseed.Engine.Core.System.LayerData;
+import dev.suprseed.Engine.Core.System.LayerHandler;
 import dev.suprseed.Engine.Core.System.LayerableQueueComparator;
 import dev.suprseed.Engine.Core.System.RegisterTypes.AnimationRegister;
 import dev.suprseed.Engine.Core.System.RegisterTypes.ImageRegister;
@@ -17,7 +19,7 @@ import dev.suprseed.Engine.Lib.Images.Animator;
 
 public abstract class BaseScene implements LogicRunnable, RenderableAndLayerable, Animator, Resetable {
 
-    public ImageRegister<RenderableAndLayerable> imageRegister;
+    public ImageRegister imageRegister;
     public AnimationRegister animationRegister;
     public LogicRegister logicRegister;
     protected String sceneId;
@@ -26,28 +28,30 @@ public abstract class BaseScene implements LogicRunnable, RenderableAndLayerable
     protected Context context;
     // Dependency injection
     protected SceneManager parentScene;
-
+    private LayerHandler layerInfo;
 
     // Constructor
-    public BaseScene(SceneManager parentScene, String sceneId, Context appContext) {
+    public BaseScene(SceneManager parentScene, String sceneId, int layerDepth) {
 
-        init(parentScene, sceneId, appContext);
+        this.layerInfo = new LayerData(layerDepth);
+        init(parentScene, sceneId);
     }
 
     // Constructor
     public BaseScene(SceneManager parentScene, String sceneId) {
 
-        init(parentScene, sceneId, parentScene.getContext());
+        this.layerInfo = new LayerData();
+        init(parentScene, sceneId);
     }
 
     // Constructor initializer
-    private void init(SceneManager parentScene, String sceneId, Context appContext) {
+    private void init(SceneManager parentScene, String sceneId) {
 
         this.parentScene = parentScene;
         this.sceneId = sceneId;
 
-        if (appContext != null) {
-            context = appContext;
+        if (parentScene != null) {
+            context = parentScene.getContext();
         }
 
         imageRegister = new ImageRegistry(new LayerableQueueComparator());
@@ -86,8 +90,8 @@ public abstract class BaseScene implements LogicRunnable, RenderableAndLayerable
     }
 
     @Override
-    public int getLayerDepth() {
-        return 0;
+    public LayerHandler getLayerInfo() {
+        return layerInfo;
     }
 
     @Override

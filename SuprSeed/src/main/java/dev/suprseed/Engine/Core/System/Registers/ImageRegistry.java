@@ -9,31 +9,24 @@ import dev.suprseed.Engine.Core.System.RegisterTypes.ImageRegister;
 import dev.suprseed.Engine.Core.System.Registerables.Layerable;
 import dev.suprseed.Engine.Core.System.Registerables.RenderableAndLayerable;
 
-public class ImageRegistry implements ImageRegister<RenderableAndLayerable> {
-
+public class ImageRegistry implements ImageRegister {
 
     private final List<RenderableAndLayerable> renderQueue;
-    private final Comparator<Layerable> layerableComparator;
-    private boolean isLayerSynced = false;
+    private final LayerSyncer<RenderableAndLayerable> layerSyncer;
 
 
     // Constructor
     public ImageRegistry(Comparator<Layerable> layerableComparator) {
 
         this.renderQueue = new ArrayList<>();
-        this.layerableComparator = layerableComparator;
+        this.layerSyncer = new LayerSyncer<>(layerableComparator);
     }
-
 
     @Override
     public void update(RenderHandler renderer) {
 
         // Re-sort the sprite list if necessary
-        if (!isLayerSynced) {
-
-            renderQueue.sort(layerableComparator);
-            isLayerSynced = true;
-        }
+        syncLayers();
 
         // Draw the sprites
         for (RenderableAndLayerable item : renderQueue) {
@@ -49,12 +42,18 @@ public class ImageRegistry implements ImageRegister<RenderableAndLayerable> {
         }
     }
 
+    @Override
+    public void syncLayers() {
+        layerSyncer.syncLayers(renderQueue);
+    }
+
 
     @Override
     public void registerObject(RenderableAndLayerable object) {
 
         renderQueue.add(object);
-        isLayerSynced = false;
+
+        syncLayers();
     }
 
     @Override

@@ -8,6 +8,6 @@ public class LayerableQueueComparator implements Comparator<Layerable> {
 
     @Override
     public int compare(Layerable o1, Layerable o2) {
-        return o1.getLayerDepth() - o2.getLayerDepth();
+        return o1.getLayerInfo().getLayerDepth() - o2.getLayerInfo().getLayerDepth();
     }
 }

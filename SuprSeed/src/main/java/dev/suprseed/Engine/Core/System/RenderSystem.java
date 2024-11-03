@@ -7,7 +7,6 @@ import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHan
 import dev.suprseed.Engine.Core.System.RegisterTypes.AnimationRegister;
 import dev.suprseed.Engine.Core.System.RegisterTypes.ImageRegister;
 import dev.suprseed.Engine.Core.System.Registerables.Renderable;
-import dev.suprseed.Engine.Core.System.Registerables.RenderableAndLayerable;
 import dev.suprseed.Engine.Core.System.Registers.AnimationRegistry;
 import dev.suprseed.Engine.Core.System.Registers.ImageRegistry;
 
@@ -15,7 +14,7 @@ public class RenderSystem implements Renderable {
 
     // Eager loading singleton
     private static final RenderSystem INSTANCE = new RenderSystem();
-    private final ImageRegister<RenderableAndLayerable> imageRegister;
+    private final ImageRegister imageRegister;
     private final AnimationRegister animationRegister;
 
 
@@ -33,7 +32,7 @@ public class RenderSystem implements Renderable {
         return INSTANCE;
     }
 
-    public ImageRegister<RenderableAndLayerable> getImageRegister() {
+    public ImageRegister getImageRegister() {
         return imageRegister;
     }
 

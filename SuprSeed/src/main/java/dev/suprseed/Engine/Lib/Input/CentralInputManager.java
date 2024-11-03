@@ -47,6 +47,9 @@ public class CentralInputManager implements InputHandler {
             return;
         }
 
+        // Re-sync touch layers
+        listenerRegister.update();
+
         // Tell dispatchers to process events that have occurred
         for (EventDispatcher ih : dispatcherRegister.getRegisterList()) {
 

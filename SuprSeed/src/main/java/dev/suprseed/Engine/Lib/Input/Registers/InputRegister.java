@@ -7,4 +7,6 @@ import dev.suprseed.Engine.Core.System.RegisterTypes.ObjectRegister;
 public interface InputRegister<T> extends ObjectRegister<T> {
 
     List<T> getRegisterList();
+
+    void update();
 }
