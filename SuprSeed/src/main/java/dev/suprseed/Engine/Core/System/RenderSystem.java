@@ -2,6 +2,7 @@ package dev.suprseed.Engine.Core.System;
 
 import dev.suprseed.Engine.Core.ErrorLogger.CentralLogger;
 import dev.suprseed.Engine.Core.ErrorLogger.ErrorType;
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.GlobalFrameStepper;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import dev.suprseed.Engine.Core.System.RegisterTypes.AnimationRegister;
 import dev.suprseed.Engine.Core.System.RegisterTypes.ImageRegister;
@@ -9,7 +10,6 @@ import dev.suprseed.Engine.Core.System.Registerables.Renderable;
 import dev.suprseed.Engine.Core.System.Registerables.RenderableAndLayerable;
 import dev.suprseed.Engine.Core.System.Registers.AnimationRegistry;
 import dev.suprseed.Engine.Core.System.Registers.ImageRegistry;
-import dev.suprseed.Engine.Lib.Images.GlobalFrameStepper;
 
 public class RenderSystem implements Renderable {
 

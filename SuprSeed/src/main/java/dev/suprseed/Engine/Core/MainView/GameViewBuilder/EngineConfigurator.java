@@ -14,6 +14,7 @@ import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LogicRates;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LoopManager;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LoopRunnable;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.RefreshTypes;
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.SceneStarter;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.CanvasData;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates.CartesianProcessor;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates.CoordinateHandler;
@@ -24,7 +25,6 @@ import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates.Locati
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.CollisionDrawable;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderProcessor;
-import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.SceneStarter;
 
 public class EngineConfigurator extends BaseEngineConfigurator {
 

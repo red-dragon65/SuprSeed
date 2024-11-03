@@ -6,12 +6,12 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import dev.suprseed.Engine.Core.MainView.EngineSettings.ViewConfig;
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.SceneStarter;
 import dev.suprseed.Engine.Core.MainView.GameViewBuilder.BaseEngineConfigurator;
 import dev.suprseed.Engine.Core.MainView.GameViewBuilder.EngineConfigurator;
 import dev.suprseed.Engine.Lib.Collisions.CollisionDiagnosticsOverlay;
 import dev.suprseed.Engine.Lib.Input.CentralInputManager;
 import dev.suprseed.Engine.Lib.Input.Dispatchers.TouchEventDispatcher;
-import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.SceneStarter;
 import dev.suprseed.demo.Subscenes.GameDemoMainScene;
 
 

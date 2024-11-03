@@ -7,6 +7,7 @@ import java.io.IOException;
 
 import dev.suprseed.Engine.Core.ErrorLogger.CentralLogger;
 import dev.suprseed.Engine.Core.ErrorLogger.ErrorType;
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.GlobalFrameStepper;
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
 import dev.suprseed.Engine.Lib.AssetLoader.FPSMismatchException;
 import dev.suprseed.Engine.Lib.AssetLoader.FolderParser;
