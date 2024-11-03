@@ -5,6 +5,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
+import dev.suprseed.Engine.Core.System.ListSyncronizer;
 import dev.suprseed.Engine.Core.System.RegisterTypes.ImageRegister;
 import dev.suprseed.Engine.Core.System.Registerables.Layerable;
 import dev.suprseed.Engine.Core.System.Registerables.RenderableAndLayerable;
@@ -12,7 +13,7 @@ import dev.suprseed.Engine.Core.System.Registerables.RenderableAndLayerable;
 public class ImageRegistry implements ImageRegister {
 
     private final List<RenderableAndLayerable> renderQueue;
-    private final LayerSyncer<RenderableAndLayerable> layerSyncer;
+    private final ListSyncronizer<RenderableAndLayerable> layerSyncer;
 
 
     // Constructor

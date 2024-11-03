@@ -5,4 +5,6 @@ import java.util.List;
 public interface SceneRegister<T> extends ObjectRegister<T> {
 
     List<T> getRegisterList();
+
+    void syncLayers();
 }

@@ -3,9 +3,10 @@ package dev.suprseed.Engine.Core.System.Registers;
 import java.util.Comparator;
 import java.util.List;
 
+import dev.suprseed.Engine.Core.System.ListSyncronizer;
 import dev.suprseed.Engine.Core.System.Registerables.Layerable;
 
-public class LayerSyncer<T extends Layerable> {
+public class LayerSyncer<T extends Layerable> implements ListSyncronizer<T> {
 
     private final Comparator<Layerable> layerableComparator;
 
@@ -13,6 +14,7 @@ public class LayerSyncer<T extends Layerable> {
         this.layerableComparator = layerableComparator;
     }
 
+    @Override
     public void syncLayers(List<T> layerableQueue) {
 
         boolean isLayerSynced = true;

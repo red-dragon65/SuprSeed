@@ -3,6 +3,7 @@ package dev.suprseed.Engine.Lib.Input.Registers;
 import java.util.Comparator;
 import java.util.List;
 
+import dev.suprseed.Engine.Core.System.ListSyncronizer;
 import dev.suprseed.Engine.Core.System.Registerables.Layerable;
 import dev.suprseed.Engine.Core.System.Registers.LayerSyncer;
 import dev.suprseed.Engine.Lib.Input.InputListener;
@@ -11,7 +12,7 @@ public class InputListenerRegistry implements InputRegister<InputListener> {
 
 
     private final List<InputListener> listeners;
-    private final LayerSyncer<InputListener> layerSyncer;
+    private final ListSyncronizer<InputListener> layerSyncer;
 
 
     // Constructor

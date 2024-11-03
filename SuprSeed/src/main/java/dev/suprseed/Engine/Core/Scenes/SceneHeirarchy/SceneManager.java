@@ -2,6 +2,7 @@ package dev.suprseed.Engine.Core.Scenes.SceneHeirarchy;
 
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import dev.suprseed.Engine.Core.Scenes.SceneStrategy.SceneChangeStrategy;
+import dev.suprseed.Engine.Core.System.LayerableQueueComparator;
 import dev.suprseed.Engine.Core.System.RegisterTypes.SceneRegister;
 
 public abstract class SceneManager extends BaseScene implements SceneController<BaseScene> {
@@ -22,7 +23,7 @@ public abstract class SceneManager extends BaseScene implements SceneController<
 
     // Constructor initializer
     private void init() {
-        sceneRegister = new SubSceneRegistry();
+        sceneRegister = new SubSceneRegistry(new LayerableQueueComparator());
     }
 
 
@@ -64,6 +65,9 @@ public abstract class SceneManager extends BaseScene implements SceneController<
     @Override
     public void draw(RenderHandler renderer) {
         super.draw(renderer);
+
+        // Re-sort the layers before drawing them
+        sceneRegister.syncLayers();
 
         for (BaseScene scene : sceneRegister.getRegisterList()) {
             scene.draw(renderer);
