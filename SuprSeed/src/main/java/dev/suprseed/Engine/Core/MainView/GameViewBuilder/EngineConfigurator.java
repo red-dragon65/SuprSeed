@@ -1,5 +1,6 @@
 package dev.suprseed.Engine.Core.MainView.GameViewBuilder;
 
+import android.content.Context;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,8 +41,8 @@ public class EngineConfigurator extends BaseEngineConfigurator {
     private CollisionDrawable collisionDiagnoser;
 
     // Constructor
-    public EngineConfigurator(BaseEngineConfigurator configurator, SceneStarter sceneStarter, InputHandler inputHandler, CollisionDrawable collisionDiagnoser) {
-        super(configurator.context);
+    public EngineConfigurator(Context context, SceneStarter sceneStarter, InputHandler inputHandler, CollisionDrawable collisionDiagnoser) {
+        super(context);
 
         this.sceneStarter = sceneStarter;
         this.inputHandler = inputHandler;

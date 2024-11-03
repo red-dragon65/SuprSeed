@@ -29,7 +29,7 @@ public class ClientEngineConfigurator extends BaseEngineConfigurator {
         SceneStarter clientSceneStarter = rootScene -> new GameDemoMainScene(rootScene, "TopScene");
 
         // User can build the engine configuration here
-        engineConfigurator = new EngineConfigurator(this, clientSceneStarter, CentralInputManager.getInstance(), CollisionDiagnosticsOverlay.getInstance())
+        engineConfigurator = new EngineConfigurator(context, clientSceneStarter, CentralInputManager.getInstance(), CollisionDiagnosticsOverlay.getInstance())
                 .setViewConfig(new ViewConfig(true, true, true, false));
 
         // Add the input handlers here
