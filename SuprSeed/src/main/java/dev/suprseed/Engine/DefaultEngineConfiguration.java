@@ -22,7 +22,7 @@ public class DefaultEngineConfiguration extends BaseEngineConfigurator {
         super(context);
 
         // User can build the engine configuration here
-        engineConfigurator = new EngineConfigurator(context, sceneStarter, CentralInputManager.getInstance(), CollisionDiagnosticsOverlay.getInstance())
+        engineConfigurator = new EngineConfigurator(context, sceneStarter, CentralInputManager.getInstance(), new CollisionDiagnosticsOverlay(false))
                 .setViewConfig(new ViewConfig(true, true, true, false));
 
         // Add the input handlers here

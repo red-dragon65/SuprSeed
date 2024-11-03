@@ -16,13 +16,11 @@ import dev.suprseed.Engine.Core.System.RenderSystem;
 
 public class CollisionDiagnosticsOverlay implements CollisionDrawable {
 
-    // Eager loading singleton
-    private static final CollisionDiagnosticsOverlay INSTANCE = new CollisionDiagnosticsOverlay();
     // Rectangle pool
     private final List<RectF> boundsPool;
     private final int initSize = 10;
     private final int maxSize = 100;
-    private boolean isEnabled = false;
+    private boolean isEnabled = true;
     private int rectColor = Color.argb(150, 200, 200, 0); //Yellow
     private int currentSize = initSize;
     private int currentIndex = 0;
@@ -30,19 +28,30 @@ public class CollisionDiagnosticsOverlay implements CollisionDrawable {
 
     // Constructor
     // Private to prevent client use of 'new' keyword
-    private CollisionDiagnosticsOverlay() {
+    public CollisionDiagnosticsOverlay(boolean isEnabled) {
+
+        this.isEnabled = isEnabled;
+        boundsPool = new ArrayList<>();
+        init();
+    }
+
+    public CollisionDiagnosticsOverlay(boolean isEnabled, int rectColor) {
+
+        this.isEnabled = isEnabled;
+        this.rectColor = rectColor;
+        boundsPool = new ArrayList<>();
+        init();
+    }
+
+
+    private void init() {
 
         // Initialize the pool
-        boundsPool = new ArrayList<>();
         for (int i = 0; i < initSize; i++) {
             boundsPool.add(new RectF());
         }
 
         RenderSystem.getInstance().getImageRegister().registerObject(this);
-    }
-
-    public static CollisionDiagnosticsOverlay getInstance() {
-        return INSTANCE;
     }
 
 
@@ -95,7 +104,7 @@ public class CollisionDiagnosticsOverlay implements CollisionDrawable {
             The collision will automatically draw any checked boxes.
             (note: the box only gets drawn once, then added back to the pool)
              */
-            Optional<RectF> holder = CollisionDiagnosticsOverlay.getInstance().checkoutRectF();
+            Optional<RectF> holder = checkoutRectF();
             holder.ifPresent(sprite::getRectF);
         }
     }
