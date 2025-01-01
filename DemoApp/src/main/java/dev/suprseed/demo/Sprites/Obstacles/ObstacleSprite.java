@@ -22,7 +22,7 @@ public class ObstacleSprite extends Sprite {
 
 
         // Update to new location values
-        setX(getX() + getxVel());
-        setY(getY() + getyVel());
+        applyXVel();
+        applyYVel();
     }
 }

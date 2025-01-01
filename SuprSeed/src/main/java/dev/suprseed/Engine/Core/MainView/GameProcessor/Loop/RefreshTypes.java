@@ -2,13 +2,8 @@ package dev.suprseed.Engine.Core.MainView.GameProcessor.Loop;
 
 public enum RefreshTypes {
 
-    SIXTY_FPS(60);
-
-    /*
-    TODO: Revert when refresh rate can be reliably set!
     SIXTY_FPS(60),
     ONE_TWENTY_FPS(120);
-     */
 
     private final int hertz;
 

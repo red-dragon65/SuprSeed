@@ -1,39 +1,66 @@
 package dev.suprseed.Engine.Core.MainView.EngineSettings;
 
-import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.GameView;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LogicRates;
-import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LoopRunnable;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.RefreshTypes;
 
-public class LoopConfig extends BaseConfig<LoopRunnable<GameView>> {
+/**
+ * Allows the user to specify the target refresh rate and logic rate.
+ * The LoopManager passes itself into the LoopConfig in order to get its settings set.
+ */
+public class LoopConfig {
 
     // Enforce only one setting across instance usages
-    private static RefreshTypes refreshSpeed;
-    private static LogicRates logicRate;
+    private RefreshTypes refreshSpeed;
+    private LogicRates logicRate;
+    private float logicScaleMultiple;
+    private boolean accurateTickRate = true;
 
-    // Constructor
-    public LoopConfig(RefreshTypes refreshSpeed, LogicRates logicRate) {
+    public LoopConfig(RefreshTypes refreshSpeed, LogicRates logicRate, float logicScaleMultiple, boolean accurateTickRate) {
+        this.refreshSpeed = refreshSpeed;
+        this.logicRate = logicRate;
+        this.logicScaleMultiple = logicScaleMultiple;
+        this.accurateTickRate = accurateTickRate;
+    }
 
-        LoopConfig.refreshSpeed = refreshSpeed;
-        LoopConfig.logicRate = logicRate;
+    public RefreshTypes getRefreshSpeed() {
+        return refreshSpeed;
+    }
 
-        settings.add(new Configurable<LoopRunnable<GameView>>() {
-            @Override
-            public void applySettings(LoopRunnable<GameView> inputObject) {
+    public void setRefreshSpeed(RefreshTypes refreshSpeed) {
+        this.refreshSpeed = refreshSpeed;
+    }
 
-                inputObject.setRefreshSpeed(LoopConfig.refreshSpeed);
-                inputObject.setLogicRate(LoopConfig.logicRate);
-            }
+    public LogicRates getLogicRate() {
+        return logicRate;
+    }
 
-            @Override
-            public boolean active() {
-                return true;
-            }
+    public void setLogicRate(LogicRates logicRate) {
+        this.logicRate = logicRate;
+    }
 
-            @Override
-            public String getId() {
-                return "loopRates";
-            }
-        });
+    public boolean isAccurateTickRate() {
+        return accurateTickRate;
+    }
+
+    public void setAccurateTickRate(boolean accurateLogicRate) {
+        this.accurateTickRate = accurateLogicRate;
+    }
+
+    public float getLogicScaleMultiple() {
+        return logicScaleMultiple;
+    }
+
+    public void setLogicScaleMultiple(int logicScaleMultiple) {
+        this.logicScaleMultiple = logicScaleMultiple;
+    }
+
+    @Override
+    public String toString() {
+        return "LoopConfig{" +
+                "refreshSpeed=" + refreshSpeed +
+                ", logicRate=" + logicRate +
+                ", logicScaleMultiple=" + logicScaleMultiple +
+                ", accurateTickRate=" + accurateTickRate +
+                '}';
     }
 }

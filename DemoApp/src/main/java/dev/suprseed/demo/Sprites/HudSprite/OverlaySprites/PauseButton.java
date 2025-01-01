@@ -2,7 +2,7 @@ package dev.suprseed.demo.Sprites.HudSprite.OverlaySprites;
 
 import android.view.MotionEvent;
 
-import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LoopManager;
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LoopRunner;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.CanvasData;
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.AssetBundle;
@@ -41,7 +41,7 @@ public class PauseButton extends Sprite implements InputListener {
         // Toggle pausing if pause button tapped
         if (action.equals(TouchTypes.TAP.toString())) {
 
-            LoopManager.loopy.toggleSoftPause();
+            LoopRunner.loopy.toggleSoftPause();
         }
 
         // Prevent touch fall through

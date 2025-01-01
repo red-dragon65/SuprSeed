@@ -5,7 +5,7 @@ import android.media.MediaPlayer;
 import java.util.HashMap;
 import java.util.Map;
 
-import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LoopManager;
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LoopRunner;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.SceneManager;
@@ -105,7 +105,7 @@ public class GameDemoMainScene extends SceneManager {
         super.draw(renderer);
 
         // Pause sound if necessary
-        if (LoopManager.loopy.isSoftPause()) {
+        if (LoopRunner.loopy.isSoftPause()) {
 
             mediaPlayer.pause();
             musicHasStarted = false;

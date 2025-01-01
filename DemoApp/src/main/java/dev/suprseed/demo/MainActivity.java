@@ -6,7 +6,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import dev.suprseed.Engine.Core.MainView.GameViewBuilder.BaseEngineConfigurator;
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.RootScene;
-import dev.suprseed.Engine.DefaultEngineConfiguration;
 import dev.suprseed.Engine.EngineActivity;
 import dev.suprseed.demo.Subscenes.GameDemoMainScene;
 
@@ -24,10 +23,10 @@ public class MainActivity extends EngineActivity {
 
     @Override
     protected BaseEngineConfigurator loadEngineConfig(Context context) {
-        return new DefaultEngineConfiguration(context, this);
+        //return new DefaultEngineConfiguration(context, this);
 
         // You can specify your custom engine configuration like this
-        //return new ClientEngineConfigurator(context);
+        return new ClientEngineConfigurator(context);
     }
 
     @Override

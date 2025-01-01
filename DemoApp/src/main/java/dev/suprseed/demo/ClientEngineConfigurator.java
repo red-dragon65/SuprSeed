@@ -5,7 +5,10 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import dev.suprseed.Engine.Core.MainView.EngineSettings.LoopConfig;
 import dev.suprseed.Engine.Core.MainView.EngineSettings.ViewConfig;
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LogicRates;
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.RefreshTypes;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.SceneStarter;
 import dev.suprseed.Engine.Core.MainView.GameViewBuilder.BaseEngineConfigurator;
 import dev.suprseed.Engine.Core.MainView.GameViewBuilder.EngineConfigurator;
@@ -28,9 +31,18 @@ public class ClientEngineConfigurator extends BaseEngineConfigurator {
         // User can specify their main scene here
         SceneStarter clientSceneStarter = rootScene -> new GameDemoMainScene(rootScene, "TopScene");
 
+        /*SceneStarter clientSc = new SceneStarter() {
+            @Override
+            public void initStartingState(RootScene rootScene) {
+
+                new GameDemoMainScene(rootScene, "TopScene");
+            }
+        };*/
+
         // User can build the engine configuration here
         engineConfigurator = new EngineConfigurator(context, clientSceneStarter, CentralInputManager.getInstance(), new CollisionDiagnosticsOverlay(false))
-                .setViewConfig(new ViewConfig(true, true, true, false));
+                .setViewConfig(new ViewConfig(true, true, true, false))
+                .setLoopConfig(new LoopConfig(RefreshTypes.ONE_TWENTY_FPS, LogicRates.ONE_TWENTY_TICKS, 0.5f, true));
 
         // Add the input handlers here
         CentralInputManager.getInstance().dispatcherRegister.registerObject(new TouchEventDispatcher());

@@ -44,13 +44,13 @@ public class BitmapSingle implements SpriteImage {
     @Override
     public float getScaledWidth() {
 
-        return CanvasData.getInstance().formatCanvasToCoordinate(getImage().getWidth()) / scaler.getLocationScaleRatio();
+        return CanvasData.getInstance().formatCanvasToCoordinate(getImage().getWidth());
     }
 
     @Override
     public float getScaledHeight() {
 
-        return CanvasData.getInstance().formatCanvasToCoordinate(getImage().getHeight()) / scaler.getLocationScaleRatio();
+        return CanvasData.getInstance().formatCanvasToCoordinate(getImage().getHeight());
     }
 
     @Override

@@ -75,8 +75,8 @@ public class Hero extends Sprite implements LogicRunnable {
     private void moveSprite() {
 
         // Update to new location values
-        setX(getX() + getxVel());
-        setY(getY() + getyVel());
+        applyXVel();
+        applyYVel();
     }
 
     @Override

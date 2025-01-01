@@ -97,20 +97,20 @@ public class BitmapCollection implements SpriteImage {
     @Override
     public float getScaledWidth() {
 
-        return CanvasData.getInstance().formatCanvasToCoordinate(getImage().getWidth()) / scaler.getLocationScaleRatio();
+        return CanvasData.getInstance().formatCanvasToCoordinate(getImage().getWidth());
     }
 
     @Override
     public float getScaledHeight() {
 
-        return CanvasData.getInstance().formatCanvasToCoordinate(getImage().getHeight()) / scaler.getLocationScaleRatio();
+        return CanvasData.getInstance().formatCanvasToCoordinate(getImage().getHeight());
     }
 
     @Override
     public float getScaledWidth(int index) {
 
         if (getIndexedImage(index).isPresent()) {
-            return CanvasData.getInstance().formatCanvasToCoordinate(getIndexedImage(index).get().getWidth()) / scaler.getLocationScaleRatio();
+            return CanvasData.getInstance().formatCanvasToCoordinate(getIndexedImage(index).get().getWidth());
         }
 
         return 0;
@@ -120,7 +120,7 @@ public class BitmapCollection implements SpriteImage {
     public float getScaledHeight(int index) {
 
         if (getIndexedImage(index).isPresent()) {
-            return CanvasData.getInstance().formatCanvasToCoordinate(getIndexedImage(index).get().getHeight()) / scaler.getLocationScaleRatio();
+            return CanvasData.getInstance().formatCanvasToCoordinate(getIndexedImage(index).get().getHeight());
         }
 
         return 0;

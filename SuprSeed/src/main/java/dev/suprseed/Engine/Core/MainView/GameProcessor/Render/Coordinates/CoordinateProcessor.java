@@ -8,14 +8,12 @@ public class CoordinateProcessor implements CoordinateHandler {
 
     // Dependencies
     private final LocationHandler locationHandler;
-    private final LocationScaler locationScaler;
 
 
     // Constructor
-    public CoordinateProcessor(LocationHandler locationHandler, LocationScaler locationScaler) {
+    public CoordinateProcessor(LocationHandler locationHandler) {
 
         this.locationHandler = locationHandler;
-        this.locationScaler = locationScaler;
     }
 
 
@@ -37,9 +35,6 @@ public class CoordinateProcessor implements CoordinateHandler {
         // Flip location based on canvas orientation
         // Apply origin offset
         loc = locationHandler.parseLocation(loc);
-
-        // Apply multiplier to scale location for varying refresh/tick rates
-        loc = locationScaler.applyLocationScale(loc);
 
         // Format the location to the canvas
         loc[0] = CanvasData.getInstance().formatCoordinateToCanvas(loc[0]);

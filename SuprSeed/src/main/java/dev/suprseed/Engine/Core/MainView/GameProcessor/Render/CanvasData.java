@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import dev.suprseed.Engine.Core.ErrorLogger.CentralLogger;
 import dev.suprseed.Engine.Core.ErrorLogger.ErrorType;
 import dev.suprseed.Engine.Core.MainView.EngineSettings.BaseConfig;
-import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates.LocationTemporalScaler;
 
 public class CanvasData {
 
@@ -14,12 +13,11 @@ public class CanvasData {
     // Eager loading singleton
     private static final CanvasData INSTANCE = new CanvasData();
     private final float scaledWidth = 100;
-    private final LocationTemporalScaler scaler = new LocationTemporalScaler();
     private float originalHeight;
     private float originalWidth;
     private float scaledHeight;
     private float spriteScaleRatio;
-    // Default target resolution
+    // Default target resolution (used for sprite scaling)
     private float targetResolution = 1080;
     private BaseConfig<AppCompatActivity> viewConfig;
 
@@ -38,7 +36,14 @@ public class CanvasData {
         this.viewConfig = viewConfig;
     }
 
-    // For client
+    /**
+     * Why is this here?
+     * Controls sprite scaling. If sprite images were created to fit in a resolution of 1920 by 1080,
+     * specify 1080 as the target resolution width.
+     *
+     * @param targetResolutionWidth The reference resolution raw sprite images are targeting/scaled for.
+     *                              Should be specified as a resolution width (ie, 720, 1080, 1440)
+     */
     public void setTargetResolution(float targetResolutionWidth) {
         this.targetResolution = targetResolutionWidth;
     }
@@ -119,11 +124,11 @@ public class CanvasData {
     }
 
     public float getScaledHeight() {
-        return scaledHeight / scaler.getLocationScaleRatio();
+        return scaledHeight;
     }
 
     public float getScaledWidth() {
-        return scaledWidth / scaler.getLocationScaleRatio();
+        return scaledWidth;
     }
 
     public float getSpriteScaleRatio() {

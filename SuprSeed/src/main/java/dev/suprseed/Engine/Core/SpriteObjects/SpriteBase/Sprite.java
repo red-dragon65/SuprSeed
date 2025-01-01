@@ -2,6 +2,7 @@ package dev.suprseed.Engine.Core.SpriteObjects.SpriteBase;
 
 import android.graphics.RectF;
 
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.VelocityScaler;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.CanvasData;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
@@ -98,6 +99,27 @@ public abstract class Sprite implements RenderableAndLayerable, Boundable, Logic
         this.yVel = yVel;
     }
 
+    /**
+     * Moves the sprite by applying the current x velocity to the sprites x position.
+     * Uses the VelocityScaler to allow the physics to scale across different engine
+     * logic rates.
+     */
+    public void applyXVel() {
+        setX(
+                getX() + (getxVel() * VelocityScaler.getVelocityScaler())
+        );
+    }
+
+    /**
+     * Moves the sprite by applying the current x velocity to the sprites x position.
+     * Uses the VelocityScaler to allow the physics to scale across different engine
+     * logic rates.
+     */
+    public void applyYVel() {
+        setY(
+                getY() + (getyVel() * VelocityScaler.getVelocityScaler())
+        );
+    }
 
     @Override
     public boolean isDrawable() {

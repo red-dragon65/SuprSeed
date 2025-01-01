@@ -25,15 +25,19 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     protected InputHandler inputHandler;
     protected Context context;
 
+    protected RefreshHandler refreshHandler;
+
 
     // Constructor
-    public GameView(Context context, LoopRunnable<GameView> loopRunner,
+    public GameView(Context context, RefreshHandler refreshHandler, LoopRunnable<GameView> loopRunner,
                     RenderHandler renderer, SceneStarter sceneStarter, InputHandler inputHandler) {
         super(context);
 
         this.context = context;
 
         // Dependency inject
+        this.refreshHandler = refreshHandler;
+        refreshHandler.setGameView(this);
         this.loopRunner = loopRunner;
         this.renderer = renderer;
 
@@ -73,37 +77,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        // TODO: Verify that this will actually work
         // Set the renderers canvas
         renderer.setCanvas(canvas);
-
-        /*
-        Game Renderer
-        --------------
-        Set refresh speed
-        - Only for higher APIs
-        - Can be set to 60fps or 120fps
-        - Handles asset scaling???
-        - Handles drawing
-
-        Physics Handler
-        ----------------
-        Set logic rate
-        - Can be set to 30, 60, 120, or 240 ticks
-        - Scales drawing location (makes setting sprite location the same despite number of ticks)
-        - Converts coordinate rotation
-
-
-        This class
-        -----------
-        Call users physics
-        - GameLoop.logicLoop();
-
-        Call user drawing
-        - GameLoop.drawingLoop();
-
-         */
-
+        refreshHandler.monitorRefreshRate();
 
         loopRunner.run(this);
     }
@@ -119,8 +95,8 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     public void surfaceCreated(@NonNull SurfaceHolder surfaceHolder) {
 
-        // Update the loop config
-        loopRunner.initLoop(this);
+        // Update refresh rate before initializing loop
+        refreshHandler.updateRefreshRate();
 
         // Continue drawing
         loopRunner.setHardPause(false);

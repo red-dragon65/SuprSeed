@@ -5,10 +5,6 @@ import android.view.SurfaceView;
 
 public interface LoopRunnable<T extends SurfaceView> {
 
-    // TODO: Verify this covers the correct responsibilities
-
-    void initLoop(T gameView);
-
     void run(T gameView);
 
     boolean isHardPause();
@@ -21,8 +17,5 @@ public interface LoopRunnable<T extends SurfaceView> {
 
     void toggleSoftPause();
 
-    void setRefreshSpeed(RefreshTypes refreshSpeed);
-
-    void setLogicRate(LogicRates logicRate);
-
+    void setLoopRateMultiples(LoopTickRateMultiples loopRateMultiples);
 }

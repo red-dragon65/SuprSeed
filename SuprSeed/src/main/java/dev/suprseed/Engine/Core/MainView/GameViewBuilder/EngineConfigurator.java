@@ -11,8 +11,10 @@ import dev.suprseed.Engine.Core.MainView.EngineSettings.ViewConfig;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.GameView;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.InputHandler;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LogicRates;
-import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LoopManager;
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LoopController;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LoopRunnable;
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LoopRunner;
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.RefreshHandler;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.RefreshTypes;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.SceneStarter;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.CanvasData;
@@ -20,8 +22,6 @@ import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates.Cartes
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates.CoordinateHandler;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates.CoordinateProcessor;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates.LocationHandler;
-import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates.LocationScaler;
-import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates.LocationTemporalScaler;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.CollisionDrawable;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderProcessor;
@@ -30,7 +30,6 @@ public class EngineConfigurator extends BaseEngineConfigurator {
 
     private final SceneStarter sceneStarter;
     private LoopRunnable<GameView> loopManager;
-    private LocationScaler locationTemporalScaler;
     private RenderHandler renderProcessor;
     private CoordinateHandler coordinateHandler;
     private LocationHandler locationHandler;
@@ -52,7 +51,9 @@ public class EngineConfigurator extends BaseEngineConfigurator {
     @Override
     public View buildView() {
 
-        return new GameView(context, getLoopManager(), getRenderProcessor(), sceneStarter, inputHandler);
+        RefreshHandler refreshHandler = new LoopController<>(getLoopConfig(), getLoopManager());
+
+        return new GameView(context, refreshHandler, getLoopManager(), getRenderProcessor(), sceneStarter, inputHandler);
     }
 
     @Override
@@ -77,7 +78,7 @@ public class EngineConfigurator extends BaseEngineConfigurator {
 
         if (loopManager == null) {
 
-            return new LoopManager(getLoopConfig(), getLocationTemporalScaler());
+            loopManager = new LoopRunner();
         }
 
         return loopManager;
@@ -85,20 +86,6 @@ public class EngineConfigurator extends BaseEngineConfigurator {
 
     public EngineConfigurator setLoopManager(LoopRunnable<GameView> loopManager) {
         this.loopManager = loopManager;
-        return this;
-    }
-
-    public LocationScaler getLocationTemporalScaler() {
-
-        if (locationTemporalScaler == null) {
-            return new LocationTemporalScaler();
-        }
-
-        return locationTemporalScaler;
-    }
-
-    public EngineConfigurator setLocationTemporalScaler(LocationScaler locationTemporalScaler) {
-        this.locationTemporalScaler = locationTemporalScaler;
         return this;
     }
 
@@ -119,7 +106,7 @@ public class EngineConfigurator extends BaseEngineConfigurator {
     public CoordinateHandler getCoordinateHandler() {
 
         if (coordinateHandler == null) {
-            return new CoordinateProcessor(getLocationHandler(), getLocationTemporalScaler());
+            return new CoordinateProcessor(getLocationHandler());
         }
 
         return coordinateHandler;
@@ -148,7 +135,7 @@ public class EngineConfigurator extends BaseEngineConfigurator {
     public LoopConfig getLoopConfig() {
 
         if (loopConfig == null) {
-            return new LoopConfig(RefreshTypes.SIXTY_FPS, LogicRates.SIXTY_TICKS);
+            loopConfig = new LoopConfig(RefreshTypes.ONE_TWENTY_FPS, LogicRates.ONE_TWENTY_TICKS, 1f, true);
         }
 
         return loopConfig;
