@@ -91,7 +91,7 @@ public class EngineConfigurator extends BaseEngineConfigurator {
     public RenderHandler getRenderProcessor() {
 
         if (renderProcessor == null) {
-            return new RenderProcessor(getCoordinateHandler(), collisionDiagnoser);
+            renderProcessor = new RenderProcessor(getCoordinateHandler(), collisionDiagnoser);
         }
 
         return renderProcessor;
@@ -105,7 +105,7 @@ public class EngineConfigurator extends BaseEngineConfigurator {
     public CoordinateHandler getCoordinateHandler() {
 
         if (coordinateHandler == null) {
-            return new CoordinateProcessor(getLocationHandler());
+            coordinateHandler = new CoordinateProcessor(getLocationHandler());
         }
 
         return coordinateHandler;
@@ -119,7 +119,7 @@ public class EngineConfigurator extends BaseEngineConfigurator {
     public LocationHandler getLocationHandler() {
 
         if (locationHandler == null) {
-            return new CartesianProcessor(getCanvasConfig());
+            locationHandler = new CartesianProcessor(getCanvasConfig());
         }
 
         return locationHandler;
@@ -148,9 +148,7 @@ public class EngineConfigurator extends BaseEngineConfigurator {
     public ViewConfig getViewConfig() {
 
         if (viewConfig == null) {
-            ViewConfig defaultConfig = new ViewConfig(true, true, true, true);
-            CanvasData.getInstance().setViewConfig(defaultConfig);
-            return defaultConfig;
+            viewConfig = new ViewConfig(true, true, true, true);
         }
 
         CanvasData.getInstance().setViewConfig(viewConfig);
@@ -165,7 +163,7 @@ public class EngineConfigurator extends BaseEngineConfigurator {
     public CanvasConfig getCanvasConfig() {
 
         if (canvasConfig == null) {
-            return new CanvasConfig(true);
+            canvasConfig = new CanvasConfig(true);
         }
 
         return canvasConfig;
