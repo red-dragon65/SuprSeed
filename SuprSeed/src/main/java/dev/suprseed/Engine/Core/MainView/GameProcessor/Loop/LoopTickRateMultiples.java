@@ -6,24 +6,14 @@ package dev.suprseed.Engine.Core.MainView.GameProcessor.Loop;
  */
 public class LoopTickRateMultiples {
 
-    private int refreshMultiple = 0;
-    private int logicMultiple = 0;
+    private int logicMultiple = 1;
 
     public LoopTickRateMultiples() {
 
     }
 
-    public LoopTickRateMultiples(int refreshMultiple, int logicMultiple) {
-        this.refreshMultiple = refreshMultiple;
+    public LoopTickRateMultiples(int logicMultiple) {
         this.logicMultiple = logicMultiple;
-    }
-
-    public int getRefreshMultiple() {
-        return refreshMultiple;
-    }
-
-    public void setRefreshMultiple(int refreshMultiple) {
-        this.refreshMultiple = refreshMultiple;
     }
 
     public int getLogicMultiple() {
@@ -31,6 +21,11 @@ public class LoopTickRateMultiples {
     }
 
     public void setLogicMultiple(int logicMultiple) {
+
+        if(logicMultiple <= 0){
+            throw new IndexOutOfBoundsException("The logic multiple must be at least 1 or greater! The value given was: " + logicMultiple);
+        }
+
         this.logicMultiple = logicMultiple;
     }
 }

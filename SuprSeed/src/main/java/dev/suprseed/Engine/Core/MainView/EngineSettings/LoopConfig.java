@@ -1,7 +1,6 @@
 package dev.suprseed.Engine.Core.MainView.EngineSettings;
 
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LogicRates;
-import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.RefreshTypes;
 
 /**
  * Allows the user to specify the target refresh rate and logic rate.
@@ -9,41 +8,29 @@ import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.RefreshTypes;
  */
 public class LoopConfig {
 
-    // Enforce only one setting across instance usages
-    private RefreshTypes refreshSpeed;
-    private LogicRates logicRate;
+    private int minLogicRate;
     private float logicScaleMultiple;
-    private boolean accurateTickRate = true;
 
-    public LoopConfig(RefreshTypes refreshSpeed, LogicRates logicRate, float logicScaleMultiple, boolean accurateTickRate) {
-        this.refreshSpeed = refreshSpeed;
-        this.logicRate = logicRate;
+    public LoopConfig(int minLogicRate, float logicScaleMultiple) {
+        this.minLogicRate = minLogicRate;
         this.logicScaleMultiple = logicScaleMultiple;
-        this.accurateTickRate = accurateTickRate;
     }
 
-    public RefreshTypes getRefreshSpeed() {
-        return refreshSpeed;
+    public LoopConfig(LogicRates minLogicRate, float logicScaleMultiple) {
+        this.minLogicRate = minLogicRate.getTickRate();
+        this.logicScaleMultiple = logicScaleMultiple;
     }
 
-    public void setRefreshSpeed(RefreshTypes refreshSpeed) {
-        this.refreshSpeed = refreshSpeed;
+    public int getMinLogicRate() {
+        return minLogicRate;
     }
 
-    public LogicRates getLogicRate() {
-        return logicRate;
+    public void setMinLogicRate(int minLogicRate) {
+        this.minLogicRate = minLogicRate;
     }
 
-    public void setLogicRate(LogicRates logicRate) {
-        this.logicRate = logicRate;
-    }
-
-    public boolean isAccurateTickRate() {
-        return accurateTickRate;
-    }
-
-    public void setAccurateTickRate(boolean accurateLogicRate) {
-        this.accurateTickRate = accurateLogicRate;
+    public void setMinLogicRate(LogicRates minLogicRate) {
+        this.minLogicRate = minLogicRate.getTickRate();
     }
 
     public float getLogicScaleMultiple() {
@@ -57,10 +44,8 @@ public class LoopConfig {
     @Override
     public String toString() {
         return "LoopConfig{" +
-                "refreshSpeed=" + refreshSpeed +
-                ", logicRate=" + logicRate +
+                ", logicRate=" + minLogicRate +
                 ", logicScaleMultiple=" + logicScaleMultiple +
-                ", accurateTickRate=" + accurateTickRate +
                 '}';
     }
 }

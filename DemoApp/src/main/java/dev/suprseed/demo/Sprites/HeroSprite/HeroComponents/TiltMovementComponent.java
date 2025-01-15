@@ -11,7 +11,7 @@ public class TiltMovementComponent implements Component {
     private final Sprite sprite;
 
     private final Accelerometer tiltometer;
-    private final float tiltAmplification = -0.80f;
+    private final float tiltAmplification = -1.60f;
     private float xValue = 0;
 
     // Constructor

@@ -7,6 +7,48 @@ import dev.suprseed.Engine.Core.ErrorLogger.CentralLogger;
 import dev.suprseed.Engine.Core.ErrorLogger.ErrorType;
 import dev.suprseed.Engine.Core.MainView.EngineSettings.LoopConfig;
 
+/*
+Scales logic tick rate across different device refresh rates.
+
+Note: this method uses a combination of:
+- scaling the dt (velocity scaler) to "upgrade" tick rates to the nearest refresh rate multiple
+- running the logic code multiple times in one frame
+
+Pros:
+- easy implementation
+- better visual accuracy across refresh rates
+- lower input latency
+- smooth frame rate at all refresh rates
+
+Cons:
+- not the most computationally efficient method
+- makes the game run in a non-deterministic way
+- lag will occur if rendering takes too long
+- clipping can occur at lower tick rates, but this is negated by preferring lag to occur instead
+    by upgrading the tick rate to the next refresh rate multiple
+
+
+TODO: provide an option to have the logic de-coupled from the rendering.
+    - use interpolation techniques to sync the logic with the renderer
+
+Interpolation
+
+Pros:
+- physics stays accurate, even if rendering skips frames
+    - aka, rendering based lag can occur without causing physics to lag
+- smooth frame rate at all refresh rates
+- deterministic physics simulations
+
+Cons:
+- more cpu usage: in between frames have to calculate physics in betweens
+- more memory usage: multiple physics frames have to be kept in memory
+- latency: physics frames are not immediately displayed to the user
+- more complicated to implement
+    - multiple interpolation algorithms might have to be used in order to ensure smooth rendering
+        output. Non-linear movement benefits from non-linear interpolation.
+- the engine will have to be adjusted in order to keep track of previous physics steps (position,
+    and velocity) in order to calculate the in between positions.
+ */
 public class LoopController<T extends SurfaceView> implements RefreshHandler {
 
     // The user specified refresh & tick rates (these are the target values)
@@ -16,15 +58,17 @@ public class LoopController<T extends SurfaceView> implements RefreshHandler {
     // The engine specified surface view
     private SurfaceView gameView;
     // Hold the actual logic rates and refresh rates the engine running on an actual phone can use
-    private LoopConfig actualLoopConfig;
     private LoopTickRateMultiples tickRateMultiples;
+
+    private int deviceRefreshSpeed = 0;
+    private int actualTargetTickRate = 0;
 
 
     public LoopController(LoopConfig userLoopConfig, LoopRunnable<T> loopRunner) {
         this.userLoopConfig = userLoopConfig;
         this.loopRunner = loopRunner;
 
-        actualLoopConfig = new LoopConfig(userLoopConfig.getRefreshSpeed(), userLoopConfig.getLogicRate(), 1, true);
+        actualTargetTickRate = userLoopConfig.getMinLogicRate();
         tickRateMultiples = new LoopTickRateMultiples();
     }
 
@@ -44,7 +88,8 @@ public class LoopController<T extends SurfaceView> implements RefreshHandler {
         Display.Mode m = gameView.getDisplay().getMode();
 
         // See if the current refresh rate is in conflict with the current target refresh rate
-        if ((int) m.getRefreshRate() != actualLoopConfig.getRefreshSpeed().getHertz()) {
+        if ((int) m.getRefreshRate() != deviceRefreshSpeed) {
+            CentralLogger.getInstance().logMessage(ErrorType.WARN, "The refresh rate changed! Updating loop tick variables!");
             updateRefreshRate();
         }
     }
@@ -58,170 +103,160 @@ public class LoopController<T extends SurfaceView> implements RefreshHandler {
     @Override
     public void updateRefreshRate() {
 
-
-        // TODO: Figure out a more general way to set the refresh and logic rate
-        //  Currently, only 60 and 120 fps are supported. Find a way to allow more options
-        //  such as 90, 144, and 240 hz without causing a logic-refresh mis-match.
-
-        // This code prevents the phone from over-riding the refresh rate that is set
-
-        // This will attempt to run the game at the highest refresh rate supported by the phone!
+        // Get the current supported refresh rate of the phone
 
         // Get the current mode of the display
         Display.Mode m = gameView.getDisplay().getMode();
 
-        int refreshRate = (int) m.getRefreshRate();
-
-        if (refreshRate == 60) { // 60hz detected
-
-            // Set target fps
-            actualLoopConfig.setRefreshSpeed(RefreshTypes.SIXTY_FPS);
-        } else if (refreshRate == 120) { // 120hz detected
-
-            // Set target fps
-            actualLoopConfig.setRefreshSpeed(RefreshTypes.ONE_TWENTY_FPS);
-        }
-
-
-        // Try and set the correct screen mode
-        //TODO: Implement this
-        /*if(actualLoopConfig.getRefreshSpeed() != userLoopConfig.getRefreshSpeed()){
-
-            gameView.getHolder().getSurface().setFrameRate(userLoopConfig.getRefreshSpeed(), Surface.FRAME_RATE_COMPATIBILITY_DEFAULT);
-
-            boolean success = Display.setMode(userLoopConfig.getRefreshSpeed());
-
-            // Honer users config if possible
-            if(success){
-                actualLoopConfig.setRefreshSpeed(userLoopConfig.getRefreshSpeed());
-            }
-        }*/
-
+        deviceRefreshSpeed = (int) m.getRefreshRate();
 
         consolidateRefreshRate();
     }
 
+
     /*
-    private void initRefreshSpeed(GameView gameView) {
-
-        // Display supported display refresh modes
-        Display.Mode[] modes = gameView.getDisplay().getSupportedModes();
-
-        CentralLogger.getInstance().logMessage(ErrorType.INFO, "Getting supported refresh rates...");
-        Arrays.stream(modes).forEach(y -> CentralLogger.getInstance().logMessage(ErrorType.INFO, "-> " + y.getRefreshRate() + " hz is supported"));
-
-
-        // Set the refresh rate of the display if possible
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-
-            // OPTIMIZE: This is not dependable!
-            //  Replace this with an instance of 'DisplayRefreshHandler'!
-            gameView.getHolder().getSurface().setFrameRate(config.getActualRefreshSpeed().getHertz(), Surface.FRAME_RATE_COMPATIBILITY_DEFAULT);
-
-            CentralLogger.getInstance().logMessage(ErrorType.INFO, "The refresh rate has been set. Refresh rate: " + config.getActualRefreshSpeed());
-
-        } else {
-
-            CentralLogger.getInstance().logMessage(ErrorType.WARN, "Cannot set the refresh rate! Android version below 'R'! Reverting to 60hz default value!");
-            config.getActualRefreshSpeed(RefreshTypes.SIXTY_FPS);
-        }
-    }
-    */
-
+    This method scales the dt (velocity scaler) in order to match the physics to the tick rate.
+    The tick rate is tied to the refresh rate as a multiple.
+     */
     private void consolidateRefreshRate() {
 
-        // TODO: Should multiplicity be removed?
-        //  This won't work with 90hz refresh rates! for both logic<refresh and logic>refresh, the VelocityScaler must be used to upgrade the logic rate.
-        //  This also won't work with unexpected refresh rates like 144hz, 240hz, 180hz, 360hz etc.
-        if (actualLoopConfig.getLogicRate().getTickRate() <= actualLoopConfig.getRefreshSpeed().getHertz()) { // logicRate < refreshSpeed
+        CentralLogger.getInstance().logMessage(ErrorType.INFO, "Attempting to set loop tick rate variables.");
 
-            CentralLogger.getInstance().logMessage(ErrorType.WARN, "The logicRate is less than the refreshSpeed! FPS will be locked to the logicRate!");
+        // Reset data
+        tickRateMultiples.setLogicMultiple(1);
+        VelocityScaler.setVelocityScaler(1);
 
-            // Verify multiplicity
-            if (actualLoopConfig.getRefreshSpeed().getHertz() % actualLoopConfig.getLogicRate().getTickRate() == 0) {
 
-                // Reset data
-                tickRateMultiples.setLogicMultiple(0);
-                tickRateMultiples.setRefreshMultiple(0);
-                VelocityScaler.setVelocityScaler(1);
 
-                if (userLoopConfig.isAccurateTickRate()) { // This will upgrade the user given logic rate
+        int bufferZone = 3;
 
-                    // Logic runs 1 to 1 with refresh rate
-                    // (the logic rate probably needs to double, so scaler should be half)
+        // See if device refresh rate is "close enough" (ie 59.0000009hz vs 60hz)
+        if(actualTargetTickRate > deviceRefreshSpeed - bufferZone
+                && actualTargetTickRate < deviceRefreshSpeed + bufferZone){
 
-                    float scaler = (float) actualLoopConfig.getLogicRate().getTickRate() / actualLoopConfig.getRefreshSpeed().getHertz();
+            // If tick rate == refresh rate
 
-                    // TODO: Figure out why this is needed for the app to run at the same rate as the frame skip
-                    // shouldn't the scaler just be 0.5? Not 0.25?
-                    scaler /= 2;
-                    scaler *= userLoopConfig.getLogicScaleMultiple();
+            float scaler = 1;
+            scaler *= userLoopConfig.getLogicScaleMultiple();
+            VelocityScaler.setVelocityScaler(scaler);
+            tickRateMultiples.setLogicMultiple(1);
+            loopRunner.setLoopRateMultiples(tickRateMultiples);
 
-                    // This is MORE computationally expensive, but runs smoother
-                    VelocityScaler.setVelocityScaler(scaler);
+            CentralLogger.getInstance().logMessage(ErrorType.INFO, "The tick rate matches the refresh rate!");
 
-                } else { // This will honor the users logic rate, but fps will get locked to the logic rate rather than the refresh rate
+            return;
+        }
 
-                    int scaler = actualLoopConfig.getRefreshSpeed().getHertz() / actualLoopConfig.getLogicRate().getTickRate();
-                    scaler = (int) (scaler / userLoopConfig.getLogicScaleMultiple());
 
-                    // The number of frames the logic should skip
-                    tickRateMultiples.setRefreshMultiple(scaler);
-                }
 
-            } else {
 
-                String message = "The given refresh rate (" + actualLoopConfig.getRefreshSpeed().getHertz() + ") is not a multiple of the logic rate (" + actualLoopConfig.getLogicRate().getTickRate() + ")!";
+        // Calculate correct tick rate for given refresh rate
+        if(actualTargetTickRate < deviceRefreshSpeed){
 
-                CentralLogger.getInstance().logMessage(ErrorType.FATAL, message);
-                throw new TickRefreshMismatch(message);
+            CentralLogger.getInstance().logMessage(ErrorType.WARN, "The target tick rate is LESS than the devices refresh speed! Upgrading the tick rate to be a multiple of the device refresh rate!");
+
+            CentralLogger.getInstance().logMessage(ErrorType.WARN, "User min target tick rate: " + userLoopConfig.getMinLogicRate()
+                    + "    Current target tick rate: " + actualTargetTickRate
+                    + "    Device refresh speed: " + deviceRefreshSpeed);
+
+
+            // Tick rate < refresh rate
+            /*
+            Tick rate gets upgraded to the refresh speed.
+            The velocity must scale down to match motion to the new tick rate.
+             */
+
+            // Scale down the velocity
+
+            float scaler = 1;
+
+            scaler = scaler / ((float) deviceRefreshSpeed / actualTargetTickRate);
+            scaler *= userLoopConfig.getLogicScaleMultiple();
+
+            VelocityScaler.setVelocityScaler(scaler);
+
+            tickRateMultiples.setLogicMultiple(1);
+            loopRunner.setLoopRateMultiples(tickRateMultiples);
+
+            /*
+            Example:
+
+            60 tick < 90 refresh
+
+            velocity = velocity / 90/60
+             */
+
+        }else {
+
+            CentralLogger.getInstance().logMessage(ErrorType.WARN, "The tick rate is GREATER than the device refresh rate! Upgrading the tick rate to be a multiple of the device refresh rate if necessary!");
+
+            CentralLogger.getInstance().logMessage(ErrorType.WARN, "User min target tick rate: " + userLoopConfig.getMinLogicRate()
+                    + "    Current target tick rate: " + actualTargetTickRate
+                    + "    Device refresh speed: " + deviceRefreshSpeed);
+
+            // Tick rate > refresh rate
+            /*
+            The tick rate must be a multiple of the refresh rate.
+            Logic runs twice per frame.
+            The velocity must scale down to match the new tick rate.
+            The new tick rate must be greater than the users minimum target tick rate.
+             */
+
+            // Scale down the velocity, double the tick/logic rate
+
+            int newTickRate = deviceRefreshSpeed * 2;
+
+            while(newTickRate < actualTargetTickRate){
+
+                newTickRate += deviceRefreshSpeed;
             }
 
-        } else if (actualLoopConfig.getLogicRate().getTickRate() > actualLoopConfig.getRefreshSpeed().getHertz()) { // logicRate > refreshSpeed
+            float scaler = 1;
 
-            CentralLogger.getInstance().logMessage(ErrorType.WARN, "The logicRate is greater than the refreshSpeed! Lag is more likely to occur!");
+            if(newTickRate == actualTargetTickRate){
+                CentralLogger.getInstance().logMessage(ErrorType.WARN, "Valid! The tick rate (" + actualTargetTickRate + ") is already multiple of the device refresh rate! (" + deviceRefreshSpeed + ")");
+            }else{
+                CentralLogger.getInstance().logMessage(ErrorType.WARN, "Invalid! The tick rate (" + actualTargetTickRate + ") is not a multiple of the device refresh rate! (" + deviceRefreshSpeed + ")");
+                CentralLogger.getInstance().logMessage(ErrorType.WARN, "The upgraded tick rate is now: " + newTickRate);
 
-            // Verify multiplicity
-            if (actualLoopConfig.getLogicRate().getTickRate() % actualLoopConfig.getRefreshSpeed().getHertz() == 0) {
-
-                // Reset data
-                tickRateMultiples.setLogicMultiple(0);
-                tickRateMultiples.setRefreshMultiple(0);
-                VelocityScaler.setVelocityScaler(1);
-
-                int scaler = actualLoopConfig.getLogicRate().getTickRate() / actualLoopConfig.getRefreshSpeed().getHertz();
-                scaler = (int) (scaler * userLoopConfig.getLogicScaleMultiple());
-
-                if (userLoopConfig.isAccurateTickRate()) {
-
-                    // Number of times the logic should run in one frame
-                    tickRateMultiples.setLogicMultiple(scaler);
-                } else {
-                    // Logic runs 1 to 1 with refresh rate
-
-                    // This is LESS computationally expensive, but may cause collision clipping / other accuracy issues!
-                    VelocityScaler.setVelocityScaler(scaler);
-                }
-
-            } else {
-
-                String message = "The given logic rate (" + actualLoopConfig.getLogicRate().getTickRate() + ") is not a multiple of the refresh rate (" + actualLoopConfig.getRefreshSpeed().getHertz() + ") !";
-
-                CentralLogger.getInstance().logMessage(ErrorType.FATAL, message);
-                throw new TickRefreshMismatch(message);
+                // Only scale if the new tick rate is not a multiple of the original target tick rate
+                scaler = scaler / ((float) newTickRate / actualTargetTickRate);
             }
-        } // logicRate == refreshSpeed -> do nothing
+
+            scaler *= userLoopConfig.getLogicScaleMultiple();
+            VelocityScaler.setVelocityScaler(scaler);
+
+            actualTargetTickRate = newTickRate;
+
+            // Run logic multiple times per frame
+            tickRateMultiples.setLogicMultiple(newTickRate / deviceRefreshSpeed);
+            loopRunner.setLoopRateMultiples(tickRateMultiples);
+
+            /*
+            One possible worst case scenario:
+
+            Target tick rate = 200
+            Refresh rate = 90
+
+            200 target tick > 90 refresh
+
+            New tick = 90 * 2 = 180
+
+            180 new tick > 90 refresh
+            180 new tick < 200 target tick rate
+
+            New tick = 180 + 90 = 270
+
+            270 new tick > 90 refresh
+            270 new tick > 200 target tick rate
+
+             */
+        }
 
 
-        // Update the loop runner values
-        loopRunner.setLoopRateMultiples(tickRateMultiples);
 
         // TODO: update the animations to scale with tick rates!
         //ImageCollectionAnimator.setTargetRefreshRate(targetFps);
         //Effects.setTargetFps(targetFps);
-
-
-        //CentralLogger.getInstance().logMessage(ErrorType.INFO, "multiples:    Logic: " + tickRateMultiples.getLogicMultiple() + "    Refresh: " + tickRateMultiples.getRefreshMultiple());
-        //CentralLogger.getInstance().logMessage(ErrorType.INFO, "The logic rate has been set. LogicRate: " + actualLoopConfig.getLogicRate());
     }
 }

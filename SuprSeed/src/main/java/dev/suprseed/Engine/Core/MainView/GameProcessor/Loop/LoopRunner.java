@@ -8,8 +8,6 @@ public class LoopRunner implements LoopRunnable<GameView> {
     // TODO: This is temporary. Figure out a better way for client to get loop manager
     //  to handle pausing behavior
     public static LoopRunner loopy = null;
-    // Dependencies
-    private int frameCounter = 0;
     private boolean softPause = false;
     private boolean hardPause = false;
 
@@ -51,42 +49,12 @@ public class LoopRunner implements LoopRunnable<GameView> {
     // Handle logic run rate (scaled relative to refresh rate)
     private void runLogic() {
 
-        // Number of times to run logic based on logic tick rate
-        // (logic rate is greater than refresh rate)
-        if (loopRateMultiples.getLogicMultiple() > 0) {
+        // Run the logic 1 or more times
+        for(int i = 0; i < loopRateMultiples.getLogicMultiple(); i++){
 
-            for (int i = 0; i < loopRateMultiples.getLogicMultiple(); i++) {
-
-                // Run client logic code
-                //gameView.logicLoop();
-                LogicSystem.getInstance().runLogic();
-            }
-        } else
-
-            // Number of frames to skip
-            // (logic rate is less than refresh rate)
-            if (loopRateMultiples.getRefreshMultiple() > 0) {
-
-                // Track which frame the logic should run
-                if (frameCounter == loopRateMultiples.getRefreshMultiple()) {
-
-                    // Run client logic code
-                    //gameView.logicLoop();
-                    LogicSystem.getInstance().runLogic();
-
-                    frameCounter = 0;
-                }
-
-                frameCounter++;
-            }
-
-
-            // Ignore frame pacing
-            else {
-
-                // Run client logic code
-                LogicSystem.getInstance().runLogic();
-            }
+            // Run the clients logic code
+            LogicSystem.getInstance().runLogic();
+        }
     }
 
     @Override

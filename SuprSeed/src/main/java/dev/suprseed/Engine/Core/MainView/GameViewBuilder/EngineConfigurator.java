@@ -15,7 +15,6 @@ import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LoopController;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LoopRunnable;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LoopRunner;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.RefreshHandler;
-import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.RefreshTypes;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.SceneStarter;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.CanvasData;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates.CartesianProcessor;
@@ -135,7 +134,7 @@ public class EngineConfigurator extends BaseEngineConfigurator {
     public LoopConfig getLoopConfig() {
 
         if (loopConfig == null) {
-            loopConfig = new LoopConfig(RefreshTypes.ONE_TWENTY_FPS, LogicRates.ONE_TWENTY_TICKS, 1f, true);
+            loopConfig = new LoopConfig(LogicRates.ONE_TWENTY_TICKS, 1f);
         }
 
         return loopConfig;

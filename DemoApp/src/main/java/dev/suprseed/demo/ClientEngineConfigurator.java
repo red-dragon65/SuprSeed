@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import dev.suprseed.Engine.Core.MainView.EngineSettings.LoopConfig;
 import dev.suprseed.Engine.Core.MainView.EngineSettings.ViewConfig;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LogicRates;
-import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.RefreshTypes;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.SceneStarter;
 import dev.suprseed.Engine.Core.MainView.GameViewBuilder.BaseEngineConfigurator;
 import dev.suprseed.Engine.Core.MainView.GameViewBuilder.EngineConfigurator;
@@ -42,7 +41,7 @@ public class ClientEngineConfigurator extends BaseEngineConfigurator {
         // User can build the engine configuration here
         engineConfigurator = new EngineConfigurator(context, clientSceneStarter, CentralInputManager.getInstance(), new CollisionDiagnosticsOverlay(false))
                 .setViewConfig(new ViewConfig(true, true, true, false))
-                .setLoopConfig(new LoopConfig(RefreshTypes.ONE_TWENTY_FPS, LogicRates.ONE_TWENTY_TICKS, 0.5f, true));
+                .setLoopConfig(new LoopConfig(LogicRates.ONE_TWENTY_TICKS, 0.2f));
 
         // Add the input handlers here
         CentralInputManager.getInstance().dispatcherRegister.registerObject(new TouchEventDispatcher());
