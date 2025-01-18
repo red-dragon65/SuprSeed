@@ -4,11 +4,12 @@ package dev.suprseed.Engine.Lib.Images;
 import android.graphics.Bitmap;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import dev.suprseed.Engine.Core.ErrorLogger.CentralLogger;
 import dev.suprseed.Engine.Core.ErrorLogger.ErrorType;
-import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.GlobalFrameStepper;
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
+import dev.suprseed.Engine.Core.System.RenderSystem;
 import dev.suprseed.Engine.Lib.AssetLoader.FPSMismatchException;
 import dev.suprseed.Engine.Lib.AssetLoader.FolderParser;
 import dev.suprseed.Engine.Lib.AssetLoader.Streamable;
@@ -19,14 +20,39 @@ public class BitmapAnimation extends BitmapCollection implements Animator {
     // This number must fit equally within the frame time
     private int frameDelay = 0;
     private int currentFrameIndex = 0;
-    private boolean cycledImage = false;
     private boolean enableLooping = true;
     private boolean lockLoop = false;
+    private int targetFrameTime;
+    private int frameCounter = 0;
 
 
     // Constructor for animating images
-    public BitmapAnimation(BaseScene parentScene, String folderPath, float imageScale, Streamable imageStreamer, FolderParser folderParser, FPS fps, boolean loop, String tag) throws IOException {
+    public BitmapAnimation(BaseScene parentScene, String folderPath, float imageScale, Streamable imageStreamer, FolderParser folderParser, int fps, boolean loop, String tag) throws IOException {
         super(folderPath, imageScale, imageStreamer, folderParser, tag);
+
+        /*
+        This syncs the animation rate with the render frame time. This allows the render frame time
+        to be changed without altering the visual animation speed.
+
+        Note: if you set the this.targetFrameTime to a different value than the render target frame time,
+        you can change the animation speed.
+
+        this.targetFrameTime < RenderSystem.targetFrameTime
+            -> animations run faster
+
+        this.targetFrameTime < RenderSystem.targetFrameTime
+            -> animations run slower
+
+        It is recommended to set the fps value to get the animation speed you want. If, for whatever
+        reason, you need an animation speed slower the 1 frame per second, than it would make sense
+        to de-couple the this.targetFrameTime from the RenderSystem.
+         */
+        this.targetFrameTime = RenderSystem.getInstance().getTargetFrameTime();
+
+        init(parentScene, fps, loop, tag);
+    }
+
+    private void init(BaseScene parentScene, int fps, boolean loop, String tag){
 
         // Register with the parent scene
         parentScene.animationRegister.registerObject(this);
@@ -35,67 +61,69 @@ public class BitmapAnimation extends BitmapCollection implements Animator {
         try {
             String tagInfo = "{tag == " + tag + "}";
 
-            if (fps.toInt() < 1) {
+            if (fps < 1) {
                 throw new FPSMismatchException("An animations fps must be greater than 0 for animation: " + tagInfo);
             }
 
             //Make sure fps fits within frame time
-            if (GlobalFrameStepper.getInstance().getFrameTime() % fps.toInt() != 0) {
-                String message = "The given animation " + tagInfo + " fps: " + fps + " does not fit within the frame time of: " + GlobalFrameStepper.getInstance().getFrameTime();
+            if (targetFrameTime % fps != 0) {
+                String message = "The given animation " + tagInfo + " fps: " + fps + " does not fit within the frame time of: " + targetFrameTime;
                 throw new FPSMismatchException(message);
             }
 
         } catch (FPSMismatchException e) {
 
             // Recover error by using next closest valid fps available
-            fps = findValidFps(fps.toInt());
+            fps = findValidFps(fps);
 
             String message = "INVALID FPS! Changing bitmap animation fps to nearest valid number: " + fps;
             CentralLogger.getInstance().logMessage(ErrorType.ERROR, message, e);
         }
 
-        frameDelay = 60 / fps.toInt();
+        frameDelay = targetFrameTime / fps;
 
         this.enableLooping = loop;
     }
 
-    private FPS findValidFps(int fps) {
+    // Find the next nearest valid frame rate
+    private int findValidFps(int fps){
 
-        if (fps < 1) {
-            return FPS._1;
+        // Prevent negative fps
+        if(fps < 1){
+            return 1;
         }
 
-        int lowFps = fps;
-        int highFps = fps;
-        int newTarget;
-        int numTries = 10;
+        // Get a list of valid frame times
+        ArrayList<Integer> validFrameTimes = validFrameTimeGenerator();
 
-        // Find next properly divisible number
-        for (int i = 0; i < numTries; i++) {
+        int closestValidFrameTime = validFrameTimes.get(0);
+        int lowestDiff = Math.abs(fps - validFrameTimes.get(0));
 
-            if (GlobalFrameStepper.getInstance().getFrameTime() % lowFps != 0) {
-                lowFps--;
-            }
+        // Find the closest valid frame time to the requested frame time
+        for(Integer i : validFrameTimes){
 
-            if (GlobalFrameStepper.getInstance().getFrameTime() % highFps != 0) {
-                highFps++;
-            }
-        }
-
-        // See if higher or lower number is closer to users original fps
-        if ((fps - lowFps) < (highFps - fps)) {
-            newTarget = lowFps;
-        } else {
-            newTarget = highFps;
-        }
-
-        for (FPS i : FPS.values()) {
-            if (i.toInt() == newTarget) {
-                return i;
+            if(Math.abs(fps - i) < lowestDiff){
+                lowestDiff = Math.abs(fps - i);
+                closestValidFrameTime = i;
             }
         }
 
-        return FPS._1;
+        return closestValidFrameTime;
+    }
+
+    // Generate valid frame rates for the given target frame time
+    private ArrayList<Integer> validFrameTimeGenerator(){
+
+        ArrayList<Integer> validFrameTimes = new ArrayList<>();
+
+        for(int i = 1; i <= targetFrameTime; i++){
+
+            if(targetFrameTime % i == 0){
+                validFrameTimes.add(i);
+            }
+        }
+
+        return validFrameTimes;
     }
 
     @Override
@@ -110,12 +138,11 @@ public class BitmapAnimation extends BitmapCollection implements Animator {
         return imageSet.get(currentFrameIndex);
     }
 
-
     @Override
     public void generateNextFrame() {
 
         // Cycle to the next frame index
-        if (cycledImage == false && GlobalFrameStepper.getInstance().getFrameStep() % frameDelay == 0 && lockLoop == false) {
+        if (frameCounter % frameDelay == 0 && lockLoop == false) {
 
             currentFrameIndex++;
 
@@ -133,10 +160,10 @@ public class BitmapAnimation extends BitmapCollection implements Animator {
                 }
             }
 
-            cycledImage = true;
-        } else {
-            cycledImage = false;
+            frameCounter = 0;
         }
+
+        frameCounter++;
     }
 
 }

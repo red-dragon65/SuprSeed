@@ -6,6 +6,7 @@ import android.view.SurfaceView;
 import dev.suprseed.Engine.Core.ErrorLogger.CentralLogger;
 import dev.suprseed.Engine.Core.ErrorLogger.ErrorType;
 import dev.suprseed.Engine.Core.MainView.EngineSettings.LoopConfig;
+import dev.suprseed.Engine.Core.System.RenderSystem;
 
 /*
 Scales logic tick rate across different device refresh rates.
@@ -109,6 +110,8 @@ public class LoopController<T extends SurfaceView> implements RefreshHandler {
         Display.Mode m = gameView.getDisplay().getMode();
 
         deviceRefreshSpeed = (int) m.getRefreshRate();
+
+        RenderSystem.getInstance().notifyRefreshRate(deviceRefreshSpeed);
 
         consolidateRefreshRate();
     }
@@ -214,7 +217,7 @@ public class LoopController<T extends SurfaceView> implements RefreshHandler {
             float scaler = 1;
 
             if(newTickRate == actualTargetTickRate){
-                CentralLogger.getInstance().logMessage(ErrorType.WARN, "Valid! The tick rate (" + actualTargetTickRate + ") is already multiple of the device refresh rate! (" + deviceRefreshSpeed + ")");
+                CentralLogger.getInstance().logMessage(ErrorType.WARN, "Valid! The tick rate (" + actualTargetTickRate + ") is already a multiple of the device refresh rate! (" + deviceRefreshSpeed + ")");
             }else{
                 CentralLogger.getInstance().logMessage(ErrorType.WARN, "Invalid! The tick rate (" + actualTargetTickRate + ") is not a multiple of the device refresh rate! (" + deviceRefreshSpeed + ")");
                 CentralLogger.getInstance().logMessage(ErrorType.WARN, "The upgraded tick rate is now: " + newTickRate);
@@ -252,11 +255,5 @@ public class LoopController<T extends SurfaceView> implements RefreshHandler {
 
              */
         }
-
-
-
-        // TODO: update the animations to scale with tick rates!
-        //ImageCollectionAnimator.setTargetRefreshRate(targetFps);
-        //Effects.setTargetFps(targetFps);
     }
 }

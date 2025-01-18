@@ -5,12 +5,13 @@ import android.util.Log;
 import java.io.IOException;
 
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
+import dev.suprseed.Engine.Core.System.RenderSystem;
 import dev.suprseed.Engine.Lib.AssetLoader.FolderParser;
 import dev.suprseed.Engine.Lib.AssetLoader.SafeAssetLoader;
 import dev.suprseed.Engine.Lib.AssetLoader.Streamable;
 import dev.suprseed.Engine.Lib.Images.BitmapAnimation;
 import dev.suprseed.Engine.Lib.Images.BitmapSingle;
-import dev.suprseed.Engine.Lib.Images.FPS;
+import dev.suprseed.Engine.Lib.Images.DefaultFPS;
 import dev.suprseed.Engine.Lib.Images.PlaceHolder;
 
 public class GameDemoAssets extends SafeAssetLoader {
@@ -28,14 +29,14 @@ public class GameDemoAssets extends SafeAssetLoader {
 
         try {
             // Hero
-            BitmapAnimation heroLeft = new BitmapAnimation(parentScene, "Images/Hero/Left", 10, assetStreamer, folderParser, FPS._2, true, "heroLeft");
+            BitmapAnimation heroLeft = new BitmapAnimation(parentScene, "Images/Hero/Left", 10, assetStreamer, folderParser, DefaultFPS._2.toInt(), true, "heroLeft");
             images.add(heroLeft);
 
-            BitmapAnimation heroRight = new BitmapAnimation(parentScene, "Images/Hero/Right", 10, assetStreamer, folderParser, FPS._2, true, "heroRight");
+            BitmapAnimation heroRight = new BitmapAnimation(parentScene, "Images/Hero/Right", 10, assetStreamer, folderParser, DefaultFPS._2.toInt(), true, "heroRight");
             images.add(heroRight);
 
             // Enemies
-            FPS enemyAnimationSpeed = FPS._15;
+            int enemyAnimationSpeed = DefaultFPS._15.toInt();
 
             Log.e("", "fps: " + enemyAnimationSpeed);
 
