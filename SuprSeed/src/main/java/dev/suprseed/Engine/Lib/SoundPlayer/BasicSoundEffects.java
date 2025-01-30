@@ -13,7 +13,7 @@ import dev.suprseed.Engine.Core.ErrorLogger.ErrorType;
 public class BasicSoundEffects<T> implements SoundMixer<T> {
 
     // Hold volume for left and right
-    private final float volume = 1.0f;
+    private final float defaultVolume = 1.0f;
     // Hold number of max sound streams
     private final int maxSounds = 10;
     // Hold sound player
@@ -23,6 +23,10 @@ public class BasicSoundEffects<T> implements SoundMixer<T> {
     private Map<T, Integer> soundMap;
 
     private int loopVal = 0;
+
+    private interface SoundExec{
+        void handleItem(Integer id);
+    }
 
     // Constructor
     public BasicSoundEffects() {
@@ -35,7 +39,6 @@ public class BasicSoundEffects<T> implements SoundMixer<T> {
                         .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
                         .build())
                 .build();
-
     }
 
 
@@ -60,12 +63,17 @@ public class BasicSoundEffects<T> implements SoundMixer<T> {
     @Override
     public void playSound(T soundId, boolean loop) {
 
+        playSound(soundId, loop, defaultVolume);
+    }
+
+    @Override
+    public void playSound(T soundId, boolean loop, float volume) {
+
         if (loop) {
             loopVal = -1;
         } else {
             loopVal = 0;
         }
-
 
         // See if sound is enabled
         if (isSoundEnabled) {
@@ -83,6 +91,56 @@ public class BasicSoundEffects<T> implements SoundMixer<T> {
             }
 
         }
+    }
+
+    private void tryAction(T soundID, SoundExec soundExec){
+
+        // See if sound requested exists in loaded sounds
+        if (soundMap.containsKey(soundID)) {
+
+            Optional<Integer> item = Optional.ofNullable(soundMap.get(soundID));
+            item.ifPresent(soundExec::handleItem);
+
+        } else {
+
+            CentralLogger.getInstance().logMessage(ErrorType.WARN, "The requested sound '" + soundID + "' does not exist in the loaded sound list!");
+        }
+    }
+
+    @Override
+    public void pause(T soundID) {
+
+        tryAction(soundID, soundPool::pause);
+    }
+
+
+    @Override
+    public void stop(T soundID) {
+
+        tryAction(soundID, soundPool::stop);
+    }
+
+    @Override
+    public void resume(T soundID) {
+
+        tryAction(soundID, soundPool::resume);
+    }
+
+    @Override
+    public void pauseAll() {
+        soundPool.autoPause();
+    }
+
+    @Override
+    public void stopAll() {
+        for(Map.Entry<T, Integer> item : soundMap.entrySet()){
+            tryAction(item.getKey(), soundPool::stop);
+        }
+    }
+
+    @Override
+    public void resumeAll() {
+        soundPool.autoResume();
     }
 
     @Override
