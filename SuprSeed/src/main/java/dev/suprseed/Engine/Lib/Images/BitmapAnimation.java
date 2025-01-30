@@ -52,7 +52,7 @@ public class BitmapAnimation extends BitmapCollection implements Animator {
         init(parentScene, fps, loop, tag);
     }
 
-    private void init(BaseScene parentScene, int fps, boolean loop, String tag){
+    private void init(BaseScene parentScene, int fps, boolean loop, String tag) {
 
         // Register with the parent scene
         parentScene.animationRegister.registerObject(this);
@@ -86,10 +86,10 @@ public class BitmapAnimation extends BitmapCollection implements Animator {
     }
 
     // Find the next nearest valid frame rate
-    private int findValidFps(int fps){
+    private int findValidFps(int fps) {
 
         // Prevent negative fps
-        if(fps < 1){
+        if (fps < 1) {
             return 1;
         }
 
@@ -100,9 +100,9 @@ public class BitmapAnimation extends BitmapCollection implements Animator {
         int lowestDiff = Math.abs(fps - validFrameTimes.get(0));
 
         // Find the closest valid frame time to the requested frame time
-        for(Integer i : validFrameTimes){
+        for (Integer i : validFrameTimes) {
 
-            if(Math.abs(fps - i) < lowestDiff){
+            if (Math.abs(fps - i) < lowestDiff) {
                 lowestDiff = Math.abs(fps - i);
                 closestValidFrameTime = i;
             }
@@ -112,13 +112,13 @@ public class BitmapAnimation extends BitmapCollection implements Animator {
     }
 
     // Generate valid frame rates for the given target frame time
-    private ArrayList<Integer> validFrameTimeGenerator(){
+    private ArrayList<Integer> validFrameTimeGenerator() {
 
         ArrayList<Integer> validFrameTimes = new ArrayList<>();
 
-        for(int i = 1; i <= targetFrameTime; i++){
+        for (int i = 1; i <= targetFrameTime; i++) {
 
-            if(targetFrameTime % i == 0){
+            if (targetFrameTime % i == 0) {
                 validFrameTimes.add(i);
             }
         }

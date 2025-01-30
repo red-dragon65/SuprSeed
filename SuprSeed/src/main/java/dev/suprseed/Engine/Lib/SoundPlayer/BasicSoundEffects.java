@@ -24,10 +24,6 @@ public class BasicSoundEffects<T> implements SoundMixer<T> {
 
     private int loopVal = 0;
 
-    private interface SoundExec{
-        void handleItem(Integer id);
-    }
-
     // Constructor
     public BasicSoundEffects() {
 
@@ -41,7 +37,6 @@ public class BasicSoundEffects<T> implements SoundMixer<T> {
                 .build();
     }
 
-
     @Override
     public void loadSounds(Map<T, Integer> sounds, Context context) {
 
@@ -52,13 +47,11 @@ public class BasicSoundEffects<T> implements SoundMixer<T> {
         soundMap.replaceAll((k, v) -> soundPool.load(context, v, 1));
     }
 
-
     @Override
     public void playSound(T soundId) {
 
         playSound(soundId, false);
     }
-
 
     @Override
     public void playSound(T soundId, boolean loop) {
@@ -93,7 +86,7 @@ public class BasicSoundEffects<T> implements SoundMixer<T> {
         }
     }
 
-    private void tryAction(T soundID, SoundExec soundExec){
+    private void tryAction(T soundID, SoundExec soundExec) {
 
         // See if sound requested exists in loaded sounds
         if (soundMap.containsKey(soundID)) {
@@ -112,7 +105,6 @@ public class BasicSoundEffects<T> implements SoundMixer<T> {
 
         tryAction(soundID, soundPool::pause);
     }
-
 
     @Override
     public void stop(T soundID) {
@@ -133,7 +125,7 @@ public class BasicSoundEffects<T> implements SoundMixer<T> {
 
     @Override
     public void stopAll() {
-        for(Map.Entry<T, Integer> item : soundMap.entrySet()){
+        for (Map.Entry<T, Integer> item : soundMap.entrySet()) {
             tryAction(item.getKey(), soundPool::stop);
         }
     }
@@ -157,5 +149,9 @@ public class BasicSoundEffects<T> implements SoundMixer<T> {
     @Override
     public void disableSound() {
         isSoundEnabled = false;
+    }
+
+    private interface SoundExec {
+        void handleItem(Integer id);
     }
 }

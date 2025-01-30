@@ -5,7 +5,6 @@ import android.util.Log;
 import java.io.IOException;
 
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
-import dev.suprseed.Engine.Core.System.RenderSystem;
 import dev.suprseed.Engine.Lib.AssetLoader.FolderParser;
 import dev.suprseed.Engine.Lib.AssetLoader.SafeAssetLoader;
 import dev.suprseed.Engine.Lib.AssetLoader.Streamable;

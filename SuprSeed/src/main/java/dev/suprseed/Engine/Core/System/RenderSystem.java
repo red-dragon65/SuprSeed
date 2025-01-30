@@ -45,7 +45,11 @@ public class RenderSystem implements Renderable {
         return animationRegister;
     }
 
-    public void setTargetFrameTime(int targetFrameTime){
+    public int getTargetFrameTime() {
+        return targetFrameTime;
+    }
+
+    public void setTargetFrameTime(int targetFrameTime) {
 
         CentralLogger.getInstance().logMessage(ErrorType.INFO, "The render animation target frame time was changed from: (" + this.targetFrameTime + ") to: (" + targetFrameTime + ")");
 
@@ -54,11 +58,7 @@ public class RenderSystem implements Renderable {
         notifyRefreshRate(refreshRate);
     }
 
-    public int getTargetFrameTime(){
-        return targetFrameTime;
-    }
-
-    public void notifyRefreshRate(int refreshRate){
+    public void notifyRefreshRate(int refreshRate) {
 
         this.refreshRate = refreshRate;
 
@@ -66,7 +66,7 @@ public class RenderSystem implements Renderable {
 
         CentralLogger.getInstance().logMessage(ErrorType.INFO, "Updating the render animation scaler to scale against the device refresh rate of: " + refreshRate);
 
-        if(tickScaler < 1){
+        if (tickScaler < 1) {
             tickScaler = 1;
             CentralLogger.getInstance().logMessage(ErrorType.ERROR, "The target frame time of (" + targetFrameTime
                     + ") should not be greater than the refresh rate of (" + refreshRate + ")!" +
@@ -90,7 +90,7 @@ public class RenderSystem implements Renderable {
         Runs in render code rather than logic in order to de-couple the animation timings
         from the logic tick rate.
          */
-        if(frameCounter % tickScaler == 0){
+        if (frameCounter % tickScaler == 0) {
 
             animationRegister.update();
             frameCounter = 0;

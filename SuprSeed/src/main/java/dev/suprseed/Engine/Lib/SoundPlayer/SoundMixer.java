@@ -15,11 +15,15 @@ public interface SoundMixer<T> {
     void playSound(T soundID, boolean loop, float volume);
 
     void pause(T soundID);
+
     void stop(T soundID);
+
     void resume(T soundID);
 
     void pauseAll();
+
     void stopAll();
+
     void resumeAll();
 
     void clearSounds();

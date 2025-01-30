@@ -22,7 +22,7 @@ public class LoopTickRateMultiples {
 
     public void setLogicMultiple(int logicMultiple) {
 
-        if(logicMultiple <= 0){
+        if (logicMultiple <= 0) {
             throw new IndexOutOfBoundsException("The logic multiple must be at least 1 or greater! The value given was: " + logicMultiple);
         }
 

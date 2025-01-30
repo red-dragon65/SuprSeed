@@ -81,7 +81,7 @@ public class GameDemoMainScene extends SceneManager {
         loadLifeCycleHandlers();
     }
 
-    private void loadLifeCycleHandlers(){
+    private void loadLifeCycleHandlers() {
 
         MainActivity.lifecycleRegistry.addObserver(new DefaultLifecycleObserver() {
             @Override

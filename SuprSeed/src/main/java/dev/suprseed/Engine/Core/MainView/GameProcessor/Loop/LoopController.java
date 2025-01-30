@@ -130,12 +130,11 @@ public class LoopController<T extends SurfaceView> implements RefreshHandler {
         VelocityScaler.setVelocityScaler(1);
 
 
-
         int bufferZone = 3;
 
         // See if device refresh rate is "close enough" (ie 59.0000009hz vs 60hz)
-        if(actualTargetTickRate > deviceRefreshSpeed - bufferZone
-                && actualTargetTickRate < deviceRefreshSpeed + bufferZone){
+        if (actualTargetTickRate > deviceRefreshSpeed - bufferZone
+                && actualTargetTickRate < deviceRefreshSpeed + bufferZone) {
 
             // If tick rate == refresh rate
 
@@ -151,10 +150,8 @@ public class LoopController<T extends SurfaceView> implements RefreshHandler {
         }
 
 
-
-
         // Calculate correct tick rate for given refresh rate
-        if(actualTargetTickRate < deviceRefreshSpeed){
+        if (actualTargetTickRate < deviceRefreshSpeed) {
 
             CentralLogger.getInstance().logMessage(ErrorType.WARN, "The target tick rate is LESS than the devices refresh speed! Upgrading the tick rate to be a multiple of the device refresh rate!");
 
@@ -189,7 +186,7 @@ public class LoopController<T extends SurfaceView> implements RefreshHandler {
             velocity = velocity / 90/60
              */
 
-        }else {
+        } else {
 
             CentralLogger.getInstance().logMessage(ErrorType.WARN, "The tick rate is GREATER than the device refresh rate! Upgrading the tick rate to be a multiple of the device refresh rate if necessary!");
 
@@ -209,16 +206,16 @@ public class LoopController<T extends SurfaceView> implements RefreshHandler {
 
             int newTickRate = deviceRefreshSpeed * 2;
 
-            while(newTickRate < actualTargetTickRate){
+            while (newTickRate < actualTargetTickRate) {
 
                 newTickRate += deviceRefreshSpeed;
             }
 
             float scaler = 1;
 
-            if(newTickRate == actualTargetTickRate){
+            if (newTickRate == actualTargetTickRate) {
                 CentralLogger.getInstance().logMessage(ErrorType.WARN, "Valid! The tick rate (" + actualTargetTickRate + ") is already a multiple of the device refresh rate! (" + deviceRefreshSpeed + ")");
-            }else{
+            } else {
                 CentralLogger.getInstance().logMessage(ErrorType.WARN, "Invalid! The tick rate (" + actualTargetTickRate + ") is not a multiple of the device refresh rate! (" + deviceRefreshSpeed + ")");
                 CentralLogger.getInstance().logMessage(ErrorType.WARN, "The upgraded tick rate is now: " + newTickRate);
 

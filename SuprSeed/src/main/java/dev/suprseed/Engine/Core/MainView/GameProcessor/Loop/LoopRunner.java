@@ -50,7 +50,7 @@ public class LoopRunner implements LoopRunnable<GameView> {
     private void runLogic() {
 
         // Run the logic 1 or more times
-        for(int i = 0; i < loopRateMultiples.getLogicMultiple(); i++){
+        for (int i = 0; i < loopRateMultiples.getLogicMultiple(); i++) {
 
             // Run the clients logic code
             LogicSystem.getInstance().runLogic();
