@@ -3,7 +3,7 @@ package dev.suprseed.demo.Sprites.Obstacles.ObstacleComponents;
 import java.util.List;
 import java.util.Random;
 
-import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.CanvasData;
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.ViewPort;
 import dev.suprseed.Engine.Core.SpriteObjects.DefaultComponents.ResetableComponent;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.AssetBundle;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
@@ -67,10 +67,10 @@ public class ObstacleSpawnerComponent implements ResetableComponent {
     private void setLocation(Sprite s) {
 
         // Set location to random value below screen
-        s.setX(rand.nextInt((int) (CanvasData.getInstance().getScaledWidth() - s.getAssetBundle().getSelectedImageSet().getScaledWidth())));
+        s.setX(rand.nextInt((int) (ViewPort.getInstance().getWidth() - s.getWidth())));
 
         float height = rand.nextInt(yGenerationDistance);
-        height += CanvasData.getInstance().getScaledHeight();
+        height += ViewPort.getInstance().getHeight();
 
         s.setY(height);
     }

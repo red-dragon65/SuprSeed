@@ -9,7 +9,7 @@ import java.io.InputStream;
 
 import dev.suprseed.Engine.Core.ErrorLogger.CentralLogger;
 import dev.suprseed.Engine.Core.ErrorLogger.ErrorType;
-import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.CanvasData;
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Screen;
 
 public class LocalImageFileStreamer implements Streamable {
 
@@ -57,7 +57,7 @@ public class LocalImageFileStreamer implements Streamable {
             CentralLogger.getInstance().logMessage(ErrorType.ERROR, "Failed to load image file: " + fileName);
         }
 
-        return Bitmap.createScaledBitmap(temp, ((int) ((float) temp.getWidth() * CanvasData.getInstance().getSpriteScaleRatio() * scaleFactor)), ((int) ((float) temp.getHeight() * CanvasData.getInstance().getSpriteScaleRatio() * scaleFactor)), false);
+        return Bitmap.createScaledBitmap(temp, ((int) ((float) temp.getWidth() * Screen.getInstance().getSpriteScaleRatio() * scaleFactor)), ((int) ((float) temp.getHeight() * Screen.getInstance().getSpriteScaleRatio() * scaleFactor)), false);
     }
 
 

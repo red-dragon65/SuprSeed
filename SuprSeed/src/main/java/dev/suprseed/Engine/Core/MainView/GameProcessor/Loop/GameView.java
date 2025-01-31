@@ -8,8 +8,8 @@ import android.view.SurfaceView;
 
 import androidx.annotation.NonNull;
 
-import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.CanvasData;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Screen;
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.RootScene;
 
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
@@ -52,7 +52,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
 
-        CanvasData.getInstance().setDimensions(h, w);
+        Screen.getInstance().setDimensions(h, w);
 
         // Initialize the assets
         // Initialize static game objects

@@ -1,7 +1,7 @@
 package dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates;
 
 import dev.suprseed.Engine.Core.MainView.EngineSettings.BaseConfig;
-import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.CanvasData;
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Screen;
 
 public class CartesianProcessor implements LocationHandler {
 
@@ -33,11 +33,11 @@ public class CartesianProcessor implements LocationHandler {
     public float[] canvasCenter(float[] loc) {
 
         // Offset x to center
-        float middle_x = CanvasData.getInstance().getOriginalWidth() / 2;
+        float middle_x = Screen.getInstance().getWidth() / 2;
         loc[0] += middle_x;
 
         // Offset y to center
-        float middle_y = CanvasData.getInstance().getOriginalWidth() / 2;
+        float middle_y = Screen.getInstance().getHeight() / 2;
         loc[1] -= middle_y;
 
         return loc;

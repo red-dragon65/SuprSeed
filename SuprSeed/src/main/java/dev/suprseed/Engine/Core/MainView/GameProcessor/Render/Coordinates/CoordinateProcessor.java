@@ -1,7 +1,7 @@
 package dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates;
 
 
-import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.CanvasData;
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Screen;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
 
 public class CoordinateProcessor implements CoordinateHandler {
@@ -37,8 +37,8 @@ public class CoordinateProcessor implements CoordinateHandler {
         loc = locationHandler.parseLocation(loc);
 
         // Format the location to the canvas
-        loc[0] = CanvasData.getInstance().formatCoordinateToCanvas(loc[0]);
-        loc[1] = CanvasData.getInstance().formatCoordinateToCanvas(loc[1]);
+        loc[0] = Screen.getInstance().convertViewPortToCanvas(loc[0]);
+        loc[1] = Screen.getInstance().convertViewPortToCanvas(loc[1]);
 
 
         return loc;

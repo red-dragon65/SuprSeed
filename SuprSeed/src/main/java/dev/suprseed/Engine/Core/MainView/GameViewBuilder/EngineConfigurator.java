@@ -16,7 +16,6 @@ import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LoopRunnable;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LoopRunner;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.RefreshHandler;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.SceneStarter;
-import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.CanvasData;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates.CartesianProcessor;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates.CoordinateHandler;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates.CoordinateProcessor;
@@ -24,6 +23,7 @@ import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates.Locati
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.CollisionDrawable;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderProcessor;
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Screen;
 
 public class EngineConfigurator extends BaseEngineConfigurator {
 
@@ -151,7 +151,7 @@ public class EngineConfigurator extends BaseEngineConfigurator {
             viewConfig = new ViewConfig(true, true, true, true);
         }
 
-        CanvasData.getInstance().setViewConfig(viewConfig);
+        Screen.getInstance().setViewConfig(viewConfig);
         return viewConfig;
     }
 

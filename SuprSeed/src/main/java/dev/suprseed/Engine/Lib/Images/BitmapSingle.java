@@ -5,7 +5,7 @@ import android.graphics.Bitmap;
 import java.io.IOException;
 import java.util.Optional;
 
-import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.CanvasData;
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Screen;
 import dev.suprseed.Engine.Lib.AssetLoader.Streamable;
 
 public class BitmapSingle implements SpriteImage {
@@ -44,13 +44,13 @@ public class BitmapSingle implements SpriteImage {
     @Override
     public float getScaledWidth() {
 
-        return CanvasData.getInstance().formatCanvasToCoordinate(getImage().getWidth());
+        return Screen.getInstance().convertCanvasToViewPort(getImage().getWidth());
     }
 
     @Override
     public float getScaledHeight() {
 
-        return CanvasData.getInstance().formatCanvasToCoordinate(getImage().getHeight());
+        return Screen.getInstance().convertCanvasToViewPort(getImage().getHeight());
     }
 
     @Override

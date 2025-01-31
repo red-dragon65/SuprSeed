@@ -9,7 +9,7 @@ import java.util.Optional;
 
 import dev.suprseed.Engine.Core.ErrorLogger.CentralLogger;
 import dev.suprseed.Engine.Core.ErrorLogger.ErrorType;
-import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.CanvasData;
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Screen;
 import dev.suprseed.Engine.Lib.AssetLoader.FolderParser;
 import dev.suprseed.Engine.Lib.AssetLoader.Streamable;
 
@@ -97,20 +97,20 @@ public class BitmapCollection implements SpriteImage {
     @Override
     public float getScaledWidth() {
 
-        return CanvasData.getInstance().formatCanvasToCoordinate(getImage().getWidth());
+        return Screen.getInstance().convertCanvasToViewPort(getImage().getWidth());
     }
 
     @Override
     public float getScaledHeight() {
 
-        return CanvasData.getInstance().formatCanvasToCoordinate(getImage().getHeight());
+        return Screen.getInstance().convertCanvasToViewPort(getImage().getHeight());
     }
 
     @Override
     public float getScaledWidth(int index) {
 
         if (getIndexedImage(index).isPresent()) {
-            return CanvasData.getInstance().formatCanvasToCoordinate(getIndexedImage(index).get().getWidth());
+            return Screen.getInstance().convertCanvasToViewPort(getIndexedImage(index).get().getWidth());
         }
 
         return 0;
@@ -120,7 +120,7 @@ public class BitmapCollection implements SpriteImage {
     public float getScaledHeight(int index) {
 
         if (getIndexedImage(index).isPresent()) {
-            return CanvasData.getInstance().formatCanvasToCoordinate(getIndexedImage(index).get().getHeight());
+            return Screen.getInstance().convertCanvasToViewPort(getIndexedImage(index).get().getHeight());
         }
 
         return 0;

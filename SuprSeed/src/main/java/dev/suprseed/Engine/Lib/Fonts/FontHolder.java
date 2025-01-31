@@ -4,7 +4,7 @@ import android.content.Context;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 
-import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.CanvasData;
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Screen;
 
 public class FontHolder extends FontPaintRoller implements FontRetriever<String> {
 
@@ -18,7 +18,7 @@ public class FontHolder extends FontPaintRoller implements FontRetriever<String>
 
         this.loadedFont = context.getResources().getFont(fontResourceId);
 
-        this.fontSize = CanvasData.getInstance().formatCoordinateToCanvas(fontSize);
+        this.fontSize = Screen.getInstance().convertViewPortToCanvas(fontSize);
 
         this.fontId = fontId;
 
@@ -31,7 +31,7 @@ public class FontHolder extends FontPaintRoller implements FontRetriever<String>
 
         this.loadedFont = context.getResources().getFont(fontResourceId);
 
-        this.fontSize = CanvasData.getInstance().formatCoordinateToCanvas(fontSize);
+        this.fontSize = Screen.getInstance().convertViewPortToCanvas(fontSize);
 
         this.fontId = "";
 

@@ -5,7 +5,7 @@ import android.graphics.RectF;
 
 import dev.suprseed.Engine.Core.ErrorLogger.CentralLogger;
 import dev.suprseed.Engine.Core.ErrorLogger.ErrorType;
-import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.CanvasData;
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Screen;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
 
 public class PixelPerfectCollision implements CollisionHandler {
@@ -51,15 +51,15 @@ public class PixelPerfectCollision implements CollisionHandler {
 
         // TODO: VERIFY THAT THIS IS WORKING AS EXPECTED!
         // Offset the overlap area so it corresponds to sprite pixel indices
-        first.left -= CanvasData.getInstance().formatCoordinateToCanvas(one.getX());
-        first.right -= CanvasData.getInstance().formatCoordinateToCanvas(one.getX());
-        first.top -= CanvasData.getInstance().formatCoordinateToCanvas(one.getY());
-        first.bottom -= CanvasData.getInstance().formatCoordinateToCanvas(one.getY());
+        first.left -= Screen.getInstance().convertViewPortToCanvas(one.getX());
+        first.right -= Screen.getInstance().convertViewPortToCanvas(one.getX());
+        first.top -= Screen.getInstance().convertViewPortToCanvas(one.getY());
+        first.bottom -= Screen.getInstance().convertViewPortToCanvas(one.getY());
 
-        second.left -= CanvasData.getInstance().formatCoordinateToCanvas(two.getX());
-        second.right -= CanvasData.getInstance().formatCoordinateToCanvas(two.getX());
-        second.top -= CanvasData.getInstance().formatCoordinateToCanvas(two.getY());
-        second.bottom -= CanvasData.getInstance().formatCoordinateToCanvas(two.getY());
+        second.left -= Screen.getInstance().convertViewPortToCanvas(two.getX());
+        second.right -= Screen.getInstance().convertViewPortToCanvas(two.getX());
+        second.top -= Screen.getInstance().convertViewPortToCanvas(two.getY());
+        second.bottom -= Screen.getInstance().convertViewPortToCanvas(two.getY());
 
 
         // Calculate if a collision has occurred

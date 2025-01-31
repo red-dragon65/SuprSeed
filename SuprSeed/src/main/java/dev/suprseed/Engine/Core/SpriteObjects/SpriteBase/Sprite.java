@@ -3,8 +3,8 @@ package dev.suprseed.Engine.Core.SpriteObjects.SpriteBase;
 import android.graphics.RectF;
 
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.VelocityScaler;
-import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.CanvasData;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Screen;
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
 import dev.suprseed.Engine.Core.SpriteObjects.DefaultComponents.Resetable;
 import dev.suprseed.Engine.Core.System.LayerData;
@@ -145,6 +145,14 @@ public abstract class Sprite implements RenderableAndLayerable, Boundable, Logic
     }
 
 
+    public float getWidth() {
+        return assetBundle.getSelectedImageSet().getScaledWidth();
+    }
+
+    public float getHeight() {
+        return assetBundle.getSelectedImageSet().getScaledHeight();
+    }
+
     public AssetBundle getAssetBundle() {
         return assetBundle;
     }
@@ -170,21 +178,13 @@ public abstract class Sprite implements RenderableAndLayerable, Boundable, Logic
         return layerInfo;
     }
 
-    public float getCanvasScaledWidth() {
-        return CanvasData.getInstance().getScaledWidth();
-    }
-
-    public float getCanvasScaledHeight() {
-        return CanvasData.getInstance().getScaledHeight();
-    }
-
     @Override
     public void getRectF(RectF result) {
 
-        result.left = CanvasData.getInstance().formatCoordinateToCanvas(this.getX());
+        result.left = Screen.getInstance().convertViewPortToCanvas(this.getX());
         result.right = result.left + this.getAssetBundle().getSelectedImageSet().getImage().getWidth();
 
-        result.top = CanvasData.getInstance().formatCoordinateToCanvas(this.getY());
+        result.top = Screen.getInstance().convertViewPortToCanvas(this.getY());
         result.bottom = result.top + this.getAssetBundle().getSelectedImageSet().getImage().getHeight();
     }
 

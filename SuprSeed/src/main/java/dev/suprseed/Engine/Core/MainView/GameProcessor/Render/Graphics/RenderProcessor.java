@@ -5,8 +5,8 @@ import android.graphics.Paint;
 
 import dev.suprseed.Engine.Core.ErrorLogger.CentralLogger;
 import dev.suprseed.Engine.Core.ErrorLogger.ErrorType;
-import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.CanvasData;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates.CoordinateHandler;
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Screen;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
 
 public class RenderProcessor implements RenderHandler {
@@ -38,7 +38,7 @@ public class RenderProcessor implements RenderHandler {
             return;
         }
 
-        if (CanvasData.getInstance().getOriginalWidth() == 0 || CanvasData.getInstance().getOriginalHeight() == 0) {
+        if (Screen.getInstance().getWidth() == 0 || Screen.getInstance().getHeight() == 0) {
 
             CentralLogger.getInstance().logMessage(ErrorType.WARN, "The canvas dimensions have not been initialized!!");
 
