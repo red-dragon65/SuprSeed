@@ -15,6 +15,7 @@ public class CameraShaker {
     private final int maxShakeDistance = 3;
     private final int shakeRate = 1;
     private int currentFrameTime = targetFrameTime + 1;
+    private boolean resetCamera = false;
 
 
     // Constructor
@@ -27,6 +28,10 @@ public class CameraShaker {
 
                 if (currentFrameTime % shakeRate == 0) { // Check frame interval to run movement
 
+                    resetCamera = true;
+
+                    // TODO: Fix this bug
+                    //      when logic runs twice per frame, the camera will not show movement!
                     if (currentFrameTime % 2 == 0) { // Alternate movement between the two below
 
                         Camera.getInstance().setxOffset(0);
@@ -41,11 +46,12 @@ public class CameraShaker {
                 currentFrameTime++;
             }
 
-            // Force camera back to original position
-            if (currentFrameTime == targetFrameTime) {
+            // Set camera back to original position
+            if (currentFrameTime == targetFrameTime && resetCamera) {
 
                 Camera.getInstance().setxOffset(0);
                 Camera.getInstance().setyOffset(0);
+                resetCamera = false;
             }
         };
     }

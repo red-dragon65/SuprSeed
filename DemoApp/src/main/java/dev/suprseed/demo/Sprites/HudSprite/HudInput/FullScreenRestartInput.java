@@ -3,7 +3,7 @@ package dev.suprseed.demo.Sprites.HudSprite.HudInput;
 import android.graphics.RectF;
 import android.view.MotionEvent;
 
-import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Screen;
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.ViewPort;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
 import dev.suprseed.Engine.Core.System.LayerData;
 import dev.suprseed.Engine.Core.System.LayerHandler;
@@ -26,8 +26,8 @@ public class FullScreenRestartInput implements InputListener {
     @Override
     public void getRectF(RectF result) {
 
-        float height = Screen.getInstance().getHeight();
-        float width = Screen.getInstance().getWidth();
+        float height = ViewPort.getInstance().getHeight();
+        float width = ViewPort.getInstance().getWidth();
 
         result.set(0, 0, width, height);
     }

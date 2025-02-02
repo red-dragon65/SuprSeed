@@ -4,7 +4,6 @@ import android.graphics.RectF;
 
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.VelocityScaler;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
-import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Screen;
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
 import dev.suprseed.Engine.Core.SpriteObjects.DefaultComponents.Resetable;
 import dev.suprseed.Engine.Core.System.LayerData;
@@ -181,11 +180,11 @@ public abstract class Sprite implements RenderableAndLayerable, Boundable, Logic
     @Override
     public void getRectF(RectF result) {
 
-        result.left = Screen.getInstance().convertViewPortToCanvas(this.getX());
-        result.right = result.left + this.getAssetBundle().getSelectedImageSet().getImage().getWidth();
+        result.left = this.getX();
+        result.right = result.left + getWidth();
 
-        result.top = Screen.getInstance().convertViewPortToCanvas(this.getY());
-        result.bottom = result.top + this.getAssetBundle().getSelectedImageSet().getImage().getHeight();
+        result.top = this.getY();
+        result.bottom = result.top + getHeight();
     }
 
     public boolean isAllowCollisionDiagnostic() {

@@ -8,6 +8,7 @@ import java.util.List;
 
 import dev.suprseed.Engine.Core.ErrorLogger.CentralLogger;
 import dev.suprseed.Engine.Core.ErrorLogger.ErrorType;
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Screen;
 import dev.suprseed.Engine.Lib.Input.InputListener;
 
 public class TouchEventDispatcher implements EventDispatcher {
@@ -15,6 +16,8 @@ public class TouchEventDispatcher implements EventDispatcher {
     private final RectF bounds = new RectF();
     private float lastDownX;
     private float lastDownY;
+    private float eventX;
+    private float eventY;
 
     private TouchTypes actionPerformed;
 
@@ -67,11 +70,15 @@ public class TouchEventDispatcher implements EventDispatcher {
 
     private boolean isTouching(InputListener listener, MotionEvent event) {
 
+        // Convert screen location into view port terms
+        eventX = Screen.getInstance().convertCanvasToViewPort(event.getX());
+        eventY = Screen.getInstance().convertCanvasToViewPort(event.getY());
+
         // Get the bounds
         listener.getRectF(bounds);
 
         // See if event occurred on the listener
-        if (!bounds.contains(event.getX(), event.getY())) {
+        if (!bounds.contains(eventX, eventY)) {
             return false;
         }
 
@@ -81,8 +88,8 @@ public class TouchEventDispatcher implements EventDispatcher {
                 actionPerformed = TouchTypes.HOLD;
 
                 // Hold the last location
-                lastDownX = event.getX();
-                lastDownY = event.getY();
+                lastDownX = eventX;
+                lastDownY = eventY;
 
                 // Hold the listener that is being helded
                 lastListenerHeld = listener;

@@ -31,8 +31,7 @@ public class ObstacleCollisionComponent implements Component {
         this.soundEngine = soundEngine;
         this.gameOverData = gameOverData;
 
-        // TODO: This should be injected for better flexibility...
-        collisionMethod = new PixelPerfectCollision(new RectangleCollision(), 1);
+        collisionMethod = new PixelPerfectCollision(new RectangleCollision(), 4);
         cameraShaker = new CameraShaker();
         cameraShaker.loadCameraShake();
     }
