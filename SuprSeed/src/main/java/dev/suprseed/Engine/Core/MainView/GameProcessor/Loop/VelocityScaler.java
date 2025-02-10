@@ -1,13 +1,14 @@
 package dev.suprseed.Engine.Core.MainView.GameProcessor.Loop;
 
 public class VelocityScaler {
-    private static float velocityScaler = 1;
 
-    public static float getVelocityScaler() {
+    private float velocityScaler = 1;
+
+    public float getVelocityScaler() {
         return velocityScaler;
     }
 
-    public static void setVelocityScaler(float scaleRatio) {
+    public void setVelocityScaler(float scaleRatio) {
         velocityScaler = scaleRatio;
     }
 }

@@ -6,10 +6,9 @@ import android.graphics.Bitmap;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import dev.suprseed.Engine.Core.ErrorLogger.CentralLogger;
 import dev.suprseed.Engine.Core.ErrorLogger.ErrorType;
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
-import dev.suprseed.Engine.Core.System.RenderSystem;
+import dev.suprseed.Engine.EngineContext;
 import dev.suprseed.Engine.Lib.AssetLoader.FPSMismatchException;
 import dev.suprseed.Engine.Lib.AssetLoader.FolderParser;
 import dev.suprseed.Engine.Lib.AssetLoader.Streamable;
@@ -47,7 +46,7 @@ public class BitmapAnimation extends BitmapCollection implements Animator {
         reason, you need an animation speed slower the 1 frame per second, than it would make sense
         to de-couple the this.targetFrameTime from the RenderSystem.
          */
-        this.targetFrameTime = RenderSystem.getInstance().getTargetFrameTime();
+        this.targetFrameTime = EngineContext.getRenderSystem().getTargetFrameTime();
 
         init(parentScene, fps, loop, tag);
     }
@@ -77,7 +76,7 @@ public class BitmapAnimation extends BitmapCollection implements Animator {
             fps = findValidFps(fps);
 
             String message = "INVALID FPS! Changing bitmap animation fps to nearest valid number: " + fps;
-            CentralLogger.getInstance().logMessage(ErrorType.ERROR, message, e);
+            EngineContext.getLogger().logMessage(ErrorType.ERROR, message, e);
         }
 
         frameDelay = targetFrameTime / fps;

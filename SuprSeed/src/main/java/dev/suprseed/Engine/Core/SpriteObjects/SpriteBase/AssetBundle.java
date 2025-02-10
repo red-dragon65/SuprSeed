@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import dev.suprseed.Engine.Core.ErrorLogger.CentralLogger;
 import dev.suprseed.Engine.Core.ErrorLogger.ErrorType;
+import dev.suprseed.Engine.EngineContext;
 import dev.suprseed.Engine.Lib.Images.PlaceHolder;
 import dev.suprseed.Engine.Lib.Images.SpriteImage;
 
@@ -52,7 +52,7 @@ public class AssetBundle {
             return result.get();
         }
 
-        CentralLogger.getInstance().logMessage(ErrorType.ERROR, "Image with key: '" + imageName + "' does not exist in the AssetBundle!");
+        EngineContext.getLogger().logMessage(ErrorType.ERROR, "Image with key: '" + imageName + "' does not exist in the AssetBundle!");
 
         /*
         There is no reason for this to ever throw for the end user
@@ -83,7 +83,7 @@ public class AssetBundle {
         selectedImage = PlaceHolder.TAG.PLACEHOLDER.toString();
 
         String message = "Image with key: '" + selected + "' does not exist in the AssetBundle!";
-        CentralLogger.getInstance().logMessage(ErrorType.ERROR, message);
+        EngineContext.getLogger().logMessage(ErrorType.ERROR, message);
 
         return false;
     }

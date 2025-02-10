@@ -3,10 +3,10 @@ package dev.suprseed.demo.Sprites.HeroSprite;
 import android.graphics.RectF;
 import android.view.MotionEvent;
 
-import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.ViewPort;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
 import dev.suprseed.Engine.Core.System.LayerData;
 import dev.suprseed.Engine.Core.System.LayerHandler;
+import dev.suprseed.Engine.EngineTools;
 import dev.suprseed.Engine.Lib.Input.Dispatchers.TouchTypes;
 import dev.suprseed.Engine.Lib.Input.InputListener;
 import dev.suprseed.demo.SharedData.GameOverData;
@@ -41,8 +41,8 @@ public class FullScreenHeroTouchInput implements InputListener {
     @Override
     public void getRectF(RectF result) {
 
-        float height = ViewPort.getInstance().getHeight();
-        float width = ViewPort.getInstance().getWidth();
+        float height = EngineTools.getViewPort().getHeight();
+        float width = EngineTools.getViewPort().getWidth();
 
         result.set(0, 0, width, height);
     }

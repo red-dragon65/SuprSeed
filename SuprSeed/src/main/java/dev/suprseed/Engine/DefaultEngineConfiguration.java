@@ -9,24 +9,21 @@ import dev.suprseed.Engine.Core.MainView.EngineSettings.ViewConfig;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.SceneStarter;
 import dev.suprseed.Engine.Core.MainView.GameViewBuilder.BaseEngineConfigurator;
 import dev.suprseed.Engine.Core.MainView.GameViewBuilder.EngineConfigurator;
-import dev.suprseed.Engine.Lib.Collisions.CollisionDiagnosticsOverlay;
-import dev.suprseed.Engine.Lib.Input.CentralInputManager;
 import dev.suprseed.Engine.Lib.Input.Dispatchers.TouchEventDispatcher;
 
 public class DefaultEngineConfiguration extends BaseEngineConfigurator {
 
     private final EngineConfigurator engineConfigurator;
 
-
     public DefaultEngineConfiguration(Context context, SceneStarter sceneStarter) {
         super(context);
 
         // User can build the engine configuration here
-        engineConfigurator = new EngineConfigurator(context, sceneStarter, CentralInputManager.getInstance(), new CollisionDiagnosticsOverlay(false))
+        engineConfigurator = new EngineConfigurator(context, sceneStarter)
                 .setViewConfig(new ViewConfig(true, true, true, false));
 
         // Add the input handlers here
-        CentralInputManager.getInstance().dispatcherRegister.registerObject(new TouchEventDispatcher());
+        EngineTools.getInputManager().getDispatcherRegistry().registerObject(new TouchEventDispatcher());
     }
 
     @Override

@@ -2,7 +2,7 @@ package dev.suprseed.demo.Sprites.HeroSprite.HeroComponents;
 
 import dev.suprseed.Engine.Core.SpriteObjects.DefaultComponents.ResetableComponent;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
-import dev.suprseed.Engine.Lib.Input.CentralInputManager;
+import dev.suprseed.Engine.EngineTools;
 import dev.suprseed.Engine.Lib.SoundPlayer.SoundMixer;
 import dev.suprseed.demo.SharedData.BounceData;
 import dev.suprseed.demo.SharedData.GameOverData;
@@ -26,7 +26,7 @@ public class BounceMovementComponent implements ResetableComponent {
 
         screenListener = new FullScreenHeroTouchInput(sprite, gameOverData);
 
-        CentralInputManager.getInstance().listenerRegister.registerObject(screenListener);
+        EngineTools.getInputManager().getListenerRegistry().registerObject(screenListener);
     }
 
 

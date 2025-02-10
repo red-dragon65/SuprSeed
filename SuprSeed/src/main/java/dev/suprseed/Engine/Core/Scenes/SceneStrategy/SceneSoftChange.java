@@ -2,7 +2,7 @@ package dev.suprseed.Engine.Core.Scenes.SceneStrategy;
 
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.SceneManager;
-import dev.suprseed.Engine.Core.System.LogicSystem;
+import dev.suprseed.Engine.EngineContext;
 
 public class SceneSoftChange implements SceneChangeStrategy<BaseScene> {
 
@@ -20,7 +20,7 @@ public class SceneSoftChange implements SceneChangeStrategy<BaseScene> {
                     oldScene.setDrawable(false);
 
                     // Clear the system register
-                    LogicSystem.getInstance().getLogicRegister().removeAllObjects();
+                    EngineContext.getLogicSystem().getLogicRegister().removeAllObjects();
 
                     // Enable the new scene
                     scene.setActive(true);

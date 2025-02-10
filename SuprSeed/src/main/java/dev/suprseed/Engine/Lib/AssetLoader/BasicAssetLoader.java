@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import dev.suprseed.Engine.Core.ErrorLogger.CentralLogger;
 import dev.suprseed.Engine.Core.ErrorLogger.ErrorType;
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.AssetBundle;
+import dev.suprseed.Engine.EngineContext;
 import dev.suprseed.Engine.Lib.Images.SpriteImage;
 
 abstract public class BasicAssetLoader implements AssetLoadable<Optional<AssetBundle>, Optional<SpriteImage>> {
@@ -51,7 +51,7 @@ abstract public class BasicAssetLoader implements AssetLoadable<Optional<AssetBu
         if (!assets.isEmpty()) {
             return Optional.of(new AssetBundle(assets));
         } else {
-            CentralLogger.getInstance().logMessage(ErrorType.ERROR, "Could not find one or more of the images specified in the AssetLoader! tags: " + tags);
+            EngineContext.getLogger().logMessage(ErrorType.ERROR, "Could not find one or more of the images specified in the AssetLoader! tags: " + tags);
         }
 
         return Optional.empty();
@@ -63,7 +63,7 @@ abstract public class BasicAssetLoader implements AssetLoadable<Optional<AssetBu
         Optional<SpriteImage> result = images.stream().filter(i -> i.getTag().equals(tag)).findFirst();
 
         if (!result.isPresent()) {
-            CentralLogger.getInstance().logMessage(ErrorType.ERROR, "Could not find the image specified in the AssetLoader! imageId: " + tag);
+            EngineContext.getLogger().logMessage(ErrorType.ERROR, "Could not find the image specified in the AssetLoader! imageId: " + tag);
         }
 
         return result;

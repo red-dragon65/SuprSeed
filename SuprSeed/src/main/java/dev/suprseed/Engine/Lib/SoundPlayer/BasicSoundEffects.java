@@ -7,8 +7,8 @@ import android.media.SoundPool;
 import java.util.Map;
 import java.util.Optional;
 
-import dev.suprseed.Engine.Core.ErrorLogger.CentralLogger;
 import dev.suprseed.Engine.Core.ErrorLogger.ErrorType;
+import dev.suprseed.Engine.EngineContext;
 
 public class BasicSoundEffects<T> implements SoundMixer<T> {
 
@@ -80,7 +80,7 @@ public class BasicSoundEffects<T> implements SoundMixer<T> {
 
             } else {
 
-                CentralLogger.getInstance().logMessage(ErrorType.WARN, "The requested sound '" + soundId + "' does not exist in the loaded sound list!");
+                EngineContext.getLogger().logMessage(ErrorType.WARN, "The requested sound '" + soundId + "' does not exist in the loaded sound list!");
             }
 
         }
@@ -96,7 +96,7 @@ public class BasicSoundEffects<T> implements SoundMixer<T> {
 
         } else {
 
-            CentralLogger.getInstance().logMessage(ErrorType.WARN, "The requested sound '" + soundID + "' does not exist in the loaded sound list!");
+            EngineContext.getLogger().logMessage(ErrorType.WARN, "The requested sound '" + soundID + "' does not exist in the loaded sound list!");
         }
     }
 

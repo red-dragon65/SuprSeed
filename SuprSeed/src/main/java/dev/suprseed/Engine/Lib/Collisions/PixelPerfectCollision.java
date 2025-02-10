@@ -5,10 +5,9 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.RectF;
 
-import dev.suprseed.Engine.Core.ErrorLogger.CentralLogger;
 import dev.suprseed.Engine.Core.ErrorLogger.ErrorType;
-import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Screen;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
+import dev.suprseed.Engine.EngineContext;
 
 public class PixelPerfectCollision implements CollisionHandler {
 
@@ -23,12 +22,13 @@ public class PixelPerfectCollision implements CollisionHandler {
     // Dependency injection
     private final CollisionHandler basicCollision;
     private int pixelMaskResolution = 1;
+
     // Constructor
     public PixelPerfectCollision(CollisionHandler basicCollision, int pixelMaskResolution) {
 
         // Check user input
         if (pixelMaskResolution < 1) {
-            CentralLogger.getInstance().logMessage(ErrorType.WARN, "The pixel mask resolution must be equal to or greater than 1! Defaulting to 1.");
+            EngineContext.getLogger().logMessage(ErrorType.WARN, "The pixel mask resolution must be equal to or greater than 1! Defaulting to 1.");
             pixelMaskResolution = 1;
         }
 
@@ -71,10 +71,10 @@ public class PixelPerfectCollision implements CollisionHandler {
         two.getRectF(secondBounds);
 
         // Upscale to get the actual x and y
-        firstBounds.left = Screen.getInstance().convertViewPortToCanvas(firstBounds.left);
-        firstBounds.top = Screen.getInstance().convertViewPortToCanvas(firstBounds.top);
-        secondBounds.left = Screen.getInstance().convertViewPortToCanvas(secondBounds.left);
-        secondBounds.top = Screen.getInstance().convertViewPortToCanvas(secondBounds.top);
+        firstBounds.left = EngineContext.getScreen().convertViewPortToCanvas(firstBounds.left);
+        firstBounds.top = EngineContext.getScreen().convertViewPortToCanvas(firstBounds.top);
+        secondBounds.left = EngineContext.getScreen().convertViewPortToCanvas(secondBounds.left);
+        secondBounds.top = EngineContext.getScreen().convertViewPortToCanvas(secondBounds.top);
 
         // Get the actual rectangle based on the actual loaded image
         firstBounds.right = firstBounds.left + one.getAssetBundle().getSelectedImageSet().getImage().getWidth();

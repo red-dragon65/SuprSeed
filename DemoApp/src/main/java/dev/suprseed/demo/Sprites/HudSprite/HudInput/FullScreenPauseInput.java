@@ -4,9 +4,9 @@ import android.graphics.RectF;
 import android.view.MotionEvent;
 
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LoopRunner;
-import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.ViewPort;
 import dev.suprseed.Engine.Core.System.LayerData;
 import dev.suprseed.Engine.Core.System.LayerHandler;
+import dev.suprseed.Engine.EngineTools;
 import dev.suprseed.Engine.Lib.Input.Dispatchers.TouchTypes;
 import dev.suprseed.Engine.Lib.Input.InputListener;
 
@@ -21,8 +21,8 @@ public class FullScreenPauseInput implements InputListener {
     @Override
     public void getRectF(RectF result) {
 
-        float height = ViewPort.getInstance().getHeight();
-        float width = ViewPort.getInstance().getWidth();
+        float height = EngineTools.getViewPort().getHeight();
+        float width = EngineTools.getViewPort().getWidth();
 
         result.set(0, 0, width, height);
     }

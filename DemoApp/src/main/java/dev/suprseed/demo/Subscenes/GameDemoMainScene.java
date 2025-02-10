@@ -40,7 +40,7 @@ public class GameDemoMainScene extends SceneManager {
     public GameDemoMainScene(SceneManager parentScene, String sceneId) {
         super(parentScene, sceneId);
 
-        //CollisionDiagnosticsOverlay.getInstance().setEnabled(true);
+        //EngineTools.getCollisionDrawer().setEnabled(true);
 
         // Instantiate the assets for this scene
         FolderParser localFolderParser = new LocalFolderParser(context.getResources());

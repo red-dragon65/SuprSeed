@@ -1,8 +1,9 @@
 package dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates;
 
 
-import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Screen;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
+import dev.suprseed.Engine.EngineContext;
+import dev.suprseed.Engine.EngineTools;
 
 public class CoordinateProcessor implements CoordinateHandler {
 
@@ -27,8 +28,8 @@ public class CoordinateProcessor implements CoordinateHandler {
         if (sprite.isCameraEnabled()) {
 
             // Apply camera offset (this has to happen before transforming location data)
-            loc[0] += Camera.getInstance().getxOffset();
-            loc[1] += Camera.getInstance().getyOffset();
+            loc[0] += EngineTools.getGlobalCamera().getxOffset();
+            loc[1] += EngineTools.getGlobalCamera().getyOffset();
         }
 
 
@@ -37,8 +38,8 @@ public class CoordinateProcessor implements CoordinateHandler {
         loc = locationHandler.parseLocation(loc);
 
         // Format the location to the canvas
-        loc[0] = Screen.getInstance().convertViewPortToCanvas(loc[0]);
-        loc[1] = Screen.getInstance().convertViewPortToCanvas(loc[1]);
+        loc[0] = EngineContext.getScreen().convertViewPortToCanvas(loc[0]);
+        loc[1] = EngineContext.getScreen().convertViewPortToCanvas(loc[1]);
 
 
         return loc;

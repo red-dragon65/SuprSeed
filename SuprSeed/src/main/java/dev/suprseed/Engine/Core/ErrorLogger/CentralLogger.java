@@ -2,22 +2,16 @@ package dev.suprseed.Engine.Core.ErrorLogger;
 
 public class CentralLogger implements Logable {
 
-    // Eager loading singleton
-    private static final CentralLogger INSTANCE = new CentralLogger();
     // Hold the log strategy
     private Logable logMethod;
 
 
     // Constructor
     // Private to prevent client use of 'new' keyword
-    private CentralLogger() {
+    public CentralLogger() {
 
         // Use cat logging as the default
         logMethod = new AndroidCatLogger();
-    }
-
-    public static CentralLogger getInstance() {
-        return INSTANCE;
     }
 
     public void changeLogMethod(Logable logMethod) {

@@ -3,11 +3,11 @@ package dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
-import dev.suprseed.Engine.Core.ErrorLogger.CentralLogger;
 import dev.suprseed.Engine.Core.ErrorLogger.ErrorType;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates.CoordinateHandler;
-import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Screen;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
+import dev.suprseed.Engine.EngineContext;
+import dev.suprseed.Engine.EngineTools;
 
 public class RenderProcessor implements RenderHandler {
 
@@ -16,15 +16,13 @@ public class RenderProcessor implements RenderHandler {
     private final CoordinateHandler coordinateHandler;
     // The hardware accelerated canvas provided by a view
     private Canvas canvas;
-    private CollisionDrawable collisionDiagnoser;
 
 
     // Constructor
-    public RenderProcessor(CoordinateHandler coordinateHandler, CollisionDrawable collisionDiagnoser) {
+    public RenderProcessor(CoordinateHandler coordinateHandler) {
 
         // Dependency injection
         this.coordinateHandler = coordinateHandler;
-        this.collisionDiagnoser = collisionDiagnoser;
     }
 
     @Override
@@ -33,23 +31,23 @@ public class RenderProcessor implements RenderHandler {
         // Show warning if canvas is not set
         if (this.canvas == null) {
 
-            CentralLogger.getInstance().logMessage(ErrorType.WARN, "The canvas has not been initialized!");
+            EngineContext.getLogger().logMessage(ErrorType.WARN, "The canvas has not been initialized!");
 
             return;
         }
 
-        if (Screen.getInstance().getWidth() == 0 || Screen.getInstance().getHeight() == 0) {
+        if (EngineContext.getScreen().getWidth() == 0 || EngineContext.getScreen().getHeight() == 0) {
 
-            CentralLogger.getInstance().logMessage(ErrorType.WARN, "The canvas dimensions have not been initialized!!");
+            EngineContext.getLogger().logMessage(ErrorType.WARN, "The canvas dimensions have not been initialized!!");
 
             return;
         }
 
 
         // Only process sprite overlays if the diagnoser is enabled
-        if (collisionDiagnoser.isEnabled()) {
+        if (EngineTools.getCollisionDrawer().isEnabled()) {
 
-            collisionDiagnoser.addOverlay(sprite);
+            EngineTools.getCollisionDrawer().addOverlay(sprite);
         }
 
         // Actually draw sprite

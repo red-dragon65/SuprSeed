@@ -2,10 +2,8 @@ package dev.suprseed.Engine.Core.Scenes.SceneHeirarchy;
 
 import android.content.Context;
 
-import dev.suprseed.Engine.Core.ErrorLogger.CentralLogger;
 import dev.suprseed.Engine.Core.ErrorLogger.ErrorType;
-import dev.suprseed.Engine.Core.System.LogicSystem;
-import dev.suprseed.Engine.Core.System.RenderSystem;
+import dev.suprseed.Engine.EngineContext;
 
 public class RootScene extends SceneManager {
 
@@ -21,12 +19,12 @@ public class RootScene extends SceneManager {
         this.context = context;
 
         if (initialized) {
-            CentralLogger.getInstance().logMessage(ErrorType.WARN, "There is already a root scene registered! Adding another root scene may cause issue to occur!");
+            EngineContext.getLogger().logMessage(ErrorType.WARN, "There is already a root scene registered! Adding another root scene may cause issue to occur!");
         }
 
         // Register the top level scene to the system managers
-        LogicSystem.getInstance().getLogicRegister().registerObject(this);
-        RenderSystem.getInstance().getImageRegister().registerObject(this);
-        RenderSystem.getInstance().getAnimationRegister().registerObject(this);
+        EngineContext.getLogicSystem().getLogicRegister().registerObject(this);
+        EngineContext.getRenderSystem().getImageRegister().registerObject(this);
+        EngineContext.getRenderSystem().getAnimationRegister().registerObject(this);
     }
 }

@@ -11,8 +11,7 @@ import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LogicRates;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.SceneStarter;
 import dev.suprseed.Engine.Core.MainView.GameViewBuilder.BaseEngineConfigurator;
 import dev.suprseed.Engine.Core.MainView.GameViewBuilder.EngineConfigurator;
-import dev.suprseed.Engine.Lib.Collisions.CollisionDiagnosticsOverlay;
-import dev.suprseed.Engine.Lib.Input.CentralInputManager;
+import dev.suprseed.Engine.EngineTools;
 import dev.suprseed.Engine.Lib.Input.Dispatchers.TouchEventDispatcher;
 import dev.suprseed.demo.Subscenes.GameDemoMainScene;
 
@@ -39,12 +38,12 @@ public class ClientEngineConfigurator extends BaseEngineConfigurator {
         };*/
 
         // User can build the engine configuration here
-        engineConfigurator = new EngineConfigurator(context, clientSceneStarter, CentralInputManager.getInstance(), new CollisionDiagnosticsOverlay(false))
+        engineConfigurator = new EngineConfigurator(context, clientSceneStarter)
                 .setViewConfig(new ViewConfig(true, true, true, false))
                 .setLoopConfig(new LoopConfig(LogicRates.ONE_TWENTY_TICKS, 0.2f));
 
         // Add the input handlers here
-        CentralInputManager.getInstance().dispatcherRegister.registerObject(new TouchEventDispatcher());
+        EngineTools.getInputManager().getDispatcherRegistry().registerObject(new TouchEventDispatcher());
     }
 
     @Override

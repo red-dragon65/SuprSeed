@@ -5,25 +5,33 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import dev.suprseed.Engine.Core.ErrorLogger.CentralLogger;
 import dev.suprseed.Engine.Core.MainView.EngineSettings.CanvasConfig;
 import dev.suprseed.Engine.Core.MainView.EngineSettings.LoopConfig;
 import dev.suprseed.Engine.Core.MainView.EngineSettings.ViewConfig;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.GameView;
-import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.InputHandler;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LogicRates;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LoopController;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LoopRunnable;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LoopRunner;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.RefreshHandler;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.SceneStarter;
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.VelocityScaler;
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates.Camera;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates.CartesianProcessor;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates.CoordinateHandler;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates.CoordinateProcessor;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates.LocationHandler;
-import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.CollisionDrawable;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderProcessor;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Screen;
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.ViewPort;
+import dev.suprseed.Engine.Core.System.LogicSystem;
+import dev.suprseed.Engine.Core.System.RenderSystem;
+import dev.suprseed.Engine.EngineContext;
+import dev.suprseed.Engine.EngineTools;
+import dev.suprseed.Engine.Lib.Collisions.CollisionDiagnosticsOverlay;
+import dev.suprseed.Engine.Lib.Input.InputRegistryManager;
 
 public class EngineConfigurator extends BaseEngineConfigurator {
 
@@ -35,16 +43,28 @@ public class EngineConfigurator extends BaseEngineConfigurator {
     private LoopConfig loopConfig;
     private ViewConfig viewConfig;
     private CanvasConfig canvasConfig;
-    private InputHandler inputHandler;
-    private CollisionDrawable collisionDiagnoser;
+    private InputRegistryManager inputRegistryManager;
 
     // Constructor
-    public EngineConfigurator(Context context, SceneStarter sceneStarter, InputHandler inputHandler, CollisionDrawable collisionDiagnoser) {
+    public EngineConfigurator(Context context, SceneStarter sceneStarter) {
         super(context);
 
         this.sceneStarter = sceneStarter;
-        this.inputHandler = inputHandler;
-        this.collisionDiagnoser = collisionDiagnoser;
+
+        inputRegistryManager = new InputRegistryManager();
+
+        // Setup the engine context and tools
+
+        EngineContext.setCentralLogger(new CentralLogger());
+        EngineContext.setVelocityScaler(new VelocityScaler());
+        EngineContext.setScreen(new Screen());
+        EngineContext.setLogicSystem(new LogicSystem());
+        EngineContext.setRenderSystem(new RenderSystem());
+
+        EngineTools.setInputManager(inputRegistryManager);
+        EngineTools.setViewPort(new ViewPort());
+        EngineTools.setGlobalCamera(new Camera());
+        EngineTools.setCollisionDrawer(new CollisionDiagnosticsOverlay(false));
     }
 
     @Override
@@ -52,7 +72,7 @@ public class EngineConfigurator extends BaseEngineConfigurator {
 
         RefreshHandler refreshHandler = new LoopController<>(getLoopConfig(), getLoopManager());
 
-        return new GameView(context, refreshHandler, getLoopManager(), getRenderProcessor(), sceneStarter, inputHandler);
+        return new GameView(context, refreshHandler, getLoopManager(), getRenderProcessor(), sceneStarter, inputRegistryManager);
     }
 
     @Override
@@ -91,7 +111,7 @@ public class EngineConfigurator extends BaseEngineConfigurator {
     public RenderHandler getRenderProcessor() {
 
         if (renderProcessor == null) {
-            renderProcessor = new RenderProcessor(getCoordinateHandler(), collisionDiagnoser);
+            renderProcessor = new RenderProcessor(getCoordinateHandler());
         }
 
         return renderProcessor;
@@ -151,7 +171,7 @@ public class EngineConfigurator extends BaseEngineConfigurator {
             viewConfig = new ViewConfig(true, true, true, true);
         }
 
-        Screen.getInstance().setViewConfig(viewConfig);
+        EngineContext.getScreen().setViewConfig(viewConfig);
         return viewConfig;
     }
 

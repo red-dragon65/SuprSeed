@@ -6,9 +6,8 @@ import android.view.MotionEvent;
 
 import java.util.List;
 
-import dev.suprseed.Engine.Core.ErrorLogger.CentralLogger;
 import dev.suprseed.Engine.Core.ErrorLogger.ErrorType;
-import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Screen;
+import dev.suprseed.Engine.EngineContext;
 import dev.suprseed.Engine.Lib.Input.InputListener;
 
 public class TouchEventDispatcher implements EventDispatcher {
@@ -31,7 +30,7 @@ public class TouchEventDispatcher implements EventDispatcher {
         // Check input type
         if (!event.isFromSource(InputDevice.SOURCE_TOUCHSCREEN)) {
 
-            CentralLogger.getInstance().logMessage(ErrorType.INFO, "Ignored irrelevant event.");
+            EngineContext.getLogger().logMessage(ErrorType.INFO, "Ignored irrelevant event.");
 
             return;
         }
@@ -39,7 +38,7 @@ public class TouchEventDispatcher implements EventDispatcher {
         // Check if any listeners exist
         if (listeners.size() == 0) {
 
-            CentralLogger.getInstance().logMessage(ErrorType.WARN, "There are no listeners taking input!");
+            EngineContext.getLogger().logMessage(ErrorType.WARN, "There are no listeners taking input!");
 
             return;
         }
@@ -61,7 +60,7 @@ public class TouchEventDispatcher implements EventDispatcher {
                     return;
                 }
 
-                CentralLogger.getInstance().logMessage(ErrorType.INFO, "An event was passed to the client!");
+                EngineContext.getLogger().logMessage(ErrorType.INFO, "An event was passed to the client!");
             }
         }
 
@@ -71,8 +70,8 @@ public class TouchEventDispatcher implements EventDispatcher {
     private boolean isTouching(InputListener listener, MotionEvent event) {
 
         // Convert screen location into view port terms
-        eventX = Screen.getInstance().convertCanvasToViewPort(event.getX());
-        eventY = Screen.getInstance().convertCanvasToViewPort(event.getY());
+        eventX = EngineContext.getScreen().convertCanvasToViewPort(event.getX());
+        eventY = EngineContext.getScreen().convertCanvasToViewPort(event.getY());
 
         // Get the bounds
         listener.getRectF(bounds);

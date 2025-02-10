@@ -2,7 +2,6 @@ package dev.suprseed.Engine.Core.SpriteObjects.SpriteBase;
 
 import android.graphics.RectF;
 
-import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.VelocityScaler;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
 import dev.suprseed.Engine.Core.SpriteObjects.DefaultComponents.Resetable;
@@ -10,6 +9,7 @@ import dev.suprseed.Engine.Core.System.LayerData;
 import dev.suprseed.Engine.Core.System.LayerHandler;
 import dev.suprseed.Engine.Core.System.Registerables.LogicRunnable;
 import dev.suprseed.Engine.Core.System.Registerables.RenderableAndLayerable;
+import dev.suprseed.Engine.EngineContext;
 import dev.suprseed.Engine.Lib.Collisions.Boundable;
 
 public abstract class Sprite implements RenderableAndLayerable, Boundable, LogicRunnable, Resetable {
@@ -105,7 +105,7 @@ public abstract class Sprite implements RenderableAndLayerable, Boundable, Logic
      */
     public void applyXVel() {
         setX(
-                getX() + (getxVel() * VelocityScaler.getVelocityScaler())
+                getX() + (getxVel() * EngineContext.getVelocityScaler().getVelocityScaler())
         );
     }
 
@@ -116,7 +116,7 @@ public abstract class Sprite implements RenderableAndLayerable, Boundable, Logic
      */
     public void applyYVel() {
         setY(
-                getY() + (getyVel() * VelocityScaler.getVelocityScaler())
+                getY() + (getyVel() * EngineContext.getVelocityScaler().getVelocityScaler())
         );
     }
 

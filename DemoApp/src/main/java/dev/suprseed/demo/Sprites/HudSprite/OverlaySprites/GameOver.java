@@ -4,8 +4,8 @@ package dev.suprseed.demo.Sprites.HudSprite.OverlaySprites;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
+import dev.suprseed.Engine.EngineTools;
 import dev.suprseed.Engine.Lib.Fonts.FontHolder;
-import dev.suprseed.Engine.Lib.Input.CentralInputManager;
 import dev.suprseed.Engine.Lib.Input.InputListener;
 import dev.suprseed.demo.R;
 import dev.suprseed.demo.SharedData.GameOverData;
@@ -40,7 +40,7 @@ public class GameOver extends Sprite {
 
         screenListener = new FullScreenRestartInput(this, gameOverData);
 
-        CentralInputManager.getInstance().listenerRegister.registerObject(screenListener);
+        EngineTools.getInputManager().getListenerRegistry().registerObject(screenListener);
 
         // Set text location
         setX(gameOverTextLocX);

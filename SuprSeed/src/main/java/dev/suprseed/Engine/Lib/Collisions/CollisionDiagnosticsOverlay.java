@@ -7,14 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import dev.suprseed.Engine.Core.ErrorLogger.CentralLogger;
 import dev.suprseed.Engine.Core.ErrorLogger.ErrorType;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.CollisionDrawable;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
 import dev.suprseed.Engine.Core.System.LayerData;
 import dev.suprseed.Engine.Core.System.LayerHandler;
-import dev.suprseed.Engine.Core.System.RenderSystem;
+import dev.suprseed.Engine.EngineContext;
 
 public class CollisionDiagnosticsOverlay implements CollisionDrawable {
 
@@ -54,7 +53,7 @@ public class CollisionDiagnosticsOverlay implements CollisionDrawable {
             boundsPool.add(new RectF());
         }
 
-        RenderSystem.getInstance().getImageRegister().registerObject(this);
+        EngineContext.getRenderSystem().getImageRegister().registerObject(this);
     }
 
 
@@ -85,7 +84,7 @@ public class CollisionDiagnosticsOverlay implements CollisionDrawable {
 
             } else {
 
-                CentralLogger.getInstance().logMessage(ErrorType.WARN,
+                EngineContext.getLogger().logMessage(ErrorType.WARN,
                         "Bounding box draw limit reached!" +
                                 "(Max size: " + maxSize + ") == (Current size: " + currentSize + ")" +
                                 "No more collision bounds can be added!");
@@ -127,6 +126,18 @@ public class CollisionDiagnosticsOverlay implements CollisionDrawable {
 
         // Set the rect color
         renderer.getPaint().setColor(rectColor);
+
+        // Upscale each rectangle
+        for (int i = 0; i <= currentIndex; i++) {
+
+            RectF current = boundsPool.get(i);
+
+            // Upscale to get the actual x and y
+            current.left = EngineContext.getScreen().convertViewPortToCanvas(current.left);
+            current.top = EngineContext.getScreen().convertViewPortToCanvas(current.top);
+            current.right = EngineContext.getScreen().convertViewPortToCanvas(current.right);
+            current.bottom = EngineContext.getScreen().convertViewPortToCanvas(current.bottom);
+        }
 
         // Draw each rectangle
         for (int i = 0; i <= currentIndex; i++) {

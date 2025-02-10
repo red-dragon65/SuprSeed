@@ -1,7 +1,6 @@
 package dev.suprseed.Engine.Core.System;
 
 
-import dev.suprseed.Engine.Core.ErrorLogger.CentralLogger;
 import dev.suprseed.Engine.Core.ErrorLogger.ErrorType;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import dev.suprseed.Engine.Core.System.RegisterTypes.AnimationRegister;
@@ -9,11 +8,10 @@ import dev.suprseed.Engine.Core.System.RegisterTypes.ImageRegister;
 import dev.suprseed.Engine.Core.System.Registerables.Renderable;
 import dev.suprseed.Engine.Core.System.Registers.AnimationRegistry;
 import dev.suprseed.Engine.Core.System.Registers.ImageRegistry;
+import dev.suprseed.Engine.EngineContext;
 
 public class RenderSystem implements Renderable {
 
-    // Eager loading singleton
-    private static final RenderSystem INSTANCE = new RenderSystem();
     private final ImageRegister imageRegister;
     private final AnimationRegister animationRegister;
 
@@ -25,17 +23,13 @@ public class RenderSystem implements Renderable {
 
     // Constructor
     // Private to prevent client use of 'new' keyword
-    private RenderSystem() {
+    public RenderSystem() {
 
         imageRegister = new ImageRegistry(new LayerableQueueComparator());
 
         animationRegister = new AnimationRegistry();
     }
 
-
-    public static RenderSystem getInstance() {
-        return INSTANCE;
-    }
 
     public ImageRegister getImageRegister() {
         return imageRegister;
@@ -51,7 +45,7 @@ public class RenderSystem implements Renderable {
 
     public void setTargetFrameTime(int targetFrameTime) {
 
-        CentralLogger.getInstance().logMessage(ErrorType.INFO, "The render animation target frame time was changed from: (" + this.targetFrameTime + ") to: (" + targetFrameTime + ")");
+        EngineContext.getLogger().logMessage(ErrorType.INFO, "The render animation target frame time was changed from: (" + this.targetFrameTime + ") to: (" + targetFrameTime + ")");
 
         this.targetFrameTime = targetFrameTime;
 
@@ -64,11 +58,11 @@ public class RenderSystem implements Renderable {
 
         tickScaler = Math.round((float) refreshRate / targetFrameTime);
 
-        CentralLogger.getInstance().logMessage(ErrorType.INFO, "Updating the render animation scaler to scale against the device refresh rate of: " + refreshRate);
+        EngineContext.getLogger().logMessage(ErrorType.INFO, "Updating the render animation scaler to scale against the device refresh rate of: " + refreshRate);
 
         if (tickScaler < 1) {
             tickScaler = 1;
-            CentralLogger.getInstance().logMessage(ErrorType.ERROR, "The target frame time of (" + targetFrameTime
+            EngineContext.getLogger().logMessage(ErrorType.ERROR, "The target frame time of (" + targetFrameTime
                     + ") should not be greater than the refresh rate of (" + refreshRate + ")!" +
                     "\nLocking the target frame time to the refresh rate!");
         }
@@ -81,7 +75,7 @@ public class RenderSystem implements Renderable {
         // Make sure renderHandler is set
         if (renderer == null) {
 
-            CentralLogger.getInstance().logMessage(ErrorType.FATAL, "The RenderHandler is null! The engine cannot draw anything!");
+            EngineContext.getLogger().logMessage(ErrorType.FATAL, "The RenderHandler is null! The engine cannot draw anything!");
             return;
         }
 

@@ -9,8 +9,8 @@ import android.view.SurfaceView;
 import androidx.annotation.NonNull;
 
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
-import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Screen;
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.RootScene;
+import dev.suprseed.Engine.EngineContext;
 
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
@@ -22,15 +22,14 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     protected RenderHandler renderer;
     protected RootScene rootScene;
     protected SceneStarter sceneStarter;
-    protected InputHandler inputHandler;
     protected Context context;
-
+    protected InputProcessor inputProcessor;
     protected RefreshHandler refreshHandler;
 
 
     // Constructor
     public GameView(Context context, RefreshHandler refreshHandler, LoopRunnable<GameView> loopRunner,
-                    RenderHandler renderer, SceneStarter sceneStarter, InputHandler inputHandler) {
+                    RenderHandler renderer, SceneStarter sceneStarter, InputProcessor inputProcessor) {
         super(context);
 
         this.context = context;
@@ -45,14 +44,14 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         rootScene = new RootScene(context) {
         };
 
-        this.inputHandler = inputHandler;
+        this.inputProcessor = inputProcessor;
     }
 
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
 
-        Screen.getInstance().setDimensions(h, w);
+        EngineContext.getScreen().setDimensions(h, w);
 
         // Initialize the assets
         // Initialize static game objects
@@ -127,7 +126,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
         // Process touch input
         // Note: this runs regardless if the game loop is allowed to run
-        inputHandler.processInput(event);
+        inputProcessor.processInput(event);
 
 
         // Returns whether the event was handled or not

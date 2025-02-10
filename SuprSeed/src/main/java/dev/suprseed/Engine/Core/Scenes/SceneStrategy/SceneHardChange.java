@@ -2,7 +2,7 @@ package dev.suprseed.Engine.Core.Scenes.SceneStrategy;
 
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.SceneManager;
-import dev.suprseed.Engine.Core.System.LogicSystem;
+import dev.suprseed.Engine.EngineContext;
 
 public class SceneHardChange implements SceneChangeStrategy<BaseScene> {
 
@@ -19,7 +19,7 @@ public class SceneHardChange implements SceneChangeStrategy<BaseScene> {
                     parentScene.getRegister().removeObject(scene);
 
                     // Clear the system register of any scene or sprites
-                    LogicSystem.getInstance().getLogicRegister().removeAllObjects();
+                    EngineContext.getLogicSystem().getLogicRegister().removeAllObjects();
 
 
                     // Hold the new scene

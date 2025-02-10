@@ -3,10 +3,9 @@ package dev.suprseed.Engine.Core.MainView.GameProcessor.Loop;
 import android.view.Display;
 import android.view.SurfaceView;
 
-import dev.suprseed.Engine.Core.ErrorLogger.CentralLogger;
 import dev.suprseed.Engine.Core.ErrorLogger.ErrorType;
 import dev.suprseed.Engine.Core.MainView.EngineSettings.LoopConfig;
-import dev.suprseed.Engine.Core.System.RenderSystem;
+import dev.suprseed.Engine.EngineContext;
 
 /*
 Scales logic tick rate across different device refresh rates.
@@ -90,7 +89,7 @@ public class LoopController<T extends SurfaceView> implements RefreshHandler {
 
         // See if the current refresh rate is in conflict with the current target refresh rate
         if ((int) m.getRefreshRate() != deviceRefreshSpeed) {
-            CentralLogger.getInstance().logMessage(ErrorType.WARN, "The refresh rate changed! Updating loop tick variables!");
+            EngineContext.getLogger().logMessage(ErrorType.WARN, "The refresh rate changed! Updating loop tick variables!");
             updateRefreshRate();
         }
     }
@@ -111,7 +110,7 @@ public class LoopController<T extends SurfaceView> implements RefreshHandler {
 
         deviceRefreshSpeed = (int) m.getRefreshRate();
 
-        RenderSystem.getInstance().notifyRefreshRate(deviceRefreshSpeed);
+        EngineContext.getRenderSystem().notifyRefreshRate(deviceRefreshSpeed);
 
         consolidateRefreshRate();
     }
@@ -123,11 +122,11 @@ public class LoopController<T extends SurfaceView> implements RefreshHandler {
      */
     private void consolidateRefreshRate() {
 
-        CentralLogger.getInstance().logMessage(ErrorType.INFO, "Attempting to set loop tick rate variables.");
+        EngineContext.getLogger().logMessage(ErrorType.INFO, "Attempting to set loop tick rate variables.");
 
         // Reset data
         tickRateMultiples.setLogicMultiple(1);
-        VelocityScaler.setVelocityScaler(1);
+        EngineContext.getVelocityScaler().setVelocityScaler(1);
 
 
         int bufferZone = 3;
@@ -140,11 +139,11 @@ public class LoopController<T extends SurfaceView> implements RefreshHandler {
 
             float scaler = 1;
             scaler *= userLoopConfig.getLogicScaleMultiple();
-            VelocityScaler.setVelocityScaler(scaler);
+            EngineContext.getVelocityScaler().setVelocityScaler(scaler);
             tickRateMultiples.setLogicMultiple(1);
             loopRunner.setLoopRateMultiples(tickRateMultiples);
 
-            CentralLogger.getInstance().logMessage(ErrorType.INFO, "The tick rate matches the refresh rate!");
+            EngineContext.getLogger().logMessage(ErrorType.INFO, "The tick rate matches the refresh rate!");
 
             return;
         }
@@ -153,9 +152,9 @@ public class LoopController<T extends SurfaceView> implements RefreshHandler {
         // Calculate correct tick rate for given refresh rate
         if (actualTargetTickRate < deviceRefreshSpeed) {
 
-            CentralLogger.getInstance().logMessage(ErrorType.WARN, "The target tick rate is LESS than the devices refresh speed! Upgrading the tick rate to be a multiple of the device refresh rate!");
+            EngineContext.getLogger().logMessage(ErrorType.WARN, "The target tick rate is LESS than the devices refresh speed! Upgrading the tick rate to be a multiple of the device refresh rate!");
 
-            CentralLogger.getInstance().logMessage(ErrorType.WARN, "User min target tick rate: " + userLoopConfig.getMinLogicRate()
+            EngineContext.getLogger().logMessage(ErrorType.WARN, "User min target tick rate: " + userLoopConfig.getMinLogicRate()
                     + "    Current target tick rate: " + actualTargetTickRate
                     + "    Device refresh speed: " + deviceRefreshSpeed);
 
@@ -173,7 +172,7 @@ public class LoopController<T extends SurfaceView> implements RefreshHandler {
             scaler = scaler / ((float) deviceRefreshSpeed / actualTargetTickRate);
             scaler *= userLoopConfig.getLogicScaleMultiple();
 
-            VelocityScaler.setVelocityScaler(scaler);
+            EngineContext.getVelocityScaler().setVelocityScaler(scaler);
 
             tickRateMultiples.setLogicMultiple(1);
             loopRunner.setLoopRateMultiples(tickRateMultiples);
@@ -188,9 +187,9 @@ public class LoopController<T extends SurfaceView> implements RefreshHandler {
 
         } else {
 
-            CentralLogger.getInstance().logMessage(ErrorType.WARN, "The tick rate is GREATER than the device refresh rate! Upgrading the tick rate to be a multiple of the device refresh rate if necessary!");
+            EngineContext.getLogger().logMessage(ErrorType.WARN, "The tick rate is GREATER than the device refresh rate! Upgrading the tick rate to be a multiple of the device refresh rate if necessary!");
 
-            CentralLogger.getInstance().logMessage(ErrorType.WARN, "User min target tick rate: " + userLoopConfig.getMinLogicRate()
+            EngineContext.getLogger().logMessage(ErrorType.WARN, "User min target tick rate: " + userLoopConfig.getMinLogicRate()
                     + "    Current target tick rate: " + actualTargetTickRate
                     + "    Device refresh speed: " + deviceRefreshSpeed);
 
@@ -214,17 +213,17 @@ public class LoopController<T extends SurfaceView> implements RefreshHandler {
             float scaler = 1;
 
             if (newTickRate == actualTargetTickRate) {
-                CentralLogger.getInstance().logMessage(ErrorType.WARN, "Valid! The tick rate (" + actualTargetTickRate + ") is already a multiple of the device refresh rate! (" + deviceRefreshSpeed + ")");
+                EngineContext.getLogger().logMessage(ErrorType.WARN, "Valid! The tick rate (" + actualTargetTickRate + ") is already a multiple of the device refresh rate! (" + deviceRefreshSpeed + ")");
             } else {
-                CentralLogger.getInstance().logMessage(ErrorType.WARN, "Invalid! The tick rate (" + actualTargetTickRate + ") is not a multiple of the device refresh rate! (" + deviceRefreshSpeed + ")");
-                CentralLogger.getInstance().logMessage(ErrorType.WARN, "The upgraded tick rate is now: " + newTickRate);
+                EngineContext.getLogger().logMessage(ErrorType.WARN, "Invalid! The tick rate (" + actualTargetTickRate + ") is not a multiple of the device refresh rate! (" + deviceRefreshSpeed + ")");
+                EngineContext.getLogger().logMessage(ErrorType.WARN, "The upgraded tick rate is now: " + newTickRate);
 
                 // Only scale if the new tick rate is not a multiple of the original target tick rate
                 scaler = scaler / ((float) newTickRate / actualTargetTickRate);
             }
 
             scaler *= userLoopConfig.getLogicScaleMultiple();
-            VelocityScaler.setVelocityScaler(scaler);
+            EngineContext.getVelocityScaler().setVelocityScaler(scaler);
 
             actualTargetTickRate = newTickRate;
 

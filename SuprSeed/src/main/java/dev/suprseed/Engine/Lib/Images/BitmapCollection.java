@@ -7,9 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import dev.suprseed.Engine.Core.ErrorLogger.CentralLogger;
 import dev.suprseed.Engine.Core.ErrorLogger.ErrorType;
-import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Screen;
+import dev.suprseed.Engine.EngineContext;
 import dev.suprseed.Engine.Lib.AssetLoader.FolderParser;
 import dev.suprseed.Engine.Lib.AssetLoader.Streamable;
 
@@ -31,7 +30,7 @@ public class BitmapCollection implements SpriteImage {
         if (subPaths.length == 0) {
 
             String message = "No images where found in the specified folder! Folder: " + folderPath;
-            CentralLogger.getInstance().logMessage(ErrorType.ERROR, message);
+            EngineContext.getLogger().logMessage(ErrorType.ERROR, message);
             throw new IOException(message);
         }
 
@@ -65,7 +64,7 @@ public class BitmapCollection implements SpriteImage {
             String tagInfo = "{tag == " + tag + "}";
             String message = "The index is out of bounds (upper) for ImageCollection tag " + tagInfo + "!";
             message += "\nIndex: " + index + " ImageSet.size(): " + imageSet.size();
-            CentralLogger.getInstance().logMessage(ErrorType.ERROR, message);
+            EngineContext.getLogger().logMessage(ErrorType.ERROR, message);
 
             return Optional.empty();
         } else if (index < 0) {
@@ -73,14 +72,14 @@ public class BitmapCollection implements SpriteImage {
             String tagInfo = "{tag == " + tag + "}";
             String message = "The index is out of bounds (lower) for ImageCollection tag " + tagInfo + "!";
             message += "\nIndex: " + index + " Minimum allowed: " + "0";
-            CentralLogger.getInstance().logMessage(ErrorType.ERROR, message);
+            EngineContext.getLogger().logMessage(ErrorType.ERROR, message);
 
             return Optional.empty();
         } else if (imageSet.isEmpty()) {
 
             String tagInfo = "{tag == " + tag + "}";
             String message = "The ImageCollection for tag " + tagInfo + " has no images in it!";
-            CentralLogger.getInstance().logMessage(ErrorType.ERROR, message);
+            EngineContext.getLogger().logMessage(ErrorType.ERROR, message);
 
             return Optional.empty();
         }
@@ -97,20 +96,20 @@ public class BitmapCollection implements SpriteImage {
     @Override
     public float getScaledWidth() {
 
-        return Screen.getInstance().convertCanvasToViewPort(getImage().getWidth());
+        return EngineContext.getScreen().convertCanvasToViewPort(getImage().getWidth());
     }
 
     @Override
     public float getScaledHeight() {
 
-        return Screen.getInstance().convertCanvasToViewPort(getImage().getHeight());
+        return EngineContext.getScreen().convertCanvasToViewPort(getImage().getHeight());
     }
 
     @Override
     public float getScaledWidth(int index) {
 
         if (getIndexedImage(index).isPresent()) {
-            return Screen.getInstance().convertCanvasToViewPort(getIndexedImage(index).get().getWidth());
+            return EngineContext.getScreen().convertCanvasToViewPort(getIndexedImage(index).get().getWidth());
         }
 
         return 0;
@@ -120,7 +119,7 @@ public class BitmapCollection implements SpriteImage {
     public float getScaledHeight(int index) {
 
         if (getIndexedImage(index).isPresent()) {
-            return Screen.getInstance().convertCanvasToViewPort(getIndexedImage(index).get().getHeight());
+            return EngineContext.getScreen().convertCanvasToViewPort(getIndexedImage(index).get().getHeight());
         }
 
         return 0;

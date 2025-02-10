@@ -1,7 +1,6 @@
 package dev.suprseed.Engine.Core.MainView.GameProcessor.Loop;
 
-import dev.suprseed.Engine.Core.System.LogicSystem;
-import dev.suprseed.Engine.Core.System.RenderSystem;
+import dev.suprseed.Engine.EngineContext;
 
 public class LoopRunner implements LoopRunnable<GameView> {
 
@@ -38,7 +37,7 @@ public class LoopRunner implements LoopRunnable<GameView> {
             }
 
             // Run clients drawing code
-            RenderSystem.getInstance().draw(gameView.renderer);
+            EngineContext.getRenderSystem().draw(gameView.renderer);
 
             // Clear out old contents of screen
             gameView.invalidate();
@@ -53,7 +52,7 @@ public class LoopRunner implements LoopRunnable<GameView> {
         for (int i = 0; i < loopRateMultiples.getLogicMultiple(); i++) {
 
             // Run the clients logic code
-            LogicSystem.getInstance().runLogic();
+            EngineContext.getLogicSystem().runLogic();
         }
     }
 

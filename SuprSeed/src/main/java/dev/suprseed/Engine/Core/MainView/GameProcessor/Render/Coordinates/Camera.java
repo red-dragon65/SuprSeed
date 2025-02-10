@@ -1,12 +1,11 @@
 package dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates;
 
-import dev.suprseed.Engine.Core.System.LogicSystem;
 import dev.suprseed.Engine.Core.System.Registerables.LogicRunnable;
+import dev.suprseed.Engine.EngineContext;
 
 public class Camera implements LogicRunnable {
 
     // Eager loading singleton
-    private static final Camera INSTANCE = new Camera();
     private float xOffset;
     private float yOffset;
     private float xVelocity;
@@ -17,10 +16,10 @@ public class Camera implements LogicRunnable {
 
     // Constructor
     // Private to prevent client use of 'new' keyword
-    private Camera() {
+    public Camera() {
 
         // Register with the sprite system
-        LogicSystem.getInstance().getLogicRegister().registerObject(this);
+        EngineContext.getLogicSystem().getLogicRegister().registerObject(this);
 
         // Default movement behavior
         cameraMovement = () -> {
@@ -29,10 +28,6 @@ public class Camera implements LogicRunnable {
             setxOffset(getxOffset() + getxVelocity());
             setyOffset(getyOffset() + getyVelocity());
         };
-    }
-
-    public static Camera getInstance() {
-        return INSTANCE;
     }
 
 

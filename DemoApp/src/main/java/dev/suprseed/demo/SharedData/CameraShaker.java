@@ -2,8 +2,8 @@ package dev.suprseed.demo.SharedData;
 
 import java.util.Random;
 
-import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates.Camera;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates.Movable;
+import dev.suprseed.Engine.EngineTools;
 
 public class CameraShaker {
 
@@ -34,12 +34,12 @@ public class CameraShaker {
                     //      when logic runs twice per frame, the camera will not show movement!
                     if (currentFrameTime % 2 == 0) { // Alternate movement between the two below
 
-                        Camera.getInstance().setxOffset(0);
-                        Camera.getInstance().setyOffset(0);
+                        EngineTools.getGlobalCamera().setxOffset(0);
+                        EngineTools.getGlobalCamera().setyOffset(0);
                     } else {
 
-                        Camera.getInstance().setxOffset(rand.nextInt(maxShakeDistance));
-                        Camera.getInstance().setyOffset(rand.nextInt(maxShakeDistance));
+                        EngineTools.getGlobalCamera().setxOffset(rand.nextInt(maxShakeDistance));
+                        EngineTools.getGlobalCamera().setyOffset(rand.nextInt(maxShakeDistance));
                     }
                 }
 
@@ -49,8 +49,8 @@ public class CameraShaker {
             // Set camera back to original position
             if (currentFrameTime == targetFrameTime && resetCamera) {
 
-                Camera.getInstance().setxOffset(0);
-                Camera.getInstance().setyOffset(0);
+                EngineTools.getGlobalCamera().setxOffset(0);
+                EngineTools.getGlobalCamera().setyOffset(0);
                 resetCamera = false;
             }
         };
@@ -63,6 +63,6 @@ public class CameraShaker {
 
     public void loadCameraShake() {
 
-        Camera.getInstance().setCameraMovement(cameraShake);
+        EngineTools.getGlobalCamera().setCameraMovement(cameraShake);
     }
 }

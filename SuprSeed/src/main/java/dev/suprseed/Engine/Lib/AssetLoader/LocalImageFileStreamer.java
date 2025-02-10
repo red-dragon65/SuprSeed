@@ -7,9 +7,8 @@ import android.graphics.BitmapFactory;
 import java.io.IOException;
 import java.io.InputStream;
 
-import dev.suprseed.Engine.Core.ErrorLogger.CentralLogger;
 import dev.suprseed.Engine.Core.ErrorLogger.ErrorType;
-import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Screen;
+import dev.suprseed.Engine.EngineContext;
 
 public class LocalImageFileStreamer implements Streamable {
 
@@ -54,10 +53,10 @@ public class LocalImageFileStreamer implements Streamable {
 
         if (temp == null) {
 
-            CentralLogger.getInstance().logMessage(ErrorType.ERROR, "Failed to load image file: " + fileName);
+            EngineContext.getLogger().logMessage(ErrorType.ERROR, "Failed to load image file: " + fileName);
         }
 
-        return Bitmap.createScaledBitmap(temp, ((int) ((float) temp.getWidth() * Screen.getInstance().getSpriteScaleRatio() * scaleFactor)), ((int) ((float) temp.getHeight() * Screen.getInstance().getSpriteScaleRatio() * scaleFactor)), false);
+        return Bitmap.createScaledBitmap(temp, ((int) ((float) temp.getWidth() * EngineContext.getScreen().getSpriteScaleRatio() * scaleFactor)), ((int) ((float) temp.getHeight() * EngineContext.getScreen().getSpriteScaleRatio() * scaleFactor)), false);
     }
 
 
@@ -73,7 +72,7 @@ public class LocalImageFileStreamer implements Streamable {
 
         if (temp == null) {
 
-            CentralLogger.getInstance().logMessage(ErrorType.ERROR, "Failed to load image file: " + fileName);
+            EngineContext.getLogger().logMessage(ErrorType.ERROR, "Failed to load image file: " + fileName);
         }
 
         return Bitmap.createScaledBitmap(temp, ((int) ((float) temp.getWidth())), ((int) ((float) temp.getHeight())), false);
