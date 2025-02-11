@@ -24,16 +24,6 @@ public class MainActivity extends EngineActivity {
     }
 
     @Override
-    protected int loadView() {
-        return R.layout.activity_main;
-    }
-
-    @Override
-    protected ConstraintLayout loadViewLayout() {
-        return findViewById(R.id.game_layout);
-    }
-
-    @Override
     protected BaseEngineConfigurator loadEngineConfig(Context context) {
         //return new DefaultEngineConfiguration(context, this);
 

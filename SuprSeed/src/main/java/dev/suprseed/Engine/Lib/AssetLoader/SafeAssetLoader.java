@@ -29,7 +29,7 @@ abstract public class SafeAssetLoader implements AssetLoadable<AssetBundle, Spri
         assetLoader = new BasicAssetLoader(parentScene, assetStreamer, folderParser) {
             @Override
             public void loadAssets(BaseScene parentScene) {
-                images = SafeAssetLoader.this.images;
+                assetRegistry = SafeAssetLoader.this.images;
                 // Do nothing here
             }
         };

@@ -10,6 +10,7 @@ import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.AssetBundle;
 import dev.suprseed.Engine.EngineContext;
 import dev.suprseed.Engine.Lib.Images.SpriteImage;
 
+//TODO: Use a generic type instead of a string to allow the user to use enums for asset tags
 abstract public class BasicAssetLoader implements AssetLoadable<Optional<AssetBundle>, Optional<SpriteImage>> {
 
     // Dependencies
@@ -17,7 +18,7 @@ abstract public class BasicAssetLoader implements AssetLoadable<Optional<AssetBu
     protected FolderParser folderParser;
 
     // Hold image data
-    protected List<SpriteImage> images = new ArrayList<>();
+    protected List<SpriteImage> assetRegistry = new ArrayList<>();
 
 
     // Constructor
@@ -60,7 +61,7 @@ abstract public class BasicAssetLoader implements AssetLoadable<Optional<AssetBu
     @Override
     public Optional<SpriteImage> getImage(String tag) {
 
-        Optional<SpriteImage> result = images.stream().filter(i -> i.getTag().equals(tag)).findFirst();
+        Optional<SpriteImage> result = assetRegistry.stream().filter(i -> i.getTag().equals(tag)).findFirst();
 
         if (!result.isPresent()) {
             EngineContext.getLogger().logMessage(ErrorType.ERROR, "Could not find the image specified in the AssetLoader! imageId: " + tag);

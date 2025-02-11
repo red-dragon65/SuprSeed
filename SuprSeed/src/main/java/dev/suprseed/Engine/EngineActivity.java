@@ -8,6 +8,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.SceneStarter;
 import dev.suprseed.Engine.Core.MainView.GameViewBuilder.BaseEngineConfigurator;
+import dev.suprseed.R;
 
 public abstract class EngineActivity extends AppCompatActivity implements SceneStarter {
 
@@ -15,19 +16,23 @@ public abstract class EngineActivity extends AppCompatActivity implements SceneS
 
     /**
      * Specify the activity to use for the engine (hint: it's probably 'activity_main')
+     * Uses the default game activity xml layout specified as port of the engine.
      *
      * @return The user specified view to load in the 'onCreate()' function
      */
-    protected abstract int loadView();
-
-    // Todo: Remove this? Can't we get the layout from the 'View' object?
+    protected int loadView(){
+        return R.layout.game_activity;
+    }
 
     /**
      * Specify the activity's id to use for the engine (hint: it's probably 'main')
+     * Uses the default game activity xml layout specified as part of the engine.
      *
      * @return The layout from the user's specified 'View's id
      */
-    protected abstract ConstraintLayout loadViewLayout();
+    protected ConstraintLayout loadViewLayout(){
+        return findViewById(R.id.game_layout);
+    }
 
     /**
      * Specify the configuration settings for the engine to use
