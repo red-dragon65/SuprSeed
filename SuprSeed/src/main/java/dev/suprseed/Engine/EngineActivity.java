@@ -20,7 +20,7 @@ public abstract class EngineActivity extends AppCompatActivity implements SceneS
      *
      * @return The user specified view to load in the 'onCreate()' function
      */
-    protected int loadView(){
+    protected int loadView() {
         return R.layout.game_activity;
     }
 
@@ -30,7 +30,7 @@ public abstract class EngineActivity extends AppCompatActivity implements SceneS
      *
      * @return The layout from the user's specified 'View's id
      */
-    protected ConstraintLayout loadViewLayout(){
+    protected ConstraintLayout loadViewLayout() {
         return findViewById(R.id.game_layout);
     }
 

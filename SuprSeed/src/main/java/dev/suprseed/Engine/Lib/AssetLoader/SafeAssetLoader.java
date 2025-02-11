@@ -15,7 +15,7 @@ abstract public class SafeAssetLoader implements AssetLoadable<AssetBundle, Spri
     protected Streamable assetStreamer;
     protected FolderParser folderParser;
     // Hold image data
-    protected List<SpriteImage> images = new ArrayList<>();
+    protected List<SpriteImage> assetRegistry = new ArrayList<>();
     private AssetLoadable<Optional<AssetBundle>, Optional<SpriteImage>> assetLoader;
     private SpriteImage placeHolder;
 
@@ -29,7 +29,7 @@ abstract public class SafeAssetLoader implements AssetLoadable<AssetBundle, Spri
         assetLoader = new BasicAssetLoader(parentScene, assetStreamer, folderParser) {
             @Override
             public void loadAssets(BaseScene parentScene) {
-                assetRegistry = SafeAssetLoader.this.images;
+                assetRegistry = SafeAssetLoader.this.assetRegistry;
                 // Do nothing here
             }
         };

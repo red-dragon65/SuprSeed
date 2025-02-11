@@ -3,7 +3,6 @@ package dev.suprseed.demo;
 import android.content.Context;
 import android.os.Bundle;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.Lifecycle;
 
 import dev.suprseed.Engine.Core.MainView.GameViewBuilder.BaseEngineConfigurator;

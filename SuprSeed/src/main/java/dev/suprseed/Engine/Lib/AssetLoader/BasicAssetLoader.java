@@ -10,7 +10,6 @@ import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.AssetBundle;
 import dev.suprseed.Engine.EngineContext;
 import dev.suprseed.Engine.Lib.Images.SpriteImage;
 
-//TODO: Use a generic type instead of a string to allow the user to use enums for asset tags
 abstract public class BasicAssetLoader implements AssetLoadable<Optional<AssetBundle>, Optional<SpriteImage>> {
 
     // Dependencies
