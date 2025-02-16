@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 import dev.suprseed.Engine.Core.ErrorLogger.ErrorType;
+import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.SpriteImage;
 import dev.suprseed.Engine.EngineContext;
 import dev.suprseed.Engine.Lib.AssetLoader.FolderParser;
 import dev.suprseed.Engine.Lib.AssetLoader.Streamable;
@@ -21,9 +22,6 @@ public class BitmapCollection implements SpriteImage {
     // Constructor for collection of images
     public BitmapCollection(String folderPath, float imageScale, Streamable imageStreamer, FolderParser folderParser, String tag) throws IOException {
 
-        // Initialize array list
-        imageSet = new ArrayList<>();
-
         // Get each sub file from base path
         String[] subPaths = folderParser.getSubPaths(folderPath);
 
@@ -33,6 +31,9 @@ public class BitmapCollection implements SpriteImage {
             EngineContext.getLogger().logMessage(ErrorType.ERROR, message);
             throw new IOException(message);
         }
+
+        // Initialize array list
+        imageSet = new ArrayList<>(subPaths.length);
 
         // Read in each image
         for (String singleImagePath : subPaths) {

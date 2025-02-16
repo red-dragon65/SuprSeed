@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import java.io.IOException;
 import java.util.Optional;
 
+import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.SpriteImage;
 import dev.suprseed.Engine.EngineContext;
 import dev.suprseed.Engine.Lib.AssetLoader.Streamable;
 

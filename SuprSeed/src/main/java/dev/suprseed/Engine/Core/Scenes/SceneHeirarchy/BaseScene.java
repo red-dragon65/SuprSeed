@@ -4,6 +4,7 @@ import android.content.Context;
 
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import dev.suprseed.Engine.Core.SpriteObjects.DefaultComponents.Resetable;
+import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Animator;
 import dev.suprseed.Engine.Core.System.LayerData;
 import dev.suprseed.Engine.Core.System.LayerHandler;
 import dev.suprseed.Engine.Core.System.LayerableQueueComparator;
@@ -15,7 +16,6 @@ import dev.suprseed.Engine.Core.System.Registerables.RenderableAndLayerable;
 import dev.suprseed.Engine.Core.System.Registers.AnimationRegistry;
 import dev.suprseed.Engine.Core.System.Registers.ImageRegistry;
 import dev.suprseed.Engine.Core.System.Registers.LogicRegistry;
-import dev.suprseed.Engine.Lib.Images.Animator;
 
 public abstract class BaseScene implements LogicRunnable, RenderableAndLayerable, Animator, Resetable {
 
@@ -76,12 +76,6 @@ public abstract class BaseScene implements LogicRunnable, RenderableAndLayerable
     @Override
     public void resetState() {
 
-    }
-
-    @Override
-    public void resetLoop() {
-
-        // TODO: REMOVE THIS! It is not needed here... refactor 'Animator' interface
     }
 
     @Override

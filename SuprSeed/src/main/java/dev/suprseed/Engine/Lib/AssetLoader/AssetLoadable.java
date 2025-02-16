@@ -1,16 +1,17 @@
 package dev.suprseed.Engine.Lib.AssetLoader;
 
 import java.util.List;
+import java.util.Optional;
 
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
 
-public interface AssetLoadable<ASSET, SPRITE> {
+public interface AssetLoadable<SPRITE> {
 
     void loadAssets(BaseScene parentScene);
 
-    ASSET getAssetBundle(String tag);
+    // Return the entire registry
+    List<SPRITE> getRegistry();
 
-    ASSET getAssetBundle(List<String> tags);
-
-    SPRITE getImage(String imageId);
+    // Return an item from the registry based on the tag
+    Optional<SPRITE> getImageSet(String tag);
 }

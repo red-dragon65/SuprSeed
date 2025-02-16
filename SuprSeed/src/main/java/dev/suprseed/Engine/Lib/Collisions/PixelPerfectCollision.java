@@ -77,10 +77,10 @@ public class PixelPerfectCollision implements CollisionHandler {
         secondBounds.top = EngineContext.getScreen().convertViewPortToCanvas(secondBounds.top);
 
         // Get the actual rectangle based on the actual loaded image
-        firstBounds.right = firstBounds.left + one.getAssetBundle().getSelectedImageSet().getImage().getWidth();
-        firstBounds.bottom = firstBounds.top + one.getAssetBundle().getSelectedImageSet().getImage().getHeight();
-        secondBounds.right = secondBounds.left + two.getAssetBundle().getSelectedImageSet().getImage().getWidth();
-        secondBounds.bottom = secondBounds.top + two.getAssetBundle().getSelectedImageSet().getImage().getHeight();
+        firstBounds.right = firstBounds.left + one.getAssetBundle().getSelectedAsset().getImageSet().getImage().getWidth();
+        firstBounds.bottom = firstBounds.top + one.getAssetBundle().getSelectedAsset().getImageSet().getImage().getHeight();
+        secondBounds.right = secondBounds.left + two.getAssetBundle().getSelectedAsset().getImageSet().getImage().getWidth();
+        secondBounds.bottom = secondBounds.top + two.getAssetBundle().getSelectedAsset().getImageSet().getImage().getHeight();
 
         // Calculate the overlap area
         overlapBounds.set(firstBounds);
@@ -99,8 +99,8 @@ public class PixelPerfectCollision implements CollisionHandler {
         secondSubBounds.bottom = (int) Math.abs(secondBounds.top - overlapBounds.bottom);
 
         // Prepare DTO
-        firstSubImage.setBounds(firstSubBounds, one.getAssetBundle().getSelectedImageSet().getImage());
-        secondSubImage.setBounds(secondSubBounds, two.getAssetBundle().getSelectedImageSet().getImage());
+        firstSubImage.setBounds(firstSubBounds, one.getAssetBundle().getSelectedAsset().getImageSet().getImage());
+        secondSubImage.setBounds(secondSubBounds, two.getAssetBundle().getSelectedAsset().getImageSet().getImage());
 
         // Calculate pixel perfect collision
         return imageSubTraverse(firstSubImage, secondSubImage, pixelMaskResolution);

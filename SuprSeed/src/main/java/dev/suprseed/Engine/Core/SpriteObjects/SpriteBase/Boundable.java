@@ -1,4 +1,4 @@
-package dev.suprseed.Engine.Lib.Collisions;
+package dev.suprseed.Engine.Core.SpriteObjects.SpriteBase;
 
 import android.graphics.RectF;
 

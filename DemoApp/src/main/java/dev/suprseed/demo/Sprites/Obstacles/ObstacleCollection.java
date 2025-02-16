@@ -7,10 +7,11 @@ import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
 import dev.suprseed.Engine.Core.SpriteObjects.DefaultComponents.Component;
 import dev.suprseed.Engine.Core.SpriteObjects.DefaultComponents.ResetableComponent;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.AssetBundle;
+import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.PlayBackOptions;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
 import dev.suprseed.Engine.Core.System.Registerables.LogicRunnable;
-import dev.suprseed.Engine.Lib.AssetLoader.AssetLoadable;
-import dev.suprseed.Engine.Lib.Images.SpriteImage;
+import dev.suprseed.Engine.Lib.AssetLoader.Bundler;
+import dev.suprseed.Engine.Lib.Images.DefaultFPS;
 import dev.suprseed.Engine.Lib.SoundPlayer.SoundMixer;
 import dev.suprseed.demo.SharedData.BounceData;
 import dev.suprseed.demo.SharedData.GameOverData;
@@ -36,20 +37,36 @@ public class ObstacleCollection implements LogicRunnable {
     private final GameOverData gameOverData;
 
 
-    public ObstacleCollection(BaseScene parentScene, AssetLoadable<AssetBundle, SpriteImage> assets, BounceData heroBounceData, Sprite hero, SoundMixer<String> soundEngine, GameOverData gameOverData) {
+    public ObstacleCollection(BaseScene parentScene, Bundler<AssetBundle> assetBundler, BounceData heroBounceData, Sprite hero, SoundMixer<String> soundEngine, GameOverData gameOverData) {
 
         this.gameOverData = gameOverData;
 
         obstacleSprites = new ArrayList<>();
         obstacleImages = new ArrayList<>();
 
-        // TODO: actually load images in asset loader!!!
         // Load images here
-        obstacleImages.add(assets.getAssetBundle("bat"));
-        obstacleImages.add(assets.getAssetBundle("bee"));
-        obstacleImages.add(assets.getAssetBundle("bird"));
-        obstacleImages.add(assets.getAssetBundle("duck"));
-        obstacleImages.add(assets.getAssetBundle("ghost"));
+        obstacleImages.add(assetBundler.generateSharedAssetBundle("bat"));
+        obstacleImages.add(assetBundler.generateSharedAssetBundle("bee"));
+        obstacleImages.add(assetBundler.generateSharedAssetBundle("bird"));
+        obstacleImages.add(assetBundler.generateSharedAssetBundle("duck"));
+        obstacleImages.add(assetBundler.generateSharedAssetBundle("ghost"));
+
+        // Note: all asset bundle objects retrieved via this method will share the same playback object for the specified tag
+        //obstacleImages.add(assetBundler.generateSharedAssetBundle("bat"));
+
+
+        // Set animation playback settings
+        int animationSpeed = DefaultFPS._15.toInt();
+
+        // We have to specify the animation on a per tag basis
+        // It is not guaranteed that two tags have the same number of frames
+        for (AssetBundle b : obstacleImages) {
+            b.getSelectedAsset()
+                    .createPlayer(parentScene, animationSpeed)
+                    .setPlayOptions(PlayBackOptions.LOOP_FORWARD)
+                    .play();
+        }
+
 
         // Initialize obstacle sprites here
         for (int i = 0; i < maxObstacles; i++) {

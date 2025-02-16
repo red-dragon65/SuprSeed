@@ -4,10 +4,12 @@ import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
 import dev.suprseed.Engine.Core.SpriteObjects.DefaultComponents.Component;
 import dev.suprseed.Engine.Core.SpriteObjects.DefaultComponents.ResetableComponent;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.AssetBundle;
+import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.PlayBackOptions;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
 import dev.suprseed.Engine.Core.System.Registerables.LogicRunnable;
 import dev.suprseed.Engine.Lib.Collisions.CollisionHandler;
 import dev.suprseed.Engine.Lib.Collisions.RectangleCollision;
+import dev.suprseed.Engine.Lib.Images.DefaultFPS;
 import dev.suprseed.Engine.Lib.SoundPlayer.SoundMixer;
 import dev.suprseed.demo.SharedData.BounceData;
 import dev.suprseed.demo.SharedData.GameOverData;
@@ -43,6 +45,16 @@ public class Hero extends Sprite implements LogicRunnable {
         tiltMovement = new TiltMovementComponent(this, parentScene.getContext());
         collider = new RectangleCollision();
 
+        // Specify the animation of the asset bundles assets
+        assetBundle.getSpriteAssetByTag("heroLeft")
+                .createPlayer(parentScene, DefaultFPS._2.toInt())
+                .setPlayOptions(PlayBackOptions.LOOP_FORWARD)
+                .play();
+        assetBundle.getSpriteAssetByTag("heroRight")
+                .createPlayer(parentScene, DefaultFPS._2.toInt())
+                .setPlayOptions(PlayBackOptions.LOOP_FORWARD)
+                .play();
+
         // Run starting state behavior
         startingState.update();
     }
@@ -65,9 +77,9 @@ public class Hero extends Sprite implements LogicRunnable {
 
         // Change sprite direction based on tilt
         if (getxVel() < 0) {
-            assetBundle.trySelectingImageSet("heroLeft");
+            assetBundle.trySelectingAsset("heroLeft");
         } else {
-            assetBundle.trySelectingImageSet("heroRight");
+            assetBundle.trySelectingAsset("heroRight");
         }
 
     }

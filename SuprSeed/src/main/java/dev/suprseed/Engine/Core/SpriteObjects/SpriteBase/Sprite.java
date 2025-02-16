@@ -10,7 +10,6 @@ import dev.suprseed.Engine.Core.System.LayerHandler;
 import dev.suprseed.Engine.Core.System.Registerables.LogicRunnable;
 import dev.suprseed.Engine.Core.System.Registerables.RenderableAndLayerable;
 import dev.suprseed.Engine.EngineContext;
-import dev.suprseed.Engine.Lib.Collisions.Boundable;
 
 public abstract class Sprite implements RenderableAndLayerable, Boundable, LogicRunnable, Resetable {
 
@@ -145,11 +144,11 @@ public abstract class Sprite implements RenderableAndLayerable, Boundable, Logic
 
 
     public float getWidth() {
-        return assetBundle.getSelectedImageSet().getScaledWidth();
+        return assetBundle.getSelectedAsset().getImageSet().getScaledWidth();
     }
 
     public float getHeight() {
-        return assetBundle.getSelectedImageSet().getScaledHeight();
+        return assetBundle.getSelectedAsset().getImageSet().getScaledHeight();
     }
 
     public AssetBundle getAssetBundle() {

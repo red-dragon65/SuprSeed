@@ -3,8 +3,8 @@ package dev.suprseed.Engine.Core.System.Registers;
 import java.util.ArrayList;
 import java.util.List;
 
+import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Animator;
 import dev.suprseed.Engine.Core.System.RegisterTypes.AnimationRegister;
-import dev.suprseed.Engine.Lib.Images.Animator;
 
 public class AnimationRegistry implements AnimationRegister {
 

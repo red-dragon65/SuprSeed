@@ -14,7 +14,7 @@ public class ObstacleSprite extends Sprite {
     public void runLogic() {
 
         // Disable this if it goes above the top of the screen
-        if (getY() + assetBundle.getSelectedImageSet().getScaledHeight() < 0) {
+        if (getY() + getHeight() < 0) {
 
             setDrawable(false);
             setActive(false);

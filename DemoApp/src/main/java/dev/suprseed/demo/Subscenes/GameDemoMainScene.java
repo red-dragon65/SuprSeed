@@ -13,13 +13,15 @@ import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHan
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.SceneManager;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.AssetBundle;
+import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.SpriteImage;
 import dev.suprseed.Engine.Lib.AssetLoader.AssetLoadable;
+import dev.suprseed.Engine.Lib.AssetLoader.Bundler;
 import dev.suprseed.Engine.Lib.AssetLoader.FolderParser;
 import dev.suprseed.Engine.Lib.AssetLoader.LocalFolderParser;
 import dev.suprseed.Engine.Lib.AssetLoader.LocalImageFileStreamer;
+import dev.suprseed.Engine.Lib.AssetLoader.SafeAssetBundler;
 import dev.suprseed.Engine.Lib.AssetLoader.Streamable;
 import dev.suprseed.Engine.Lib.Images.PlaceHolder;
-import dev.suprseed.Engine.Lib.Images.SpriteImage;
 import dev.suprseed.Engine.Lib.SoundPlayer.BasicSoundEffects;
 import dev.suprseed.Engine.Lib.SoundPlayer.SoundMixer;
 import dev.suprseed.demo.Assets.GameDemoAssets;
@@ -46,13 +48,17 @@ public class GameDemoMainScene extends SceneManager {
         FolderParser localFolderParser = new LocalFolderParser(context.getResources());
         Streamable localStreamer = new LocalImageFileStreamer(context.getResources());
 
+        // Define a place holder asset
         PlaceHolder placeHolder;
         try {
             placeHolder = new PlaceHolder("Images/Placeholder.png", 1, localStreamer);
         } catch (Exception e) {
             throw new RuntimeException("The placeholder image could not load! Check the file path or image file!");
         }
-        AssetLoadable<AssetBundle, SpriteImage> gamePlayAssets = new GameDemoAssets(this, localStreamer, localFolderParser, placeHolder);
+
+        // Create the asset loader to and bundler
+        AssetLoadable<SpriteImage> gamePlayAssets = new GameDemoAssets(this, localStreamer, localFolderParser);
+        Bundler<AssetBundle> assetBundler = new SafeAssetBundler(gamePlayAssets, placeHolder);
 
         // Instantiate the sounds for this scene
         soundEffects = new BasicSoundEffects<>();
@@ -74,9 +80,9 @@ public class GameDemoMainScene extends SceneManager {
         // Create leaf scenes here
         // AND/OR create the sprites for this scene
         // NOTE: ORDER MATTERS! OR you can set the scenes priority value!
-        BaseScene background = new BackgroundScene(this, "background", gamePlayAssets);
-        entities = new EntityScene(this, "entities", gamePlayAssets, soundEffects, bounceData, gameOverData);
-        overlay = new OverlayScene(this, "overlay", gamePlayAssets, bounceData, gameOverData);
+        BaseScene background = new BackgroundScene(this, "background", assetBundler);
+        entities = new EntityScene(this, "entities", assetBundler, soundEffects, bounceData, gameOverData);
+        overlay = new OverlayScene(this, "overlay", assetBundler, bounceData, gameOverData);
 
         loadLifeCycleHandlers();
     }

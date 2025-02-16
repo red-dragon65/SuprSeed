@@ -1,4 +1,4 @@
-package dev.suprseed.Engine.Lib.Images;
+package dev.suprseed.Engine.Core.SpriteObjects.SpriteBase;
 
 public interface SpriteImage extends ImageType, Scalable {
 

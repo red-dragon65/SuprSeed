@@ -4,8 +4,7 @@ import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.SceneManager;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.AssetBundle;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
-import dev.suprseed.Engine.Lib.AssetLoader.AssetLoadable;
-import dev.suprseed.Engine.Lib.Images.SpriteImage;
+import dev.suprseed.Engine.Lib.AssetLoader.Bundler;
 import dev.suprseed.demo.SharedData.BounceData;
 import dev.suprseed.demo.SharedData.GameOverData;
 import dev.suprseed.demo.Sprites.HudSprite.OverlaySprites.GameOver;
@@ -17,7 +16,7 @@ public class OverlayScene extends BaseScene {
 
     private final Sprite scoreSprite;
 
-    public OverlayScene(SceneManager parentScene, String sceneId, AssetLoadable<AssetBundle, SpriteImage> gamePlayAssets, BounceData bounceData, GameOverData gameOverData) {
+    public OverlayScene(SceneManager parentScene, String sceneId, Bundler<AssetBundle> assetBundler, BounceData bounceData, GameOverData gameOverData) {
         super(parentScene, sceneId);
 
         // Load HUD scenes here
@@ -25,9 +24,9 @@ public class OverlayScene extends BaseScene {
         scoreSprite = new ScoreSprite(this, bounceData, gameOverData);
 
         // This runs independent of the pause button
-        Sprite pauseText = new PauseText(this, gamePlayAssets.getAssetBundle("pause_text"));
+        Sprite pauseText = new PauseText(this, assetBundler.generateAssetBundle("pause_text"));
 
-        Sprite pauseButton = new PauseButton(this, gamePlayAssets.getAssetBundle("pause_button"));
+        Sprite pauseButton = new PauseButton(this, assetBundler.generateAssetBundle("pause_button"));
 
         Sprite gameOverText = new GameOver(this, gameOverData);
     }
