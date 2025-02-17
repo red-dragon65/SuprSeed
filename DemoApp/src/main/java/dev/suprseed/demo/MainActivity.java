@@ -27,7 +27,7 @@ public class MainActivity extends EngineActivity {
         //return new DefaultEngineConfiguration(context, this);
 
         // You can specify your custom engine configuration like this
-        return new ClientEngineConfigurator(context);
+        return new ClientEngineConfigurator(context, this);
     }
 
     @Override

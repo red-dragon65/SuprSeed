@@ -11,6 +11,7 @@ import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LogicRates;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.SceneStarter;
 import dev.suprseed.Engine.Core.MainView.GameViewBuilder.BaseEngineConfigurator;
 import dev.suprseed.Engine.Core.MainView.GameViewBuilder.EngineConfigurator;
+import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.RootScene;
 import dev.suprseed.Engine.EngineTools;
 import dev.suprseed.Engine.Lib.Input.Dispatchers.TouchEventDispatcher;
 import dev.suprseed.demo.Subscenes.GameDemoMainScene;
@@ -23,22 +24,11 @@ public class ClientEngineConfigurator extends BaseEngineConfigurator {
 
     private final EngineConfigurator engineConfigurator;
 
-    public ClientEngineConfigurator(Context context) {
-        super(context);
-
-        // User can specify their main scene here
-        SceneStarter clientSceneStarter = rootScene -> new GameDemoMainScene(rootScene, "TopScene");
-
-        /*SceneStarter clientSc = new SceneStarter() {
-            @Override
-            public void initStartingState(RootScene rootScene) {
-
-                new GameDemoMainScene(rootScene, "TopScene");
-            }
-        };*/
+    public ClientEngineConfigurator(Context context, SceneStarter sceneStarter) {
+        super(context, sceneStarter);
 
         // User can build the engine configuration here
-        engineConfigurator = new EngineConfigurator(context, clientSceneStarter)
+        engineConfigurator = new EngineConfigurator(context, sceneStarter)
                 .setViewConfig(new ViewConfig(true, true, true, false))
                 .setLoopConfig(new LoopConfig(LogicRates.ONE_TWENTY_TICKS, 0.2f));
 

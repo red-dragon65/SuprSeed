@@ -47,7 +47,7 @@ public class EngineConfigurator extends BaseEngineConfigurator {
 
     // Constructor
     public EngineConfigurator(Context context, SceneStarter sceneStarter) {
-        super(context);
+        super(context, sceneStarter);
 
         this.sceneStarter = sceneStarter;
 
