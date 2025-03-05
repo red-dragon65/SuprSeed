@@ -1,5 +1,7 @@
 package dev.suprseed.demo.Sprites.HeroSprite;
 
+import android.content.Context;
+
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
 import dev.suprseed.Engine.Core.SpriteObjects.DefaultComponents.Component;
 import dev.suprseed.Engine.Core.SpriteObjects.DefaultComponents.ResetableComponent;
@@ -29,8 +31,8 @@ public class Hero extends Sprite implements LogicRunnable {
     private final BounceData bounceData;
 
 
-    public Hero(BaseScene parentScene, AssetBundle assetBundle, SoundMixer<String> soundEngine, BounceData bounceData, GameOverData gameOverData) {
-        super(parentScene, assetBundle);
+    public Hero(BaseScene parentScene, Context context, AssetBundle assetBundle, SoundMixer<String> soundEngine, BounceData bounceData, GameOverData gameOverData) {
+        super(assetBundle);
 
         // Show collision boxes
         //CollisionDiagnosticsOverlay.getInstance().enable();
@@ -42,7 +44,7 @@ public class Hero extends Sprite implements LogicRunnable {
         startingState = new HeroStartingState(this);
         wallCollision = new WallCollisionComponent(this);
         bounceMovement = new BounceMovementComponent(this, bounceData, soundEngine, gameOverData);
-        tiltMovement = new TiltMovementComponent(this, parentScene.getContext());
+        tiltMovement = new TiltMovementComponent(this, context);
         collider = new RectangleCollision();
 
         // Specify the animation of the asset bundles assets

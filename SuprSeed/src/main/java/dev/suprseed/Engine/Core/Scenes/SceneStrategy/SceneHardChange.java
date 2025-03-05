@@ -1,50 +1,99 @@
 package dev.suprseed.Engine.Core.Scenes.SceneStrategy;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.stream.Collectors;
+
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.SceneManager;
-import dev.suprseed.Engine.EngineContext;
 
-public class SceneHardChange implements SceneChangeStrategy<BaseScene> {
+public class SceneHardChange {
 
-    @Override
-    public void changeScene(SceneManager parentScene, BaseScene oldScene, String... sceneId) {
+    private ExecutorService executorService;
+    private List<Future<BaseScene>> pendingScenes;
+    private SceneManager parentScene;
+    private BaseScene sceneSpinner;
 
-        for (BaseScene scene : parentScene.getRegister().getRegisterList()) {
+    public SceneHardChange(SceneManager parentScene, BaseScene sceneSpinner) {
+        this.parentScene = parentScene;
+        this.sceneSpinner = sceneSpinner;
+        executorService = Executors.newSingleThreadExecutor();
+        pendingScenes = new ArrayList<>(1);
+    }
 
-            for (String s : sceneId) {
+    public void requestSceneChange(Callable<BaseScene> lateInitScene, String... removalIds) {
 
-                if (scene.getId().equals(s)) {
-
-                    // Remove the old scene
-                    parentScene.getRegister().removeObject(scene);
-
-                    // Clear the system register of any scene or sprites
-                    EngineContext.getLogicSystem().getLogicRegister().removeAllObjects();
+        // Get the old scenes
+        List<BaseScene> oldScenes = parentScene.getRegister().getRegisterList().stream()
+                .filter(s -> Arrays.stream(removalIds).anyMatch(r -> s.getId().equals(r)))
+                .collect(Collectors.toList());
 
 
-                    // Hold the new scene
-                    BaseScene someScene = null;
+        // Remove the old scenes
+        for (BaseScene s : oldScenes) {
 
-                    // Create the new scene
-                    /*switch (s) {
-                        // Note: The main scene should never have to be instantiated, instead, sub scenes should be removed and built as needed
-                        //case "MainScene":
-                            //someScene = new GameDemoMainScene(parentScene, "MainScene");
-                            //break;
-                        //case "LandingScene":
-                            //someScene = new LandingScene(parentScene, "LandingScene");
-                            //break;
-                    }*/
+            // Cleanup the scene
+            // Removes itself from the parent by default
+            s.onDestroy();
 
-                    // Enable the new scene
-                    if (someScene != null) {
+            // De-reference for garbage collection
+            parentScene.getRegister().removeObject(s);
+            s = null;
+        }
 
-                        parentScene.getRegister().registerObject(someScene);
-                    }
 
-                    break;
-                }
+        // Stop all running scenes
+        for (BaseScene s : parentScene.getRegister().getRegisterList()) {
+            s.setActive(false);
+            s.setDrawable(false);
+        }
+
+        // Show the spinner
+        parentScene.registerScene(sceneSpinner);
+
+        Future<BaseScene> futureScene = executorService.submit(lateInitScene);
+        pendingScenes.add(futureScene);
+    }
+
+    public void joinScenes() throws ExecutionException, InterruptedException {
+
+        // See if any scenes are pending
+        if (pendingScenes.isEmpty()) {
+
+            // Stop the spinner
+            if (parentScene.getRegister().getRegisterList().stream().anyMatch(s -> s.getId().equals(sceneSpinner.getId()))) {
+                parentScene.getRegister().removeObject(sceneSpinner);
+            }
+
+            // Resume all stopped scenes
+            for (BaseScene s : parentScene.getRegister().getRegisterList()) {
+                s.setActive(true);
+                s.setDrawable(true);
+            }
+
+            return;
+        }
+
+        // Load any background loading scenes
+        for (Future<BaseScene> threadWork : pendingScenes) {
+
+            // See if the scene has been created
+            if (threadWork.isDone()) {
+
+                // Add the new scene
+                BaseScene finishedScene = threadWork.get();
+                finishedScene.onPost();
+                parentScene.registerScene(finishedScene);
             }
         }
+
+        // Remove anything that is finished
+        pendingScenes.removeIf(Future::isDone);
     }
 }

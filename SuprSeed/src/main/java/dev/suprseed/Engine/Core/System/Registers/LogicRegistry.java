@@ -8,23 +8,21 @@ import dev.suprseed.Engine.Core.System.Registerables.LogicRunnable;
 
 public class LogicRegistry implements LogicRegister {
 
-    private final List<LogicRunnable> sprites;
-
+    private final List<LogicRunnable> runners;
 
     // Constructor
     public LogicRegistry() {
-        sprites = new ArrayList<>();
+        runners = new ArrayList<>();
     }
-
 
     @Override
     public void registerObject(LogicRunnable sprite) {
-        sprites.add(sprite);
+        runners.add(sprite);
     }
 
     @Override
     public void removeObject(LogicRunnable sprite) {
-        sprites.remove(sprite);
+        runners.remove(sprite);
     }
 
 
@@ -33,7 +31,7 @@ public class LogicRegistry implements LogicRegister {
     public void update() {
 
         // Run logic for active sprites
-        for (LogicRunnable s : sprites) {
+        for (LogicRunnable s : runners) {
 
             if (s.isActive()) {
                 s.runLogic();
@@ -44,6 +42,6 @@ public class LogicRegistry implements LogicRegister {
     // Clear currently registered sprites
     @Override
     public void removeAllObjects() {
-        sprites.clear();
+        runners.clear();
     }
 }

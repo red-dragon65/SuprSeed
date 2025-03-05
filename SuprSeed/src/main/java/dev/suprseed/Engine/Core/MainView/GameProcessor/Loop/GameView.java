@@ -22,7 +22,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     protected RenderHandler renderer;
     protected RootScene rootScene;
     protected SceneStarter sceneStarter;
-    protected Context context;
     protected InputProcessor inputProcessor;
     protected RefreshHandler refreshHandler;
 
@@ -32,8 +31,6 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
                     RenderHandler renderer, SceneStarter sceneStarter, InputProcessor inputProcessor) {
         super(context);
 
-        this.context = context;
-
         // Dependency inject
         this.refreshHandler = refreshHandler;
         refreshHandler.setGameView(this);
@@ -41,7 +38,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         this.renderer = renderer;
 
         this.sceneStarter = sceneStarter;
-        rootScene = new RootScene(context) {
+        rootScene = new RootScene() {
         };
 
         this.inputProcessor = inputProcessor;

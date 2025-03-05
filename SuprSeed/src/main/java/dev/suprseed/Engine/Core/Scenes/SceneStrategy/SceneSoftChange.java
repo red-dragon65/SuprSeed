@@ -2,12 +2,10 @@ package dev.suprseed.Engine.Core.Scenes.SceneStrategy;
 
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.SceneManager;
-import dev.suprseed.Engine.EngineContext;
 
-public class SceneSoftChange implements SceneChangeStrategy<BaseScene> {
+public class SceneSoftChange {
 
-    @Override
-    public void changeScene(SceneManager parentScene, BaseScene oldScene, String... sceneId) {
+    public void changeActiveScene(SceneManager parentScene, BaseScene oldScene, String... sceneId) {
 
         for (BaseScene scene : parentScene.getRegister().getRegisterList()) {
 
@@ -18,9 +16,6 @@ public class SceneSoftChange implements SceneChangeStrategy<BaseScene> {
                     // Disable the old scene
                     oldScene.setActive(false);
                     oldScene.setDrawable(false);
-
-                    // Clear the system register
-                    EngineContext.getLogicSystem().getLogicRegister().removeAllObjects();
 
                     // Enable the new scene
                     scene.setActive(true);

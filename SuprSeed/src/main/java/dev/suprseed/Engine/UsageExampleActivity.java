@@ -1,7 +1,5 @@
 package dev.suprseed.Engine;
 
-import android.content.Context;
-
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import dev.suprseed.Engine.Core.MainView.GameViewBuilder.BaseEngineConfigurator;
@@ -24,8 +22,8 @@ public class UsageExampleActivity extends EngineActivity {
     }
 
     @Override
-    protected BaseEngineConfigurator loadEngineConfig(Context context) {
-        return new DefaultEngineConfiguration(context, this);
+    protected BaseEngineConfigurator loadEngineConfig() {
+        return new DefaultEngineConfiguration(this.getApplicationContext(), this);
     }
 
     @Override

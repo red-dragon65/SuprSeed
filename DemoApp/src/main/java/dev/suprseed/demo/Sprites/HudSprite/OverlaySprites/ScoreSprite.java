@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
-import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
 import dev.suprseed.Engine.Core.System.Registerables.LogicRunnable;
 import dev.suprseed.Engine.Lib.Fonts.FontHolder;
@@ -26,15 +25,15 @@ public class ScoreSprite extends Sprite implements LogicRunnable {
     private boolean saved = false;
     private int highScore = 0;
 
-    public ScoreSprite(BaseScene parentScene, BounceData bounceData, GameOverData gameOverData) {
-        super(parentScene, null);
+    public ScoreSprite(Context context, BounceData bounceData, GameOverData gameOverData) {
+        super(null);
 
         this.bounceData = bounceData;
 
-        this.scoreFont = new FontHolder(R.font.peaberry_base, 10, parentScene.getContext(), new ScorePaintStrategy());
+        this.scoreFont = new FontHolder(R.font.peaberry_base, 10, context, new ScorePaintStrategy());
 
         // Load saved score value
-        this.gameData = parentScene.getContext().getSharedPreferences("GAME_DATA", Context.MODE_PRIVATE);
+        this.gameData = context.getSharedPreferences("GAME_DATA", Context.MODE_PRIVATE);
 
         this.gameOverData = gameOverData;
 

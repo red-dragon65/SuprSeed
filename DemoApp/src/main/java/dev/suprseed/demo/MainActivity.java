@@ -1,6 +1,5 @@
 package dev.suprseed.demo;
 
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.lifecycle.Lifecycle;
@@ -8,7 +7,7 @@ import androidx.lifecycle.Lifecycle;
 import dev.suprseed.Engine.Core.MainView.GameViewBuilder.BaseEngineConfigurator;
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.RootScene;
 import dev.suprseed.Engine.EngineActivity;
-import dev.suprseed.demo.Subscenes.GameDemoMainScene;
+import dev.suprseed.demo.Subscenes.MainScene;
 
 public class MainActivity extends EngineActivity {
 
@@ -23,11 +22,11 @@ public class MainActivity extends EngineActivity {
     }
 
     @Override
-    protected BaseEngineConfigurator loadEngineConfig(Context context) {
+    protected BaseEngineConfigurator loadEngineConfig() {
         //return new DefaultEngineConfiguration(context, this);
 
         // You can specify your custom engine configuration like this
-        return new ClientEngineConfigurator(context, this);
+        return new ClientEngineConfigurator(this.getApplicationContext(), this);
     }
 
     @Override
@@ -40,6 +39,7 @@ public class MainActivity extends EngineActivity {
         //context.getResources();
 
         // Starts the scene 1 example package
-        new GameDemoMainScene(rootScene, "TopScene");
+        //new GamePlayScene(rootScene, "TopScene");
+        rootScene.registerScene(new MainScene(this.getApplicationContext(), "topscene"));
     }
 }

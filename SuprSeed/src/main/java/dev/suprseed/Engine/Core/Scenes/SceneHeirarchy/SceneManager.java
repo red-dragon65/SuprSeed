@@ -1,7 +1,6 @@
 package dev.suprseed.Engine.Core.Scenes.SceneHeirarchy;
 
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
-import dev.suprseed.Engine.Core.Scenes.SceneStrategy.SceneChangeStrategy;
 import dev.suprseed.Engine.Core.System.LayerableQueueComparator;
 import dev.suprseed.Engine.Core.System.RegisterTypes.SceneRegister;
 
@@ -10,14 +9,14 @@ public abstract class SceneManager extends BaseScene implements SceneController<
     protected SceneRegister<BaseScene> sceneRegister;
 
     // Constructor
-    public SceneManager(SceneManager parentScene, String sceneId, int layerDepth) {
-        super(parentScene, sceneId, layerDepth);
+    public SceneManager(String sceneId, int layerDepth) {
+        super(sceneId, layerDepth);
         init();
     }
 
     // Constructor
-    public SceneManager(SceneManager parentScene, String sceneId) {
-        super(parentScene, sceneId);
+    public SceneManager(String sceneId) {
+        super(sceneId);
         init();
     }
 
@@ -26,18 +25,14 @@ public abstract class SceneManager extends BaseScene implements SceneController<
         sceneRegister = new SubSceneRegistry(new LayerableQueueComparator());
     }
 
-
-    @Override
-    public void changeScene(SceneChangeStrategy<BaseScene> strategy, BaseScene oldScene, String... sceneId) {
-
-        strategy.changeScene(this, oldScene, sceneId);
-    }
-
     @Override
     public SceneRegister<BaseScene> getRegister() {
         return sceneRegister;
     }
 
+    public void registerScene(BaseScene scene) {
+        sceneRegister.registerObject(scene);
+    }
 
     /*
     This calls the sub scenes / sceneManagers code
@@ -56,8 +51,11 @@ public abstract class SceneManager extends BaseScene implements SceneController<
     public void runLogic() {
         super.runLogic();
 
+        // Run the logic for all sub scenes
         for (BaseScene scene : sceneRegister.getRegisterList()) {
-            scene.runLogic();
+            if (scene.isActive) {
+                scene.runLogic();
+            }
         }
     }
 
@@ -69,8 +67,22 @@ public abstract class SceneManager extends BaseScene implements SceneController<
         // Re-sort the layers before drawing them
         sceneRegister.syncLayers();
 
+        // Draw all sub scenes
         for (BaseScene scene : sceneRegister.getRegisterList()) {
-            scene.draw(renderer);
+
+            if (scene.isDrawable) {
+                scene.draw(renderer);
+            }
         }
+    }
+
+    @Override
+    public void onDestroy() {
+
+        for (BaseScene s : sceneRegister.getRegisterList()) {
+            s.onDestroy();
+        }
+
+        sceneRegister.removeAllObjects();
     }
 }

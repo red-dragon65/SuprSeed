@@ -71,9 +71,12 @@ public class ObstacleCollection implements LogicRunnable {
         // Initialize obstacle sprites here
         for (int i = 0; i < maxObstacles; i++) {
 
-            obstacleSprites.add(new ObstacleSprite(parentScene, obstacleImages.get(rand.nextInt(obstacleImages.size()))));
+            obstacleSprites.add(new ObstacleSprite(obstacleImages.get(rand.nextInt(obstacleImages.size()))));
         }
 
+        for (Sprite o : obstacleSprites) {
+            parentScene.registerSprite(o);
+        }
 
         // Initialize obstacle components
         obstacleCollision = new ObstacleCollisionComponent(hero, obstacleSprites, soundEngine, gameOverData);

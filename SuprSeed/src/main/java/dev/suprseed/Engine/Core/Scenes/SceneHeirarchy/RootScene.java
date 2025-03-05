@@ -1,7 +1,5 @@
 package dev.suprseed.Engine.Core.Scenes.SceneHeirarchy;
 
-import android.content.Context;
-
 import dev.suprseed.Engine.Core.ErrorLogger.ErrorType;
 import dev.suprseed.Engine.EngineContext;
 
@@ -14,9 +12,8 @@ public class RootScene extends SceneManager {
     and passes to the user in order to allow them to load their initial scene.
     There is no reason for the user to connect their scenes directly to the logic and render system.
      */
-    protected RootScene(Context context) {
-        super(null, "root");
-        this.context = context;
+    protected RootScene() {
+        super("root");
 
         if (initialized) {
             EngineContext.getLogger().logMessage(ErrorType.WARN, "There is already a root scene registered! Adding another root scene may cause issue to occur!");

@@ -3,7 +3,6 @@ package dev.suprseed.Engine.Core.SpriteObjects.SpriteBase;
 import android.graphics.RectF;
 
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
-import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
 import dev.suprseed.Engine.Core.SpriteObjects.DefaultComponents.Resetable;
 import dev.suprseed.Engine.Core.System.LayerData;
 import dev.suprseed.Engine.Core.System.LayerHandler;
@@ -17,7 +16,6 @@ public abstract class Sprite implements RenderableAndLayerable, Boundable, Logic
 
     // Dependency
     protected AssetBundle assetBundle;
-    protected BaseScene parentScene;
     private float x;
     private float y;
     private float xVel;
@@ -30,31 +28,19 @@ public abstract class Sprite implements RenderableAndLayerable, Boundable, Logic
 
 
     // Constructor that takes one sprite image set
-    public Sprite(BaseScene parentScene, AssetBundle assetBundle) {
+    public Sprite(AssetBundle assetBundle) {
 
         // Dependency injection
         this.assetBundle = assetBundle;
-        this.parentScene = parentScene;
         this.layerInfo = new LayerData();
-
-
-        // Register this to the scene
-        parentScene.imageRegister.registerObject(this);
-        parentScene.logicRegister.registerObject(this);
     }
 
     // Constructor that takes one sprite image set
-    public Sprite(BaseScene parentScene, AssetBundle assetBundle, int layerDepth) {
+    public Sprite(AssetBundle assetBundle, int layerDepth) {
 
         // Dependency injection
         this.assetBundle = assetBundle;
-        this.parentScene = parentScene;
         this.layerInfo = new LayerData(layerDepth);
-
-
-        // Register this to the scene
-        parentScene.imageRegister.registerObject(this);
-        parentScene.logicRegister.registerObject(this);
     }
 
 

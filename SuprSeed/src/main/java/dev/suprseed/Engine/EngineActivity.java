@@ -1,6 +1,5 @@
 package dev.suprseed.Engine;
 
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,10 +36,9 @@ public abstract class EngineActivity extends AppCompatActivity implements SceneS
     /**
      * Specify the configuration settings for the engine to use
      *
-     * @param context The application context
      * @return The user specified engine configuration to initialize the engine with
      */
-    protected abstract BaseEngineConfigurator loadEngineConfig(Context context);
+    protected abstract BaseEngineConfigurator loadEngineConfig();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +46,7 @@ public abstract class EngineActivity extends AppCompatActivity implements SceneS
         setContentView(loadView());
 
         // Load the game view
-        loadGameView(this.getApplicationContext());
+        loadGameView();
     }
 
     @Override
@@ -63,13 +61,13 @@ public abstract class EngineActivity extends AppCompatActivity implements SceneS
 
 
     // Load the game view based on builder results
-    private void loadGameView(Context context) {
+    private void loadGameView() {
 
         // Get layout
         ConstraintLayout cLayout = loadViewLayout();
 
         // Create a builder
-        engineConfigurator = loadEngineConfig(context);
+        engineConfigurator = loadEngineConfig();
 
         // Apply the window settings
         engineConfigurator.setWindowConfig(this);

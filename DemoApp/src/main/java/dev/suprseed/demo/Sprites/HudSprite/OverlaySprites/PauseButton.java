@@ -3,7 +3,6 @@ package dev.suprseed.demo.Sprites.HudSprite.OverlaySprites;
 import android.view.MotionEvent;
 
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LoopRunner;
-import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.AssetBundle;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
 import dev.suprseed.Engine.EngineTools;
@@ -16,8 +15,8 @@ public class PauseButton extends Sprite implements InputListener {
     private final InputListener screenListener;
 
     // Constructor
-    public PauseButton(BaseScene parentScene, AssetBundle assetBundle) {
-        super(parentScene, assetBundle, 102);
+    public PauseButton(AssetBundle assetBundle) {
+        super(assetBundle, 102);
 
         screenListener = new FullScreenPauseInput();
 

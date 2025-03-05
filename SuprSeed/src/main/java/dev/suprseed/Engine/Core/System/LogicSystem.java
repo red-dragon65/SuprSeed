@@ -8,7 +8,6 @@ public class LogicSystem implements LogicRunnable {
 
     private final LogicRegister logicRegister;
 
-
     // Constructor
     // Private to prevent client use of 'new' keyword
     public LogicSystem() {

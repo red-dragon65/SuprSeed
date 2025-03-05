@@ -1,10 +1,9 @@
 package dev.suprseed.Engine.Core.Scenes.SceneHeirarchy;
 
-import android.content.Context;
-
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import dev.suprseed.Engine.Core.SpriteObjects.DefaultComponents.Resetable;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Animator;
+import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
 import dev.suprseed.Engine.Core.System.LayerData;
 import dev.suprseed.Engine.Core.System.LayerHandler;
 import dev.suprseed.Engine.Core.System.LayerableQueueComparator;
@@ -17,60 +16,49 @@ import dev.suprseed.Engine.Core.System.Registers.AnimationRegistry;
 import dev.suprseed.Engine.Core.System.Registers.ImageRegistry;
 import dev.suprseed.Engine.Core.System.Registers.LogicRegistry;
 
-public abstract class BaseScene implements LogicRunnable, RenderableAndLayerable, Animator, Resetable {
+public abstract class BaseScene implements LogicRunnable, RenderableAndLayerable, Animator, Resetable, Threadable {
 
+    protected final String sceneId;
     public ImageRegister imageRegister;
     public AnimationRegister animationRegister;
     public LogicRegister logicRegister;
-    protected String sceneId;
     protected boolean isActive = true;
     protected boolean isDrawable = true;
-    protected Context context;
     // Dependency injection
-    protected SceneManager parentScene;
     private LayerHandler layerInfo;
 
     // Constructor
-    public BaseScene(SceneManager parentScene, String sceneId, int layerDepth) {
+    public BaseScene(String sceneId, int layerDepth) {
 
+        this.sceneId = sceneId;
         this.layerInfo = new LayerData(layerDepth);
-        init(parentScene, sceneId);
+        init();
     }
 
     // Constructor
-    public BaseScene(SceneManager parentScene, String sceneId) {
+    public BaseScene(String sceneId) {
 
+        this.sceneId = sceneId;
         this.layerInfo = new LayerData();
-        init(parentScene, sceneId);
+        init();
     }
 
     // Constructor initializer
-    private void init(SceneManager parentScene, String sceneId) {
-
-        this.parentScene = parentScene;
-        this.sceneId = sceneId;
-
-        if (parentScene != null) {
-            context = parentScene.getContext();
-        }
+    private void init() {
 
         imageRegister = new ImageRegistry(new LayerableQueueComparator());
         animationRegister = new AnimationRegistry();
         logicRegister = new LogicRegistry();
+    }
 
-        // Register the base scene to it's parent
-        if (parentScene != null) {
-            this.parentScene.sceneRegister.registerObject(this);
-        }
+    public void registerSprite(Sprite s) {
+        imageRegister.registerObject(s);
+        logicRegister.registerObject(s);
     }
 
 
     public String getId() {
         return sceneId;
-    }
-
-    public Context getContext() {
-        return context;
     }
 
     @Override
@@ -116,5 +104,16 @@ public abstract class BaseScene implements LogicRunnable, RenderableAndLayerable
 
     public void setDrawable(boolean drawable) {
         isDrawable = drawable;
+    }
+
+    @Override
+    public void onPost() {
+        // Run code once it joins back with main thread
+    }
+
+    @Override
+    public void onDestroy() {
+
+        // Run code before this scenes gets destroyed
     }
 }

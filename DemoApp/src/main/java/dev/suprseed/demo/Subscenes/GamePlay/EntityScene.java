@@ -1,9 +1,10 @@
-package dev.suprseed.demo.Subscenes;
+package dev.suprseed.demo.Subscenes.GamePlay;
+
+import android.content.Context;
 
 import java.util.List;
 
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
-import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.SceneManager;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.AssetBundle;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
 import dev.suprseed.Engine.Lib.AssetLoader.Bundler;
@@ -18,11 +19,12 @@ public class EntityScene extends BaseScene {
     private final Sprite hero;
     private final ObstacleCollection obstacleHandler;
 
-    public EntityScene(SceneManager parentScene, String sceneId, Bundler<AssetBundle> assetBundler, SoundMixer<String> gamePlaySounds, BounceData bounceData, GameOverData gameOverData) {
-        super(parentScene, sceneId);
+    public EntityScene(Context context, String sceneId, Bundler<AssetBundle> assetBundler, SoundMixer<String> gamePlaySounds, BounceData bounceData, GameOverData gameOverData) {
+        super(sceneId);
 
         // Create the character sprites here
-        this.hero = new Hero(this, assetBundler.generateAssetBundle(List.of("heroLeft", "heroRight")), gamePlaySounds, bounceData, gameOverData);
+        this.hero = new Hero(this, context, assetBundler.generateAssetBundle(List.of("heroLeft", "heroRight")), gamePlaySounds, bounceData, gameOverData);
+        registerSprite(hero);
 
         this.obstacleHandler = new ObstacleCollection(this, assetBundler, bounceData, hero, gamePlaySounds, gameOverData);
     }

@@ -11,10 +11,8 @@ import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LogicRates;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.SceneStarter;
 import dev.suprseed.Engine.Core.MainView.GameViewBuilder.BaseEngineConfigurator;
 import dev.suprseed.Engine.Core.MainView.GameViewBuilder.EngineConfigurator;
-import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.RootScene;
 import dev.suprseed.Engine.EngineTools;
 import dev.suprseed.Engine.Lib.Input.Dispatchers.TouchEventDispatcher;
-import dev.suprseed.demo.Subscenes.GameDemoMainScene;
 
 
 /*

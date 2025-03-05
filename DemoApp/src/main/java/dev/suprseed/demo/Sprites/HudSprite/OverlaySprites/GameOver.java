@@ -1,8 +1,9 @@
 package dev.suprseed.demo.Sprites.HudSprite.OverlaySprites;
 
 
+import android.content.Context;
+
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
-import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
 import dev.suprseed.Engine.EngineTools;
 import dev.suprseed.Engine.Lib.Fonts.FontHolder;
@@ -28,10 +29,10 @@ public class GameOver extends Sprite {
     private final String restartText = "Tap to Restart";
 
 
-    public GameOver(BaseScene parentScene, GameOverData gameOverData) {
-        super(parentScene, null);
+    public GameOver(Context context, GameOverData gameOverData) {
+        super(null);
 
-        gameOverFont = new FontHolder(R.font.peaberry_base, 12, parentScene.getContext(), new GameOverPaintStrategy());
+        gameOverFont = new FontHolder(R.font.peaberry_base, 12, context, new GameOverPaintStrategy());
 
         // Start hidden until game over occurs
         setDrawable(false);

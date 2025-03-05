@@ -1,7 +1,8 @@
-package dev.suprseed.demo.Subscenes;
+package dev.suprseed.demo.Subscenes.GamePlay;
+
+import android.content.Context;
 
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
-import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.SceneManager;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.AssetBundle;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
 import dev.suprseed.Engine.Lib.AssetLoader.Bundler;
@@ -16,19 +17,20 @@ public class OverlayScene extends BaseScene {
 
     private final Sprite scoreSprite;
 
-    public OverlayScene(SceneManager parentScene, String sceneId, Bundler<AssetBundle> assetBundler, BounceData bounceData, GameOverData gameOverData) {
-        super(parentScene, sceneId);
+    public OverlayScene(Context context, String sceneId, Bundler<AssetBundle> assetBundler, BounceData bounceData, GameOverData gameOverData) {
+        super(sceneId);
 
         // Load HUD scenes here
 
-        scoreSprite = new ScoreSprite(this, bounceData, gameOverData);
+        scoreSprite = new ScoreSprite(context, bounceData, gameOverData);
+        registerSprite(scoreSprite);
 
         // This runs independent of the pause button
-        Sprite pauseText = new PauseText(this, assetBundler.generateAssetBundle("pause_text"));
+        registerSprite(new PauseText(assetBundler.generateAssetBundle("pause_text")));
 
-        Sprite pauseButton = new PauseButton(this, assetBundler.generateAssetBundle("pause_button"));
+        registerSprite(new PauseButton(assetBundler.generateAssetBundle("pause_button")));
 
-        Sprite gameOverText = new GameOver(this, gameOverData);
+        registerSprite(new GameOver(context, gameOverData));
     }
 
     @Override

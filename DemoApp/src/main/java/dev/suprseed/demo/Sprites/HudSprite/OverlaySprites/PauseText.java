@@ -2,15 +2,14 @@ package dev.suprseed.demo.Sprites.HudSprite.OverlaySprites;
 
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LoopRunner;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
-import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.AssetBundle;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
 import dev.suprseed.Engine.EngineTools;
 
 public class PauseText extends Sprite {
 
-    public PauseText(BaseScene parentScene, AssetBundle assetBundle) {
-        super(parentScene, assetBundle);
+    public PauseText(AssetBundle assetBundle) {
+        super(assetBundle);
 
         // Center the pause text overlay
         float horizontalCenter = EngineTools.getViewPort().getWidth() / 2;

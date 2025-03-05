@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+import dev.suprseed.Engine.Core.ErrorLogger.ErrorType;
 import dev.suprseed.Engine.Core.System.ListSyncronizer;
 import dev.suprseed.Engine.Core.System.RegisterTypes.SceneRegister;
 import dev.suprseed.Engine.Core.System.Registerables.Layerable;
 import dev.suprseed.Engine.Core.System.Registers.LayerSyncer;
+import dev.suprseed.Engine.EngineContext;
 
 public class SubSceneRegistry implements SceneRegister<BaseScene> {
 
@@ -26,11 +28,25 @@ public class SubSceneRegistry implements SceneRegister<BaseScene> {
     @Override
     public void registerObject(BaseScene object) {
 
+        if (myScenes.stream().anyMatch(s -> s.getId().equals(object.getId()))) {
+
+            EngineContext.getLogger().logMessage(ErrorType.ERROR, "A scene with id: " + object.getId() + "already exists! Not adding scene!");
+
+            return;
+        }
+
         myScenes.add(object);
     }
 
     @Override
     public void removeObject(BaseScene object) {
+
+        if (!myScenes.stream().anyMatch(s -> s.getId().equals(object.getId()))) {
+
+            EngineContext.getLogger().logMessage(ErrorType.ERROR, "No scene with id: " + object.getId() + " was found! Could not remove the scene!!");
+
+            return;
+        }
 
         myScenes.remove(object);
     }
