@@ -40,6 +40,12 @@ public class SpriteAsset implements PlayerCreator {
             return player;
         }
 
+        if (imageSet.getNumImages() == 1) {
+
+            EngineContext.getLogger().logMessage(ErrorType.WARN, "Image set: " + imageSet.getTag() + " contains only 1 image!" +
+                    "Created animation player won't show any apparent animations on screen!");
+        }
+
         player = new AnimationPlayer(parentScene, fps, imageSet.getTag(), imageSet.getNumImages());
         playerInitialized = true;
 

@@ -19,8 +19,20 @@ public class SceneHardChange {
     private List<Future<BaseScene>> pendingScenes;
     private SceneManager parentScene;
     private BaseScene sceneSpinner;
+    private long minLoadingScreenTimeInMs = 0;
+    private long startTime = 0L;
+    private long elapsedTime = 0;
+
+    public SceneHardChange(SceneManager parentScene, BaseScene sceneSpinner, long minLoadingScreenTimeInMs) {
+        this.minLoadingScreenTimeInMs = minLoadingScreenTimeInMs;
+        init(parentScene, sceneSpinner);
+    }
 
     public SceneHardChange(SceneManager parentScene, BaseScene sceneSpinner) {
+        init(parentScene, sceneSpinner);
+    }
+
+    private void init(SceneManager parentScene, BaseScene sceneSpinner) {
         this.parentScene = parentScene;
         this.sceneSpinner = sceneSpinner;
         executorService = Executors.newSingleThreadExecutor();
@@ -28,6 +40,11 @@ public class SceneHardChange {
     }
 
     public void requestSceneChange(Callable<BaseScene> lateInitScene, String... removalIds) {
+
+        requestMassSceneChange(List.of(lateInitScene), removalIds);
+    }
+
+    public void requestMassSceneChange(List<Callable<BaseScene>> lateInitScene, String... removalIds) {
 
         // Get the old scenes
         List<BaseScene> oldScenes = parentScene.getRegister().getRegisterList().stream()
@@ -57,8 +74,12 @@ public class SceneHardChange {
         // Show the spinner
         parentScene.registerScene(sceneSpinner);
 
-        Future<BaseScene> futureScene = executorService.submit(lateInitScene);
-        pendingScenes.add(futureScene);
+        for (Callable<BaseScene> call : lateInitScene) {
+            Future<BaseScene> futureScene = executorService.submit(call);
+            pendingScenes.add(futureScene);
+        }
+
+        startTime = System.currentTimeMillis();
     }
 
     public void joinScenes() throws ExecutionException, InterruptedException {
@@ -66,15 +87,25 @@ public class SceneHardChange {
         // See if any scenes are pending
         if (pendingScenes.isEmpty()) {
 
-            // Stop the spinner
+            // See if a spinner exists
             if (parentScene.getRegister().getRegisterList().stream().anyMatch(s -> s.getId().equals(sceneSpinner.getId()))) {
-                parentScene.getRegister().removeObject(sceneSpinner);
-            }
 
-            // Resume all stopped scenes
-            for (BaseScene s : parentScene.getRegister().getRegisterList()) {
-                s.setActive(true);
-                s.setDrawable(true);
+                elapsedTime = System.currentTimeMillis() - startTime;
+
+                // Only stop the spinner if the min time has elapsed
+                if (startTime == 0 || elapsedTime > minLoadingScreenTimeInMs) {
+
+                    startTime = 0L;
+
+                    parentScene.getRegister().removeObject(sceneSpinner);
+
+                    // Resume all stopped scenes
+                    for (BaseScene s : parentScene.getRegister().getRegisterList()) {
+                        s.setActive(true);
+                        s.setDrawable(true);
+                    }
+
+                }
             }
 
             return;
@@ -89,6 +120,10 @@ public class SceneHardChange {
                 // Add the new scene
                 BaseScene finishedScene = threadWork.get();
                 finishedScene.onPost();
+
+                // Will get active after spinner gets removed
+                finishedScene.setActive(false);
+                finishedScene.setDrawable(false);
                 parentScene.registerScene(finishedScene);
             }
         }

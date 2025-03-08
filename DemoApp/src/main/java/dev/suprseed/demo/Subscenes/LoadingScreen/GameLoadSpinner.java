@@ -44,7 +44,7 @@ public class GameLoadSpinner extends BaseScene {
         registerSprite(background);
         background.setAllowCollisionDiagnostic(false);
 
-        registerSprite(new LoadingIcon(assetBundler.generateAssetBundle("spinningIcon")));
+        registerSprite(new LoadingIcon(this, assetBundler.generateAssetBundle("spinningIcon")));
 
         registerSprite(new LoadingText(context));
     }

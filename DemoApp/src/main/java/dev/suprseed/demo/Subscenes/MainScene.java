@@ -21,7 +21,7 @@ public class MainScene extends SceneManager {
 
         this.context = context;
 
-        swapper = new SceneHardChange(this, new GameLoadSpinner("sceneSpinner", context));
+        swapper = new SceneHardChange(this, new GameLoadSpinner("sceneSpinner", context), 1000);
 
         registerScene(new MenuScene("menu", changeSceneRequestDTO, context));
 
@@ -46,6 +46,7 @@ public class MainScene extends SceneManager {
 
             } else {
 
+                // Note: this doesn't do anything for now... (user cannot go back to menu after game play scenes starts)
                 swapper.requestSceneChange(() -> new MenuScene("menu", changeSceneRequestDTO, context), "gameplay");
 
                 changeSceneRequestDTO.isChangeRequested = false;
@@ -54,7 +55,7 @@ public class MainScene extends SceneManager {
         }
 
         try {
-            // This should never need to run
+            // Check and add initiated scenes to this parent scene manager
             swapper.joinScenes();
         } catch (ExecutionException | InterruptedException e) {
             throw new RuntimeException(e);
