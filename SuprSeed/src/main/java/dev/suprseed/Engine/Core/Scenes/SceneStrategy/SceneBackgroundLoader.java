@@ -1,12 +1,14 @@
 package dev.suprseed.Engine.Core.Scenes.SceneStrategy;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.stream.Collectors;
 
+import dev.suprseed.Engine.Core.ErrorLogger.ErrorType;
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.BaseScene;
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.SceneManager;
+import dev.suprseed.Engine.EngineContext;
 
 abstract public class SceneBackgroundLoader {
 
@@ -29,22 +31,24 @@ abstract public class SceneBackgroundLoader {
 
     protected void removeScenes(List<String> removalIds) {
 
-        // TODO: This shit should be handled by the register! An error should be logged if the scene does not exist!
-        // Get the old scenes
-        List<BaseScene> oldScenes = parentScene.getRegister().getRegisterList().stream()
-                .filter(s -> removalIds.stream().anyMatch(r -> s.getId().equals(r)))
-                .collect(Collectors.toList());
+        Optional<BaseScene> current;
 
+        for (String s : removalIds) {
 
-        // Remove the old scenes
-        for (BaseScene s : oldScenes) {
+            current = parentScene.getRegister().getScene(s);
 
-            // Cleanup the scene
-            // Removes itself from the parent by default
-            s.onDestroy();
+            if (current.isPresent()) {
 
-            // De-reference for garbage collection
-            parentScene.getRegister().removeObject(s);
+                // Cleanup the scene
+                current.get().onDestroy();
+
+                // De-reference for garbage collection
+                parentScene.getRegister().removeObject(s);
+
+            } else {
+                EngineContext.getLogger().logMessage(ErrorType.ERROR, "Could not remove scene with removalId: " + s + " when attempting scene change strategy!");
+            }
+
         }
 
 

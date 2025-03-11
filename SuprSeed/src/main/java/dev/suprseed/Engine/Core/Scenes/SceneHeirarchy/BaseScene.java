@@ -113,7 +113,6 @@ public abstract class BaseScene implements LogicRunnable, RenderableAndLayerable
 
     @Override
     public void onDestroy() {
-
         // Run code before this scenes gets destroyed
     }
 }

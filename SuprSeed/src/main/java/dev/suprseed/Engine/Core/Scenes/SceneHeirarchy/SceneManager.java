@@ -6,7 +6,7 @@ import dev.suprseed.Engine.Core.System.RegisterTypes.SceneRegister;
 
 public abstract class SceneManager extends BaseScene implements SceneController<BaseScene> {
 
-    protected SceneRegister<BaseScene> sceneRegister;
+    private SceneRegister<BaseScene> sceneRegister;
 
     // Constructor
     public SceneManager(String sceneId, int layerDepth) {
