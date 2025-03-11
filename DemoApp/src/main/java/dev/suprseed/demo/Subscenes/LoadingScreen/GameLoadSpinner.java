@@ -35,14 +35,13 @@ public class GameLoadSpinner extends BaseScene {
         }
 
         // Create the asset loader and bundler
-        AssetLoadable<SpriteImage> gamePlayAssets = new LoadingAssets(this, localStreamer, localFolderParser);
-        Bundler<AssetBundle> assetBundler = new SafeAssetBundler(gamePlayAssets, placeHolder);
+        AssetLoadable<SpriteImage> loadingAssets = new LoadingAssets(this, localStreamer, localFolderParser);
+        Bundler<AssetBundle> assetBundler = new SafeAssetBundler(loadingAssets, placeHolder);
 
 
         // Load in sprites here
         Sprite background = new Background(assetBundler.generateAssetBundle("loadingBackground"));
         registerSprite(background);
-        background.setAllowCollisionDiagnostic(false);
 
         registerSprite(new LoadingIcon(this, assetBundler.generateAssetBundle("spinningIcon")));
 

@@ -22,10 +22,13 @@ import dev.suprseed.demo.Subscenes.ChangeSceneRequestDTO;
 
 public class MenuScene extends SceneManager {
 
-    private final InputListener fullscreenInputListener;
+    private InputListener fullscreenInputListener;
+    private ChangeSceneRequestDTO changeSceneRequestDTO;
 
     public MenuScene(String sceneId, ChangeSceneRequestDTO changeSceneRequestDTO, Context context) {
         super(sceneId);
+
+        this.changeSceneRequestDTO = changeSceneRequestDTO;
 
         // Instantiate the assets for this scene
         FolderParser localFolderParser = new LocalFolderParser(context.getResources());
@@ -40,13 +43,12 @@ public class MenuScene extends SceneManager {
         }
 
         // Create the asset loader and bundler
-        AssetLoadable<SpriteImage> gamePlayAssets = new MenuAssets(this, localStreamer, localFolderParser);
-        Bundler<AssetBundle> assetBundler = new SafeAssetBundler(gamePlayAssets, placeHolder);
+        AssetLoadable<SpriteImage> menuAssets = new MenuAssets(this, localStreamer, localFolderParser);
+        Bundler<AssetBundle> assetBundler = new SafeAssetBundler(menuAssets, placeHolder);
 
 
         Sprite background = new Background(assetBundler.generateAssetBundle("menu_background"));
         registerSprite(background);
-        background.setAllowCollisionDiagnostic(false);
 
         Sprite playButton = new Sprite(assetBundler.generateAssetBundle("play_button")) {
             @Override
@@ -60,7 +62,10 @@ public class MenuScene extends SceneManager {
         registerSprite(playButton);
 
         registerSprite(new MenuText(context));
+    }
 
+    @Override
+    public void onPost() {
 
         fullscreenInputListener = new FullScreenMenuTouchInput(changeSceneRequestDTO);
         EngineTools.getInputManager().getListenerRegistry().registerObject(fullscreenInputListener);

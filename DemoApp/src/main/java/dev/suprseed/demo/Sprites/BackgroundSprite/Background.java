@@ -8,6 +8,9 @@ public class Background extends Sprite {
     public Background(AssetBundle assetBundle) {
         super(assetBundle);
 
+        // Disable collision debugging
+        setAllowCollisionDiagnostic(false);
+
         // Disable camera
         disableCamera();
     }

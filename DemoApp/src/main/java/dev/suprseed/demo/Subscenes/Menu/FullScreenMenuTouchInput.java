@@ -24,7 +24,7 @@ public class FullScreenMenuTouchInput implements InputListener {
     public boolean processInput(String action, MotionEvent event) {
 
         // Trigger to change scene
-        changeSceneRequestDTO.isChangeRequested = true;
+        changeSceneRequestDTO.notifyRequestChange();
 
         return true;
     }

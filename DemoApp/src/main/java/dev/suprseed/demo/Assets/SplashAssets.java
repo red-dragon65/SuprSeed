@@ -10,9 +10,9 @@ import dev.suprseed.Engine.Lib.AssetLoader.Streamable;
 import dev.suprseed.Engine.Lib.Images.BitmapCollection;
 import dev.suprseed.Engine.Lib.Images.BitmapSingle;
 
-public class LoadingAssets extends AssetLoader {
+public class SplashAssets extends AssetLoader {
 
-    public LoadingAssets(BaseScene parentScene, Streamable assetStreamer, FolderParser folderParser) {
+    public SplashAssets(BaseScene parentScene, Streamable assetStreamer, FolderParser folderParser) {
         super(parentScene, assetStreamer, folderParser);
     }
 
@@ -20,13 +20,16 @@ public class LoadingAssets extends AssetLoader {
     public void loadAssets(BaseScene parentScene) {
 
         try {
-            // Loading images
+            // Splash images
 
-            SpriteImage background = new BitmapSingle("Images/LoadingScreen/SuprSeed_LoadingScreen.png", 1.25f, assetStreamer, "loadingBackground");
+            SpriteImage background = new BitmapSingle("Images/SplashScreen/SuprSeed_SplashScreen.png", 1.25f, assetStreamer, "splashScreen");
             imageRegistry.add(background);
 
-            SpriteImage spinningIcon = new BitmapCollection("Images/LoadingScreen/strawberry", 10, assetStreamer, folderParser, "spinningIcon");
-            imageRegistry.add(spinningIcon);
+            SpriteImage spinningLogo = new BitmapCollection("Images/SplashScreen/logo-animation", 2f, assetStreamer, folderParser, "splashLogo");
+            imageRegistry.add(spinningLogo);
+
+            SpriteImage text = new BitmapSingle("Images/SplashScreen/splash-text.png", 1f, assetStreamer, "splashText");
+            imageRegistry.add(text);
 
         } catch (IOException e) {
             throw new RuntimeException("One or more folders paths are incorrect!");
