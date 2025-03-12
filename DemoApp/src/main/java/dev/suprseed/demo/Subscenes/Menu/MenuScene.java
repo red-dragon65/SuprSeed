@@ -14,11 +14,15 @@ import dev.suprseed.Engine.Lib.AssetLoader.LocalFolderParser;
 import dev.suprseed.Engine.Lib.AssetLoader.LocalImageFileStreamer;
 import dev.suprseed.Engine.Lib.AssetLoader.SafeAssetBundler;
 import dev.suprseed.Engine.Lib.AssetLoader.Streamable;
+import dev.suprseed.Engine.Lib.Fonts.FontHolder;
+import dev.suprseed.Engine.Lib.Fonts.FontSprite;
 import dev.suprseed.Engine.Lib.Images.PlaceHolder;
 import dev.suprseed.Engine.Lib.Input.InputListener;
 import dev.suprseed.demo.Assets.MenuAssets;
+import dev.suprseed.demo.R;
 import dev.suprseed.demo.Sprites.BackgroundSprite.Background;
 import dev.suprseed.demo.Subscenes.ChangeSceneRequestDTO;
+import dev.suprseed.demo.Subscenes.GameFontPainter;
 
 public class MenuScene extends SceneManager {
 
@@ -61,7 +65,9 @@ public class MenuScene extends SceneManager {
 
         registerSprite(playButton);
 
-        registerSprite(new MenuText(context));
+        FontHolder fontHolder = new FontHolder(R.font.peaberry_base, 10, context, new GameFontPainter());
+        registerSprite(new FontSprite("SuprSeed Demo", 10, 50, fontHolder));
+        registerSprite(new FontSprite("Tap To Start", 15, 80, fontHolder));
     }
 
     @Override

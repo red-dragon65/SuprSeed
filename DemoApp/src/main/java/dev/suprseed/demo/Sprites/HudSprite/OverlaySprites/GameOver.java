@@ -7,11 +7,12 @@ import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHan
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
 import dev.suprseed.Engine.EngineTools;
 import dev.suprseed.Engine.Lib.Fonts.FontHolder;
+import dev.suprseed.Engine.Lib.Fonts.FontPaintRoller;
 import dev.suprseed.Engine.Lib.Input.InputListener;
 import dev.suprseed.demo.R;
 import dev.suprseed.demo.SharedData.GameOverData;
-import dev.suprseed.demo.Sprites.HudSprite.HudFontPaintStrategies.GameOverPaintStrategy;
 import dev.suprseed.demo.Sprites.HudSprite.HudInput.FullScreenRestartInput;
+import dev.suprseed.demo.Subscenes.GameFontPainter;
 
 public class GameOver extends Sprite {
 
@@ -32,7 +33,7 @@ public class GameOver extends Sprite {
     public GameOver(Context context, GameOverData gameOverData) {
         super(null);
 
-        gameOverFont = new FontHolder(R.font.peaberry_base, 12, context, new GameOverPaintStrategy());
+        gameOverFont = new FontHolder(R.font.peaberry_base, 12, context, new GameFontPainter());
 
         // Start hidden until game over occurs
         setDrawable(false);
@@ -42,10 +43,6 @@ public class GameOver extends Sprite {
         screenListener = new FullScreenRestartInput(this, gameOverData);
 
         EngineTools.getInputManager().getListenerRegistry().registerObject(screenListener);
-
-        // Set text location
-        setX(gameOverTextLocX);
-        setY(gameOverTextLocY);
     }
 
     @Override
@@ -60,28 +57,17 @@ public class GameOver extends Sprite {
 
     @Override
     public void draw(RenderHandler renderer) {
-
-        // Don't draw the 'image handler!' It is null...
         //super.draw(renderer);
 
-        // Draw the game over text here instead
-
-
-        // Set the font settings
-        gameOverFont.updatePaint(renderer.getPaint());
-
-
         // Scale the location then draw text
-        setY(gameOverTextLocY);
         setX(gameOverTextLocX);
-        float[] output = renderer.getCoordinateHandler().parseLocation(this);
-        renderer.getCanvas().drawText(gameOverText, output[0], output[1], renderer.getPaint());
+        setY(gameOverTextLocY);
+        FontPaintRoller.renderFont(renderer, this, gameOverText, gameOverFont);
 
 
         // Scale the location then draw text
-        setY(restartTextLocY);
         setX(restartTextLocX);
-        output = renderer.getCoordinateHandler().parseLocation(this);
-        renderer.getCanvas().drawText(restartText, output[0], output[1], renderer.getPaint());
+        setY(restartTextLocY);
+        FontPaintRoller.renderFont(renderer, this, restartText, gameOverFont);
     }
 }

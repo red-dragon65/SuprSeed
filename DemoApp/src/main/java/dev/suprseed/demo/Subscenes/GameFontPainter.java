@@ -1,14 +1,14 @@
-package dev.suprseed.demo.Sprites.HudSprite.HudFontPaintStrategies;
+package dev.suprseed.demo.Subscenes;
 
 import android.graphics.Color;
 import android.graphics.Paint;
 
 import dev.suprseed.Engine.Lib.Fonts.FontPaintRoller;
 
-public class ScorePaintStrategy extends FontPaintRoller {
+public class GameFontPainter extends FontPaintRoller {
 
     @Override
-    public void updatePaint(Paint paint) {
+    protected void updatePaint(Paint paint) {
 
         paint.setColor(Color.WHITE);
         paint.setTypeface(fontHolder.getFont());

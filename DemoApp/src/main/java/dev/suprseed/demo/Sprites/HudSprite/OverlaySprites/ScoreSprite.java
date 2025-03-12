@@ -7,10 +7,11 @@ import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHan
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
 import dev.suprseed.Engine.Core.System.Registerables.LogicRunnable;
 import dev.suprseed.Engine.Lib.Fonts.FontHolder;
+import dev.suprseed.Engine.Lib.Fonts.FontPaintRoller;
 import dev.suprseed.demo.R;
 import dev.suprseed.demo.SharedData.BounceData;
 import dev.suprseed.demo.SharedData.GameOverData;
-import dev.suprseed.demo.Sprites.HudSprite.HudFontPaintStrategies.ScorePaintStrategy;
+import dev.suprseed.demo.Subscenes.GameFontPainter;
 
 public class ScoreSprite extends Sprite implements LogicRunnable {
 
@@ -30,7 +31,7 @@ public class ScoreSprite extends Sprite implements LogicRunnable {
 
         this.bounceData = bounceData;
 
-        this.scoreFont = new FontHolder(R.font.peaberry_base, 10, context, new ScorePaintStrategy());
+        this.scoreFont = new FontHolder(R.font.peaberry_base, 10, context, new GameFontPainter());
 
         // Load saved score value
         this.gameData = context.getSharedPreferences("GAME_DATA", Context.MODE_PRIVATE);
@@ -65,26 +66,15 @@ public class ScoreSprite extends Sprite implements LogicRunnable {
 
     @Override
     public void draw(RenderHandler renderer) {
-
-        // Don't draw the 'image handler!' It is null...
         //super.draw(renderer);
-
-        // Draw the score text here instead
-
-        // Set the font
-        scoreFont.updatePaint(renderer.getPaint());
-
-        // Scale the location
-        float[] output = renderer.getCoordinateHandler().parseLocation(this);
-
 
         // Draw the font
         if (!gameOverData.isStarted() && !gameOverData.isGameOver()) {
 
-            renderer.getCanvas().drawText(highScoreText + highScore, output[0], output[1], renderer.getPaint());
+            FontPaintRoller.renderFont(renderer, this, highScoreText + highScore, scoreFont);
         } else {
 
-            renderer.getCanvas().drawText(scoreText + scoreCounter, output[0], output[1], renderer.getPaint());
+            FontPaintRoller.renderFont(renderer, this, scoreText + scoreCounter, scoreFont);
         }
     }
 
