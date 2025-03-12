@@ -10,6 +10,7 @@ import androidx.lifecycle.LifecycleOwner;
 import java.util.HashMap;
 import java.util.Map;
 
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LoopRunner;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.SceneManager;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.AssetBundle;
@@ -86,6 +87,10 @@ public class GamePlayScene extends SceneManager {
         registerScene(entities);
         overlay = new OverlayScene(context, "overlay", assetBundler, bounceData, gameOverData);
         registerScene(overlay);
+
+        // Pause the game when the window gets focused again
+        // By default, the engine will pause/resume when the window loses/has focus
+        EngineTools.getWindowEventRegistry().registerObject(hasFocus -> LoopRunner.loopy.setSoftPause(hasFocus));
     }
 
     private void loadLifeCycleHandlers() {

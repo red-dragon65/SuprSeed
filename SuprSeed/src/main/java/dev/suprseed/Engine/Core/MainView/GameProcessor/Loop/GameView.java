@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.RootScene;
 import dev.suprseed.Engine.EngineContext;
+import dev.suprseed.Engine.EngineTools;
 
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
@@ -94,14 +95,14 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         // Update refresh rate before initializing loop
         refreshHandler.updateRefreshRate();
 
-        // Continue drawing
+        // Continue logic and drawing
         loopRunner.setHardPause(false);
     }
 
     @Override
     public void surfaceChanged(@NonNull SurfaceHolder surfaceHolder, int i, int i1, int i2) {
 
-        // Continue drawing
+        // Continue logic and drawing
         loopRunner.setHardPause(false);
     }
 
@@ -109,13 +110,11 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     public void onWindowFocusChanged(boolean hasWindowFocus) {
         super.onWindowFocusChanged(hasWindowFocus);
 
-        // Pause game drawing (in game pause)
-        if (!hasWindowFocus) {
+        // Stop/resume logic only (drawing still allowed)
+        loopRunner.setSoftPause(!hasWindowFocus);
 
-            // Stop logic only (drawing still allowed)
-            loopRunner.setSoftPause(true);
-        }
-
+        // Notify listeners of window change (useful for pausing game)
+        EngineTools.getWindowEventRegistry().onFocusChanged(hasWindowFocus);
     }
 
     @Override

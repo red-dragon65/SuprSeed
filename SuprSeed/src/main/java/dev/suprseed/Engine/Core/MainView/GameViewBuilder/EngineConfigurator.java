@@ -17,6 +17,7 @@ import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LoopRunner;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.RefreshHandler;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.SceneStarter;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.VelocityScaler;
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.WindowEventRegistry;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates.Camera;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates.CartesianProcessor;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates.CoordinateHandler;
@@ -65,6 +66,7 @@ public class EngineConfigurator extends BaseEngineConfigurator {
         EngineTools.setViewPort(new ViewPort());
         EngineTools.setGlobalCamera(new Camera());
         EngineTools.setCollisionDrawer(new CollisionDiagnosticsOverlay(false));
+        EngineTools.setWindowEventRegistry(new WindowEventRegistry());
     }
 
     @Override

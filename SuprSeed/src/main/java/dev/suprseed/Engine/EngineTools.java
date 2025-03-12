@@ -1,6 +1,7 @@
 package dev.suprseed.Engine;
 
 import dev.suprseed.Engine.Core.ErrorLogger.ErrorType;
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.WindowEventRegistry;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates.Camera;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.CollisionDrawable;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.ViewPort;
@@ -14,6 +15,8 @@ public class EngineTools {
 
     private static InputManager inputManagerInstance = null;
     private static CollisionDrawable collisionDrawerInstance = null;
+
+    private static WindowEventRegistry windowEventRegistryInstance = null;
 
 
     private static void logIfPresent(Object oldInstance, Object newInstance) {
@@ -59,5 +62,14 @@ public class EngineTools {
     public static void setCollisionDrawer(CollisionDrawable collisionDrawer) {
         logIfPresent(collisionDrawerInstance, collisionDrawer);
         collisionDrawerInstance = collisionDrawer;
+    }
+
+    public static WindowEventRegistry getWindowEventRegistry() {
+        return windowEventRegistryInstance;
+    }
+
+    public static void setWindowEventRegistry(WindowEventRegistry windowEventRegistry) {
+        logIfPresent(windowEventRegistryInstance, windowEventRegistry);
+        windowEventRegistryInstance = windowEventRegistry;
     }
 }
