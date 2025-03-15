@@ -41,6 +41,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         this.sceneStarter = sceneStarter;
         rootScene = new RootScene() {
         };
+        sceneStarter.setRootScene(rootScene);
 
         this.inputProcessor = inputProcessor;
     }

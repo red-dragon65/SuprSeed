@@ -73,4 +73,10 @@ public class MainScene extends SceneManager {
 
     }
 
+    @Override
+    public void onDestroy() {
+        hardSwapper.shutDownThread();
+        backgroundLoader.shutDownThread();
+    }
+
 }

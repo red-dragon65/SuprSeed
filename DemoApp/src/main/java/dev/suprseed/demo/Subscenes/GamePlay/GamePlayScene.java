@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LoopRunner;
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.WindowEventListener;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.SceneManager;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.AssetBundle;
@@ -39,6 +40,7 @@ public class GamePlayScene extends SceneManager {
     private final OverlayScene overlay;
     private final GameOverData gameOverData;
     private final SoundMixer<String> soundEffects;
+    private final WindowEventListener pauseListener;
 
     // Constructor
     public GamePlayScene(Context context, String sceneId) {
@@ -74,6 +76,8 @@ public class GamePlayScene extends SceneManager {
         mediaPlayer.setLooping(true);
         mediaPlayer.setVolume(0.60f, 0.60f);
 
+        pauseListener = hasFocus -> LoopRunner.loopy.setSoftPause(hasFocus);
+
 
         // Shared data
         BounceData bounceData = new BounceData();
@@ -87,10 +91,6 @@ public class GamePlayScene extends SceneManager {
         registerScene(entities);
         overlay = new OverlayScene(context, "overlay", assetBundler, bounceData, gameOverData);
         registerScene(overlay);
-
-        // Pause the game when the window gets focused again
-        // By default, the engine will pause/resume when the window loses/has focus
-        EngineTools.getWindowEventRegistry().registerObject(hasFocus -> LoopRunner.loopy.setSoftPause(hasFocus));
     }
 
     private void loadLifeCycleHandlers() {
@@ -114,6 +114,10 @@ public class GamePlayScene extends SceneManager {
 
     @Override
     public void onPost() {
+
+        // Pause the game when the window gets focused again
+        // By default, the engine will pause/resume when the window loses/has focus
+        EngineTools.getWindowEventRegistry().registerObject(pauseListener);
         loadLifeCycleHandlers();
     }
 
@@ -134,8 +138,8 @@ public class GamePlayScene extends SceneManager {
 
     @Override
     public void onDestroy() {
-        // Remove all touch listeners
-        EngineTools.getInputManager().getListenerRegistry().removeAllObjects();
+
+        EngineTools.getWindowEventRegistry().removeObject(pauseListener);
     }
 
     @Override

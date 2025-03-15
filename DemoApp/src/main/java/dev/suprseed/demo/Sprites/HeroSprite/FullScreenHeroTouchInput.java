@@ -3,7 +3,6 @@ package dev.suprseed.demo.Sprites.HeroSprite;
 import android.graphics.RectF;
 import android.view.MotionEvent;
 
-import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
 import dev.suprseed.Engine.Core.System.LayerData;
 import dev.suprseed.Engine.Core.System.LayerHandler;
 import dev.suprseed.Engine.EngineTools;
@@ -13,14 +12,14 @@ import dev.suprseed.demo.SharedData.GameOverData;
 
 public class FullScreenHeroTouchInput implements InputListener {
 
-    private final Sprite sprite;
     private final GameOverData gameOverData;
+    private boolean isActive;
     private boolean hold = false;
     private LayerHandler layerInfo = new LayerData(101);
 
     // Constructor
-    public FullScreenHeroTouchInput(Sprite sprite, GameOverData gameOverData) {
-        this.sprite = sprite;
+    public FullScreenHeroTouchInput(boolean isActive, GameOverData gameOverData) {
+        this.isActive = isActive;
         this.gameOverData = gameOverData;
     }
 
@@ -35,7 +34,7 @@ public class FullScreenHeroTouchInput implements InputListener {
         }
 
         // Pass to 'gameRestart' input if hero is inactive
-        return sprite.isActive();
+        return isActive;
     }
 
     @Override
@@ -53,6 +52,9 @@ public class FullScreenHeroTouchInput implements InputListener {
         return layerInfo;
     }
 
+    public void setActive(boolean isActive) {
+        this.isActive = isActive;
+    }
 
     public boolean isHold() {
         return hold;

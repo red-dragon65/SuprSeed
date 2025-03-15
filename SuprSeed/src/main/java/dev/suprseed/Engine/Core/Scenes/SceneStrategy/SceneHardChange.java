@@ -58,7 +58,6 @@ public class SceneHardChange extends SceneBackgroundLoader {
 
                     // Add the new scene
                     BaseScene finishedScene = current.get();
-                    finishedScene.onPost();
 
                     // Will get active after spinner gets removed
                     finishedScene.setActive(false);

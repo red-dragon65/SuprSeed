@@ -14,7 +14,6 @@ import dev.suprseed.Engine.Lib.Collisions.RectangleCollision;
 import dev.suprseed.Engine.Lib.Images.DefaultFPS;
 import dev.suprseed.Engine.Lib.SoundPlayer.SoundMixer;
 import dev.suprseed.demo.SharedData.BounceData;
-import dev.suprseed.demo.SharedData.GameOverData;
 import dev.suprseed.demo.Sprites.HeroSprite.HeroComponents.BounceMovementComponent;
 import dev.suprseed.demo.Sprites.HeroSprite.HeroComponents.TiltMovementComponent;
 import dev.suprseed.demo.Sprites.HeroSprite.HeroComponents.WallCollisionComponent;
@@ -29,21 +28,20 @@ public class Hero extends Sprite implements LogicRunnable {
     private final Component tiltMovement;
     private final CollisionHandler collider;
     private final BounceData bounceData;
+    private final FullScreenHeroTouchInput screenListener;
 
-
-    public Hero(BaseScene parentScene, Context context, AssetBundle assetBundle, SoundMixer<String> soundEngine, BounceData bounceData, GameOverData gameOverData) {
+    public Hero(BaseScene parentScene, Context context, AssetBundle assetBundle, SoundMixer<String> soundEngine, BounceData bounceData, FullScreenHeroTouchInput fullScreenHeroTouchInput) {
         super(assetBundle);
 
-        // Show collision boxes
-        //CollisionDiagnosticsOverlay.getInstance().enable();
-
         this.bounceData = bounceData;
+        this.screenListener = fullScreenHeroTouchInput;
+        screenListener.setActive(isActive());
 
         // Instantiate behavior here if you want
         // but it is probably better to dependency inject these
         startingState = new HeroStartingState(this);
         wallCollision = new WallCollisionComponent(this);
-        bounceMovement = new BounceMovementComponent(this, bounceData, soundEngine, gameOverData);
+        bounceMovement = new BounceMovementComponent(this, bounceData, soundEngine, fullScreenHeroTouchInput);
         tiltMovement = new TiltMovementComponent(this, context);
         collider = new RectangleCollision();
 
@@ -99,6 +97,9 @@ public class Hero extends Sprite implements LogicRunnable {
 
         // Stop bounceData
         bounceData.setBounceValue(0);
+
+        // Disable the touch listener if this hero gets disabled
+        screenListener.setActive(enabled);
     }
 
     @Override

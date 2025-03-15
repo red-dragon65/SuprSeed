@@ -73,6 +73,8 @@ public class MenuScene extends SceneManager {
     @Override
     public void onPost() {
 
+        // Load the input after the object is created to avoid it from being active while
+        // the loading screen is still showing
         fullscreenInputListener = new FullScreenMenuTouchInput(changeSceneRequestDTO);
         EngineTools.getInputManager().getListenerRegistry().registerObject(fullscreenInputListener);
     }

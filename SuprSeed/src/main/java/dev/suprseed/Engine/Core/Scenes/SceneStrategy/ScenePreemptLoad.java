@@ -109,7 +109,6 @@ public class ScenePreemptLoad extends SceneBackgroundLoader {
 
                             // Add the new scene
                             BaseScene finishedScene = value.get();
-                            finishedScene.onPost();
 
                             // Remove the finished scene
                             pendingScenes.remove(s);

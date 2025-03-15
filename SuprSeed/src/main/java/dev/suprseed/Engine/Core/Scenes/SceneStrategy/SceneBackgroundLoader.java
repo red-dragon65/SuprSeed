@@ -39,11 +39,8 @@ abstract public class SceneBackgroundLoader {
 
             if (current.isPresent()) {
 
-                // Cleanup the scene
-                current.get().onDestroy();
-
                 // De-reference for garbage collection
-                parentScene.getRegister().removeObject(s);
+                parentScene.destroyScene(current.get());
 
             } else {
                 EngineContext.getLogger().logMessage(ErrorType.ERROR, "Could not remove scene with removalId: " + s + " when attempting scene change strategy!");
@@ -78,7 +75,7 @@ abstract public class SceneBackgroundLoader {
 
                 startTime = 0L;
 
-                parentScene.getRegister().removeObject(sceneSpinner);
+                parentScene.destroyScene(sceneSpinner);
                 sceneSpinner.setActive(false);
                 sceneSpinner.setDrawable(false);
 
@@ -93,6 +90,10 @@ abstract public class SceneBackgroundLoader {
             return false;
         }
         return true;
+    }
+
+    public void shutDownThread() {
+        executorService.shutdown();
     }
 }
 

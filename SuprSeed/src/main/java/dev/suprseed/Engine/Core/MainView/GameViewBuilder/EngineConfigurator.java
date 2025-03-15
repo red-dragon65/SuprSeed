@@ -48,19 +48,27 @@ public class EngineConfigurator extends BaseEngineConfigurator {
 
     // Constructor
     public EngineConfigurator(Context context, SceneStarter sceneStarter) {
-        super(context, sceneStarter);
+        super(context);
 
         this.sceneStarter = sceneStarter;
 
         inputRegistryManager = new InputRegistryManager();
 
         // Setup the engine context and tools
+        initEngineContextService();
+        initEngineToolsService();
+    }
+
+    protected void initEngineContextService() {
 
         EngineContext.setCentralLogger(new CentralLogger());
         EngineContext.setVelocityScaler(new VelocityScaler());
         EngineContext.setScreen(new Screen());
         EngineContext.setLogicSystem(new LogicSystem());
         EngineContext.setRenderSystem(new RenderSystem());
+    }
+
+    protected void initEngineToolsService() {
 
         EngineTools.setInputManager(inputRegistryManager);
         EngineTools.setViewPort(new ViewPort());

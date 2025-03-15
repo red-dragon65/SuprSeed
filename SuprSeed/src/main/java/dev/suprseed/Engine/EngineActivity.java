@@ -7,11 +7,17 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.SceneStarter;
 import dev.suprseed.Engine.Core.MainView.GameViewBuilder.BaseEngineConfigurator;
+import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.RootScene;
 import dev.suprseed.R;
 
 public abstract class EngineActivity extends AppCompatActivity implements SceneStarter {
 
     private BaseEngineConfigurator engineConfigurator;
+    private RootScene rootScene;
+
+    public void setRootScene(RootScene rootScene) {
+        this.rootScene = rootScene;
+    }
 
     /**
      * Specify the activity to use for the engine (hint: it's probably 'activity_main')
@@ -59,6 +65,15 @@ public abstract class EngineActivity extends AppCompatActivity implements SceneS
         }
     }
 
+    @Override
+    protected void onDestroy() {
+
+        // Destroy all registered user scenes, bottom up
+        if (rootScene != null) {
+            rootScene.onDestroy();
+        }
+        super.onDestroy();
+    }
 
     // Load the game view based on builder results
     private void loadGameView() {

@@ -30,8 +30,16 @@ public abstract class SceneManager extends BaseScene implements SceneController<
         return sceneRegister;
     }
 
+    @Override
     public void registerScene(BaseScene scene) {
         sceneRegister.registerObject(scene);
+        scene.onPost();
+    }
+
+    @Override
+    public void destroyScene(BaseScene scene) {
+        sceneRegister.removeObject(scene);
+        scene.onDestroy();
     }
 
     /*

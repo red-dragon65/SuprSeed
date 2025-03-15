@@ -5,18 +5,14 @@ import android.content.Context;
 
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
-import dev.suprseed.Engine.EngineTools;
 import dev.suprseed.Engine.Lib.Fonts.FontHolder;
 import dev.suprseed.Engine.Lib.Fonts.FontPaintRoller;
-import dev.suprseed.Engine.Lib.Input.InputListener;
 import dev.suprseed.demo.R;
 import dev.suprseed.demo.SharedData.GameOverData;
-import dev.suprseed.demo.Sprites.HudSprite.HudInput.FullScreenRestartInput;
 import dev.suprseed.demo.Subscenes.GameFontPainter;
 
 public class GameOver extends Sprite {
 
-    private final InputListener screenListener;
     private final GameOverData gameOverData;
     private final FontHolder gameOverFont;
 
@@ -39,10 +35,6 @@ public class GameOver extends Sprite {
         setDrawable(false);
 
         this.gameOverData = gameOverData;
-
-        screenListener = new FullScreenRestartInput(this, gameOverData);
-
-        EngineTools.getInputManager().getListenerRegistry().registerObject(screenListener);
     }
 
     @Override
