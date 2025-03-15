@@ -7,7 +7,6 @@ import androidx.lifecycle.Lifecycle;
 import dev.suprseed.Engine.Core.MainView.GameViewBuilder.BaseEngineConfigurator;
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.RootScene;
 import dev.suprseed.Engine.EngineActivity;
-import dev.suprseed.demo.Subscenes.MainScene;
 
 public class MainActivity extends EngineActivity {
 
