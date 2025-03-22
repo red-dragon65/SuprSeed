@@ -19,7 +19,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     // TODO: REMOVE THIS! Instead, override 'instance state configuration changes'!!!
     protected static boolean initialized = false;
     // Dependencies
-    protected LoopRunnable<GameView> loopRunner;
+    protected LoopRunnable loopRunner;
     protected RenderHandler renderer;
     protected RootScene rootScene;
     protected SceneStarter sceneStarter;
@@ -28,7 +28,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
 
     // Constructor
-    public GameView(Context context, RefreshHandler refreshHandler, LoopRunnable<GameView> loopRunner,
+    public GameView(Context context, RefreshHandler refreshHandler, LoopRunnable loopRunner,
                     RenderHandler renderer, SceneStarter sceneStarter, InputProcessor inputProcessor) {
         super(context);
 
@@ -79,7 +79,10 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         renderer.setCanvas(canvas);
         refreshHandler.monitorRefreshRate();
 
-        loopRunner.run(this);
+        loopRunner.run(renderer);
+
+        // Clear out old contents of screen
+        invalidate();
     }
 
 

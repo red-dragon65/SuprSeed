@@ -1,11 +1,11 @@
 package dev.suprseed.Engine.Core.MainView.GameProcessor.Loop;
 
 
-import android.view.SurfaceView;
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
 
-public interface LoopRunnable<T extends SurfaceView> {
+public interface LoopRunnable {
 
-    void run(T gameView);
+    void run(RenderHandler renderer);
 
     boolean isHardPause();
 

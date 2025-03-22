@@ -37,7 +37,7 @@ import dev.suprseed.Engine.Lib.Input.InputRegistryManager;
 public class EngineConfigurator extends BaseEngineConfigurator {
 
     private final SceneStarter sceneStarter;
-    private LoopRunnable<GameView> loopManager;
+    private LoopRunnable loopManager;
     private RenderHandler renderProcessor;
     private CoordinateHandler coordinateHandler;
     private LocationHandler locationHandler;
@@ -80,7 +80,7 @@ public class EngineConfigurator extends BaseEngineConfigurator {
     @Override
     public View buildView() {
 
-        RefreshHandler refreshHandler = new LoopController<>(getLoopConfig(), getLoopManager());
+        RefreshHandler refreshHandler = new LoopController(getLoopConfig(), getLoopManager());
 
         return new GameView(context, refreshHandler, getLoopManager(), getRenderProcessor(), sceneStarter, inputRegistryManager);
     }
@@ -103,7 +103,7 @@ public class EngineConfigurator extends BaseEngineConfigurator {
     The user can also retrieve default configs here if they wish to create their own partial builder.
      */
 
-    public LoopRunnable<GameView> getLoopManager() {
+    public LoopRunnable getLoopManager() {
 
         if (loopManager == null) {
 
@@ -113,7 +113,7 @@ public class EngineConfigurator extends BaseEngineConfigurator {
         return loopManager;
     }
 
-    public EngineConfigurator setLoopManager(LoopRunnable<GameView> loopManager) {
+    public EngineConfigurator setLoopManager(LoopRunnable loopManager) {
         this.loopManager = loopManager;
         return this;
     }

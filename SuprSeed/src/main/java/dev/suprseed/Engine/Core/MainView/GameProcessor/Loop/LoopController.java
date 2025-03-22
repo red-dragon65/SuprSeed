@@ -50,12 +50,12 @@ Cons:
 - the engine will have to be adjusted in order to keep track of previous physics steps (position,
     and velocity) in order to calculate the in between positions.
  */
-public class LoopController<T extends SurfaceView> implements RefreshHandler {
+public class LoopController implements RefreshHandler {
 
     // The user specified refresh & tick rates (these are the target values)
     private final LoopConfig userLoopConfig;
     // The classes we need to notify of changes
-    private final LoopRunnable<T> loopRunner;
+    private final LoopRunnable loopRunner;
     // The engine specified surface view
     private SurfaceView gameView;
     // Hold the actual logic rates and refresh rates the engine running on an actual phone can use
@@ -65,7 +65,7 @@ public class LoopController<T extends SurfaceView> implements RefreshHandler {
     private int actualTargetTickRate = 0;
 
 
-    public LoopController(LoopConfig userLoopConfig, LoopRunnable<T> loopRunner) {
+    public LoopController(LoopConfig userLoopConfig, LoopRunnable loopRunner) {
         this.userLoopConfig = userLoopConfig;
         this.loopRunner = loopRunner;
 

@@ -1,8 +1,9 @@
 package dev.suprseed.Engine.Core.MainView.GameProcessor.Loop;
 
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import dev.suprseed.Engine.EngineContext;
 
-public class LoopRunner implements LoopRunnable<GameView> {
+public class LoopRunner implements LoopRunnable {
 
     // TODO: This is temporary. Figure out a better way for client to get loop manager
     //  to handle pausing behavior
@@ -26,7 +27,7 @@ public class LoopRunner implements LoopRunnable<GameView> {
 
 
     @Override
-    public void run(GameView gameView) {
+    public void run(RenderHandler renderer) {
 
         if (!hardPause) { // Stops logic and drawing
 
@@ -37,10 +38,7 @@ public class LoopRunner implements LoopRunnable<GameView> {
             }
 
             // Run clients drawing code
-            EngineContext.getRenderSystem().draw(gameView.renderer);
-
-            // Clear out old contents of screen
-            gameView.invalidate();
+            EngineContext.getRenderSystem().draw(renderer);
         }
     }
 
