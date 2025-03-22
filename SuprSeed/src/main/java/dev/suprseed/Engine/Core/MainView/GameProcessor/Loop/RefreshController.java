@@ -50,7 +50,7 @@ Cons:
 - the engine will have to be adjusted in order to keep track of previous physics steps (position,
     and velocity) in order to calculate the in between positions.
  */
-public class LoopController implements RefreshHandler {
+public class RefreshController implements RefreshHandler {
 
     // The user specified refresh & tick rates (these are the target values)
     private final LoopConfig userLoopConfig;
@@ -65,7 +65,7 @@ public class LoopController implements RefreshHandler {
     private int actualTargetTickRate = 0;
 
 
-    public LoopController(LoopConfig userLoopConfig, LoopRunnable loopRunner) {
+    public RefreshController(LoopConfig userLoopConfig, LoopRunnable loopRunner) {
         this.userLoopConfig = userLoopConfig;
         this.loopRunner = loopRunner;
 
