@@ -3,7 +3,6 @@ package dev.suprseed.Engine;
 import dev.suprseed.Engine.Core.ErrorLogger.CentralLogger;
 import dev.suprseed.Engine.Core.ErrorLogger.ErrorType;
 import dev.suprseed.Engine.Core.ErrorLogger.Logable;
-import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.VelocityScaler;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Screen;
 import dev.suprseed.Engine.Core.System.LogicSystem;
 import dev.suprseed.Engine.Core.System.RenderSystem;
@@ -12,7 +11,7 @@ public class EngineContext {
 
     //TODO: Use interface, not definition
     private static CentralLogger centralLoggerInstance;
-    private static VelocityScaler velocityScalerInstance;
+
     private static Screen screenInstance;
     private static LogicSystem logicSystemInstance;
     private static RenderSystem renderSystemInstance;
@@ -43,15 +42,6 @@ public class EngineContext {
     public static void setLogicSystem(LogicSystem logicSystem) {
         logIfPresent(logicSystemInstance, logicSystem);
         logicSystemInstance = logicSystem;
-    }
-
-    public static VelocityScaler getVelocityScaler() {
-        return velocityScalerInstance;
-    }
-
-    public static void setVelocityScaler(VelocityScaler velocityScaler) {
-        logIfPresent(velocityScalerInstance, velocityScaler);
-        velocityScalerInstance = velocityScaler;
     }
 
     public static Screen getScreen() {

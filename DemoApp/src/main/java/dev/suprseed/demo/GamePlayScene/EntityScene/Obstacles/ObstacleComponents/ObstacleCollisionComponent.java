@@ -8,8 +8,8 @@ import dev.suprseed.Engine.Lib.Collisions.CollisionHandler;
 import dev.suprseed.Engine.Lib.Collisions.PixelPerfectCollision;
 import dev.suprseed.Engine.Lib.Collisions.RectangleCollision;
 import dev.suprseed.Engine.Lib.SoundPlayer.SoundMixer;
-import dev.suprseed.demo.Utils.CameraShaker;
 import dev.suprseed.demo.GamePlayScene.SharedData.GameOverData;
+import dev.suprseed.demo.Utils.CameraShaker;
 
 public class ObstacleCollisionComponent implements Component {
 

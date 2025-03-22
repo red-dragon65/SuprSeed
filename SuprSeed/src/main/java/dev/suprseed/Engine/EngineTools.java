@@ -1,6 +1,7 @@
 package dev.suprseed.Engine;
 
 import dev.suprseed.Engine.Core.ErrorLogger.ErrorType;
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.VelocityScaler;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.WindowEventRegistry;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates.Camera;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.CollisionDrawable;
@@ -12,6 +13,7 @@ public class EngineTools {
     // TODO: use interface, not definition
     private static Camera cameraInstance = null;
     private static ViewPort viewPortInstance = null;
+    private static VelocityScaler velocityScalerInstance;
 
     private static InputManager inputManagerInstance = null;
     private static CollisionDrawable collisionDrawerInstance = null;
@@ -37,15 +39,6 @@ public class EngineTools {
         cameraInstance = camera;
     }
 
-    public static InputManager getInputManager() {
-        return inputManagerInstance;
-    }
-
-    public static void setInputManager(InputManager inputHandler) {
-        logIfPresent(inputManagerInstance, inputHandler);
-        inputManagerInstance = inputHandler;
-    }
-
     public static ViewPort getViewPort() {
         return viewPortInstance;
     }
@@ -53,6 +46,24 @@ public class EngineTools {
     public static void setViewPort(ViewPort viewPort) {
         logIfPresent(viewPortInstance, viewPort);
         viewPortInstance = viewPort;
+    }
+
+    public static VelocityScaler getVelocityScaler() {
+        return velocityScalerInstance;
+    }
+
+    public static void setVelocityScaler(VelocityScaler velocityScaler) {
+        logIfPresent(velocityScalerInstance, velocityScaler);
+        velocityScalerInstance = velocityScaler;
+    }
+
+    public static InputManager getInputManager() {
+        return inputManagerInstance;
+    }
+
+    public static void setInputManager(InputManager inputHandler) {
+        logIfPresent(inputManagerInstance, inputHandler);
+        inputManagerInstance = inputHandler;
     }
 
     public static CollisionDrawable getCollisionDrawer() {

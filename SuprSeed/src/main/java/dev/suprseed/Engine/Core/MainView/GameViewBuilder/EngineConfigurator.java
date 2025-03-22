@@ -62,7 +62,6 @@ public class EngineConfigurator extends BaseEngineConfigurator {
     protected void initEngineContextService() {
 
         EngineContext.setCentralLogger(new CentralLogger());
-        EngineContext.setVelocityScaler(new VelocityScaler());
         EngineContext.setScreen(new Screen());
         EngineContext.setLogicSystem(new LogicSystem());
         EngineContext.setRenderSystem(new RenderSystem());
@@ -70,9 +69,10 @@ public class EngineConfigurator extends BaseEngineConfigurator {
 
     protected void initEngineToolsService() {
 
-        EngineTools.setInputManager(inputRegistryManager);
-        EngineTools.setViewPort(new ViewPort());
         EngineTools.setGlobalCamera(new Camera());
+        EngineTools.setViewPort(new ViewPort());
+        EngineTools.setVelocityScaler(new VelocityScaler());
+        EngineTools.setInputManager(inputRegistryManager);
         EngineTools.setCollisionDrawer(new CollisionDiagnosticsOverlay(false));
         EngineTools.setWindowEventRegistry(new WindowEventRegistry());
     }

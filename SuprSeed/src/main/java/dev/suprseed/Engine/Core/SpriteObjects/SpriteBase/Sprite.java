@@ -8,7 +8,7 @@ import dev.suprseed.Engine.Core.System.LayerData;
 import dev.suprseed.Engine.Core.System.LayerHandler;
 import dev.suprseed.Engine.Core.System.Registerables.LogicRunnable;
 import dev.suprseed.Engine.Core.System.Registerables.RenderableAndLayerable;
-import dev.suprseed.Engine.EngineContext;
+import dev.suprseed.Engine.EngineTools;
 
 public abstract class Sprite implements RenderableAndLayerable, Boundable, LogicRunnable, Resetable {
 
@@ -90,7 +90,7 @@ public abstract class Sprite implements RenderableAndLayerable, Boundable, Logic
      */
     public void applyXVel() {
         setX(
-                getX() + (getxVel() * EngineContext.getVelocityScaler().getVelocityScaler())
+                getX() + (getxVel() * EngineTools.getVelocityScaler().getVelocityScaler())
         );
     }
 
@@ -101,7 +101,7 @@ public abstract class Sprite implements RenderableAndLayerable, Boundable, Logic
      */
     public void applyYVel() {
         setY(
-                getY() + (getyVel() * EngineContext.getVelocityScaler().getVelocityScaler())
+                getY() + (getyVel() * EngineTools.getVelocityScaler().getVelocityScaler())
         );
     }
 

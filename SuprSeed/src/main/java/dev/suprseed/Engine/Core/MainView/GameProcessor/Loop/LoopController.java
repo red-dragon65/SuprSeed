@@ -6,6 +6,7 @@ import android.view.SurfaceView;
 import dev.suprseed.Engine.Core.ErrorLogger.ErrorType;
 import dev.suprseed.Engine.Core.MainView.EngineSettings.LoopConfig;
 import dev.suprseed.Engine.EngineContext;
+import dev.suprseed.Engine.EngineTools;
 
 /*
 Scales logic tick rate across different device refresh rates.
@@ -126,7 +127,7 @@ public class LoopController<T extends SurfaceView> implements RefreshHandler {
 
         // Reset data
         tickRateMultiples.setLogicMultiple(1);
-        EngineContext.getVelocityScaler().setVelocityScaler(1);
+        EngineTools.getVelocityScaler().setVelocityScaler(1);
 
 
         int bufferZone = 3;
@@ -139,7 +140,7 @@ public class LoopController<T extends SurfaceView> implements RefreshHandler {
 
             float scaler = 1;
             scaler *= userLoopConfig.getLogicScaleMultiple();
-            EngineContext.getVelocityScaler().setVelocityScaler(scaler);
+            EngineTools.getVelocityScaler().setVelocityScaler(scaler);
             tickRateMultiples.setLogicMultiple(1);
             loopRunner.setLoopRateMultiples(tickRateMultiples);
 
@@ -172,7 +173,7 @@ public class LoopController<T extends SurfaceView> implements RefreshHandler {
             scaler = scaler / ((float) deviceRefreshSpeed / actualTargetTickRate);
             scaler *= userLoopConfig.getLogicScaleMultiple();
 
-            EngineContext.getVelocityScaler().setVelocityScaler(scaler);
+            EngineTools.getVelocityScaler().setVelocityScaler(scaler);
 
             tickRateMultiples.setLogicMultiple(1);
             loopRunner.setLoopRateMultiples(tickRateMultiples);
@@ -223,7 +224,7 @@ public class LoopController<T extends SurfaceView> implements RefreshHandler {
             }
 
             scaler *= userLoopConfig.getLogicScaleMultiple();
-            EngineContext.getVelocityScaler().setVelocityScaler(scaler);
+            EngineTools.getVelocityScaler().setVelocityScaler(scaler);
 
             actualTargetTickRate = newTickRate;
 

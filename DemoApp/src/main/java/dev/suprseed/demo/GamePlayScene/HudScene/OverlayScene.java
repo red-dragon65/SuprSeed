@@ -8,14 +8,14 @@ import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
 import dev.suprseed.Engine.EngineTools;
 import dev.suprseed.Engine.Lib.AssetLoader.Bundler;
 import dev.suprseed.Engine.Lib.Input.InputListener;
-import dev.suprseed.demo.GamePlayScene.SharedData.BounceData;
-import dev.suprseed.demo.GamePlayScene.SharedData.GameOverData;
 import dev.suprseed.demo.GamePlayScene.HudScene.HudInput.FullScreenPauseInput;
 import dev.suprseed.demo.GamePlayScene.HudScene.HudInput.FullScreenRestartInput;
 import dev.suprseed.demo.GamePlayScene.HudScene.OverlaySprites.GameOver;
 import dev.suprseed.demo.GamePlayScene.HudScene.OverlaySprites.PauseButton;
 import dev.suprseed.demo.GamePlayScene.HudScene.OverlaySprites.PauseText;
 import dev.suprseed.demo.GamePlayScene.HudScene.OverlaySprites.ScoreSprite;
+import dev.suprseed.demo.GamePlayScene.SharedData.BounceData;
+import dev.suprseed.demo.GamePlayScene.SharedData.GameOverData;
 
 public class OverlayScene extends BaseScene {
 

@@ -10,11 +10,11 @@ import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
 import dev.suprseed.Engine.EngineTools;
 import dev.suprseed.Engine.Lib.AssetLoader.Bundler;
 import dev.suprseed.Engine.Lib.SoundPlayer.SoundMixer;
-import dev.suprseed.demo.GamePlayScene.SharedData.BounceData;
-import dev.suprseed.demo.GamePlayScene.SharedData.GameOverData;
 import dev.suprseed.demo.GamePlayScene.EntityScene.Hero.FullScreenHeroTouchInput;
 import dev.suprseed.demo.GamePlayScene.EntityScene.Hero.Hero;
 import dev.suprseed.demo.GamePlayScene.EntityScene.Obstacles.ObstacleCollection;
+import dev.suprseed.demo.GamePlayScene.SharedData.BounceData;
+import dev.suprseed.demo.GamePlayScene.SharedData.GameOverData;
 
 public class EntityScene extends BaseScene {
 

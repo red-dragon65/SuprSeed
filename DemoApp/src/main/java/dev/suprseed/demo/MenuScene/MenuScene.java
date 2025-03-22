@@ -18,9 +18,9 @@ import dev.suprseed.Engine.Lib.Fonts.FontHolder;
 import dev.suprseed.Engine.Lib.Fonts.FontSprite;
 import dev.suprseed.Engine.Lib.Images.PlaceHolder;
 import dev.suprseed.Engine.Lib.Input.InputListener;
+import dev.suprseed.demo.ChangeSceneRequestDTO;
 import dev.suprseed.demo.R;
 import dev.suprseed.demo.Shared.BackgroundSprite;
-import dev.suprseed.demo.ChangeSceneRequestDTO;
 import dev.suprseed.demo.Utils.GameFontPainter;
 
 public class MenuScene extends SceneManager {

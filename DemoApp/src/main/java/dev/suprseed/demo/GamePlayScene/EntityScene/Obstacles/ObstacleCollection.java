@@ -13,11 +13,11 @@ import dev.suprseed.Engine.Core.System.Registerables.LogicRunnable;
 import dev.suprseed.Engine.Lib.AssetLoader.Bundler;
 import dev.suprseed.Engine.Lib.Images.DefaultFPS;
 import dev.suprseed.Engine.Lib.SoundPlayer.SoundMixer;
-import dev.suprseed.demo.GamePlayScene.SharedData.BounceData;
-import dev.suprseed.demo.GamePlayScene.SharedData.GameOverData;
 import dev.suprseed.demo.GamePlayScene.EntityScene.Obstacles.ObstacleComponents.ObstacleCollisionComponent;
 import dev.suprseed.demo.GamePlayScene.EntityScene.Obstacles.ObstacleComponents.ObstacleMovementComponent;
 import dev.suprseed.demo.GamePlayScene.EntityScene.Obstacles.ObstacleComponents.ObstacleSpawnerComponent;
+import dev.suprseed.demo.GamePlayScene.SharedData.BounceData;
+import dev.suprseed.demo.GamePlayScene.SharedData.GameOverData;
 
 public class ObstacleCollection implements LogicRunnable {
 

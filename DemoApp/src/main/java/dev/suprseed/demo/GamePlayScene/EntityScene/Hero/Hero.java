@@ -13,11 +13,11 @@ import dev.suprseed.Engine.Lib.Collisions.CollisionHandler;
 import dev.suprseed.Engine.Lib.Collisions.RectangleCollision;
 import dev.suprseed.Engine.Lib.Images.DefaultFPS;
 import dev.suprseed.Engine.Lib.SoundPlayer.SoundMixer;
-import dev.suprseed.demo.GamePlayScene.EntityScene.Hero.HeroComponents.HeroStartingState;
-import dev.suprseed.demo.GamePlayScene.SharedData.BounceData;
 import dev.suprseed.demo.GamePlayScene.EntityScene.Hero.HeroComponents.BounceMovementComponent;
+import dev.suprseed.demo.GamePlayScene.EntityScene.Hero.HeroComponents.HeroStartingState;
 import dev.suprseed.demo.GamePlayScene.EntityScene.Hero.HeroComponents.TiltMovementComponent;
 import dev.suprseed.demo.GamePlayScene.EntityScene.Hero.HeroComponents.WallCollisionComponent;
+import dev.suprseed.demo.GamePlayScene.SharedData.BounceData;
 
 public class Hero extends Sprite implements LogicRunnable {
 

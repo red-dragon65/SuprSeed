@@ -29,10 +29,10 @@ import dev.suprseed.Engine.Lib.SoundPlayer.BasicSoundEffects;
 import dev.suprseed.Engine.Lib.SoundPlayer.SoundMixer;
 import dev.suprseed.demo.GamePlayScene.EntityScene.EntityScene;
 import dev.suprseed.demo.GamePlayScene.HudScene.OverlayScene;
-import dev.suprseed.demo.MainActivity;
-import dev.suprseed.demo.R;
 import dev.suprseed.demo.GamePlayScene.SharedData.BounceData;
 import dev.suprseed.demo.GamePlayScene.SharedData.GameOverData;
+import dev.suprseed.demo.MainActivity;
+import dev.suprseed.demo.R;
 
 public class GamePlayScene extends SceneManager {
 
