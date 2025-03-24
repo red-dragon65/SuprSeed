@@ -90,7 +90,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     public void surfaceDestroyed(@NonNull SurfaceHolder surfaceHolder) {
 
         // Stop logic and drawing
-        loopRunner.setHardPause(true);
+        EngineTools.getLoopController().setHardPause(true);
     }
 
     @Override
@@ -100,14 +100,14 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         refreshHandler.updateRefreshRate();
 
         // Continue logic and drawing
-        loopRunner.setHardPause(false);
+        EngineTools.getLoopController().setHardPause(false);
     }
 
     @Override
     public void surfaceChanged(@NonNull SurfaceHolder surfaceHolder, int i, int i1, int i2) {
 
         // Continue logic and drawing
-        loopRunner.setHardPause(false);
+        EngineTools.getLoopController().setHardPause(false);
     }
 
     @Override
@@ -115,7 +115,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         super.onWindowFocusChanged(hasWindowFocus);
 
         // Stop/resume logic only (drawing still allowed)
-        loopRunner.setSoftPause(!hasWindowFocus);
+        EngineTools.getLoopController().setSoftPause(!hasWindowFocus);
 
         // Notify listeners of window change (useful for pausing game)
         EngineTools.getWindowEventRegistry().onFocusChanged(hasWindowFocus);

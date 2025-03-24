@@ -12,6 +12,7 @@ import dev.suprseed.Engine.Core.MainView.EngineSettings.LoopConfig;
 import dev.suprseed.Engine.Core.MainView.EngineSettings.ViewConfig;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.GameView;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LogicRates;
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LoopController;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LoopRunnable;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LoopRunner;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.RefreshController;
@@ -77,6 +78,7 @@ public class EngineConfigurator extends BaseEngineConfigurator {
         EngineTools.setInputManager(inputRegistryManager);
         EngineTools.setCollisionDrawer(new CollisionDiagnosticsOverlay(false));
         EngineTools.setWindowEventRegistry(new WindowEventRegistry());
+        EngineTools.setLoopController(new LoopController());
     }
 
     @Override

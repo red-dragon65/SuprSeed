@@ -1,6 +1,5 @@
 package dev.suprseed.demo.GamePlayScene.HudScene.OverlaySprites;
 
-import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LoopRunner;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.AssetBundle;
 import dev.suprseed.Engine.Core.SpriteObjects.SpriteBase.Sprite;
@@ -35,7 +34,7 @@ public class PauseText extends Sprite {
 
         // We only want to draw if soft pause is occurring
 
-        if (LoopRunner.loopy.isSoftPause()) {
+        if (EngineTools.getLoopController().isSoftPause()) {
 
             renderer.drawSprite(this);
         }

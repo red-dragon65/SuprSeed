@@ -3,7 +3,6 @@ package dev.suprseed.demo.GamePlayScene.HudScene.HudInput;
 import android.graphics.RectF;
 import android.view.MotionEvent;
 
-import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LoopRunner;
 import dev.suprseed.Engine.Core.System.LayerData;
 import dev.suprseed.Engine.Core.System.LayerHandler;
 import dev.suprseed.Engine.EngineTools;
@@ -32,11 +31,11 @@ public class FullScreenPauseInput implements InputListener {
 
         if (action.equals(TouchTypes.TAP.toString())) {
 
-            LoopRunner.loopy.setSoftPause(false);
+            EngineTools.getLoopController().setSoftPause(false);
         }
 
         // Input is handled while loop is paused
-        return LoopRunner.loopy.isSoftPause();
+        return EngineTools.getLoopController().isSoftPause();
 
         // Allow input to fall through to next listener
     }

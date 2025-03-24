@@ -10,7 +10,6 @@ import androidx.lifecycle.LifecycleOwner;
 import java.util.HashMap;
 import java.util.Map;
 
-import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LoopRunner;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.WindowEventListener;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Graphics.RenderHandler;
 import dev.suprseed.Engine.Core.Scenes.SceneHeirarchy.SceneManager;
@@ -77,7 +76,7 @@ public class GamePlayScene extends SceneManager {
         mediaPlayer.setLooping(true);
         mediaPlayer.setVolume(0.60f, 0.60f);
 
-        pauseEventListener = hasFocus -> LoopRunner.loopy.setSoftPause(hasFocus);
+        pauseEventListener = hasFocus -> EngineTools.getLoopController().setSoftPause(hasFocus);
 
 
         // Shared data

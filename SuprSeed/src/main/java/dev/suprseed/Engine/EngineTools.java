@@ -1,6 +1,7 @@
 package dev.suprseed.Engine;
 
 import dev.suprseed.Engine.Core.ErrorLogger.ErrorType;
+import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.LoopControllable;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.VelocityScaler;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Loop.WindowEventRegistry;
 import dev.suprseed.Engine.Core.MainView.GameProcessor.Render.Coordinates.Camera;
@@ -20,6 +21,7 @@ public class EngineTools {
 
     private static WindowEventRegistry windowEventRegistryInstance = null;
 
+    private static LoopControllable loopControllerInstance = null;
 
     private static void logIfPresent(Object oldInstance, Object newInstance) {
         if (oldInstance != null) {
@@ -82,5 +84,14 @@ public class EngineTools {
     public static void setWindowEventRegistry(WindowEventRegistry windowEventRegistry) {
         logIfPresent(windowEventRegistryInstance, windowEventRegistry);
         windowEventRegistryInstance = windowEventRegistry;
+    }
+
+    public static LoopControllable getLoopController() {
+        return loopControllerInstance;
+    }
+
+    public static void setLoopController(LoopControllable loopController) {
+        logIfPresent(loopControllerInstance, loopController);
+        loopControllerInstance = loopController;
     }
 }
