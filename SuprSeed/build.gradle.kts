@@ -46,7 +46,7 @@ publishing {
         register<MavenPublication>("release") {
             groupId = "dev.suprseed"
             artifactId = "suprseed"
-            version = "0.1.0-local-test"
+            version = "1.0.0-local-test"
 
             afterEvaluate {
                 from(components["release"])
