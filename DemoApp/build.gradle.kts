@@ -36,6 +36,11 @@ android {
     buildFeatures {
         viewBinding = true
     }
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(17)
+        }
+    }
 }
 
 dependencies {
