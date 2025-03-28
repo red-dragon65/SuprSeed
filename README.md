@@ -78,53 +78,9 @@ The engines `Lib` features are:
 
 ## Project Usage
 
-**Initializing the project**
-
-- Import the SuprSeed dependency via gradle
-  - follow the steps at https://jitpack.io/#red-dragon65/SuprSeed
-  - or, use the steps down below if you are using kotlin
-- Create a new "Empty views activity" project in Android Studio.
-- Remove the `<Textview ... />` from the `activity_main.xml` layout
-- Remove the `onCreate()` function from the `MainActivity` class
-- Update the `MainActivity` class to extend the `EngineActivity`
-  - implement the methods as needed
-- Add the `assets` folder
-  - Right click the `app` folder -> `New` -> `Folder` -> `Assets Folder`
-- The project is now ready to use the framework
-  - use the repo's demo as a guide<sub> better docs will be available <sup>someday</sup></sub>
-
-<br/>
-
-**Dependency install for gradle + kotlin (.gradle.kts) files**
-
-1. Add `maven { url = uri("https://jitpack.io") }` to your `settings.gradle.kts` file
-
-```
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-        google()
-        mavenCentral()
-        // Include this repo
-        maven { url = uri("https://jitpack.io") }
-    }
-}
-```
-
-2. Add `implementation("com.github.red-dragon65:SuprSeed:v1.0.0")` to your `build.gradle.kts` file
-
-(note: this is the _Module:app_ level one)
-
-```
-dependencies {
-
-    implementation(libs.androidx.core.ktx)
-    ...
-    androidTestImplementation(libs.androidx.espresso.core)
-    // Add this dependency
-    implementation("com.github.red-dragon65:SuprSeed:v1.0.0")
-}
-```
+**Please follow the guide on the [SuprSeed_Starter Github Repo](https://github.com/red-dragon65/SuprSeed_Starter)**
+- You can download the starter to start using the SuprSeed engine
+- Alternatively, you can follow the guide to manually setup a project with the SuprSeed dependency
 
 <br/>
 
