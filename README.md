@@ -129,3 +129,20 @@ _Assets are stored under the default project folders:_
 - Images: `app/src/main/assets/Images`
 - Font: `app/src/main/res/font`
 - Sound: `app/src/main/res/raw`
+
+<br/>
+
+## SuprSeed Engine Architecture Diagram
+
+- Right click and "open image in new tab" for your convenience
+- The below diagram covers the main components of the "core" package and is not comprehensive to the whole project
+  - The goal of the diagram is to help illustrate the main dependencies and data flows of the system
+- Read the legend at the bottom right to understand what the color coding means
+- The arrows point to which classes a particular function is accessing.
+  - Eg. the `GameView` class has a function `onDraw(canvas)` that calls multiple functions. One of which being the `monitorRefreshRate()` function of the `LoopController` class. As such, the `LoopController` is a necessary dependency of the `GameView`.
+
+<p align="center">
+<img src="Architecture_Diagram/SuprSeed-Architecture.jpg" title="SuprSeed Architecture Diagram" alt="SuprSeed Engine Architecture Diagram">
+</p>
+
+<br/>
